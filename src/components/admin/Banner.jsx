@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Banner.module.css"
 export default function CategoryBanner({children, isOpen,setIsOpen}){
+    //test
     function handleClick(e){
         e.stopPropagation()
     }
