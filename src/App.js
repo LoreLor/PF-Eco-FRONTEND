@@ -4,7 +4,7 @@ import SearchComplete from "./components/searchBar/SearchAutocomplete";
 function App() {
   return (
     <div className="">
-    <SearchComplete />
+   <h1>Holass</h1>
     </div>
   );
 }
