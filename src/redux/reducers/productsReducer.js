@@ -1,7 +1,8 @@
-import { GET_ALL_PRODUCTS_FAIL, GET_ALL_PRODUCTS_REQUEST, GET_ALL_PRODUCTS_SUCCESS, GET_PRODUCT_BY_NAME_FAIL, GET_PRODUCT_BY_NAME_REQUEST, GET_PRODUCT_BY_NAME_SUCCESS } from "../actions/constants";
+import { GET_ALL_PRODUCTS_FAIL, GET_ALL_PRODUCTS_REQUEST, GET_ALL_PRODUCTS_SUCCESS, GET_PRODUCT_BY_ID_FAIL, GET_PRODUCT_BY_ID_REQUEST, GET_PRODUCT_BY_ID_SUCCESS, GET_PRODUCT_BY_NAME_FAIL, GET_PRODUCT_BY_NAME_REQUEST, GET_PRODUCT_BY_NAME_SUCCESS } from "../actions/constants";
 
 const initialState ={
     products:[],
+    detail:{},
     loading: true,
     error: {}
 }
@@ -37,6 +38,22 @@ export const productsReducer = (state=initialState, action) => {
             }
 
         case GET_PRODUCT_BY_NAME_FAIL:
+            return {
+                loading:false,
+                error:action.payload
+            }
+        case GET_PRODUCT_BY_ID_REQUEST:
+            return{
+                loading: true
+            }
+
+        case GET_PRODUCT_BY_ID_SUCCESS:
+            return {
+                loading:false,
+                detail: action.payload
+            }
+
+        case GET_PRODUCT_BY_ID_FAIL:
             return {
                 loading:false,
                 error:action.payload
