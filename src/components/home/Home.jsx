@@ -9,6 +9,7 @@ import NavBar from '../navBar/NavBar'
 import ProductCard from '../Productos/ProductCard'
 
 import style from './Home.module.css'
+import Loader from "../Loading/Loader"
 
 export default function Home (){
 
@@ -28,7 +29,7 @@ export default function Home (){
             <Link to='/admin'> Ir a Admin</Link>
             <div className={style.cards}>
                 {
-                    allProducts.products &&
+                    allProducts.products ? 
                         allProducts.products.map(p => {
                             return(
                                 <Link to={`/home/${p.id}`}>
@@ -41,7 +42,8 @@ export default function Home (){
                                     />
                                 </Link>
                             )
-                        })
+                        }):
+                        <Loader/>
                 }
             </div>
         </div>
