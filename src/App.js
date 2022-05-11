@@ -3,9 +3,9 @@ import React,{Fragment} from 'react';
 import './App.css';
 import Home from './components/home/Home'
 import AdminPage from './components/admin/AdminPage'
-import CategoryAdmin from './components/admin/CategoryAdmin'
-import ProductAdmin from './components/admin/ProductAdmin'
-import UserAdmin from './components/admin/UserAdmin'
+import CategoryAdmin from './components/admin/categoryForm/CategoryAdmin'
+import ProductAdmin from './components/admin/productForm/ProductAdmin'
+import UserAdmin from './components/admin/userAdmin/UserAdmin'
 import {Routes,Route} from 'react-router-dom'
 import Login from './components/login/Login';
 
