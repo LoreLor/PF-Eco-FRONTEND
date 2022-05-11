@@ -2,6 +2,9 @@ import {
     GET_ALL_PRODUCTS_FAIL,
     GET_ALL_PRODUCTS_REQUEST,
     GET_ALL_PRODUCTS_SUCCESS,
+    GET_PRODUCT_BY_ID_FAIL,
+    GET_PRODUCT_BY_ID_REQUEST,
+    GET_PRODUCT_BY_ID_SUCCESS,
     GET_PRODUCT_BY_NAME_FAIL,
     GET_PRODUCT_BY_NAME_REQUEST,
     GET_PRODUCT_BY_NAME_SUCCESS
@@ -49,3 +52,23 @@ export const getProductByName = (name) => async (dispatch) => {
     }
 };
 
+export const getProductById = (id) => async (dispatch) => {
+    dispatch({
+        type: GET_PRODUCT_BY_ID_REQUEST,
+        payload: id
+    })
+    try {
+        const {data} = await axios.get(`${SERVER}/products/${id}`)
+        dispatch({
+            type: GET_PRODUCT_BY_ID_SUCCESS,
+            payload: data
+        })
+        
+    } catch (error) {
+        dispatch({
+            type: GET_PRODUCT_BY_ID_FAIL,
+            payload: error
+        })
+    }
+
+}
