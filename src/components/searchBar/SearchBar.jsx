@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom"
+//import { useHistory } from "react-router-dom"
 
 import { getProductByName } from "../../redux/actions/products";
 
 export default function SearchBar(){
     
     const dispatch = useDispatch();
-    const history = useHistory();
+    //const history = useHistory();
 
     const [name, setName] = useState('');
     
@@ -19,7 +19,7 @@ export default function SearchBar(){
 
     function handleSearch(e){
         e.preventDefault()
-        history.push('/home')
+        //history.push('/home')
         dispatch(getProductByName(name))
     }
 
@@ -30,7 +30,7 @@ export default function SearchBar(){
                 onKeyPress={(e => {
                     if(e.key === 'Enter'){
                         dispatch(getProductByName(name))
-                        history.push('/home')
+                        //history.push('/home')
                     }    
                 })}
             >
