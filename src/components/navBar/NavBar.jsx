@@ -15,7 +15,7 @@ export default function NavBar({categories}){
 
             <div className="container-fluid">
 
-                <a className="navbar-brand" href="#">Titulo del Ecommerce</a>
+                <a className="navbar-brand" href="/">Titulo del Ecommerce</a>
 
                 <button className="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -30,7 +30,7 @@ export default function NavBar({categories}){
                         </svg>
                     </button>
                     <SearchBar/>
-                    <a type="button" haref='#' className="btn btn-secondary">LogIn</a>
+                    <a type="button" href='/login' className="btn btn-secondary">LogIn</a>
                 </div>
             </div>
         </nav>

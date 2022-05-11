@@ -36,15 +36,14 @@ export default function Home (){
                     allProducts.products ? 
                         allProducts.products.map(p => {
                             return(
-                                <Link to={`/home/${p.id}`}>
                                     <ProductCard
+                                        id={p.id}
                                         key={p.id}
                                         name={p.name}
                                         price={p.price}
                                         img={p.img}
                                         rating={p.rating}
                                     />
-                                </Link>
                             )
                         }):
                         <Loader/>
