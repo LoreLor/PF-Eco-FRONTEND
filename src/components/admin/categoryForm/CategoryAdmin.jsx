@@ -1,10 +1,10 @@
 import React,{useState} from "react"
-import categoryValidations from '../utils/categoryValidation'
+import categoryValidations from '../../utils/categoryValidation'
 import {useDispatch, useSelector} from 'react-redux'
 import { useNavigate } from "react-router-dom"
-import { addCategoriesCheck,getCategories } from "../../redux/actions/categories"
+import { addCategoriesCheck,getCategories } from "../../../redux/actions/categories"
 import style from './CategoryAdmin.module.css'
-import Banner from './CategoryBanner'
+import Banner from '../Banner'
 
 export default function Form(){
     const dispatch = useDispatch()
