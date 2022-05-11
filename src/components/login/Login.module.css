@@ -1,0 +1,23 @@
+
+.btn{
+  color: #FFFFFF; 
+  background-color: #112B3C; 
+  border-color: #393f44; 
+  border-radius: 8px;
+  height: 40px;
+}
+.btn:hover{
+    color: #FFFFFF; 
+    background-color: #F66B0E; 
+    border-color: #F66B0E; 
+}
+
+.carrousel{
+    margin-top: 150px;
+}
+
+@media screen and(max-width:1000px){
+    .carrousel{
+        display:none
+    }
+}

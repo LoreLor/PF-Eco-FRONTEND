@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { useNavigate } from "react-router-dom"
 import { addCategoriesCheck,getCategories } from "../../redux/actions/categories"
 import style from './CategoryAdmin.module.css'
-import Banner from './CategoryBanner'
+import CategoryBanner from './Banner'
 
 export default function Form(){
     const dispatch = useDispatch()
@@ -79,7 +79,7 @@ export default function Form(){
             }
             </div>
             </form>
-            <Banner isOpen={isOpen} setIsOpen={setIsOpen}>
+            <CategoryBanner isOpen={isOpen} setIsOpen={setIsOpen}>
                 {keyword.length ? (
                     <>
                     <h2>{keyword}</h2>
@@ -94,7 +94,7 @@ export default function Form(){
                 ):(
                     <h2>Invalid Data</h2>
                 )}
-            </Banner>
+            </CategoryBanner>
             </div>
         </div>
     )
