@@ -7,7 +7,9 @@ import { GET_ALL_PRODUCTS_FAIL,
     GET_PRODUCT_BY_ID_SUCCESS, 
     GET_PRODUCT_BY_NAME_FAIL, 
     GET_PRODUCT_BY_NAME_REQUEST, 
-    GET_PRODUCT_BY_NAME_SUCCESS } from "../actions/constants";
+    GET_PRODUCT_BY_NAME_SUCCESS,
+    GET_ALL_CATEGORIES,
+    GET_CATEGORY_CHECK } from "../actions/constants";
 
 
 const initialState ={
