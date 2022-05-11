@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { useNavigate } from "react-router-dom"
 import { addCategoriesCheck,getCategories } from "../../../redux/actions/categories"
 import style from './CategoryAdmin.module.css'
-import CategoryBanner from './Banner'
+import CategoryBanner from '../Banner'
 
 export default function Form(){
     const dispatch = useDispatch()
