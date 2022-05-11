@@ -1,0 +1,11 @@
+.btnRat{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.algo{
+        display: flex;
+        align-items: center;
+}
