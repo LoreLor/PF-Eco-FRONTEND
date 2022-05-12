@@ -1,0 +1,17 @@
+.select{
+    text-align: center;
+    width: 150px;
+    padding: 8px;
+    color: white;
+    background: #112B3C;
+    border: #112B3C;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+.select:focus, .select:hover {
+    outline: none;
+}
+.select option {
+    color: #112B3C;
+    background-color: #EFEFEF;
+}
