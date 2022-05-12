@@ -17,7 +17,7 @@ function App() {
         <Route path='/userAdmin' element={<UserAdmin/>}/>
         <Route path='/productAdmin' element={<ProductAdmin/>}/>
         <Route path ='/categoryAdmin' element={<CategoryAdmin/>}/>
-        <Route path ='/Login' element={<Login />} />
+        <Route path ='/login' element={<Login />} />
       </Routes>
     </Fragment>
   );
