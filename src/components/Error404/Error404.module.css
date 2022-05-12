@@ -12,9 +12,9 @@
 }
 
 .container h1{
-        color: white;
+        color: #112B3C;
         text-transform: uppercase;
-        font-weight: 500;
+        font-weight: 700;
 }
 .btn_land{
     border: 0;
@@ -25,7 +25,8 @@
     border: 2px solid #F66B0E;
     padding: 14px 40px;
     outline: none;
-    color: white;
+    color: #112B3C;
+    font-weight: 700;
     border-radius: 24px;
     transition: 0.25s;
 }
