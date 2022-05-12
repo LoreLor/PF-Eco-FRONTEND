@@ -2,12 +2,12 @@ import React from "react"
 
 
 export default function Categories({categories}){
-    function handleCahngeCategories (e){
+    function handleChangeCategories (e){
         e.preventDefault();
         alert(e.target.value)
     }
     return(
-        <select onChange={e => handleCahngeCategories(e)}>
+        <select onChange={e => handleChangeCategories(e)}>
             {
                 // console.log(categories)&&
                 categories?.map(cat => {

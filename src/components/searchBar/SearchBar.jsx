@@ -12,7 +12,7 @@ export default function SearchBar(){
     const [name, setName] = useState('')
     const [auto, setAuto] = useState([])
     
-    function hanldeInputChange(e){
+    function handleInputChange(e){
         //e.preventDefault()
         setName(e.target.value)
         setAuto(allProducts?.map(p=>{
@@ -54,7 +54,7 @@ export default function SearchBar(){
                     value={name}
                     placeholder="Search" 
                     label="Search" 
-                    onChange={hanldeInputChange}
+                    onChange={handleInputChange}
                 />
             </Hint>   
             <button className="btn btn-dark" type="submit" onClick={e => handleSearch(e)}>
