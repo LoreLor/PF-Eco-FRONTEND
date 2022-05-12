@@ -10,6 +10,11 @@ export default function AdminPage (){
         dispatch(getCategories())
         dispatch(getAllProducts())
     },[dispatch])
+
+    function handleReturn(i){
+        dispatch(getCategories)
+        dispatch(getAllProducts)
+    }
     return(
         <div>
             <div>Administración</div>
@@ -31,6 +36,11 @@ export default function AdminPage (){
                     <p>Crear Producto</p>
                 </Link>
             </div>
+            <Link to="/">
+            <button onClick={handleReturn}className='returnButton'> 
+                            Volver
+                        </button>
+            </Link>
         </div>
     )
 }

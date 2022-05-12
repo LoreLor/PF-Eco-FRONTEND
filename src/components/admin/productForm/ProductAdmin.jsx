@@ -2,7 +2,7 @@ import React,{useState} from "react"
 import productValidations from '../../utils/productValidation'
 import {useDispatch, useSelector} from 'react-redux'
 import { useNavigate,Link } from "react-router-dom"
-import { getProductById,getAllProducts} from "../../../redux/actions/products"
+import { getProductByName,getAllProducts} from "../../../redux/actions/products"
 import { getCategories } from "../../../redux/actions/categories"
 import style from './ProductAdmin.module.css'
 import Banner from '../Banner'
@@ -14,8 +14,6 @@ export default function ProductAdmin(){
     const productsDb = useSelector((state)=>state.products.products)
     const [keyword,setKeyword] = useState("")
     const [isOpen,setIsOpen] =useState(false)
-    
-    console.log(categoriesDb)
 
     const [errors,setErrors]=useState({})
     const [input,setInput] = useState({
@@ -25,11 +23,7 @@ export default function ProductAdmin(){
         stock:"",
         img: "",
         categories: [],
-        active: true,
     })
-
-    console.log(input)
-    console.log(errors)
 
     function handleReturn(i){
         dispatch(getCategories)
@@ -61,26 +55,6 @@ export default function ProductAdmin(){
         }))
     }
 
-    function handleActive(e){
-        e.preventDefault()
-        if(e.target.value === "true"){
-            return(
-                setInput({
-                    ...input,
-                    [e.target.name]:true
-                })
-            )
-        }
-        if(e.target.value === "false"){
-            return(
-                setInput({
-                    ...input,
-                    [e.target.name]:false
-                })
-            )
-        }
-    }
-
     async function handleSubmit(event){
         event.preventDefault()
         const data = {
@@ -90,10 +64,9 @@ export default function ProductAdmin(){
             rating: 0,
             stock: parseInt(input.stock) || "",
             img: input.img || "",
-            categories: input.categories || "",
-            active: input.active || ""
+            categories: input.categories || ""
         }
-        console.log(data)
+
         setErrors(productValidations(data,productsDb))
         if(Object.keys(errors).length === 0
         && input.name !== ""
@@ -102,25 +75,23 @@ export default function ProductAdmin(){
         && input.rating !== ""
         && input.stock !== ""
         && input.img !== ""
-        && input.categories.length >0
-        && input.active !== ""){
+        && input.categories.length >0){
             let response = null
-
-            response = await fetch('http://localhost:3001/products',
+            try {
+                response = await fetch('http://localhost:3001/products',
                 {method:"POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
             body: JSON.stringify(data)
             })
-            const result = await response.json()
+            const result = await response.json()  
             setKeyword(result.msg)
-            console.log(result)
-            console.log(keyword)
+
             if(!isOpen && result){
                 setIsOpen(state => !state);
             if(result.msg === "Producto creado exitosamente"){
-                dispatch(getProductById(result.id))
+                dispatch(getProductByName(result.name))
                 dispatch(getAllProducts)
                 dispatch(getCategories)
                 setInput({
@@ -131,9 +102,11 @@ export default function ProductAdmin(){
             stock:"",
             img: "",
             categories: [],
-            active: "",
                 })
             }
+            }
+            } catch (error) {
+                console.log(error)
             }
         }
     }
@@ -191,12 +164,6 @@ export default function ProductAdmin(){
                         <button key={category} name="categories" value={category} onClick={handleRemove}>{category}</button>
                     )
                 })}
-            </div>
-            <div>
-                <span>Estado del producto:</span>
-                <span>{input.active === true ? "Activo" : "Inactivo"}</span>
-                <button name="active" value={true}  onClick={handleActive}>Activar</button>
-                <button name="active" value={false} onClick={handleActive}>Ocultar</button>
             </div>
             <div>
                 {Object.keys(errors).length === 0 && Object.keys(input).length > 0 && 

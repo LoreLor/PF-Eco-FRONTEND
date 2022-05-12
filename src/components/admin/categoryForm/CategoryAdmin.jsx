@@ -14,8 +14,6 @@ export default function Form(){
     const categoriesDb = useSelector((state)=>state.products.categoriesDb)
     const [keyword,setKeyword] = useState("")
     const [isOpen,setIsOpen] =useState(false)
-    
-    console.log(categoriesDb)
 
     const [errors,setErrors]=useState({})
     const [input,setInput] = useState({
@@ -42,8 +40,8 @@ export default function Form(){
         && input.name !== ""
         ){
         let response = null
-
-        response = await fetch('http://localhost:3001/categories',
+            try {
+                response = await fetch('http://localhost:3001/categories',
                 {method:"POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -51,8 +49,8 @@ export default function Form(){
             body: JSON.stringify(data)
             })
         const result = await response.json()
+
         setKeyword(result.msg)
-        console.log(result.name)
         if(!isOpen && result){
             setIsOpen(state => !state);
         if(result.msg === "Categoria creada correctamente"){
@@ -62,7 +60,10 @@ export default function Form(){
                 name:""
             })
             }
-        }
+        } 
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 
