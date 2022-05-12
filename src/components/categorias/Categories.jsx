@@ -1,5 +1,6 @@
 import React from "react"
 
+import style from './Categories.module.css'
 
 export default function Categories({categories}){
     function handleChangeCategories (e){
@@ -7,7 +8,7 @@ export default function Categories({categories}){
         alert(e.target.value)
     }
     return(
-        <select onChange={e => handleChangeCategories(e)}>
+        <select onChange={e => handleChangeCategories(e)} className={style.select}>
             {
                 // console.log(categories)&&
                 categories?.map(cat => {

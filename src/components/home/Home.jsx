@@ -30,7 +30,6 @@ export default function Home (){
     return(
         <div>
             <NavBar categories={allCategories}/>
-            <Link to='/admin'> Ir a Admin</Link>
             <div className={style.cards}>
                 {
                     allProducts.products ? 

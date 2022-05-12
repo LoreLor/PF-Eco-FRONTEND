@@ -1,0 +1,29 @@
+.container{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.mybtn{
+    color: #EFEFEF;
+    text-decoration: none;
+    font-weight: 700;
+    padding-left: 29px;
+}
+.mybtn:hover{
+    color: #F66B0E;
+}
+
+.footHead{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 10px;
+}
