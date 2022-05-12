@@ -38,7 +38,8 @@ export const getProductByName = (name) => async (dispatch) => {
         type: GET_PRODUCT_BY_NAME_REQUEST
     })
     try {
-        const product = await axios.get(`${SERVER}products?name=${name}`)
+        const product = await axios.get(`${SERVER}/products?name=${name}`)
+        console.log(product)
         dispatch({
             type: GET_PRODUCT_BY_NAME_SUCCESS,
             payload: product.data
