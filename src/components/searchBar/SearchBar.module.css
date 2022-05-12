@@ -5,13 +5,11 @@
     justify-content: space-between;
     width: 400px;
     height: 50px;
-    top: 80px;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background: #EFEFEF;
     border-radius: 40px;
     border: solid #F66B0E;
     padding: 0.1px;
+    margin-right: 9px;
 }
 
 .btn{
