@@ -25,7 +25,7 @@ export default function ProductAdmin(){
         stock:"",
         img: "",
         categories: [],
-        isActive: "",
+        active: true,
     })
 
     console.log(input)
@@ -63,12 +63,22 @@ export default function ProductAdmin(){
 
     function handleActive(e){
         e.preventDefault()
-        return(
-            setInput({
-                ...input,
-                [e.target.name]:e.target.value
-            })
-        )
+        if(e.target.value === "true"){
+            return(
+                setInput({
+                    ...input,
+                    [e.target.name]:true
+                })
+            )
+        }
+        if(e.target.value === "false"){
+            return(
+                setInput({
+                    ...input,
+                    [e.target.name]:false
+                })
+            )
+        }
     }
 
     async function handleSubmit(event){
@@ -81,7 +91,7 @@ export default function ProductAdmin(){
             stock: parseInt(input.stock) || "",
             img: input.img || "",
             categories: input.categories || "",
-            isActive: input.isActive || ""
+            active: input.active || ""
         }
         console.log(data)
         setErrors(productValidations(data,productsDb))
@@ -93,7 +103,7 @@ export default function ProductAdmin(){
         && input.stock !== ""
         && input.img !== ""
         && input.categories.length >0
-        && input.isActive !== ""){
+        && input.active !== ""){
             let response = null
 
             response = await fetch('http://localhost:3001/products',
@@ -121,7 +131,7 @@ export default function ProductAdmin(){
             stock:"",
             img: "",
             categories: [],
-            isActive: "",
+            active: "",
                 })
             }
             }
@@ -184,9 +194,9 @@ export default function ProductAdmin(){
             </div>
             <div>
                 <span>Estado del producto:</span>
-                <span>{input.isActive}</span>
-                <button name="isActive" value={"Activo"}  onClick={handleActive}>Activar</button>
-                <button name="isActive" value={"Inactivo"} onClick={handleActive}>Ocultar</button>
+                <span>{input.active === true ? "Activo" : "Inactivo"}</span>
+                <button name="active" value={true}  onClick={handleActive}>Activar</button>
+                <button name="active" value={false} onClick={handleActive}>Ocultar</button>
             </div>
             <div>
                 {Object.keys(errors).length === 0 && Object.keys(input).length > 0 && 
