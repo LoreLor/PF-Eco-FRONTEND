@@ -24,51 +24,60 @@ export const productsReducer = (state=initialState, action) => {
     switch(action.type){
         case GET_ALL_PRODUCTS_REQUEST:
             return{
+                ...state,
                 loading: true
             }
 
         case GET_ALL_PRODUCTS_SUCCESS:
             return {
+                ...state,
                 loading:false,
                 products: action.payload
             }
 
         case GET_ALL_PRODUCTS_FAIL:
             return {
+                ...state,
                 loading:false,
                 error:action.payload
             }
 
         case GET_PRODUCT_BY_NAME_REQUEST:
             return{
+                ...state,
                 loading: true
             }
 
         case GET_PRODUCT_BY_NAME_SUCCESS:
             return {
+                ...state,
                 loading:false,
                 products: action.payload
             }
 
         case GET_PRODUCT_BY_NAME_FAIL:
             return {
+                ...state,
                 loading:false,
                 error:action.payload
             }
 
         case GET_PRODUCT_BY_ID_REQUEST:
             return{
+                ...state,
                 loading: true
             }
 
         case GET_PRODUCT_BY_ID_SUCCESS:
             return {
+                ...state,
                 loading:false,
                 detail: action.payload
             }
 
         case GET_PRODUCT_BY_ID_FAIL:
             return {
+                ...state,
                 loading:false,
                 error:action.payload
             }

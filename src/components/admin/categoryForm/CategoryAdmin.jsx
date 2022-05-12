@@ -1,26 +1,31 @@
 import React,{useState} from "react"
 import categoryValidations from '../../utils/categoryValidation'
 import {useDispatch, useSelector} from 'react-redux'
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { addCategoriesCheck,getCategories } from "../../../redux/actions/categories"
 import style from './CategoryAdmin.module.css'
 import Banner from '../Banner'
+import { getAllProducts } from "../../../redux/actions/products"
+
 
 export default function Form(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const categoriesDb = useSelector((state)=>state.products.categoriesDb)
-    console.log(categoriesDb)
     const [keyword,setKeyword] = useState("")
     const [isOpen,setIsOpen] =useState(false)
     
+    console.log(categoriesDb)
+
     const [errors,setErrors]=useState({})
     const [input,setInput] = useState({
         name: "",
     })
-    console.log(input)
-    console.log(errors)
 
+    function handleReturn(i){
+        dispatch(getCategories)
+        dispatch(getAllProducts)
+    }
     function handleInputChange(i){  
         setErrors(categoryValidations({...input,[i.target.name]:i.target.value},categoriesDb))
         setInput({...input,[i.target.name]:i.target.value})            
@@ -32,7 +37,6 @@ export default function Form(){
         const data = {
         name: input.name.toLocaleLowerCase() || "",
         }
-        console.log(data)
         setErrors(categoryValidations(data,categoriesDb))
         if(Object.keys(errors).length === 0
         && input.name !== ""
@@ -47,11 +51,11 @@ export default function Form(){
             body: JSON.stringify(data)
             })
         const result = await response.json()
-        console.log(result)
         setKeyword(result.msg)
+        console.log(result.name)
         if(!isOpen && result){
             setIsOpen(state => !state);
-        if(result.msg === "Category added successfully"){
+        if(result.msg === "Categoria creada correctamente"){
             dispatch(addCategoriesCheck(result.name))
             dispatch(getCategories())
             setInput({
@@ -78,17 +82,29 @@ export default function Form(){
                 <input type='submit' value= "Add Category" className='finalButton'onClick={handleSubmit}/>   
             }
             </div>
+            <div>
+            <Link to="/admin">
+            <button onClick={handleReturn}className='returnButton'> 
+                            Volver
+                        </button>
+            </Link>
+            </div>
             </form>
             <Banner isOpen={isOpen} setIsOpen={setIsOpen}>
                 {keyword.length ? (
                     <>
                     <h2>{keyword}</h2>
-                    {keyword === "Category added successfully" ? (
+                    {keyword === "Categoria creada correctamente" ? (
+                        <>
                         <button onClick={()=> navigate("/admin",{replace:true})}className='bannerUpdate'> 
                             Go to Admin
                         </button>
+                        </>
                     ): (
+                        <>
+                        {keyword}
                         <button onClick={()=> setIsOpen(state=>!state)}>Ok</button>
+                        </>
                     )}
                     </>
                 ):(

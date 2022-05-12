@@ -2,12 +2,14 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import {Link} from 'react-router-dom'
 import { getCategories } from '../../redux/actions/categories'
+import { getAllProducts } from '../../redux/actions/products'
 
 export default function AdminPage (){
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(getCategories())
-    })
+        dispatch(getAllProducts())
+    },[dispatch])
     return(
         <div>
             <div>Administración</div>
