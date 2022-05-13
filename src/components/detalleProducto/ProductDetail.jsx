@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import { Link, NavLink, useParams } from "react-router-dom"
@@ -18,9 +18,9 @@ export default function ProductDetail (){
     let {id} = useParams()
     
     const dispatch = useDispatch();
+    const [items, setItems] = useState(1)
     const detailProduct = useSelector((state) => state.products.detail)
     const categories = useSelector((state) => state.products.categoriesDb)
-    const loading = useSelector((state) => state.products.loading)
     
     useEffect(() => {
         dispatch(getProductById(id))
@@ -30,12 +30,13 @@ export default function ProductDetail (){
 
     function handleSelectQty (e){
         e.preventDefault();
-        console.log(`seleccionaste ${e.target.value} items`)
+        setItems(e.target.value)
+        //console.log(`seleccionaste ${items} items`)
     }
 
     function handleBuy(e){
         e.preventDefault();
-        alert('compraste wachin')
+        alert(`compraste ${items}`)
     }
 
 
@@ -49,7 +50,7 @@ export default function ProductDetail (){
         <div>
             <NavBar categories={categories}/>
             {
-                detailProduct ?
+                detailProduct.rating ?
                     <div className={style.card}>
                         <div className={style.card_img}>
                             <div className={style.imgContainer}>
