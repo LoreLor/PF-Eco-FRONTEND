@@ -1,17 +1,26 @@
 import React from "react";
 import SearchBar from "../searchBar/SearchBar";
 import Categories from "../categorias/Categories";
-
+import { logout } from '../../redux/actions/user'
 import style from './NavBar.module.css'
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 
 export default function NavBar({categories}){
     const user = JSON.parse(localStorage.getItem('userInfo'))
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
 
 
     function handleCart(e){
         e.preventDefault()
         alert('carrito')
+    }
+
+    function handleLogout(){
+        dispatch(logout())
+        navigate('/')
     }
 
     return(
@@ -21,20 +30,31 @@ export default function NavBar({categories}){
                     <NavLink exact to="/" className="navbar-brand">Titulo del Ecommerce</NavLink>
                     <div className={style.box}>
                         <SearchBar/>
+                        <div className={style.conte}>
+                            {user ? (
+                            <div class="dropdown">
+                                <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown">
+                                    <span class="caret"><h3>{user.user_name}</h3></span>
+                                </button>
+                                <ul class="dropdown-menu">     
+                                    <li><a href="#" className={style.logout} onClick={handleLogout}>Log Out</a></li>
+                                </ul>
+                            </div>    
+                            ) : (
+                                <NavLink to="/login"className={style.mybtn}>Log In</NavLink>
+                            )}       
+                        </div>
                     </div>
                 </div>
             </nav>
                 <div className={style.footHead}>
                     <div>
                         <Categories categories={categories}/>
-                        <NavLink exact to="/" className={style.mybtn}>History</NavLink>
-                        <NavLink exact to="/" className={style.mybtn}>Help</NavLink>
+                        <NavLink to="/" className={style.mybtn}>History</NavLink>
+                        <NavLink to="/" className={style.mybtn}>Help</NavLink>
                     </div>
-                    <div>
-                        {user ? 
-                            <h3>{user.user_name}</h3> :(
-                            <NavLink exact to="/login" className={style.mybtn}>Log In</NavLink>)
-                        }
+                    <div>  
+                        
                         <button className="btn btn-secundary" type="button" style={{marginRight:'10px'}} onClick={e => handleCart(e)}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" className="bi bi-cart-check" viewBox="0 0 16 16">
                                 <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>

@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@fortawesome/fontawesome-free": "^6.1.1",
     "@mui/material": "^5.7.0",
     "@mui/styled-engine-sc": "^5.7.0",
     "@testing-library/jest-dom": "^5.16.4",
@@ -13,6 +14,7 @@
     "axios": "^0.27.2",
     "bootstrap-icons": "^1.8.1",
     "dotenv": "^16.0.0",
+    "fontawesome": "^5.6.3",
     "react": "^18.1.0",
     "react-autocomplete-hint": "^2.0.0",
     "react-dom": "^18.1.0",

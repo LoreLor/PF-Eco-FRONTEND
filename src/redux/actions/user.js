@@ -26,5 +26,6 @@ export const logout = () => (dispatch) => {
     window.location.ref ="/";  //me refresca la pagina y limpia el local
     dispatch({
         type: USER_LOGOUT,
+      
     })
 };
