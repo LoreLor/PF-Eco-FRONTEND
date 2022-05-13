@@ -9,7 +9,9 @@ import { GET_ALL_CATEGORIES,
     GET_PRODUCT_BY_ID_SUCCESS, 
     GET_PRODUCT_BY_NAME_FAIL, 
     GET_PRODUCT_BY_NAME_REQUEST, 
-    GET_PRODUCT_BY_NAME_SUCCESS } from "../actions/constants";
+    GET_PRODUCT_BY_NAME_SUCCESS,
+    CLEAN_DETAIL
+} from "../actions/constants";
 
 
 const initialState ={
@@ -91,6 +93,11 @@ export const productsReducer = (state=initialState, action) => {
             return {
                 ...state,
                 categoriesDb:[...state.categoriesDb,action.payload]
+            }
+        case CLEAN_DETAIL:
+            return{
+                ...state,
+                detail: {}
             }
 
         default:

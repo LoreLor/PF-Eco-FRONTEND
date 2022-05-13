@@ -75,7 +75,7 @@ const [mail, setMail]=useState('')
 
     return (
         <div style={{ marginBottom: 40 }} >
-            <form onSubmit={handleSubmitLogin} >
+            <form onSubmit={handleSubmitLogin} autocomplete="off">
                 <div className="container w-75 mt-5 shadow-lg p-3 mb-5 bg-white rounded">
                     <div className="row align-items-center align-items-center ">
                         <div class='col-lg-5'>
