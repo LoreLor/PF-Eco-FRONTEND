@@ -17,7 +17,7 @@ export default function ProductCard({name, img, price, rating, id}){
                          <span className={style.card_preci}>${price}</span>
                          <div className={style.card_ratBtn}>
                             <Rating name="read-only" value={rating} readOnly/>
-                            <a href="#" className={style.card_button}>Add to Cart</a>
+                            <a href="#" className={style.card_button}>Buy Now</a>
                          </div>
                      </div>
             </div>
