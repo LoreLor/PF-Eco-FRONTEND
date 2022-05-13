@@ -23,17 +23,20 @@ export default function ProductAdmin(){
         stock:"",
         img: "",
         categories: [],
+        pictures: [], 
     })
+
+    function handleInputChange(i){  
+        setErrors(productValidations({...input,[i.target.name]:i.target.value},productsDb))
+         setInput({...input,[i.target.name]:i.target.value})            
+     }
 
     function handleReturn(i){
         dispatch(getCategories)
         dispatch(getAllProducts)
     }
 
-    function handleInputChange(i){  
-       setErrors(productValidations({...input,[i.target.name]:i.target.value},productsDb))
-        setInput({...input,[i.target.name]:i.target.value})            
-    }
+    
     
     function handleArrayChange(i){
         if(!input.categories.includes(i.target.value)){
@@ -115,7 +118,7 @@ export default function ProductAdmin(){
         <div className='productForm'>
             <div className="formularyProduct">
 
-            <form className='prodForm' onSubmit={handleSubmit}>
+            <form className='prodForm' enctype="multipart/form-data" onSubmit={handleSubmit}>
             <div>
                 <h3>Añadir o Editar:</h3>
             <div>
@@ -149,6 +152,13 @@ export default function ProductAdmin(){
                 name='img' value={input.img} onChange={handleInputChange}/>
                 {errors.img && (<p className={style.danger}>{errors.img}</p>)}             
             </div>
+            <div>
+            <span>Imagen(multer)</span>
+                <input className={errors.name && style.danger} accept="image/png,image/jpg,image/jpeg" type='file' multiple={true}  placeholder="Imagen del producto..."
+                name='pictures' /* value={input.pictures} onChange={handleArrayChange} *//>
+                {/* {errors.img && (<p className={style.danger}>{errors.img}</p>)}  */}            
+            </div>
+            
             </div>
             <div>
                 <span>Categorias:</span>

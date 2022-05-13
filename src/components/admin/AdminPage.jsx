@@ -36,6 +36,12 @@ export default function AdminPage (){
                     <p>Crear Producto</p>
                 </Link>
             </div>
+            <div>
+                <span>Test</span>
+                <Link to='/test'>
+                    <p>Crear Producto</p>
+                </Link>
+            </div>
             <Link to="/">
             <button onClick={handleReturn}className='returnButton'> 
                             Volver
