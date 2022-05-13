@@ -25,8 +25,7 @@ const Login = () => {
         e.preventDefault();
         dispatch(userLogin(email, password))
         setEmail('')
-        setPassword('')
-        
+        setPassword('')   
             Swal.fire({
                 title:'login success',
                 icon: 'success'
@@ -35,24 +34,24 @@ const Login = () => {
     }
 
 /*para el seteo de contraseña*/
-const [mail, setMail]=useState('')
-    const handleInputChangeEmail = function (e) {
-        setMail({
-            ...mail,
-            [e.target.name]: e.target.value
-        });
-    }
+    const [mail, setMail]=useState('')
+        const handleInputChangeMail = function (e) {
+            setMail({
+                ...mail,
+                [e.target.name]: e.target.value
+            });
+        }
   
-    const handleSubmitEmail = async (e) => {
+    const handleSubmitMail = async (e) => {
         e.preventDefault()
         await axios.post('/user', email).then(res => {
-            Swal("email enviado con exito!", {
+            Swal.fire("email enviado con exito!", {
                 buttons: false,
                 icon: "success",
                 timer: 2000,
             });
         }).catch(err => {
-            Swal("Error, el usuario no existe!", {
+            Swal.fire("Error, el usuario no existe!", {
                 buttons: false,
                 icon: "error",
                 timer: 2000,
@@ -60,11 +59,6 @@ const [mail, setMail]=useState('')
         })
     }
 
-    
-
-
-    
-        
 
     const handleGoogleLogin = async () => {
         //dispatch(googleLogin()).then(
@@ -75,7 +69,7 @@ const [mail, setMail]=useState('')
 
     return (
         <div style={{ marginBottom: 40 }} >
-            <form onSubmit={handleSubmitLogin} >
+            <form  onSubmit={handleSubmitLogin} >
                 <div className="container w-75 mt-5 shadow-lg p-3 mb-5 bg-white rounded">
                     <div className="row align-items-center align-items-center ">
                         <div class='col-lg-5'>
@@ -96,6 +90,7 @@ const [mail, setMail]=useState('')
                         </div>
                         <div className="col bg- p-5 col-lg-7 col-xl-6 rounded-end">
                             <h2 className="fw-bold text-center pt-5 mb-5">Welcome</h2>
+
                             {/* Formulario de login */}
                             <div className="mb-4">
                                 <label htmlFor="email" className="form-label"> Email </label>
@@ -104,8 +99,7 @@ const [mail, setMail]=useState('')
                                     placeholder="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                    autoComplete='off'
+                                    required     
                                 />
                             </div>
                             <div className="mb-4">
@@ -116,13 +110,13 @@ const [mail, setMail]=useState('')
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
-                                    autoComplete='off'
+                                   
                                 />
                             </div>
-                            <div className="mb-4 form-check">
+                            {/* <div className="mb-4 form-check">
                                 <input type="checkbox" className="form-check-input" name="connected" />
                                 <label className="form-check-label" htmlFor="connected"> Keep Connection </label>
-                            </div>
+                            </div> */}
                             <div className="d-grid">
                                 <button type="submit" className={s.btn}> Sign In </button>
                             </div>
@@ -136,7 +130,7 @@ const [mail, setMail]=useState('')
                                         data-bs-target="#exampleModal"
                                         data-bs-whatever="@igroup"
                                     >
-                                        {/*<i class="far fa-comment-dots"></i> */}Forgot your Password?
+                                       Forgot your Password?
                                     </button>
                                 </div>
                                 <div
@@ -172,7 +166,7 @@ const [mail, setMail]=useState('')
                                                         type="email"
                                                         value={email.email}
                                                         name="email"
-                                                        onChange={handleInputChangeEmail}
+                                                        onChange={handleInputChangeMail}
                                                         className="form-control"
                                                         id="recipient-name"
                                                     />
@@ -190,7 +184,7 @@ const [mail, setMail]=useState('')
                                                 <button type="submit"
                                                     value="Enviar Mail"
                                                     data-bs-dismiss="modal"
-                                                    onClick={handleSubmitEmail}
+                                                    onClick={handleSubmitMail}
                                                     className="btn btn-success">
                                                     Send Email
                                                 </button>
@@ -201,29 +195,26 @@ const [mail, setMail]=useState('')
 
                             </div>
                             <div className="my-3">
-                                <span> You don't have an account? <Link to="/register">Register</Link></span>
-                                <br />
-                                <span> <a href="# "> Recuperar password </a> </span> 
+                                <span> You don't have an account? <Link to="/register">Register</Link></span>                             
                             </div>
+
                             {/* Login con google */}
                             <div className="container w-100 my-5">
                                 <div className="row my-3 text-center">
                                     <div className="col-12"> Login with </div>
                                 </div>
-                                {/* <div className="row">
+                                    <div className="row">
                                     <div className="col">
                                         <button className="btn btn-outline-ligth  my-1" type="button" onClick={handleGoogleLogin}>
                                             <div className="row align-items-center">
 
                                                 <img src="https://i.postimg.cc/Y04ZG5n6/google.png" width="5%" alt='' />
-
-
-                                                Google
+                                        Google
                                             </div>
 
                                         </button>
                                 </div>
-                                    </div> */}
+                                    </div> 
                             </div>
                         </div>
                     </div>

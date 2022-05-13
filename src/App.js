@@ -9,6 +9,7 @@ import {Routes,Route} from 'react-router-dom'
 import Login from './components/login/Login';
 import ProductDetail from './components/detalleProducto/ProductDetail';
 import Error404 from './components/Error404/Error404';
+import Register from './components/registro/Register';
 
 function App() {
   
@@ -24,6 +25,7 @@ function App() {
         <Route path ='/categoryAdmin' element={<CategoryAdmin/>}/>
         <Route path ='/login' element={<Login />} />
         <Route path = '/home/:id' element={<ProductDetail/>}/>
+        <Route path = '/register' element={<Register />} />
         <Route path={'*'} element={<Error404/>}/>
       </Routes>
     </Fragment>
