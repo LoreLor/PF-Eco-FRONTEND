@@ -9,6 +9,10 @@ import {Routes,Route} from 'react-router-dom'
 import Login from './components/login/Login';
 
 function App() {
+  
+  const userInfo=JSON.parse(localStorage.getItem('userInfo'))?.user_name ? localStorage.getItem('userInfo') : localStorage.setItem('userInfo', JSON.stringify([]))
+  console.log(userInfo)
+  
   return (
     <Fragment>
       <Routes>

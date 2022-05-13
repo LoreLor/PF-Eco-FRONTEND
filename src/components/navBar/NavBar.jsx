@@ -6,6 +6,7 @@ import style from './NavBar.module.css'
 import { NavLink } from "react-router-dom";
 
 export default function NavBar({categories}){
+    const user = JSON.parse(localStorage.getItem('userInfo'))
 
 
     function handleCart(e){
@@ -30,7 +31,10 @@ export default function NavBar({categories}){
                         <NavLink exact to="/" className={style.mybtn}>Help</NavLink>
                     </div>
                     <div>
-                        <NavLink exact to="/login" className={style.mybtn}>Log In</NavLink>
+                        {user ? 
+                            <h3>{user.user_name}</h3> :(
+                            <NavLink exact to="/login" className={style.mybtn}>Log In</NavLink>)
+                        }
                         <button className="btn btn-secundary" type="button" style={{marginRight:'10px'}} onClick={e => handleCart(e)}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" className="bi bi-cart-check" viewBox="0 0 16 16">
                                 <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>

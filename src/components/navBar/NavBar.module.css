@@ -16,6 +16,7 @@
     text-decoration: none;
     font-weight: 700;
     padding-left: 29px;
+    margin-right: 40px;
 }
 .mybtn:hover{
     color: #F66B0E;
@@ -26,4 +27,12 @@
     justify-content: space-around;
     align-items: center;
     padding-bottom: 10px;
+}
+h3{
+    color: #EFEFEF;
+    font-weight: 600;
+    display: inline;
+    font-size:large;
+    margin-right: 15px;
+
 }
