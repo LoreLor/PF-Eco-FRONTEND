@@ -127,12 +127,12 @@
   }
   
   .card:hover .card_title {
-    transform: translateX(-2.3rem);
+    transform: translateX(0rem);
     margin-bottom: 0;
   }
   
   .card:hover .card_preci {
-    transform: translateX(-6.8rem);
+    transform: translateX(0rem);
   }
   
   .card:hover .card_description, 

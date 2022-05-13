@@ -7,7 +7,8 @@ import {
     GET_PRODUCT_BY_ID_SUCCESS,
     GET_PRODUCT_BY_NAME_FAIL,
     GET_PRODUCT_BY_NAME_REQUEST,
-    GET_PRODUCT_BY_NAME_SUCCESS
+    GET_PRODUCT_BY_NAME_SUCCESS,
+    CLEAN_DETAIL
 } from "./constants";
 import axios from 'axios';
 
@@ -54,22 +55,15 @@ export const getProductByName = (name) => async (dispatch) => {
 };
 
 export const getProductById = (id) => async (dispatch) => {
-    dispatch({
-        type: GET_PRODUCT_BY_ID_REQUEST,
-        payload: id
-    })
-    try {
-        const {data} = await axios.get(`${SERVER}/products/${id}`)
+    const {data} = await axios.get(`${SERVER}/products/${id}`)
         dispatch({
             type: GET_PRODUCT_BY_ID_SUCCESS,
             payload: data
         })
-        
-    } catch (error) {
-        dispatch({
-            type: GET_PRODUCT_BY_ID_FAIL,
-            payload: error
-        })
-    }
+}
 
+export function limpiarDetail(){
+    return {
+        type: CLEAN_DETAIL
+    }
 }
