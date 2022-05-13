@@ -3,11 +3,13 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
+   
 }
 .box{
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-top: 8px;
 }
 
 
@@ -16,6 +18,7 @@
     text-decoration: none;
     font-weight: 700;
     padding-left: 29px;
+    margin-right: 40px;
 }
 .mybtn:hover{
     color: #F66B0E;
@@ -26,4 +29,27 @@
     justify-content: space-around;
     align-items: center;
     padding-bottom: 10px;
+}
+h3{
+    color: #292727;
+    font-weight: 600;
+    display: inline;
+    font-size:medium;
+    margin-right: 15px;
+
+}
+
+.logout{
+    color: #292727;
+    font-weight: 600;
+    display: inline;
+    font-size:medium;
+    margin-right: 15px
+}
+
+.conte{
+    display:flex;
+    margin-left: 30px;
+    margin-top: 8px;
+
 }

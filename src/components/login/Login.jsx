@@ -2,11 +2,11 @@ import React from 'react';
 import axios from "axios";
 import { Link } from "react-router-dom"
 import { useNavigate } from 'react-router-dom';
-//import { googleLogin, localLoginUser  } from "../actions/actionUser"
-import { useDispatch } from "react-redux";
+import { googleLogin, userLogin  } from "../../redux/actions/user"
+import { useDispatch, useSelector } from "react-redux";
 import s from "./Login.module.css";
 import { useState } from 'react';
-import swal from "sweetalert2";
+import Swal from "sweetalert2";
 import imagen1 from '../../assets/celulares.jpg';
 import imagen2 from '../../assets/celulares1.jpg';
 import imagen3 from '../../assets/celulares3.jpg';
@@ -15,53 +15,60 @@ const Login = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch();
+    const user = useSelector((state)=>state.user)
 
-    const [input, setInput] = useState({
-        email: '',
-        password: '',
-    });
+    const [email, setEmail] = useState("");
+    const [password, setPassword]= useState("");
 
-    const [email, setEmail] = useState({ name: '' });
+    
+    const handleSubmitLogin = (e) => {
+        e.preventDefault();
+        dispatch(userLogin(email, password))
+        setEmail('')
+        setPassword('')
+        
+            Swal.fire({
+                title:'login success',
+                icon: 'success'
+            })
+            navigate('/')
+    }
+
+    
+
+    
+
+
+/*para el seteo de contraseña*/
     const handleInputChangeEmail = function (e) {
         setEmail({
             ...email,
             [e.target.name]: e.target.value
         });
     }
-
+  
     const handleSubmitEmail = async (e) => {
         e.preventDefault()
-        await axios.put('/user', email).then(res => {
-            swal("email enviado con exito!", {
+        await axios.post('/user', email).then(res => {
+            Swal("email enviado con exito!", {
                 buttons: false,
                 icon: "success",
                 timer: 2000,
             });
         }).catch(err => {
-            swal("Error, el usuario no existe!", {
+            Swal("Error, el usuario no existe!", {
                 buttons: false,
                 icon: "error",
                 timer: 2000,
             });
-        }
-        )
+        })
     }
 
     // const local = localStorage.getItem('login')
 
 
-    //   console.log(local, "este es mi local storage")   //  <--- console,LOG
-    //  console.log(input, "este es el valor del input")
-    const handleLocalLogin = (e) => {
-        e.preventDefault();
-        //dispatch(localLoginUser(input))
-        setInput({
-            email: '',
-            password: '',
-        })
-        navigate(`/`)
-    }
-
+    
+        
 
     const handleGoogleLogin = async () => {
         //dispatch(googleLogin()).then(
@@ -72,7 +79,7 @@ const Login = () => {
 
     return (
         <div style={{ marginBottom: 40 }} >
-            <form onSubmit={e => handleLocalLogin(e)} >
+            <form onSubmit={handleSubmitLogin} >
                 <div className="container w-75 mt-5 shadow-lg p-3 mb-5 bg-white rounded">
                     <div className="row align-items-center align-items-center ">
                         <div class='col-lg-5'>
@@ -99,9 +106,10 @@ const Login = () => {
                                 <input type="text"
                                     className="form-control mb-2"
                                     placeholder="email"
-                                    value={input.email}
-                                    onChange={(e) => setInput({ ...input, email: e.target.value })}
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     required
+                                    autoComplete='off'
                                 />
                             </div>
                             <div className="mb-4">
@@ -109,9 +117,10 @@ const Login = () => {
                                 <input type="password"
                                     className="form-control"
                                     placeholder="Password"
-                                    value={input.password}
-                                    onChange={(e) => setInput({ ...input, password: e.target.value })}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                     required
+                                    autoComplete='off'
                                 />
                             </div>
                             <div className="mb-4 form-check">
@@ -119,7 +128,7 @@ const Login = () => {
                                 <label className="form-check-label" htmlFor="connected"> Keep Connection </label>
                             </div>
                             <div className="d-grid">
-                                <button type="submit" onSubmit={e => handleLocalLogin(e)} className={s.btn}> Sign In </button>
+                                <button type="submit" className={s.btn}> Sign In </button>
                             </div>
                             <br />
                             <div className="col-md-4 col-lg-3 col-xl-12 mx-auto mb-md-0 mb-4">
@@ -131,7 +140,7 @@ const Login = () => {
                                         data-bs-target="#exampleModal"
                                         data-bs-whatever="@igroup"
                                     >
-                                        {/* <i class="far fa-comment-dots"></i> */} Forgot your Password?
+                                        {/*<i class="far fa-comment-dots"></i> */}Forgot your Password?
                                     </button>
                                 </div>
                                 <div
@@ -196,7 +205,7 @@ const Login = () => {
 
                             </div>
                             <div className="my-3">
-                                <span> You don't have an account? <Link to="/user">Register</Link></span>
+                                <span> You don't have an account? <Link to="/register">Register</Link></span>
                                 <br />
                                 {/* <span> <a href="# "> Recuperar password </a> </span> */}
                             </div>
