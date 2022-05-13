@@ -11,6 +11,10 @@ import ProductDetail from './components/detalleProducto/ProductDetail';
 import Error404 from './components/Error404/Error404';
 
 function App() {
+  
+  const userInfo=JSON.parse(localStorage.getItem('userInfo'))?.user_name ? localStorage.getItem('userInfo') : localStorage.setItem('userInfo', JSON.stringify([]))
+  console.log(userInfo)
+  
   return (
     <Fragment>
       <Routes>
