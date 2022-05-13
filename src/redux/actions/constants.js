@@ -16,5 +16,8 @@ export const SORT_AND_FILTER = 'SORT AND_FILTER'
 export const GET_CATEGORY_CHECK = "GET_CATEGORY_CHECK"
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 
+export const CLEAN_DETAIL = 'CLEAN_DETAIL'
+
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGOUT = 'USER_LOGOUT';
+

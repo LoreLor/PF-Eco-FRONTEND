@@ -7,7 +7,8 @@ import {
     GET_PRODUCT_BY_ID_SUCCESS,
     GET_PRODUCT_BY_NAME_FAIL,
     GET_PRODUCT_BY_NAME_REQUEST,
-    GET_PRODUCT_BY_NAME_SUCCESS
+    GET_PRODUCT_BY_NAME_SUCCESS,
+    CLEAN_DETAIL
 } from "./constants";
 import axios from 'axios';
 
@@ -59,5 +60,10 @@ export const getProductById = (id) => async (dispatch) => {
             type: GET_PRODUCT_BY_ID_SUCCESS,
             payload: data
         })
+}
 
+export function limpiarDetail(){
+    return {
+        type: CLEAN_DETAIL
+    }
 }
