@@ -22,10 +22,8 @@ export const userLogin = (email, password) => async(dispatch) =>{
 }
 
 export const logout = () => (dispatch) => {
-    localStorage.clear();
-    window.location.ref ="/";  //me refresca la pagina y limpia el local
+   
     dispatch({
         type: USER_LOGOUT,
-      
     })
 };

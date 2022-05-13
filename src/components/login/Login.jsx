@@ -34,15 +34,11 @@ const Login = () => {
             navigate('/')
     }
 
-    
-
-    
-
-
 /*para el seteo de contraseña*/
+const [mail, setMail]=useState('')
     const handleInputChangeEmail = function (e) {
-        setEmail({
-            ...email,
+        setMail({
+            ...mail,
             [e.target.name]: e.target.value
         });
     }
@@ -64,7 +60,7 @@ const Login = () => {
         })
     }
 
-    // const local = localStorage.getItem('login')
+    
 
 
     
@@ -135,7 +131,7 @@ const Login = () => {
                                 <div className='d-grid'>
                                     <button
                                         type="button"
-                                        className="btn btn-info text-white"
+                                        className={s.btn}
                                         data-bs-toggle="modal"
                                         data-bs-target="#exampleModal"
                                         data-bs-whatever="@igroup"
@@ -207,7 +203,7 @@ const Login = () => {
                             <div className="my-3">
                                 <span> You don't have an account? <Link to="/register">Register</Link></span>
                                 <br />
-                                {/* <span> <a href="# "> Recuperar password </a> </span> */}
+                                <span> <a href="# "> Recuperar password </a> </span> 
                             </div>
                             {/* Login con google */}
                             <div className="container w-100 my-5">
