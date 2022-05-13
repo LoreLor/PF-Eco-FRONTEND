@@ -54,22 +54,10 @@ export const getProductByName = (name) => async (dispatch) => {
 };
 
 export const getProductById = (id) => async (dispatch) => {
-    dispatch({
-        type: GET_PRODUCT_BY_ID_REQUEST,
-        payload: id
-    })
-    try {
-        const {data} = await axios.get(`${SERVER}/products/${id}`)
+    const {data} = await axios.get(`${SERVER}/products/${id}`)
         dispatch({
             type: GET_PRODUCT_BY_ID_SUCCESS,
             payload: data
         })
-        
-    } catch (error) {
-        dispatch({
-            type: GET_PRODUCT_BY_ID_FAIL,
-            payload: error
-        })
-    }
 
 }
