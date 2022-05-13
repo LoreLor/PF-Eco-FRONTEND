@@ -17,7 +17,7 @@ export default function NavBar({categories}){
         <header>
             <nav className="navbar navbar-expand-sm">
                 <div className={style.container}>
-                    <NavLink exact to="/" className="navbar-brand">Titulo del Ecommerce</NavLink>
+                    <NavLink exact to="/home" className="navbar-brand">Titulo del Ecommerce</NavLink>
                     <div className={style.box}>
                         <SearchBar/>
                     </div>
