@@ -10,12 +10,14 @@ import { GET_ALL_CATEGORIES,
     GET_PRODUCT_BY_NAME_FAIL, 
     GET_PRODUCT_BY_NAME_REQUEST, 
     GET_PRODUCT_BY_NAME_SUCCESS,
+    FILTER_BY_CATEGORY,
     CLEAN_DETAIL
 } from "../actions/constants";
 
 
 const initialState ={
     products:[],
+    showedProducts: [],
     detail:{},
     loading: true,
     error: {},
@@ -34,7 +36,8 @@ export const productsReducer = (state=initialState, action) => {
             return {
                 ...state,
                 loading:false,
-                products: action.payload
+                products: action.payload,
+                showedProducts: action.payload,
             }
 
         case GET_ALL_PRODUCTS_FAIL:
@@ -54,7 +57,8 @@ export const productsReducer = (state=initialState, action) => {
             return {
                 ...state,
                 loading:false,
-                products: action.payload
+                products: action.payload,
+                showedProducts: action.payload,
             }
 
         case GET_PRODUCT_BY_NAME_FAIL:
@@ -93,6 +97,13 @@ export const productsReducer = (state=initialState, action) => {
             return {
                 ...state,
                 categoriesDb:[...state.categoriesDb,action.payload]
+            }
+        case FILTER_BY_CATEGORY:
+            const all = state.products;
+            const filter = action.payload === 'all' ? all : all.filter(p => p.categories.find(d => d.name === action.payload))
+            return {
+                ...state,
+                showedProducts: filter
             }
         case CLEAN_DETAIL:
             return{

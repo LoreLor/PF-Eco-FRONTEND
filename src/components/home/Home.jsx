@@ -32,8 +32,8 @@ export default function Home (){
             <NavBar categories={allCategories}/>
             <div className={style.cards}>
                 {
-                    allProducts.products ? 
-                        allProducts.products.map(p => {
+                    allProducts.showedProducts ? 
+                        allProducts.showedProducts.map(p => {
                             return(
                                     <ProductCard
                                         id={p.id}
