@@ -11,6 +11,7 @@ import { GET_ALL_CATEGORIES,
     GET_PRODUCT_BY_NAME_REQUEST, 
     GET_PRODUCT_BY_NAME_SUCCESS,
     FILTER_BY_CATEGORY,
+    ORDER_BY_PRICE,
     CLEAN_DETAIL
 } from "../actions/constants";
 
@@ -104,6 +105,26 @@ export const productsReducer = (state=initialState, action) => {
             return {
                 ...state,
                 showedProducts: filter
+            }
+        case ORDER_BY_PRICE:
+            if(action.payload === "default") return {
+                ...state,
+            }
+            let sortedByPrice = [...state.showedProducts];
+            sortedByPrice = action.payload === "asc" ? 
+            state.showedProducts.sort(function(a,b) {
+                if(a.price > b.price) return 1;
+                if(a.price < b.price) return -1;
+                return 0
+            })  :
+            state.showedProducts.sort(function(a,b) {
+                if (a.price < b.price) return 1;
+                if (a.price > b.price) return -1;
+                return 0;
+            });
+            return {
+                ...state,
+                showedProducts: sortedByPrice,
             }
         case CLEAN_DETAIL:
             return{
