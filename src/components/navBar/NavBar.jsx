@@ -1,6 +1,7 @@
 import React from "react";
 import SearchBar from "../searchBar/SearchBar";
 import Categories from "../categorias/Categories";
+import OrderPrice from "../orderPrice/OrderPrice";
 import { logout } from '../../redux/actions/user'
 import style from './NavBar.module.css'
 import { NavLink, useNavigate } from "react-router-dom";
@@ -48,9 +49,9 @@ export default function NavBar({categories}){
                 </div>
             </nav>
                 <div className={style.footHead}>
-                    <div>
+                    <div className={style.aux}>
                         <Categories categories={categories}/>
-                        <NavLink to="/" className={style.mybtn}>History</NavLink>
+                        <OrderPrice />
                         <NavLink to="/" className={style.mybtn}>Help</NavLink>
                     </div>
                     <div>  
