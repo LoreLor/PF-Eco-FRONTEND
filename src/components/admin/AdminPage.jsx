@@ -36,7 +36,7 @@ export default function AdminPage (){
                     <p>Crear Producto</p>
                 </Link>
             </div>
-            <Link to="/">
+            <Link to="/home">
             <button onClick={handleReturn}className='returnButton'> 
                             Volver
                         </button>

@@ -30,10 +30,6 @@ export default function ProTest (){
         img: []
     })
     const [file,setFile] = useState([])
-   
-    console.log(input)
-    console.log(file)
-    console.log(errors)
 
     function onValueChange (e){
         setErrors(activeValidators({...input,[e.target.name]:e.target.value},productsDb))
@@ -85,7 +81,7 @@ export default function ProTest (){
                     data.append("file", file[index]);
           
                 }
-                response = await axios.post("http://localhost:3001/test",data)
+                response = await axios.post("http://localhost:3001/products",data)
                 const result = response.data
                 setKeyword(result.msg)
                 
