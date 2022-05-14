@@ -12,6 +12,7 @@ import { GET_ALL_CATEGORIES,
     GET_PRODUCT_BY_NAME_SUCCESS,
     FILTER_BY_CATEGORY,
     ORDER_BY_PRICE,
+    FILTER_BY_PRICE,
     CLEAN_DETAIL
 } from "../actions/constants";
 
@@ -125,6 +126,19 @@ export const productsReducer = (state=initialState, action) => {
             return {
                 ...state,
                 showedProducts: sortedByPrice,
+            }
+        case FILTER_BY_PRICE:
+            const all2 = state.products;
+            const filter2 = all2.filter(p => p.price > action.payload.min && p.price < action.payload.max)
+            if(filter2.length === 0) {
+                alert("No products were found in that range, all products were displayed again.")
+                return {
+                    ...state,
+                }
+            }
+            return {
+                ...state,
+                showedProducts: filter2
             }
         case CLEAN_DETAIL:
             return{
