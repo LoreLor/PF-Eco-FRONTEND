@@ -129,7 +129,7 @@ export const productsReducer = (state=initialState, action) => {
             }
         case FILTER_BY_PRICE:
             const all2 = state.products;
-            const filter2 = all2.filter(p => p.price > action.payload.min && p.price < action.payload.max)
+            const filter2 = all2.filter(p => p.price >= action.payload.min && p.price <= action.payload.max)
             if(filter2.length === 0) {
                 alert("No products were found in that range, all products were displayed again.")
                 return {
