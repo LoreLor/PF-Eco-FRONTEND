@@ -20,25 +20,19 @@ export default function AdminPage (){
             <div>Administración</div>
             <div>
                 <span>Usuarios</span>
-                <Link to='/userAdmin'>
+                <Link to='/admin/userAdmin'>
                     <p>Autorizar Usuario</p>
                 </Link>
             </div>
             <div>
                 <span>Categorias</span>
-                <Link to='/categoryAdmin'>
+                <Link to='/admin/categoryAdmin'>
                     <p>Crear Categoria</p>
                 </Link>
             </div>
             <div>
                 <span>Productos</span>
-                <Link to='/productAdmin'>
-                    <p>Crear Producto</p>
-                </Link>
-            </div>
-            <div>
-                <span>Test</span>
-                <Link to='/test'>
+                <Link to='/admin/productAdmin'>
                     <p>Crear Producto</p>
                 </Link>
             </div>
