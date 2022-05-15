@@ -1,8 +1,9 @@
-import { USER_LOGIN, USER_LOGOUT } from "../actions/constants"
+import { USER_LOGIN, USER_LOGOUT, USER_REGISTER, USER_REGISTER_CLEAR } from "../actions/constants"
 
 
 const initialState = {
-    //userInfo: localStorage.getItem('userInfo')? JSON.parse(localStorage.getItem('userInfo')):null,
+    userInfo:{},
+    userRegister:null
 }
 
 export const userReducer =(state=initialState, action)=>{
@@ -13,7 +14,20 @@ export const userReducer =(state=initialState, action)=>{
                 userInfo: action.payload
             }
         case USER_LOGOUT:
-            return {}
+            return {
+                ...state,
+                userInfo:{}
+            }
+        case USER_REGISTER:
+            return {
+                ...state,
+                userRegister: action.payload
+            }
+        case USER_REGISTER_CLEAR:
+            return {
+                ...state,
+                userRegister:{}
+            }
 
         default:
             return state;
