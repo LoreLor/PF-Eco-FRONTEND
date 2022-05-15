@@ -56,6 +56,7 @@ export default function NavBar({categories}){
                 </div>
             </nav>
                 <div className={style.footHead}>
+                    { window.location.href.includes("http://localhost:3000/home/") ? <NavLink to="/" className={style.mybtn}>Help</NavLink> :
                     <div className={style.aux}>
                         <Categories categories={categories}/>
                         <OrderPrice />
@@ -63,6 +64,7 @@ export default function NavBar({categories}){
                         <button onClick={e => handleClick(e)}>REFRESH</button>
                         <NavLink to="/" className={style.mybtn}>Help</NavLink>
                     </div>
+                    }
                     <div>  
                         
                         <button className="btn btn-secundary" type="button" style={{marginRight:'10px'}} onClick={e => handleCart(e)}>
