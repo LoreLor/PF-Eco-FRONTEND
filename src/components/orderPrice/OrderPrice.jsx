@@ -9,15 +9,12 @@ export default function OrderPrice() {
 
     function handleOrderByPrice(e) {
         e.preventDefault();
-        if(e.target.value === "default"){
-            dispatch(getAllProducts())
-        }
         dispatch(orderByPrice(e.target.value));
     }
     return (
         <div>
-            <select name="numerical" onChange={e => handleOrderByPrice(e)} className={style.select}>
-                <option value="default">Order price</option>
+            <select defaultValue="default" name="numerical" onChange={e => handleOrderByPrice(e)} className={style.select}>
+                <option value="default" disabled>Order price</option>
                 <option value="asc">Min to Max</option>
                 <option value="desc">Max to Min</option>
             </select>
