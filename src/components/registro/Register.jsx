@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import s from './Register.module.css'
 import imagen1 from '../../assets/celulares4.jpg';
 import { useDispatch, useSelector } from 'react-redux';
-import { register} from '../../redux/actions/user'
+import { register, registerClear} from '../../redux/actions/user'
 
 
 
@@ -63,7 +63,7 @@ const Register = () => {
     
     const handleSubmit = (e)=> {
         e.preventDefault();
-        if(errors){
+        if(!errors){
             setUser({
                 name: "",
                 last_name: "",
@@ -80,7 +80,9 @@ const Register = () => {
             alert('usuario creado')
             
         }
+        dispatch(registerClear())
         navigate("/login")
+        
     }
     
     const handleChange = (e) => {
@@ -99,6 +101,7 @@ const Register = () => {
 
 
     return (
+        <>
           <div className={s.contenedor} >
             <form class="needs-validation" onSubmit={(e)=> handleSubmit(e)} autocomplete="off">
                 <h1 class="fw-bold text-center pt-5 mb-5 ">Welcome:  Create Account</h1>     
@@ -125,7 +128,7 @@ const Register = () => {
                                 aria-describedby="Insert your name"
                                 placeholder='Insert your  Name'
                                 onChange={handleChange}
-                              />
+                                />
                         </div>
                               {errors.name && <p class='text-danger'>{errors.name}</p>}                   
                         
@@ -140,7 +143,7 @@ const Register = () => {
                                 aria-describedby="Insert your last_name"
                                 placeholder='Insert your Last Name'
                                 onChange={handleChange}
-                            />
+                                />
                             {errors.last_name && <p class='text-danger'>{errors.last_name}</p>}  
                         </div>
                         <div class="mb-3">     
@@ -154,7 +157,7 @@ const Register = () => {
                                 aria-describedby="Insert your email"
                                 placeholder='Insert your email example@algo.com'
                                 onChange={handleChange}
-                            />
+                                />
                             {errors.email && <p class='text-danger'>{errors.email}</p>}  
                         </div>
 
@@ -183,7 +186,7 @@ const Register = () => {
                                 aria-describedby="Insert your user_name"
                                 placeholder='username'
                                 onChange={handleChange}
-                            />
+                                />
                         </div>
                             {errors.user_name && <p class='text-danger'>{errors.user_name}</p>}  
                        
@@ -197,7 +200,7 @@ const Register = () => {
                                 aria-describedby="Insert your name"
                                 placeholder='Insert your password min characters 8'
                                 onChange={handleChange}
-                            />
+                                />
                         </div>
                             {errors.password && <p class='text-danger'>{errors.password}</p>} 
                         
@@ -211,7 +214,7 @@ const Register = () => {
                                 aria-describedby="Insert your dni"
                                 placeholder='Insert your dni or social segurity'
                                 onChange={handleChange}
-                            />
+                                />
                         </div>
                             {errors.dni && <p class='text-danger'>{errors.dni}</p>} 
                         
@@ -224,7 +227,7 @@ const Register = () => {
                                 class="form-control"
                                 placeholder='Street Name/Number - City - Postal Code - Country'
                                 onChange={handleChange}
-                            />
+                                />
                         </div>
                             {errors.address && <p class='text-danger'>{errors.address}</p>} 
                         
@@ -262,19 +265,23 @@ const Register = () => {
                                 User
                             </label>
                             {errors.rol && <p class='text-danger'>{errors.rol}</p>} 
+                        
                         <div className="d-grid">
-                            {user.rol?
-                                (<button
+                            
+                            {user.length ?(
+                                <button
                                     type="submit"
                                     class={s.btn}>SUBMIT
-                                </button>): null
-                            }
+                                </button>
+                                ): <h1>You must you must complete all fields</h1>}
                         </div>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
+
+        </>
     );
 }; 
        

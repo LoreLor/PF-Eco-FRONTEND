@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom"
 import { useNavigate } from 'react-router-dom';
-import { googleLogin, userLogin } from "../../redux/actions/user"
+import { onSignIn, userLogin } from "../../redux/actions/user"
 import { useDispatch, useSelector } from "react-redux";
 import s from "./Login.module.css";
 import { useState } from 'react';
@@ -38,10 +38,10 @@ const Login = () => {
     
 
     const handleGoogleLogin = async () => {
-        //dispatch(googleLogin()).then(
+        dispatch(onSignIn())
         navigate('/')
-        //)
-        // window.location.reload()
+    
+        window.location.reload()
     };
 
     return (
@@ -108,6 +108,7 @@ const Login = () => {
                                         <button className={s.btn} type="button" onClick={handleGoogleLogin}>
                                             <div className="row align-items-center">
                                                 <div className="d-none d-md-block col-12 col-lg-4 col-xl-4 col-xxl-3 text-center">
+                                                <div class="g-signin2" data-width="300" data-height="200" data-longtitle="true"></div>
                                                     <img src="https://i.postimg.cc/Y04ZG5n6/google.png" width="50px" alt='' />
                                                 </div>
                                                 <div className="col-12 col-md-9 col-lg-8 col-xl-8 col-xxl-6 text-center">
