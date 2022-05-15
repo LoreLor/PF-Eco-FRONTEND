@@ -1,21 +1,6 @@
-import { GET_ALL_CATEGORIES, GET_CATEGORY_CHECK } from "./constants";
+import { GET_ALL_CATEGORIES,GET_SINGLE_CATEGORY } from "./constants";
 
 const SERVER = "http://localhost:3001";
-
-export function addCategoriesCheck(name){
-    console.log(name)
-    return async function(dispatch){
-        try {
-            const response = await fetch(`${SERVER}/categories/${name}`);
-            console.log(response)
-            const category = await response.json();
-           console.log(category)
-            dispatch({ type: GET_CATEGORY_CHECK, payload: category });
-        } catch (error) {
-            console.log(error);
-        }
-    }
-}
 
 export function getCategories(){
     return function(dispatch){
@@ -26,5 +11,17 @@ export function getCategories(){
     .catch(error=>{
         console.log(error)
     })
+    }
+}
+
+export function getSingleCategory(name){
+    return async function(dispatch){
+        try {
+            const response = await fetch(`${SERVER}/categories/${name}`);
+            const category = await response.json();
+            dispatch({ type: GET_SINGLE_CATEGORY, payload: category });
+        } catch (error) {
+            console.log(error);
+        }
     }
 }

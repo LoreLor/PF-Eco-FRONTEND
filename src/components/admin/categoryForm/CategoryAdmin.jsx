@@ -1,8 +1,8 @@
-import React,{useState} from "react"
+import React,{useEffect, useState} from "react"
 import categoryValidations from './validators/categoryValidation'
 import {useDispatch, useSelector} from 'react-redux'
-import { Link, useNavigate } from "react-router-dom"
-import { addCategoriesCheck,getCategories } from "../../../redux/actions/categories"
+import { Link, useNavigate,useParams } from "react-router-dom"
+import {getCategories, getSingleCategory } from "../../../redux/actions/categories"
 import style from './CategoryAdmin.module.css'
 import Banner from '../Banner'
 import { getAllProducts } from "../../../redux/actions/products"
@@ -11,7 +11,11 @@ import { getAllProducts } from "../../../redux/actions/products"
 export default function Form(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const {name} =useParams()
+
     const categoriesDb = useSelector((state)=>state.products.categoriesDb)
+    const categoryEdit = useSelector((state)=>state.products.editCategory)
     const [keyword,setKeyword] = useState("")
     const [isOpen,setIsOpen] =useState(false)
 
@@ -19,7 +23,7 @@ export default function Form(){
     const [input,setInput] = useState({
         name: "",
     })
-
+    console.log(categoryEdit)
     function handleReturn(i){
         dispatch(getCategories)
         dispatch(getAllProducts)
@@ -41,24 +45,36 @@ export default function Form(){
         ){
         let response = null
             try {
-                response = await fetch('http://localhost:3001/categories',
+            name?
+                (response = await fetch(`http://localhost:3001/categories/${categoryEdit.id}`,
+                {method:"PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data)
+                })):
+                (response = await fetch('http://localhost:3001/categories',
                 {method:"POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-            body: JSON.stringify(data)
-            })
+                body: JSON.stringify(data)
+                }))
         const result = await response.json()
 
         setKeyword(result.msg)
         if(!isOpen && result){
             setIsOpen(state => !state);
-        if(result.msg === "Categoria creada correctamente"){
-            dispatch(addCategoriesCheck(result.name))
+        if(result.msg === "Category created"){
             dispatch(getCategories())
             setInput({
                 name:""
             })
+            }else if(result.msg === "Category updated"){
+            dispatch(getCategories())
+            setInput({
+                name:""
+            })               
             }
         } 
             } catch (error) {
@@ -66,6 +82,14 @@ export default function Form(){
             }
         }
     }
+
+    useEffect(()=>{
+        if(name && categoryEdit){
+            setInput({
+                name: categoryEdit.name
+            })
+        }
+    },[name,categoryEdit])
 
     return (
         <div className='formPage'>
@@ -80,7 +104,7 @@ export default function Form(){
             </div>
             <div>
                 {Object.keys(errors).length === 0 && Object.keys(input).length > 0 && 
-                <input type='submit' value= "Add Category" className='finalButton'onClick={handleSubmit}/>   
+                <input type='submit' value= {name? "Edit" : "Add"} className='finalButton'onClick={handleSubmit}/>   
             }
             </div>
             <div>
@@ -96,7 +120,7 @@ export default function Form(){
                 {keyword.length ? (
                     <>
                     <h2>{keyword}</h2>
-                    {keyword === "Categoria creada correctamente" ? (
+                    {keyword === "Category created" || "Category updated" ? (
                         <>
                         <button onClick={()=> navigate("/admin",{replace:true})}className='bannerUpdate'> 
                             Go to Admin
