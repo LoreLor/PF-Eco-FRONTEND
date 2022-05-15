@@ -23,19 +23,23 @@ const Login = () => {
 
     const handleSubmitLogin = (e) => {
         e.preventDefault();
-        
+
         dispatch(userLogin(email, password))
-        setEmail('')
-        setPassword('')
-        Swal.fire({
-            title: 'login success',
-            icon: 'success'
-        })
-        navigate('/')
-        
-      
+            .then(res => { 
+                if(!res){
+                    setEmail('')
+                    setPassword('')
+                    Swal.fire({
+                        title: 'login success',
+                        icon: 'success'
+                    })
+                    navigate('/')
+                } else {
+                    alert("Email or password invalid.")
+                }
+            })
     }
-    
+
 
     const handleGoogleLogin = async () => {
         //dispatch(googleLogin()).then(
@@ -97,7 +101,7 @@ const Login = () => {
                             <div className="d-grid">
                                 <button type="submit" className={s.btn}> Sign In </button>
                             </div>
-                         
+
                             <div className="container w-100 my-5">
                                 <div className="row my-3 text-center">
                                     <div className="col-12"> Or LogIn width </div>
@@ -118,7 +122,7 @@ const Login = () => {
                                     </div>
                                 </div>
                             </div>
-                    
+
                             <div className="row my-3 text-center">
                                 <span> You don't have an account?  Go to...<Link to="/register">Register</Link></span>
                             </div>
