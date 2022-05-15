@@ -1,10 +1,9 @@
 import axios from 'axios';
-import { UNSAFE_NavigationContext } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import { USER_LOGIN, USER_LOGOUT, USER_REGISTER, USER_REGISTER_CLEAR } from './constants';
 
 
 const SERVER = "http://localhost:3001";
+
 
 export const userLogin = (email, password) => async(dispatch) =>{
     try {
@@ -17,8 +16,8 @@ export const userLogin = (email, password) => async(dispatch) =>{
     localStorage.setItem('userInfo', JSON.stringify(data)))
  
   }catch (error) {
-     console.log(error)
-    
+  //  console.log(error)
+     alert("user or pass invalid");
   } 
 }
 
@@ -29,25 +28,19 @@ export const logout = () => (dispatch) => {
     })
 };
 
-export const register = ( name, last_name, user_name, email, phone_number, password, dni, address, birthday) => async(dispatch) => {
+export const register = ( body) => async(dispatch) => {
   try{
-    const {data} = await axios.post(`${SERVER}/user`, {
-      name, 
-      last_name, 
-      user_name, 
-      email, 
-      phone_number, 
-      password, 
-      dni, 
-      address,   
-      birthday
-    })
+    const {data} = await axios.post(`${SERVER}/user`, body)
     
       dispatch({
         type: USER_REGISTER,
+        payload: data.user
+      });
+      dispatch({
+        type: USER_LOGIN,
         payload: data
-      },
-      localStorage.setItem('userInfo', JSON.stringify(data)))
+      })
+      localStorage.setItem('userInfo', JSON.stringify(data))
     }catch(error){
       console.log(error)
     }

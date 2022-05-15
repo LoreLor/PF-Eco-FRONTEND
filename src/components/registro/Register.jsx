@@ -40,13 +40,10 @@ const Register = () => {
         }
         if(!user.email ){
             errors.email = "Email is required";
-        } else if (!/^([\w\d._\-#])+@([\w\d._\-#]+[.][\w\d._\-#]+)+$/.test(user.email)) {
-            errors.email = "Must be a valid email";
         }
         if (!user.password) {
-            errors.password = "Password is required";
-          } else if (!/(?=.{7,})/.test(user.password)) {
-            errors.password = "Should have 8 or more characters";
+           
+            errors.password = "Should have 8 or more characters"
           }
         if(!user.address){
             errors.address="you must enter an address"
@@ -147,18 +144,18 @@ const Register = () => {
                             {errors.last_name && <p class='text-danger'>{errors.last_name}</p>}  
                         </div>
                         <div class="mb-3">     
-                            <label htmlFor="validationCustom03" class="form-label"><strong>User_Name:{" "}</strong>
+                            <label htmlFor="validationCustom03" class="form-label"><strong>Email:</strong>
                             </label>
                             <input
-                                id="user_name"
-                                name='user_name'
-                                type="text"
+                                id="email"
+                                name='email'
+                                type="email"
                                 class="form-control"
-                    
-                                placeholder='Insert your Last Name'
+                                aria-describedby="Insert your email"
+                                placeholder='Insert your email example@algo.com'
                                 onChange={handleChange}
                             />
-                            {errors.user_name && <p class='text-danger'>{errors.user_name}</p>}  
+                            {errors.email && <p class='text-danger'>{errors.email}</p>}  
                         </div>
 
                         <div class="mb-3">
@@ -177,18 +174,18 @@ const Register = () => {
                         </div>
                         
                         <div class="mb-3">
-                            <label htmlFor="validationCustom03" class="form-label"><strong>Email:{" "}</strong></label>
+                            <label htmlFor="validationCustom03" class="form-label"><strong>User Name:{" "}</strong></label>
                             <input
-                                id="email"
-                                name='email'
-                                type="email"
+                                id="user_name"
+                                name='user_name'
+                                type="text"
                                 class="form-control"
-                                aria-describedby="Insert your email"
-                                placeholder='Insert your email example@algo.com'
+                                aria-describedby="Insert your user_name"
+                                placeholder='username'
                                 onChange={handleChange}
                             />
                         </div>
-                            {errors.email && <p class='text-danger'>{errors.email}</p>}  
+                            {errors.user_name && <p class='text-danger'>{errors.user_name}</p>}  
                        
                         <div class="mb-3">
                             <label htmlFor="validationCustom03" class="form-label"><strong>Password:{" "}</strong></label>

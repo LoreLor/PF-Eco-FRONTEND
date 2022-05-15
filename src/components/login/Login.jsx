@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from "axios";
 import { Link } from "react-router-dom"
 import { useNavigate } from 'react-router-dom';
 import { googleLogin, userLogin } from "../../redux/actions/user"
@@ -24,6 +23,7 @@ const Login = () => {
 
     const handleSubmitLogin = (e) => {
         e.preventDefault();
+        
         dispatch(userLogin(email, password))
         setEmail('')
         setPassword('')
@@ -32,7 +32,9 @@ const Login = () => {
             icon: 'success'
         })
         navigate('/')
-        }
+        
+      
+    }
     
 
     const handleGoogleLogin = async () => {
@@ -44,7 +46,7 @@ const Login = () => {
 
     return (
         <div style={{ marginBottom: 40 }} >
-            <form onSubmit={handleSubmitLogin} autocomplete="off">
+            <form onSubmit={handleSubmitLogin} autoComplete="off">
                 <div className="container w-75 mt-5 shadow-lg p-3 mb-5 bg-white rounded">
                     <div className="row align-items-center align-items-center ">
                         <div class='col-lg-5'>
@@ -106,7 +108,7 @@ const Login = () => {
                                         <button className={s.btn} type="button" onClick={handleGoogleLogin}>
                                             <div className="row align-items-center">
                                                 <div className="d-none d-md-block col-12 col-lg-4 col-xl-4 col-xxl-3 text-center">
-                                                    <img src="https://i.postimg.cc/Y04ZG5n6/google.png" width="20%" alt='' />
+                                                    <img src="https://i.postimg.cc/Y04ZG5n6/google.png" width="50px" alt='' />
                                                 </div>
                                                 <div className="col-12 col-md-9 col-lg-8 col-xl-8 col-xxl-6 text-center">
                                                     Google

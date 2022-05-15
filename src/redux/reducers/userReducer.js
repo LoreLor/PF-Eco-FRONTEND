@@ -3,7 +3,7 @@ import { USER_LOGIN, USER_LOGOUT, USER_REGISTER, USER_REGISTER_CLEAR } from "../
 
 const initialState = {
     userInfo:{},
-    userRegister:null
+    userRegister:{}
 }
 
 export const userReducer =(state=initialState, action)=>{
