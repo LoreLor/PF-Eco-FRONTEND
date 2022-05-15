@@ -17,7 +17,7 @@ export const userLogin = (email, password) => async(dispatch) =>{
  
   }catch (error) {
   //  console.log(error)
-     alert("user or pass invalid");
+     return error;
   } 
 }
 

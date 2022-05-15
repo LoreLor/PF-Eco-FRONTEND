@@ -12,8 +12,8 @@ export default function Categories({categories}){
         dispatch(filterByCategory(e.target.value));
     }
     return(
-        <select onChange={e => handleChangeCategories(e)} className={style.select}>
-            <option value="all">Filter category</option>
+        <select defaultValue="all" onChange={e => handleChangeCategories(e)} className={style.select}>
+            <option value="all" disabled>Filter category</option>
             {
                 categories?.map(cat => {
                         return(

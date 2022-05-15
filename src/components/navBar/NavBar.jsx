@@ -27,7 +27,7 @@ export default function NavBar({categories}){
 
     function handleClick(e) {
         e.preventDefault();
-        dispatch(getAllProducts());
+        window.location.reload();
     }
 
     return(
