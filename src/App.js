@@ -24,6 +24,7 @@ function App() {
         <Route path='/admin/userAdmin' element={<UserAdmin/>}/>
         <Route path='/admin/productAdmin' element={<ProductAdmin/>}/>
         <Route path ='/admin/categoryAdmin' element={<CategoryAdmin/>}/>
+        <Route path ='/admin/categoryAdmin/:name' element={<CategoryAdmin/>}/>
         <Route path ='/login' element={<Login />} />
         <Route path = '/home/:id' element={<ProductDetail/>}/>
         <Route path = '/register' element={<Register />} />

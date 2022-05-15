@@ -1,20 +1,23 @@
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {Link} from 'react-router-dom'
 import { getCategories } from '../../redux/actions/categories'
 import { getAllProducts } from '../../redux/actions/products'
+import CategoriesSB from './userAdmin/searchBars/categoriesSB'
 
 export default function AdminPage (){
+    const categories = useSelector((state)=> state.products.categoriesDb)
     const dispatch = useDispatch()
+
+    const [name,setName] = useState("")
+    const [category,setCategory] = useState("")
+    
     useEffect(()=>{
         dispatch(getCategories())
         dispatch(getAllProducts())
     },[dispatch])
 
-    function handleReturn(i){
-        dispatch(getCategories)
-        dispatch(getAllProducts)
-    }
+
     return(
         <div>
             <div>Administración</div>
@@ -25,10 +28,13 @@ export default function AdminPage (){
                 </Link>
             </div>
             <div>
-                <span>Categorias</span>
-                <Link to='/admin/categoryAdmin'>
-                    <p>Crear Categoria</p>
+                <h3>Categorias</h3>
+                <span>Crear o editar una nueva categoria</span>
+                <Link to='/admin/categoryAdmin/'>
+                    <p>Crear categoria</p>
                 </Link>
+                <CategoriesSB categories={categories} name={name} 
+                category={category} setName={setName} setCategory={setCategory}/>
             </div>
             <div>
                 <span>Productos</span>
@@ -36,10 +42,8 @@ export default function AdminPage (){
                     <p>Crear Producto</p>
                 </Link>
             </div>
-            <Link to="/home">
-            <button onClick={handleReturn}className='returnButton'> 
-                            Volver
-                        </button>
+            <Link to="/">
+                <p>Volver</p>
             </Link>
         </div>
     )
