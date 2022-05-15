@@ -53,3 +53,8 @@ h3{
     margin-top: 8px;
 
 }
+
+.aux{
+    display: flex;
+    flex-direction: row;
+}

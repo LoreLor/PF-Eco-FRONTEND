@@ -34,7 +34,7 @@
   
   img {
     max-width: 100%;
-    height: auto;
+    height: 230px;
   }
   
   /*===== CARD =====*/
@@ -58,7 +58,7 @@
   
   .card_img {
     position: absolute;
-    width: 210px;
+    width: 220px;
     filter: drop-shadow(5px 10px 15px rgba(8,9,13,.4));
   }
   

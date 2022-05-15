@@ -1,5 +1,5 @@
 import React,{useState} from "react"
-import categoryValidations from '../../utils/categoryValidation'
+import categoryValidations from './validators/categoryValidation'
 import {useDispatch, useSelector} from 'react-redux'
 import { Link, useNavigate } from "react-router-dom"
 import { addCategoriesCheck,getCategories } from "../../../redux/actions/categories"

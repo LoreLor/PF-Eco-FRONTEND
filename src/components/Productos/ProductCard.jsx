@@ -10,7 +10,7 @@ export default function ProductCard({name, img, price, rating, id}){
         <div className={style.container}>
             <div className={style.card}>
             <Link to={`/home/${id}`}>
-                <img src={img} alt="" className={style.card_img}/> 
+                <img src={img[0]} alt="" className={style.card_img}/> 
             </Link>
                      <div className={style.card_data}>
                          <h1 className={style.card_title}>{name}</h1>

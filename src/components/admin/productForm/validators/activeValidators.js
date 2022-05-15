@@ -1,6 +1,5 @@
 export default function productValidations(input,products){
-console.log(input)
-console.log(parseInt(input.price))
+
     let errors={}
 if(input.name){
     if(input.name.trim()=== ""){
@@ -15,26 +14,31 @@ if(input.name){
     var checkDb = products && products.filter(product => product.name.toLowerCase() === input.name.toLowerCase())
     if(checkDb && checkDb.length > 0){errors.name = "El producto ya existe"}
 }
-    if(!input.price){ 
-    errors.price = "Es necesario un precio"
+    if(input.price){
+        if(input.price.trim()=== ""){
+            errors.price = "Es necesario un precio"
+        }
+        else if (!/^[0-9]*$/.test(input.price)){
+            errors.price = "El valor debe ser un numero"
+            }
     }
-    else if (!/^[0-9]*$/.test(input.price)){
-    errors.price = "El valor debe ser un numero"
-    }
-
-    if(!input.description){
+    
+    if(input.description){
+    if(input.description.trim()=== ""){
     errors.description = "El producto debe tener una descripción"
+    }}
+
+
+    if(input.stock){
+        if(input.stock.trim()=== ""){
+            errors.stock = "Es necesario un valor de inventario"}
+        else if (!/^[0-9]*$/.test(input.stock)){
+            errors.stock = "El valor debe ser un numero"
+        }    
     }
 
-    if(!input.stock){ 
-        errors.stock = "Es necesario un precio"
-        }
-    else if (!/^[0-9]*$/.test(input.stock)){
-    errors.stock = "El valor debe ser un numero"
-    }
-
-    if(!input.img){
+    /* if(!input.img){
         errors.img = "El producto debe tener al menos una imagen"
-        }
+        } */
 return errors
 }
