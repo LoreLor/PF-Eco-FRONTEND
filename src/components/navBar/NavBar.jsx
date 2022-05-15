@@ -23,7 +23,6 @@ export default function NavBar({categories}){
 
     function handleLogout(){
         dispatch(logout())
-        navigate('/')
     }
 
     function handleClick(e) {
@@ -46,6 +45,7 @@ export default function NavBar({categories}){
                                 </button>
                                 <ul class="dropdown-menu">     
                                     <li><a href="#" className={style.logout} onClick={handleLogout}>Log Out</a></li>
+                                    <li><a href="/register" className={style.logout}>Register</a></li>
                                 </ul>
                             </div>    
                             ) : (

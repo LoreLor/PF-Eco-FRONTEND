@@ -9,23 +9,24 @@ import {Routes,Route} from 'react-router-dom'
 import Login from './components/login/Login';
 import ProductDetail from './components/detalleProducto/ProductDetail';
 import Error404 from './components/Error404/Error404';
+import Register from './components/registro/Register';
 
 
 function App() {
   
-  const userInfo=JSON.parse(localStorage.getItem('userInfo'))?.user_name ? localStorage.getItem('userInfo') : localStorage.setItem('userInfo', JSON.stringify([]))
-  console.log(userInfo)
+  
   
   return (
     <Fragment>
       <Routes>
-      <Route path='/home' element={<Home/>}/>
+      <Route path='/' element={<Home/>}/>
         <Route path='/admin' element={<AdminPage/>}/>
         <Route path='/admin/userAdmin' element={<UserAdmin/>}/>
         <Route path='/admin/productAdmin' element={<ProductAdmin/>}/>
         <Route path ='/admin/categoryAdmin' element={<CategoryAdmin/>}/>
         <Route path ='/login' element={<Login />} />
         <Route path = '/home/:id' element={<ProductDetail/>}/>
+        <Route path = '/register' element={<Register />} />
         <Route path={'*'} element={<Error404/>}/>
       </Routes>
     </Fragment>

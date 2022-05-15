@@ -1,9 +1,9 @@
 import axios from 'axios';
-import Swal from 'sweetalert2';
-import { USER_LOGIN, USER_LOGOUT } from './constants';
+import { USER_LOGIN, USER_LOGOUT, USER_REGISTER, USER_REGISTER_CLEAR } from './constants';
 
 
 const SERVER = "http://localhost:3001";
+
 
 export const userLogin = (email, password) => async(dispatch) =>{
     try {
@@ -22,10 +22,34 @@ export const userLogin = (email, password) => async(dispatch) =>{
 }
 
 export const logout = () => (dispatch) => {
-    localStorage.clear();
-    window.location.ref ="/";  //me refresca la pagina y limpia el local
+   localStorage.clear()
     dispatch({
         type: USER_LOGOUT,
-      
     })
+};
+
+export const register = ( body) => async(dispatch) => {
+  try{
+    const {data} = await axios.post(`${SERVER}/user`, body)
+    
+      dispatch({
+        type: USER_REGISTER,
+        payload: data.user
+      });
+      dispatch({
+        type: USER_LOGIN,
+        payload: data
+      })
+      localStorage.setItem('userInfo', JSON.stringify(data))
+    }catch(error){
+      console.log(error)
+    }
+
+  }
+
+export const registerClear = ()=>(dispatch) =>{
+  localStorage.clear()
+  dispatch({
+    type:USER_REGISTER_CLEAR
+  })
 };
