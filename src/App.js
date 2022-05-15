@@ -10,6 +10,7 @@ import Login from './components/login/Login';
 import ProductDetail from './components/detalleProducto/ProductDetail';
 import Error404 from './components/Error404/Error404';
 
+
 function App() {
   
   
@@ -19,9 +20,9 @@ function App() {
       <Routes>
       <Route path='/' element={<Home/>}/>
         <Route path='/admin' element={<AdminPage/>}/>
-        <Route path='/userAdmin' element={<UserAdmin/>}/>
-        <Route path='/productAdmin' element={<ProductAdmin/>}/>
-        <Route path ='/categoryAdmin' element={<CategoryAdmin/>}/>
+        <Route path='/admin/userAdmin' element={<UserAdmin/>}/>
+        <Route path='/admin/productAdmin' element={<ProductAdmin/>}/>
+        <Route path ='/admin/categoryAdmin' element={<CategoryAdmin/>}/>
         <Route path ='/login' element={<Login />} />
         <Route path = '/home/:id' element={<ProductDetail/>}/>
         <Route path={'*'} element={<Error404/>}/>

@@ -1,10 +1,13 @@
 import React from "react";
 import SearchBar from "../searchBar/SearchBar";
 import Categories from "../categorias/Categories";
+import OrderPrice from "../orderPrice/OrderPrice";
 import { logout } from '../../redux/actions/user'
 import style from './NavBar.module.css'
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import FilterPrice from "../filterPrice/FilterPrice";
+import { getAllProducts } from "../../redux/actions/products";
 
 
 export default function NavBar({categories}){
@@ -20,6 +23,11 @@ export default function NavBar({categories}){
 
     function handleLogout(){
         dispatch(logout())
+    }
+
+    function handleClick(e) {
+        e.preventDefault();
+        dispatch(getAllProducts());
     }
 
     return(
@@ -48,9 +56,11 @@ export default function NavBar({categories}){
                 </div>
             </nav>
                 <div className={style.footHead}>
-                    <div>
+                    <div className={style.aux}>
                         <Categories categories={categories}/>
-                        <NavLink to="/" className={style.mybtn}>History</NavLink>
+                        <OrderPrice />
+                        <FilterPrice />
+                        <button onClick={e => handleClick(e)}>REFRESH</button>
                         <NavLink to="/" className={style.mybtn}>Help</NavLink>
                     </div>
                     <div>  

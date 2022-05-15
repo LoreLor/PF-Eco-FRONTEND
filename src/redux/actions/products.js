@@ -8,6 +8,9 @@ import {
     GET_PRODUCT_BY_NAME_FAIL,
     GET_PRODUCT_BY_NAME_REQUEST,
     GET_PRODUCT_BY_NAME_SUCCESS,
+    FILTER_BY_CATEGORY,
+    ORDER_BY_PRICE,
+    FILTER_BY_PRICE,
     CLEAN_DETAIL
 } from "./constants";
 import axios from 'axios';
@@ -60,6 +63,27 @@ export const getProductById = (id) => async (dispatch) => {
             type: GET_PRODUCT_BY_ID_SUCCESS,
             payload: data
         })
+}
+
+export function filterByCategory(payload) {
+    return {
+        type: FILTER_BY_CATEGORY,
+        payload
+    }
+}
+
+export function orderByPrice(payload) {
+    return {
+        type: ORDER_BY_PRICE,
+        payload
+    }
+}
+
+export function filterByPrice(payload) {
+    return {
+        type: FILTER_BY_PRICE,
+        payload
+    }
 }
 
 export function limpiarDetail(){
