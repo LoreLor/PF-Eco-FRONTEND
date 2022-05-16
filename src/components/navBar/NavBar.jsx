@@ -8,6 +8,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import FilterPrice from "../filterPrice/FilterPrice";
 import { getAllProducts } from "../../redux/actions/products";
+import LoginGoogle from "../login/LoginGoogle";
 
 
 export default function NavBar({categories}){
@@ -45,7 +46,8 @@ export default function NavBar({categories}){
                                 </button>
                                 <ul class="dropdown-menu">     
                                     <li><a href="#" className={style.logout} onClick={handleLogout}>Log Out</a></li>
-                                    {/* <li><a href="/register" className={style.logout}>Register</a></li> */}
+                                    <li><a href="/register" className={style.logout}>Register</a></li>
+                                    <li><a href="#" className={style.logout}><LoginGoogle></LoginGoogle></a></li>
                                 </ul>
                             </div>    
                             ) : (
