@@ -28,4 +28,10 @@
       align-items: center;
       justify-items: start;
   }
-  
+  .titulo{
+      color: crimson;
+      font-size: larger;
+      font-weight: 800;
+      align-items: center;
+      flex-direction: center;
+  }
