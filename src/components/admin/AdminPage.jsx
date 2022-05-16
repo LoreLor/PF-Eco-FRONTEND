@@ -5,6 +5,7 @@ import { getCategories } from '../../redux/actions/categories'
 import { getAllProducts } from '../../redux/actions/products'
 import CategoriesSB from './userAdmin/searchBars/categoriesSB'
 import ProductsSB from './userAdmin/searchBars/productsSB'
+import style from './AdminPage.module.css'
 
 export default function AdminPage (){
     const categories = useSelector((state)=> state.products.categoriesDb)
@@ -24,35 +25,37 @@ export default function AdminPage (){
 
     return(
         <div>
-            <div><h1>Admin Page</h1></div>
-            <div>
-                <h2>Users</h2>
-                <span>Authorize permissions</span>
-                <Link to='/admin/userAdmin'>
-                    <p>Authorize User</p>
+            <header><h1 className={style.hola}>DashBoard</h1></header>
+            <div className={style.adminPage}>
+
+                <div className={style.box}>
+                    <h2>Users</h2>  
+                    <Link to='/admin/userAdmin'>
+                        <button className={style.mybtn}>Authorize User</button>
+                    </Link>
+                </div>
+
+                <div className={style.box}>
+                    <h2>Categories</h2>
+                    <Link to='/admin/categoryAdmin/'>
+                        <button className={style.mybtn}>Create category</button>
+                    </Link>
+                    <CategoriesSB categories={categories} categoryName={categoryName} 
+                    category={category} setCategoryName={setCategoryName} setCategory={setCategory}/>
+                </div>
+
+                <div className={style.box}>
+                    <h2>Products</h2>
+                    <Link to='/admin/productAdmin'>
+                        <button className={style.mybtn}>Create product</button>
+                    </Link>
+                    <ProductsSB products={products} productName={productName} 
+                    product={product} setProductName={setProductName} setProduct={setProduct}/>
+                </div>
+                <Link to="/">
+                    <button className={style.mybtn}p>Go Back</button>
                 </Link>
             </div>
-            <div>
-                <h2>Categories</h2>
-                <span>Create or edit a category</span>
-                <Link to='/admin/categoryAdmin/'>
-                    <p>Create category</p>
-                </Link>
-                <CategoriesSB categories={categories} categoryName={categoryName} 
-                category={category} setCategoryName={setCategoryName} setCategory={setCategory}/>
-            </div>
-            <div>
-                <h2>Products</h2>
-                <span>Create or edit a product</span>
-                <Link to='/admin/productAdmin'>
-                    <p>Create product</p>
-                </Link>
-                <ProductsSB products={products} productName={productName} 
-                product={product} setProductName={setProductName} setProduct={setProduct}/>
-            </div>
-            <Link to="/">
-                <p>Go Back</p>
-            </Link>
         </div>
     )
 }

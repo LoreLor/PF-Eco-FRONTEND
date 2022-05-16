@@ -19,6 +19,8 @@
     font-weight: 700;
     padding-left: 29px;
     margin-right: 40px;
+    background-color: #112B3C;
+    border: none;
 }
 .mybtn:hover{
     color: #F66B0E;
@@ -36,7 +38,6 @@ h3{
     display: inline;
     font-size:medium;
     margin-right: 15px;
-
 }
 
 .logout{
@@ -49,12 +50,30 @@ h3{
 
 .conte{
     display:flex;
-    margin-left: 30px;
-    margin-top: 8px;
+    align-items: center;
 
 }
 
 .aux{
     display: flex;
     flex-direction: row;
+}
+
+.perfil{
+    background-color: #112B3C;
+    border: none;
+}
+.drop h3{
+    color: #EFEFEF;
+    padding-left: 10px ;
+}
+
+.drop ul {
+    background-color: #112B3C;
+    text-align: center;
+    border: 1px solid #EFEFEF;
+}
+
+.userName:hover {
+    color: #F66B0E;
 }

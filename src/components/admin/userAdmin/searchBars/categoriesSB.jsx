@@ -47,7 +47,7 @@ return (<>
             {category && Array.isArray(category)? <div>
                 <span>{category[0].name}</span>
                 <button name="edit" onClick={editCategorie}>Edit</button>
-                <button name= "cancel" onClick={cancelAction}>Cancel</button>
+                <button name= "cancel" onClick={cancelAction}>X</button>
                 <Banner setIsOpen={setIsOpen} isOpen={isOpen}>
                     <h2>Are you sure you want to edit "{category[0].name}"?</h2>
                     <button name="edit" onClick={confirmEdit}>Edit</button>

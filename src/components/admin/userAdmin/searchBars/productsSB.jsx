@@ -53,7 +53,7 @@ return (<>
                     <button name="edit" onClick={confirmEdit}>Edit</button>
                 </Banner>
             </div>: <></>}
-            {product && typeof(category) === "string" ? <p>Product not found</p>:<></>}
+            {product && typeof(product) === "string" ? <p>Product not found</p>:<></>}
         </div>
 </>)
 }

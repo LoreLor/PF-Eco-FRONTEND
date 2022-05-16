@@ -1,0 +1,26 @@
+.hola{
+    color: #ffff;
+    text-align: center;
+    font-size: 50px ;
+}
+.adminPage{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+.box{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around;
+    width: 300px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #EFEFEF;
+    padding: 10px;
+}
