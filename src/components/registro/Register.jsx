@@ -273,7 +273,7 @@ const Register = () => {
                                     type="submit"
                                     class={s.btn}>SUBMIT
                                 </button>
-                                ): <h1>You must you must complete all fields</h1>}
+                                ): <h1 className={s.titulo}>You must you must complete all fields</h1>}
                         </div>
                         </div>
                     </div>

@@ -28,7 +28,7 @@
       align-items: center;
       justify-items: start;
   }
-  h1{
+  .titulo{
       color: crimson;
       font-size: larger;
       font-weight: 800;
