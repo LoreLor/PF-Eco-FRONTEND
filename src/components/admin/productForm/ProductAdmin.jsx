@@ -195,7 +195,7 @@ useEffect(()=>{
                     </div>
                     <div>
                         {Object.keys(errors).length === 0 && Object.keys(input).length > 0 && 
-                        <input type='submit' value= "Add Product" onClick={onSubmit}/>   
+                        <input type='submit' value= {id? "Edit": "Add"} onClick={onSubmit}/>   
                         }
                     </div>
                     <Link to="/admin">
