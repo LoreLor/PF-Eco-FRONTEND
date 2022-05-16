@@ -5,6 +5,8 @@ import s from './LoginGoogle.module.css'
 
 
 
+
+
 function LoginGoogle() {
 
     const [showloginButton, setShowloginButton] = useState(true);
@@ -26,12 +28,13 @@ function LoginGoogle() {
         setShowloginButton(true);
         setShowlogoutButton(false);
     };
+    
 
     return (
         <div>
             { showloginButton ?
                 <GoogleLogin
-                    clientId={process.env.GOOGLE_API_KEY}
+                    clientId={process.env.REACT_APP_GOOGLE_API_KEY}
                     buttonText="Log in with Google"
                     onSuccess={onLoginSuccess}
                     onFailure={onLoginFailure}
@@ -41,7 +44,7 @@ function LoginGoogle() {
 
             { showlogoutButton ?
                 <GoogleLogout
-                    clientId={process.env.GOOGLE_API_KEY}
+                    clientId={process.env.REACT_APP_GOOGLE_API_KEY}
                     buttonText="Sign Out"
                     onLogoutSuccess={onSignoutSuccess}
                 >

@@ -267,13 +267,11 @@ const Register = () => {
                             {errors.rol && <p class='text-danger'>{errors.rol}</p>} 
                         
                         <div className="d-grid">
-                            
-                            {user.length ?(
                                 <button
                                     type="submit"
                                     class={s.btn}>SUBMIT
                                 </button>
-                                ): <h1 className={s.titulo}>You must you must complete all fields</h1>}
+                                
                         </div>
                         </div>
                     </div>
