@@ -1,0 +1,36 @@
+p.danger {
+  color: red;
+  font-size: 12px;
+}
+  
+input.danger {
+  border: 2px solid red;
+}
+.container{
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.containerForm{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 500px;;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #EFEFEF;
+    padding: 10px;
+  }
+
+.categoryForm{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.btnContainer{
+  display: flex;
+}

@@ -1,0 +1,90 @@
+.container{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+   
+}
+.box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+
+.mybtn{
+    color: #EFEFEF;
+    text-decoration: none;
+    font-weight: 700;
+    padding-left: 29px;
+    margin-right: 40px;
+    background-color: #112B3C;
+    border: none;
+}
+.mybtn:hover{
+    color: #F66B0E;
+}
+
+.footHead{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 10px;
+}
+h3{
+    color: #292727;
+    font-weight: 600;
+    display: inline;
+    font-size:medium;
+    margin-right: 15px;
+}
+
+.logout{
+    color: #292727;
+    font-weight: 600;
+    display: inline;
+    font-size:medium;
+    margin-right: 15px
+}
+
+.conte{
+    display:flex;
+    align-items: center;
+
+}
+
+.aux{
+    display: flex;
+    flex-direction: row;
+}
+
+.perfil{
+    background-color: #112B3C;
+    border: none;
+}
+.drop h3{
+    color: #EFEFEF;
+    padding-left: 10px ;
+}
+
+.drop ul {
+    background-color: #112B3C;
+    text-align: center;
+    border: 1px solid #EFEFEF;
+}
+
+.userName:hover {
+    color: #F66B0E;
+}
+.title{
+    color: #F66B0E;
+    padding-left: 20px ;
+    width: 400px;
+    font-weight: 600;
+    font-size: 30px;
+    text-decoration: none;
+}
+.title:hover{
+    color: #EFEFEF;
+}

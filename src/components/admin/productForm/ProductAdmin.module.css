@@ -1,0 +1,28 @@
+p.danger {
+    color: red;
+    font-size: 12px;
+  }
+  
+  input.danger {
+    border: 2px solid red;
+  }
+
+.containerProd{
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid black;
+  border-radius: 10px ;
+  padding: 15px;
+  background-color: #EFEFEF;
+}
+
+.containerProd div {
+  padding-bottom: 4px;
+}
+
+.btn{
+  margin-left: 4px;
+}

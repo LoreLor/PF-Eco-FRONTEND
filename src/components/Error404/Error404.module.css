@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    width: 500px;
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+.container h1{
+        color: #112B3C;
+        text-transform: uppercase;
+        font-weight: 700;
+}
+.btn_land{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #F66B0E;
+    padding: 14px 40px;
+    outline: none;
+    color: #112B3C;
+    font-weight: 700;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+.btn_land:hover{
+    width: 150px;    
+    background: #F66B0E;
+    cursor: pointer;
+}
