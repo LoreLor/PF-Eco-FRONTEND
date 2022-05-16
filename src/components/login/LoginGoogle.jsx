@@ -3,22 +3,17 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 
 
 
-
+const clientId='640314454001-3v76vc8c874abhtehrrc1evrs66u2ro1.apps.googleusercontent.com'
 
 
 
 function LoginGoogle() {
-    const [liginData, setLoginData]=useState(
-        localStorage.setItem('loginData')
-        ? JSON.parse(localStorage.getItem('loginData'))
-        : null
-    );
+
 
     const [showloginButton, setShowloginButton] = useState(true);
     const [showlogoutButton, setShowlogoutButton] = useState(false);
-    
-    const onLoginSuccess = (googleData) => {
-        console.log('Login Success:', googleData);
+    const onLoginSuccess = (res) => {
+        console.log('Login Success:', res.profileObj);
         setShowloginButton(false);
         setShowlogoutButton(true);
     };
@@ -33,24 +28,22 @@ function LoginGoogle() {
         setShowloginButton(true);
         setShowlogoutButton(false);
     };
-    
 
     return (
         <div>
-            
             { showloginButton ?
                 <GoogleLogin
-                    clientId={process.env.REACT_APP_GOOGLE_API_KEY}
-                    buttonText="Google"
+                    clientId={clientId}
+                    buttonText="Sign In"
                     onSuccess={onLoginSuccess}
                     onFailure={onLoginFailure}
                     cookiePolicy={'single_host_origin'}
                     isSignedIn={true}
-                ></GoogleLogin> : null}
+                /> : null}
 
             { showlogoutButton ?
                 <GoogleLogout
-                    clientId={process.env.REACT_APP_GOOGLE_API_KEY}
+                    clientId={clientId}
                     buttonText="Sign Out"
                     onLogoutSuccess={onSignoutSuccess}
                 >
