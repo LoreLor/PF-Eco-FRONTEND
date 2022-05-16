@@ -36,7 +36,7 @@ export default function NavBar({categories}){
         <header>
             <nav className="navbar navbar-expand-sm">
                 <div className={style.container}>
-                    <NavLink to="/" className="navbar-brand">Titulo del Ecommerce</NavLink>
+                    <NavLink to="/" className={style.title}>City Cell</NavLink>
                     <div className={style.box}>
                         <SearchBar/>
                         <div className={style.conte}>

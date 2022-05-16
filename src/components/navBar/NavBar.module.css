@@ -77,3 +77,14 @@ h3{
 .userName:hover {
     color: #F66B0E;
 }
+.title{
+    color: #F66B0E;
+    padding-left: 20px ;
+    width: 400px;
+    font-weight: 600;
+    font-size: 30px;
+    text-decoration: none;
+}
+.title:hover{
+    color: #EFEFEF;
+}
