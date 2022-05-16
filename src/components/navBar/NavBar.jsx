@@ -45,7 +45,7 @@ export default function NavBar({categories}){
                                 </button>
                                 <ul class="dropdown-menu">     
                                     <li><a href="#" className={style.logout} onClick={handleLogout}>Log Out</a></li>
-                                    <li><a href="/register" className={style.logout}>Register</a></li>
+                                    {/* <li><a href="/register" className={style.logout}>Register</a></li> */}
                                 </ul>
                             </div>    
                             ) : (
@@ -65,13 +65,14 @@ export default function NavBar({categories}){
                 </div>
             </nav>
                 <div className={style.footHead}>
+                    { window.location.href.includes("http://localhost:3000/home/") ? <NavLink to="/" className={style.mybtn}>Help</NavLink> :
                     <div className={style.aux}>
                         <Categories categories={categories}/>
                         <OrderPrice />
                         <FilterPrice />
                         <button onClick={e => handleClick(e)}>REFRESH</button>
                         <NavLink to="/" className={style.mybtn}>Help</NavLink>
-                    </div>
+                    </div>}
                     
                 </div>
         </header>

@@ -50,7 +50,7 @@ export default function ProductDetail (){
         <div>
             <NavBar categories={categories}/>
             {
-                detailProduct.rating ?
+                detailProduct.rating >= 0 ?
                     <div className={style.card}>
                         <div className={style.card_img}>
                             <div className={style.imgContainer}>
@@ -58,7 +58,7 @@ export default function ProductDetail (){
                             </div>
                         </div>
                         <div className={style.card_data}>
-                            <NavLink to={"/home"}>
+                            <NavLink to={"/"}>
                                 <button className={style.btnBack}>X</button>
                             </NavLink>
                             {detailProduct.categories?.map(c => {

@@ -3,7 +3,7 @@ import { GET_ALL_CATEGORIES,
     GET_ALL_PRODUCTS_FAIL, 
     GET_ALL_PRODUCTS_REQUEST, 
     GET_ALL_PRODUCTS_SUCCESS, 
-    GET_CATEGORY_CHECK, 
+    GET_SINGLE_CATEGORY, 
     GET_PRODUCT_BY_ID_FAIL, 
     GET_PRODUCT_BY_ID_REQUEST, 
     GET_PRODUCT_BY_ID_SUCCESS, 
@@ -23,7 +23,8 @@ const initialState ={
     detail:{},
     loading: true,
     error: {},
-    categoriesDb:[]
+    categoriesDb:[],
+    editCategory:{}
 }
 
 export const productsReducer = (state=initialState, action) => {
@@ -95,11 +96,12 @@ export const productsReducer = (state=initialState, action) => {
                 ...state,
                 categoriesDb:action.payload
             }
-        case GET_CATEGORY_CHECK:
-            return {
-                ...state,
-                categoriesDb:[...state.categoriesDb,action.payload]
-            }
+
+            case GET_SINGLE_CATEGORY:
+                return {
+                    ...state,
+                    editCategory: action.payload
+                }
         case FILTER_BY_CATEGORY:
             const all = state.products;
             const filter = action.payload === 'all' ? all : all.filter(p => p.categories.find(d => d.name === action.payload))

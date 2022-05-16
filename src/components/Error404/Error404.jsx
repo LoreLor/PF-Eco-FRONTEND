@@ -7,7 +7,7 @@ function Error404 () {
         return (
                 <div className={style.container}>
                     <h1>404 NOT FOUND</h1>
-                    <Link to="/home">
+                    <Link to="/">
                         <button className={style.btn_land}>Home</button>
                     </Link>
                 </div>

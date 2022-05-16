@@ -1,7 +1,7 @@
 import axios from "axios"
 import React,{useState} from "react"
 import {useDispatch, useSelector} from 'react-redux'
-import { useNavigate,Link } from "react-router-dom"
+import { useNavigate,Link, useParams } from "react-router-dom"
 import { getProductByName,getAllProducts} from "../../../redux/actions/products"
 import { getCategories } from "../../../redux/actions/categories"
 import style from './ProductAdmin.module.css'
@@ -10,17 +10,20 @@ import activeValidators from './validators/activeValidators'
 import submitValidators from './validators/submitValidators'
 
 
-export default function ProTest (){
+export default function ProductForm (){
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const {name} = useParams()
+
     const categoriesDb = useSelector((state)=>state.products.categoriesDb)
     const productsDb = useSelector((state)=>state.products.products)
-   
+    const productEdit = useSelector((state)=>state.products.detail)
+    
     const [keyword,setKeyword] = useState("")
     const [isOpen,setIsOpen] =useState(false)
 
     const [errors,setErrors]=useState({})
-    
     const [input,setInput] = useState({
         name: "",
         price: "",
@@ -62,7 +65,6 @@ export default function ProTest (){
     }
     async function onSubmit (event){
         event.preventDefault()
-        //input.stock = parseInt(input.stock)
         setErrors(activeValidators(input,productsDb))
         setErrors(submitValidators(input))
         if(Object.keys(errors).length === 0
@@ -117,31 +119,32 @@ export default function ProTest (){
             <div className="formularyProduct">
         <form>
         <div>
-            <span>Nombre</span>
+            <h3>Add or edit</h3>
+            <p>Product name:</p>
             <input className={errors?.name? style.danger : style.input} type='text' placeholder="Nombre del producto..."
             name='name' value={input.name} onChange={onValueChange}/>
             {errors.name && (<p className={style.danger}>{errors.name}</p>)}
             </div>
             <div>
-            <span>Precio</span>
+            <p>Price:</p>
                 <input className={errors?.price? style.danger : style.input} type='text' placeholder="Precio del producto..."
                 name='price' value={input.price} onChange={onValueChange}/>
                 {errors.price && (<p className={style.danger}>{errors.price}</p>)}               
             </div>
             <div>
-            <span>Descripction</span>
+            <p>Description:</p>
                 <input className={errors?.description? style.danger : style.input} type='text' placeholder="Descripción del producto..."
                 name='description' value={input.description} onChange={onValueChange}/>
                 {errors.description && (<p className={style.danger}>{errors.description}</p>)}              
             </div>
             <div>
-            <span>Stock</span>
+            <p>Stock:</p>
                 <input className={errors?.stock? style.danger : style.input} type='text' placeholder="Unidades en inventario..."
                 name='stock' value={input.stock} onChange={onValueChange}/>
                 {errors.stock && (<p className={style.danger}>{errors.stock}</p>)}              
             </div>
             <div>
-                <span>Categorias:</span>
+                <p>Categories:</p>
                 {categoriesDb.length ?
                 <select className={style.select} name ='categories'
                 onChange={onArrayChange} multiple={true} 
@@ -153,7 +156,7 @@ export default function ProTest (){
                             className={style.categories}>
                     {category.name}</option>
                 )})}
-                </select>:<span> Aun no se han creado categorias</span>}
+                </select>:<span> No categories yet</span>}
                 {errors?.categories && <p className={style.danger}>{errors?.categories}</p>}
             </div>
             <div>
@@ -165,7 +168,7 @@ export default function ProTest (){
             </div>
 
             <div>
-            <span>Imagenes:</span>
+            <p>Images:</p>
             <input className="inputs" accept="image/png,image/jpg,image/jpeg" multiple={true} type='file' 
             name="file"  onChange={(e)=>onFileChange(e.target.files)}/>
             </div>
@@ -179,7 +182,7 @@ export default function ProTest (){
         <div>
             <Link to="/admin">
             <button onClick={onReturn}className='returnButton'> 
-                            Volver
+                            Go Back
                         </button>
             </Link>
         </div>
