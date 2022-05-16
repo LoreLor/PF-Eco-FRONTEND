@@ -22,6 +22,9 @@
     width: 500px;
     height: 500px;
 }
+.imgContainer img{
+    max-width: 100%;
+}
 .card_data{
     display: flex;
     flex-direction: column;

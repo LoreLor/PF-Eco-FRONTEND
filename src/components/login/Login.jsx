@@ -15,7 +15,7 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user)
-    console.log(user)
+    // console.log(user)
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
