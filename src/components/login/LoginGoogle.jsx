@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import s from './LoginGoogle.module.css'
+
 
 
 
@@ -8,6 +8,11 @@ import s from './LoginGoogle.module.css'
 
 
 function LoginGoogle() {
+    const [liginData, setLoginData]=useState(
+        localStorage.setItem('loginData')
+        ? JSON.parse(localStorage.getItem('loginData'))
+        : null
+    );
 
     const [showloginButton, setShowloginButton] = useState(true);
     const [showlogoutButton, setShowlogoutButton] = useState(false);
@@ -32,15 +37,16 @@ function LoginGoogle() {
 
     return (
         <div>
+            
             { showloginButton ?
                 <GoogleLogin
                     clientId={process.env.REACT_APP_GOOGLE_API_KEY}
-                    buttonText="Log in with Google"
+                    buttonText="Google"
                     onSuccess={onLoginSuccess}
                     onFailure={onLoginFailure}
                     cookiePolicy={'single_host_origin'}
                     isSignedIn={true}
-                /> : null}
+                ></GoogleLogin> : null}
 
             { showlogoutButton ?
                 <GoogleLogout
