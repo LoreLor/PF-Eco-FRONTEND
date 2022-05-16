@@ -4,13 +4,17 @@ import {Link} from 'react-router-dom'
 import { getCategories } from '../../redux/actions/categories'
 import { getAllProducts } from '../../redux/actions/products'
 import CategoriesSB from './userAdmin/searchBars/categoriesSB'
+import ProductsSB from './userAdmin/searchBars/productsSB'
 
 export default function AdminPage (){
     const categories = useSelector((state)=> state.products.categoriesDb)
+    const products = useSelector((state)=> state.products.products)
     const dispatch = useDispatch()
 
-    const [name,setName] = useState("")
+    const [categoryName,setCategoryName] = useState("")
     const [category,setCategory] = useState("")
+    const [productName,setProductName]= useState("")
+    const [product,setProduct]= useState("")
     
     useEffect(()=>{
         dispatch(getCategories())
@@ -20,30 +24,34 @@ export default function AdminPage (){
 
     return(
         <div>
-            <div>Administración</div>
+            <div><h1>Admin Page</h1></div>
             <div>
-                <span>Usuarios</span>
+                <h2>Users</h2>
+                <span>Authorize permissions</span>
                 <Link to='/admin/userAdmin'>
-                    <p>Autorizar Usuario</p>
+                    <p>Authorize User</p>
                 </Link>
             </div>
             <div>
-                <h3>Categorias</h3>
-                <span>Crear o editar una nueva categoria</span>
+                <h2>Categories</h2>
+                <span>Create or edit a category</span>
                 <Link to='/admin/categoryAdmin/'>
-                    <p>Crear categoria</p>
+                    <p>Create category</p>
                 </Link>
-                <CategoriesSB categories={categories} name={name} 
-                category={category} setName={setName} setCategory={setCategory}/>
+                <CategoriesSB categories={categories} categoryName={categoryName} 
+                category={category} setCategoryName={setCategoryName} setCategory={setCategory}/>
             </div>
             <div>
-                <span>Productos</span>
+                <h2>Products</h2>
+                <span>Create or edit a product</span>
                 <Link to='/admin/productAdmin'>
-                    <p>Crear Producto</p>
+                    <p>Create product</p>
                 </Link>
+                <ProductsSB products={products} productName={productName} 
+                product={product} setProductName={setProductName} setProduct={setProduct}/>
             </div>
             <Link to="/">
-                <p>Volver</p>
+                <p>Go Back</p>
             </Link>
         </div>
     )

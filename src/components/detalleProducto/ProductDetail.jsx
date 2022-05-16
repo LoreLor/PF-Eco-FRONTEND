@@ -58,7 +58,7 @@ export default function ProductDetail (){
                             </div>
                         </div>
                         <div className={style.card_data}>
-                            <NavLink to={"/home"}>
+                            <NavLink to={"/"}>
                                 <button className={style.btnBack}>X</button>
                             </NavLink>
                             {detailProduct.categories?.map(c => {
