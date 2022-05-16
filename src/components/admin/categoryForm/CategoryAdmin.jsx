@@ -2,13 +2,13 @@ import React,{useEffect, useState} from "react"
 import categoryValidations from './validators/categoryValidation'
 import {useDispatch, useSelector} from 'react-redux'
 import { Link, useNavigate,useParams } from "react-router-dom"
-import {getCategories, getSingleCategory } from "../../../redux/actions/categories"
+import {getCategories} from "../../../redux/actions/categories"
 import style from './CategoryAdmin.module.css'
 import Banner from '../Banner'
 import { getAllProducts } from "../../../redux/actions/products"
 
 
-export default function Form(){
+export default function CategoryForm(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -16,6 +16,7 @@ export default function Form(){
 
     const categoriesDb = useSelector((state)=>state.products.categoriesDb)
     const categoryEdit = useSelector((state)=>state.products.editCategory)
+    
     const [keyword,setKeyword] = useState("")
     const [isOpen,setIsOpen] =useState(false)
 
@@ -23,7 +24,7 @@ export default function Form(){
     const [input,setInput] = useState({
         name: "",
     })
-    console.log(categoryEdit)
+    
     function handleReturn(i){
         dispatch(getCategories)
         dispatch(getAllProducts)
@@ -97,8 +98,9 @@ export default function Form(){
 
             <form className='addForm' onSubmit={handleSubmit}>
             <div>
-                <h3>Añadir o Editar:</h3>
-                <input className={errors.name && style.danger} type='text' placeholder="Nombre de la categoria..."
+                <h3>Add or Edit</h3>
+                <p>Name:</p>
+                <input className={errors.name && style.danger} type='text' placeholder="Add a name..."
                 name='name' value={input.name} onChange={handleInputChange}/>
                 {errors.name && (<p className={style.danger}>{errors.name}</p>)}
             </div>
@@ -110,7 +112,7 @@ export default function Form(){
             <div>
             <Link to="/admin">
             <button onClick={handleReturn}className='returnButton'> 
-                            Volver
+                            Go Back
                         </button>
             </Link>
             
