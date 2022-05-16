@@ -13,7 +13,7 @@ export default function Categories({categories}){
     }
     return(
         <select defaultValue="all" onChange={e => handleChangeCategories(e)} className={style.select}>
-            <option value="all" disabled>Filter category</option>
+            <option value="all" disabled>Filter Brand</option>
             {
                 categories?.map(cat => {
                         return(
