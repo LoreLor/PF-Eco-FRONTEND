@@ -63,7 +63,7 @@ const Register = () => {
     
     const handleSubmit = (e)=> {
         e.preventDefault();
-        if(errors){
+        if(Object.keys(errors).length === 0 && user.name !== ""){
             setUser({
                 name: "",
                 last_name: "",
@@ -77,10 +77,17 @@ const Register = () => {
                 birthday: ""
             })
             dispatch(register(user))
-            alert('usuario creado')
-            
+            .then(res => {
+                if(!res) {
+                    alert("User created.")
+                    navigate("/login")
+                } else {
+                    alert("Email or user already exists.")
+                }
+            })
+        } else {
+            alert('Check the fields.')
         }
-        navigate("/login")
     }
     
     const handleChange = (e) => {
@@ -267,7 +274,10 @@ const Register = () => {
                                 (<button
                                     type="submit"
                                     class={s.btn}>SUBMIT
-                                </button>): null
+                                </button>): <button
+                                    type="submit"
+                                    class={s.btn}>SUBMIT
+                                </button>
                             }
                         </div>
                         </div>

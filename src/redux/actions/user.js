@@ -42,7 +42,7 @@ export const register = ( body) => async(dispatch) => {
       })
       localStorage.setItem('userInfo', JSON.stringify(data))
     }catch(error){
-      console.log(error)
+      return error;
     }
 
   }
