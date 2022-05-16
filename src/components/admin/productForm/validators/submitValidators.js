@@ -1,6 +1,13 @@
-export default function submitValidations(input,products){
+export default function submitValidations(id,input,products){
     let errors={}
     
+    if(!id){ let checkDb = products && products.filter(product => product.name.toLowerCase() === input.name.toLowerCase())
+        if(checkDb && checkDb.length > 0){errors.name = "El producto ya existe"}}
+    else if(id){ 
+        let preData = products && products.filter(product => product.id !== id)
+        let checkDb = preData && preData.filter(product => product.name.toLowerCase() === input.name.toLowerCase())
+        if(checkDb && checkDb.length > 0){errors.name = "El producto ya existe"} }
+
     if(!input.name){
         errors.name = "Se requiere un nombre para crear el producto"
     }

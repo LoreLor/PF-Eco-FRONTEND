@@ -44,8 +44,8 @@ export default function FilterPrice() {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <input className={style.input} type={"number"} name={"min"} value={input.min} onChange={e => handleChange(e)} placeholder="$Min."></input>
-                <input className={style.input} type={"number"} name={"max"} value={input.max} onChange={e => handleChange(e)} placeholder="$Max."></input>
+                <input className={style.input} type={"number"} min={1} name={"min"} value={input.min} onChange={e => handleChange(e)} placeholder="$Min."></input>
+                <input className={style.input} type={"number"} min={1} name={"max"} value={input.max} onChange={e => handleChange(e)} placeholder="$Max."></input>
                 <button type="submit" className={style.mybtn}>GO</button>
             </form>
         </div>

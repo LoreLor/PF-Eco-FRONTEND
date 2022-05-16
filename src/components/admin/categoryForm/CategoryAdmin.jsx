@@ -63,6 +63,7 @@ export default function CategoryForm(){
         const result = await response.json()
 
         setKeyword(result.msg)
+        
         if(!isOpen && result){
             setIsOpen(state => !state);
         if(result.msg === "Category created"){

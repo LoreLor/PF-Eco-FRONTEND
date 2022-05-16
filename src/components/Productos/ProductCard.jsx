@@ -5,6 +5,9 @@ import style from './ProductCard.module.css'
 
 export default function ProductCard({name, img, price, rating, id}){
 
+    function handleAddCart(){
+        alert(`add to cart`)
+    }
 
     return(
         <div className={style.container}>
@@ -17,7 +20,7 @@ export default function ProductCard({name, img, price, rating, id}){
                          <span className={style.card_preci}>${price}</span>
                          <div className={style.card_ratBtn}>
                             <Rating name="read-only" value={rating} readOnly/>
-                            <a href="#" className={style.card_button}>Buy Now</a>
+                            <a href="#" className={style.card_button} onClick={handleAddCart}>Buy Now</a>
                          </div>
                      </div>
             </div>
