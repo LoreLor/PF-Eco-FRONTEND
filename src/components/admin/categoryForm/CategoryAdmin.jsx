@@ -7,7 +7,6 @@ import style from './CategoryAdmin.module.css'
 import Banner from '../Banner'
 import { getAllProducts } from "../../../redux/actions/products"
 
-
 export default function CategoryForm(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -94,53 +93,53 @@ export default function CategoryForm(){
     },[name,categoryEdit])
 
     return (
-        <div className='formPage'>
-            <div className="formularyPage">
-
-            <form className='addForm' onSubmit={handleSubmit}>
-            <div>
-                <h3>Add or Edit</h3>
-                <p>Name:</p>
-                <input className={errors.name && style.danger} type='text' placeholder="Add a name..."
-                name='name' value={input.name} onChange={handleInputChange}/>
-                {errors.name && (<p className={style.danger}>{errors.name}</p>)}
-            </div>
-            <div>
-                {Object.keys(errors).length === 0 && Object.keys(input).length > 0 && 
-                <input type='submit' value= {name? "Edit" : "Add"} className='finalButton'onClick={handleSubmit}/>   
-            }
-            </div>
-            <div>
-            <Link to="/admin">
-            <button onClick={handleReturn}className='returnButton'> 
-                            Go Back
-                        </button>
-            </Link>
-            
-            </div>
-            </form>
-            <Banner isOpen={isOpen} setIsOpen={setIsOpen}>
-                {keyword.length ? (
-                    <>
-                    <h2>{keyword}</h2>
-                    {keyword === "Category created" || "Category updated" ? (
+        <div className={style.container}>
+                <form onSubmit={handleSubmit} className={style.containerForm}>
+                    <div className={style.categoryForm}>
+                        <div>
+                            <h3>Add or Edit</h3>
+                            <p>Name:</p>
+                            <input className={errors.name && style.danger} type='text' placeholder="Add a name..." name='name' value={input.name} onChange={handleInputChange}/>
+                        </div>
+                        {
+                            errors.name && (<p className={style.danger}>{errors.name}</p>)
+                        }
+                    </div>
+                    <div className={style.btnContainer}>
+                        <div>
+                            {
+                                Object.keys(errors).length === 0 && Object.keys(input).length > 0 && 
+                                <input type='submit' value= {name? "Edit" : "Add"} onClick={handleSubmit}/>   
+                            }   
+                        </div>
+                        <div>
+                            <Link to="/admin">
+                                <button onClick={handleReturn} >Go Back</button>
+                            </Link>
+                        </div>
+                    </div>
+                </form>
+                <Banner isOpen={isOpen} setIsOpen={setIsOpen}>
+                    {keyword.length ? (
                         <>
-                        <button onClick={()=> navigate("/admin",{replace:true})}className='bannerUpdate'> 
-                            Go to Admin
-                        </button>
+                        <h2>{keyword}</h2>
+                        {keyword === "Category created" || "Category updated" ? (
+                            <>
+                            <button onClick={()=> navigate("/admin",{replace:true})}> 
+                                Go to Admin
+                            </button>
+                            </>
+                        ): (
+                            <>
+                            {keyword}
+                            <button onClick={()=> setIsOpen(state=>!state)}>Ok</button>
+                            </>
+                        )}
                         </>
-                    ): (
-                        <>
-                        {keyword}
-                        <button onClick={()=> setIsOpen(state=>!state)}>Ok</button>
-                        </>
+                    ):(
+                        <h2>Invalid Data</h2>
                     )}
-                    </>
-                ):(
-                    <h2>Invalid Data</h2>
-                )}
-            </Banner>
+                </Banner>
             </div>
-        </div>
     )
 }

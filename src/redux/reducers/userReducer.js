@@ -3,7 +3,7 @@ import { USER_LOGIN, USER_LOGOUT, USER_REGISTER, USER_REGISTER_CLEAR } from "../
 
 const initialState = {
     userInfo:{},
-    userRegister:{}
+    
 }
 
 export const userReducer =(state=initialState, action)=>{
@@ -21,12 +21,12 @@ export const userReducer =(state=initialState, action)=>{
         case USER_REGISTER:
             return {
                 ...state,
-                userRegister: action.payload
+                userInfo: action.payload
             }
         case USER_REGISTER_CLEAR:
             return {
                 ...state,
-                userRegister:{}
+                userInfo:{}
             }
 
         default:

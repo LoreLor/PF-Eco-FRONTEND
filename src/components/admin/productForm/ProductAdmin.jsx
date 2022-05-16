@@ -140,70 +140,68 @@ useEffect(()=>{
 },[id,productEdit])
 
     return(
-        <div className='productForm'>
-            <div className="formularyProduct">
-        <form>
-        <div>
-            <h3>Add or edit</h3>
-            <p>Product name:</p>
-            <input className={errors?.name? style.danger : style.input} type='text' placeholder="Nombre del producto..."
-            name='name' value={input.name} onChange={onValueChange}/>
-            {errors.name && (<p className={style.danger}>{errors.name}</p>)}
-            </div>
-            <div>
-            <p>Price:</p>
-                <input className={errors?.price? style.danger : style.input} type='text' placeholder="Precio del producto..."
-                name='price' value={input.price} onChange={onValueChange}/>
-                {errors.price && (<p className={style.danger}>{errors.price}</p>)}               
-            </div>
-            <div>
-            <p>Description:</p>
-                <input className={errors?.description? style.danger : style.input} type='text' placeholder="Descripción del producto..."
-                name='description' value={input.description} onChange={onValueChange}/>
-                {errors.description && (<p className={style.danger}>{errors.description}</p>)}              
-            </div>
-            <div>
-            <p>Stock:</p>
-                <input className={errors?.stock? style.danger : style.input} type='text' placeholder="Unidades en inventario..."
-                name='stock' value={input.stock} onChange={onValueChange}/>
-                {errors.stock && (<p className={style.danger}>{errors.stock}</p>)}              
-            </div>
-            <div>
-                <p>Categories:</p>
-                {categoriesDb.length ?
-                <select className={style.select} name ='categories'
-                onChange={onArrayChange} multiple={true} 
-                size={categoriesDb && categoriesDb.length < 10 ? categoriesDb.length : 10}>
-
-                {categoriesDb && categoriesDb.map((category)=>{return(
-                    <option key={category.id} 
-                            value={category.name}
-                            className={style.categories}>
-                    {category.name}</option>
-                )})}
-                </select>:<span> No categories yet</span>}
-                {errors?.categories && <p className={style.danger}>{errors?.categories}</p>}
-            </div>
-            <div>
-                {input.categories && input.categories.map((category)=>{
-                    return(
-                        <button key={category} name="categories" value={category} onClick={onRemove}>{category}</button>
-                    )
-                })}
-            </div>
-
-            <div>
-            <p>Images:</p>
-            <input className="inputs" accept="image/png,image/jpg,image/jpeg" multiple={true} type='file' 
-            name="file"  onChange={(e)=>onFileChange(e.target.files)}/>
-            </div>
-
-            <div>
-                {Object.keys(errors).length === 0 && Object.keys(input).length > 0 && 
-                <input type='submit' value= {id? "Edit" : "Add"} className='finalButton'onClick={onSubmit}/>   
-            }
-            </div>
-        </form>
+        <div className={style.containerProd}>
+                <form>
+                    <div>
+                        <h3>Add or edit</h3>
+                        <p>Product name:</p>
+                        <input className={errors?.name? style.danger : style.input} type='text' placeholder="Nombre del producto..." name='name' value={input.name} onChange={onValueChange}/>
+                        {
+                            errors.name && (<p className={style.danger}>{errors.name}</p>)
+                        }
+                    </div>
+                    <div>
+                        <p>Price:</p>
+                        <input className={errors?.price? style.danger : style.input} type='text' placeholder="Precio del producto..." name='price' value={input.price} onChange={onValueChange}/>
+                        {
+                            errors.price && (<p className={style.danger}>{errors.price}</p>)
+                        }               
+                    </div>
+                    <div>
+                        <p>Description:</p>
+                        <textarea rows={5} cols={70} className={errors?.description? style.danger : style.input} type='text' placeholder="Descripción del producto..." name='description' value={input.description} onChange={onValueChange}/>
+                        {
+                            errors.description && (<p className={style.danger}>{errors.description}</p>)
+                        }              
+                    </div>
+                    <div>
+                        <p>Stock:</p>
+                        <input className={errors?.stock? style.danger : style.input} type='text' placeholder="Unidades en inventario..." name='stock' value={input.stock} onChange={onValueChange}/>
+                        {
+                            errors.stock && (<p className={style.danger}>{errors.stock}</p>)
+                        }              
+                    </div>
+                    <div>
+                        <p>Categories:</p>
+                        {
+                            categoriesDb.length ?
+                                <select className={style.select} name ='categories' onChange={onArrayChange} multiple={true} size={categoriesDb && categoriesDb.length < 10 ? categoriesDb.length : 10}>
+                        {categoriesDb && categoriesDb.map((category)=>{return(
+                        <option key={category.id} value={category.name} className={style.categories}>{category.name}</option>
+                        )})}
+                        </select>:<span> No categories yet</span>}
+                        {errors?.categories && <p className={style.danger}>{errors?.categories}</p>}
+                    </div>
+                    <div>
+                        {input.categories && input.categories.map((category)=>{
+                            return(
+                                <button key={category} name="categories" value={category} onClick={onRemove} className={style.btn}>{category}</button>
+                            )
+                        })}
+                    </div>
+                    <div>
+                        <p>Images:</p>
+                        <input accept="image/png,image/jpg,image/jpeg" multiple={true} type='file' name="file"  onChange={(e)=>onFileChange(e.target.files)}/>
+                    </div>
+                    <div>
+                        {Object.keys(errors).length === 0 && Object.keys(input).length > 0 && 
+                        <input type='submit' value= "Add Product" onClick={onSubmit}/>   
+                        }
+                    </div>
+                    <Link to="/admin">
+                        <button onClick={onReturn}> Go Back </button>
+                    </Link>
+                </form>
         <div>
             <Link to="/admin">
             <button onClick={onReturn}className='returnButton'> 
@@ -221,18 +219,17 @@ useEffect(()=>{
                             Go to Admin
                         </button>
                         </>
-                    ): (
-                        <>
-                        {keyword}
-                        <button onClick={()=> setIsOpen(state=>!state)}>Ok</button>
+                        ): (
+                            <>
+                            {keyword}
+                            <button onClick={()=> setIsOpen(state=>!state)}>Ok</button>
+                            </>
+                        )}
                         </>
+                    ):(
+                        <h2>Invalid Data</h2>
                     )}
-                    </>
-                ):(
-                    <h2>Invalid Data</h2>
-                )}
-            </Banner>
-            </div>
+                </Banner>
         </div>
     )
 }
