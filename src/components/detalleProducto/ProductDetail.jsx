@@ -21,7 +21,7 @@ export default function ProductDetail (){
     const [items, setItems] = useState(1)
     const detailProduct = useSelector((state) => state.products.detail)
     const categories = useSelector((state) => state.products.categoriesDb)
-    
+    console.log(detailProduct)
     useEffect(() => {
         dispatch(getProductById(id))
         dispatch(getCategories())

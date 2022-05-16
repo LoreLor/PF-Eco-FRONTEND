@@ -11,7 +11,8 @@ import {
     FILTER_BY_CATEGORY,
     ORDER_BY_PRICE,
     FILTER_BY_PRICE,
-    CLEAN_DETAIL
+    CLEAN_DETAIL,
+    EDIT_PRODUCT
 } from "./constants";
 import axios from 'axios';
 
@@ -89,5 +90,12 @@ export function filterByPrice(payload) {
 export function limpiarDetail(){
     return {
         type: CLEAN_DETAIL
+    }
+}
+
+export function editProduct(payload){
+    return {
+        type:EDIT_PRODUCT,
+        payload
     }
 }

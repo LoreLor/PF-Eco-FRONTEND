@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { getSingleCategory } from "../../../../redux/actions/categories"
+import { editProduct} from "../../../../redux/actions/products"
 import Banner from "../../Banner"
+import axios from "axios"
 
 export default function CategoriesSB({products,productName,product,setProductName,setProduct}){
     const dispatch = useDispatch()
@@ -29,11 +30,16 @@ export default function CategoriesSB({products,productName,product,setProductNam
         e.preventDefault()
         setProduct("")
     }
-
-    function confirmEdit(e){
+   
+    async function confirmEdit(e){
         if(e.target.name ==="edit"){
-            dispatch( getSingleCategory(product[0].name))
-            navigate(`/admin/productAdmin/${product[0].name}`,{replace:true})
+            const response = await axios.get(`http://localhost:3001/products/${product[0].id}`)
+            const result = response.data
+            if(result.id === product[0].id ){
+                dispatch(editProduct(result))
+                navigate(`/admin/productAdmin/${product[0].id}`,{replace:false})
+            }
+            
         }
     }
 return (<>

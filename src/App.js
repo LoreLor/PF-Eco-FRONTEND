@@ -23,7 +23,7 @@ function App() {
         <Route path='/admin' element={<AdminPage/>}/>
         <Route path='/admin/userAdmin' element={<UserAdmin/>}/>
         <Route path='/admin/productAdmin' element={<ProductAdmin/>}/>
-        <Route path='/admin/productAdmin/:name' element={<ProductAdmin/>}/>
+        <Route path='/admin/productAdmin/:id' element={<ProductAdmin/>}/>
         <Route path ='/admin/categoryAdmin' element={<CategoryAdmin/>}/>
         <Route path ='/admin/categoryAdmin/:name' element={<CategoryAdmin/>}/>
         <Route path ='/login' element={<Login />} />

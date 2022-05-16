@@ -1,8 +1,8 @@
 import axios from "axios"
-import React,{useState} from "react"
+import React,{useEffect,useState} from "react"
 import {useDispatch, useSelector} from 'react-redux'
 import { useNavigate,Link, useParams } from "react-router-dom"
-import { getProductByName,getAllProducts} from "../../../redux/actions/products"
+import { getAllProducts} from "../../../redux/actions/products"
 import { getCategories } from "../../../redux/actions/categories"
 import style from './ProductAdmin.module.css'
 import Banner from '../Banner'
@@ -14,12 +14,12 @@ export default function ProductForm (){
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const {name} = useParams()
+    const {id} = useParams()
 
     const categoriesDb = useSelector((state)=>state.products.categoriesDb)
     const productsDb = useSelector((state)=>state.products.products)
-    const productEdit = useSelector((state)=>state.products.detail)
-    
+    const productEdit = useSelector((state)=>state.products.editProduct)
+
     const [keyword,setKeyword] = useState("")
     const [isOpen,setIsOpen] =useState(false)
 
@@ -35,7 +35,7 @@ export default function ProductForm (){
     const [file,setFile] = useState([])
 
     function onValueChange (e){
-        setErrors(activeValidators({...input,[e.target.name]:e.target.value},productsDb))
+        setErrors(activeValidators(id,{...input,[e.target.name]:e.target.value},productsDb))
         setInput({...input,[e.target.name]:e.target.value}) 
     }
 
@@ -60,13 +60,12 @@ export default function ProductForm (){
     }
 
     function onFileChange(e){
-        console.log(e)
         setFile(e)
     }
     async function onSubmit (event){
         event.preventDefault()
-        setErrors(activeValidators(input,productsDb))
-        setErrors(submitValidators(input))
+        setErrors(activeValidators(id,input,productsDb))
+        setErrors(submitValidators(id,input,productsDb))
         if(Object.keys(errors).length === 0
         && input.name !== ""
         &&input.price !== ""
@@ -81,18 +80,30 @@ export default function ProductForm (){
                 data.append("input",JSON.stringify(input))
                 for (let index = 0; index < file.length; index++) {
                     data.append("file", file[index]);
-          
                 }
-                response = await axios.post("http://localhost:3001/products",data)
+
+                id? (response = await axios.put(`http://localhost:3001/products/${productEdit.id}`,data))
+                :(response = await axios.post("http://localhost:3001/products",data))
                 const result = response.data
                 setKeyword(result.msg)
                 
                 if(!isOpen && result){
                     setIsOpen(state => !state);
-                if(result.msg === "Producto creado exitosamente"){
-                    dispatch(getProductByName(result.name))
-                    dispatch(getAllProducts)
-                    dispatch(getCategories)
+                if(result.msg === "Product created"){
+                    dispatch(getAllProducts())
+                    dispatch(getCategories())
+                    setInput({
+                    name: "",
+                price: "",
+                description:"",
+                stock:"",
+                img: "",
+                categories: [],
+                    })
+                    setFile([])
+                }else if(result.msg === "Product edited"){
+                    dispatch(getAllProducts())
+                    dispatch(getCategories())
                     setInput({
                     name: "",
                 price: "",
@@ -114,6 +125,20 @@ export default function ProductForm (){
         dispatch(getCategories)
         dispatch(getAllProducts)
 }
+
+useEffect(()=>{
+    if(id && productEdit){
+        setInput({
+        name: productEdit.name,
+        price: productEdit.price.toString(),
+        description: productEdit.description,
+        stock: productEdit.stock.toString(),
+        img: productEdit.img,
+        categories: productEdit.categories.map(c=>c.name),
+        })
+    }
+},[id,productEdit])
+
     return(
         <div className={style.containerProd}>
                 <form>
@@ -170,22 +195,30 @@ export default function ProductForm (){
                     </div>
                     <div>
                         {Object.keys(errors).length === 0 && Object.keys(input).length > 0 && 
-                        <input type='submit' value= "Add Product" onClick={onSubmit}/>   
+                        <input type='submit' value= {id? "Edit": "Add"} onClick={onSubmit}/>   
                         }
                     </div>
                     <Link to="/admin">
                         <button onClick={onReturn}> Go Back </button>
                     </Link>
                 </form>
-
-                <Banner isOpen={isOpen} setIsOpen={setIsOpen}>
-                    {keyword.length ? (
+        <div>
+            <Link to="/admin">
+            <button onClick={onReturn}className='returnButton'> 
+                            Go Back
+                        </button>
+            </Link>
+        </div>
+        <Banner isOpen={isOpen} setIsOpen={setIsOpen}>
+                {keyword.length ? (
+                    <>
+                    <h2>{keyword}</h2>
+                    {keyword === "Product created" || "Product edited" ? (
                         <>
-                        <h2>{keyword}</h2>
-                        {keyword === "Producto creado exitosamente" ? (
-                            <button onClick={()=> navigate("/admin",{replace:true})}> 
-                                Go to Admin
-                            </button>
+                        <button onClick={()=> navigate("/admin",{replace:true})}className='bannerUpdate'> 
+                            Go to Admin
+                        </button>
+                        </>
                         ): (
                             <>
                             {keyword}

@@ -1,4 +1,4 @@
-export default function productValidations(input,products){
+export default function productValidations(id,input,products){
 
     let errors={}
 if(input.name){
@@ -11,8 +11,13 @@ if(input.name){
     else if(input.name.length < 5 || input.name.length > 30){
         errors.name = "El nombre debe tener entre 5 y 30 caracteres"
     }
-    var checkDb = products && products.filter(product => product.name.toLowerCase() === input.name.toLowerCase())
-    if(checkDb && checkDb.length > 0){errors.name = "El producto ya existe"}
+    if(!id){ let checkDb = products && products.filter(product => product.name.toLowerCase() === input.name.toLowerCase())
+        if(checkDb && checkDb.length > 0){errors.name = "El producto ya existe"}}
+    else if(id){ 
+        let preData = products && products.filter(product => product.id !== id)
+        let checkDb = preData && preData.filter(product => product.name.toLowerCase() === input.name.toLowerCase())
+        if(checkDb && checkDb.length > 0){errors.name = "El producto ya existe"} }
+
 }
     if(input.price){
         if(input.price.trim()=== ""){

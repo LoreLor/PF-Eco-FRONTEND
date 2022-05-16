@@ -13,7 +13,8 @@ import { GET_ALL_CATEGORIES,
     FILTER_BY_CATEGORY,
     ORDER_BY_PRICE,
     FILTER_BY_PRICE,
-    CLEAN_DETAIL
+    CLEAN_DETAIL,
+    EDIT_PRODUCT
 } from "../actions/constants";
 
 
@@ -24,7 +25,8 @@ const initialState ={
     loading: true,
     error: {},
     categoriesDb:[],
-    editCategory:{}
+    editCategory:{},
+    editProduct: {}
 }
 
 export const productsReducer = (state=initialState, action) => {
@@ -102,6 +104,11 @@ export const productsReducer = (state=initialState, action) => {
                     ...state,
                     editCategory: action.payload
                 }
+            case EDIT_PRODUCT:
+                 return {
+                    ...state,
+                    editProduct: action.payload
+                }     
         case FILTER_BY_CATEGORY:
             const all = state.products;
             const filter = action.payload === 'all' ? all : all.filter(p => p.categories.find(d => d.name === action.payload))
