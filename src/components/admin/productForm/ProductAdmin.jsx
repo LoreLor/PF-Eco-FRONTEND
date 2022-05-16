@@ -145,28 +145,28 @@ useEffect(()=>{
                     <div>
                         <h3>Add or edit</h3>
                         <p>Product name:</p>
-                        <input className={errors?.name? style.danger : style.input} type='text' placeholder="Nombre del producto..." name='name' value={input.name} onChange={onValueChange}/>
+                        <input className={errors?.name? style.danger : style.input} type='text' placeholder="Product name..." name='name' value={input.name} onChange={onValueChange}/>
                         {
                             errors.name && (<p className={style.danger}>{errors.name}</p>)
                         }
                     </div>
                     <div>
                         <p>Price:</p>
-                        <input className={errors?.price? style.danger : style.input} type='text' placeholder="Precio del producto..." name='price' value={input.price} onChange={onValueChange}/>
+                        <input className={errors?.price? style.danger : style.input} type='text' placeholder="Product price..." name='price' value={input.price} onChange={onValueChange}/>
                         {
                             errors.price && (<p className={style.danger}>{errors.price}</p>)
                         }               
                     </div>
                     <div>
                         <p>Description:</p>
-                        <textarea rows={5} cols={70} className={errors?.description? style.danger : style.input} type='text' placeholder="Descripción del producto..." name='description' value={input.description} onChange={onValueChange}/>
+                        <textarea rows={5} cols={70} className={errors?.description? style.danger : style.input} type='text' placeholder="Add more info..." name='description' value={input.description} onChange={onValueChange}/>
                         {
                             errors.description && (<p className={style.danger}>{errors.description}</p>)
                         }              
                     </div>
                     <div>
                         <p>Stock:</p>
-                        <input className={errors?.stock? style.danger : style.input} type='text' placeholder="Unidades en inventario..." name='stock' value={input.stock} onChange={onValueChange}/>
+                        <input className={errors?.stock? style.danger : style.input} type='text' placeholder="Add a stock..." name='stock' value={input.stock} onChange={onValueChange}/>
                         {
                             errors.stock && (<p className={style.danger}>{errors.stock}</p>)
                         }              
@@ -198,9 +198,6 @@ useEffect(()=>{
                         <input type='submit' value= {id? "Edit": "Add"} onClick={onSubmit}/>   
                         }
                     </div>
-                    <Link to="/admin">
-                        <button onClick={onReturn}> Go Back </button>
-                    </Link>
                 </form>
         <div>
             <Link to="/admin">
