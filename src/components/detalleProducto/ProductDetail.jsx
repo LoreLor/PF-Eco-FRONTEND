@@ -82,15 +82,7 @@ export default function ProductDetail (){
                                 <div className={style.card_dataBtm}>
                                     <div className={style.qty}>
                                         <h5>Choise Qty:</h5>
-                                        <select className={style.select} onChange={e => handleSelectQty(e)}>
-                                            {
-                                                stockItems.map(i => {
-                                                    return(
-                                                        <option key={i} value={i}>{i}</option>
-                                                        )
-                                                    })  
-                                                }
-                                        </select>
+                                        <input type="number" max={detailProduct.stock} min={1} onChange={handleSelectQty}/>
                                     </div>
                                     <h5>{detailProduct.stock} Available!</h5>
                                 </div>

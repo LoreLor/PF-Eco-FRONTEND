@@ -12,58 +12,47 @@
     --small-font-size: .875rem;
   }
   
-  /*===== BASE =====*/
+  /* ===== BASE =====
   *, ::before, ::after {
     box-sizing: border-box;
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: var(--body-font);
-    font-size: var(--normal-font-size);
-  }
-  
-  h1, p {
-    margin: 0;
-  }
+  } */
   
   a {
     text-decoration: none;
   }
   
-  .card img {
-    max-width: 100%;
-    height: 230px;
-  }
-  
   /*===== CARD =====*/
-  .container {
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--dark-color-lighten);
-  }
   
   .card {
-    width: 320px;
-    height: 400px;
+    width: 100%;
     background-color: var(--dark-color);
     border-radius: 1rem;
-    padding: 2rem 2rem 0;
     color: var(--white-color);
-    overflow-y: hidden;
+    overflow: hidden;
   }
   
   .card_img {
-    position: absolute;
-    width: 220px;
+    position: relative;
+    width: 100%;
+    height: 310px;
     filter: drop-shadow(5px 10px 15px rgba(8,9,13,.4));
+    overflow: hidden;
+    background-color: #112b3c53;   
+  }
+
+  .card_img img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 20px;
   }
   
   .card_data {
-    transform: translateY(16.2rem);
+    position: relative;
+    bottom: 15px;
     text-align: center;
   }
   
@@ -80,13 +69,6 @@
     margin-bottom: 1.25rem;
   }
   
-  .card_description {
-    font-size: var(--small-font-size);
-    text-align: initial;
-    margin-bottom: 1.25rem;
-    opacity: 0;
-  }
-  
   .card_button {
     display: block;
     width: max-content;
@@ -96,7 +78,7 @@
     border-radius: .5rem;
     font-weight: 500;
     transition: .2s;
-    opacity: 0;
+    opacity: 1;
   }
   .card_ratBtn{
     display: flex;
@@ -119,26 +101,21 @@
   
   /* Hover card effect */
   .card:hover .card_img {
-    transform: translate(-1.5rem, -9.5rem) rotate(-20deg);
+    transform: scale(1.5);
   }
-  
-  .card:hover .card_data {
-    transform: translateY(4.8rem);
-  }
-  
+
+/*   
   .card:hover .card_title {
     transform: translateX(0rem);
     margin-bottom: 0;
-  }
-  
+  } */
+/*   
   .card:hover .card_preci {
     transform: translateX(0rem);
-  }
+  } */
   
-  .card:hover .card_description, 
   .card:hover .card_button {
     transition-delay: .2s;
-    opacity: 1;
   }
   
   .card_title{
