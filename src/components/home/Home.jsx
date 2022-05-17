@@ -34,6 +34,7 @@ export default function Home (){
                 {
                     allProducts.showedProducts ? 
                         allProducts.showedProducts.map(p => {
+                            if (p.stock === 0) return;
                             return(
                                     <ProductCard
                                         id={p.id}
