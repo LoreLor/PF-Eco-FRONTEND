@@ -9,7 +9,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 8px;
+    transform: translate(-5%, 0);
 }
 
 
@@ -87,4 +87,9 @@ h3{
 }
 .title:hover{
     color: #EFEFEF;
+}
+
+.logCart{
+    display: flex;
+    align-items: center;
 }
