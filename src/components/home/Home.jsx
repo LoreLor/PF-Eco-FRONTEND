@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import Pagination from '@mui/material/Pagination';
 
 import { getAllProducts } from "../../redux/actions/products"
 import { getCategories } from "../../redux/actions/categories"
