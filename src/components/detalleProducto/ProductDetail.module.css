@@ -67,6 +67,10 @@
     border-radius: 24px;
     transition: 0.25s;
 }
+.myBtn:disabled{
+    background: red;
+    border: red;
+}
 .select{
     text-align: center;
     width: 80px;
@@ -87,7 +91,7 @@
     background-color: #EFEFEF;
 }
 
-.myBtn:hover{
+.myBtn:hover:enabled{
     width: 200px;    
     background: #F66B0E;
     cursor: pointer;

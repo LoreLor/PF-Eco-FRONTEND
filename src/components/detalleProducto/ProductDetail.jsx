@@ -73,22 +73,29 @@ export default function ProductDetail (){
                             <div className={style.desc}>
                                 <p>{detailProduct.description}</p>
                             </div>
-                            <div className={style.card_dataBtm}>
-                                <div className={style.qty}>
-                                    <h5>Choise Qty:</h5>
-                                    <select className={style.select} onChange={e => handleSelectQty(e)}>
-                                        {
-                                            stockItems.map(i => {
-                                                return(
-                                                    <option key={i} value={i}>{i}</option>
-                                                    )
-                                                })  
-                                            }
-                                    </select>
+                            {
+                                detailProduct.stock === 0 ? 
+                                    <div>
+                                        <h2>Product out of stock</h2>
+                                    </div>
+                                :
+                                <div className={style.card_dataBtm}>
+                                    <div className={style.qty}>
+                                        <h5>Choise Qty:</h5>
+                                        <select className={style.select} onChange={e => handleSelectQty(e)}>
+                                            {
+                                                stockItems.map(i => {
+                                                    return(
+                                                        <option key={i} value={i}>{i}</option>
+                                                        )
+                                                    })  
+                                                }
+                                        </select>
+                                    </div>
+                                    <h5>{detailProduct.stock} Available!</h5>
                                 </div>
-                                <h5>{detailProduct.stock} Available!</h5>
-                            </div>
-                            <button onClick={e => handleBuy(e)} className={style.myBtn}>Buy Now</button>
+                            }
+                            <button onClick={e => handleBuy(e)} className={style.myBtn} disabled={detailProduct.stock === 0}>Buy Now</button>
                         </div>
                     </div>:
                     <Loader/>

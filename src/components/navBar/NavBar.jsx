@@ -40,28 +40,6 @@ export default function NavBar({categories}){
                     <NavLink to="/" className={style.title}>City Cell</NavLink>
                     <div className={style.box}>
                         <SearchBar/>
-                        <div className={style.conte}>
-                            {
-                                user || clientId ? (
-                                    <div className={style.drop}>
-                                        <button className={style.perfil} type="button" data-toggle="dropdown">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#F66B0E" className="bi bi-person-circle" viewBox="0 0 16 16">
-                                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                                            </svg>
-                                            <h3 className={style.userName}>{user.user_name}</h3>
-                                        </button>
-                                    <ul className="dropdown-menu">     
-                                        <li>
-                                            <button className={style.mybtn} onClick={handleLogout}>Log Out</button>
-                                        </li>
-                                        {/* <li><a href="/register" className={style.logout}>Register</a></li> */}
-                                    </ul>
-                                </div>    
-                            ) : (
-                                <NavLink to="/login" className={style.mybtn}>Log In</NavLink>
-                            )}                  
-                        </div>
                     </div>
                 </div>
             </nav>
@@ -75,7 +53,29 @@ export default function NavBar({categories}){
                         {/* <NavLink to="/" className={style.mybtn}>Help</NavLink> */}
                     </div>
                     }
-                    <div>                 
+                    <div className={style.logCart}> 
+                        <div className={style.conte}>
+                            {
+                                user ? (
+                                    <div className={style.drop}>
+                                        <button className={style.perfil} type="button" data-toggle="dropdown">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#F66B0E" className="bi bi-person-circle" viewBox="0 0 16 16">
+                                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                                <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                            </svg>
+                                            <h3 className={style.userName}>{user.user_name}</h3>
+                                        </button>
+                                        <ul className="dropdown-menu">     
+                                            <li>
+                                                <button className={style.mybtn} onClick={handleLogout}>Log Out</button>
+                                            </li>
+                                            {/* <li><a href="/register" className={style.logout}>Register</a></li> */}
+                                        </ul>
+                                    </div>    
+                                ) : (
+                                    <NavLink to="/login" className={style.mybtn}>Log In</NavLink>
+                                )}                            
+                        </div>
                         <NavLink to="/admin" className={style.mybtn}>Admin</NavLink>
                         <button className="btn btn-secundary" type="button" style={{marginRight:'10px'}} onClick={e => handleCart(e)}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#F66B0E" className="bi bi-cart-check" viewBox="0 0 16 16">

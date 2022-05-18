@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
 
 import { getAllProducts } from "../../redux/actions/products"
 import { getCategories } from "../../redux/actions/categories"
@@ -9,14 +8,27 @@ import { getCategories } from "../../redux/actions/categories"
 import NavBar from '../navBar/NavBar'
 import ProductCard from '../Productos/ProductCard'
 import Loader from "../Loading/Loader"
+import Pages from "../Pages/Pages"
 
 import style from './Home.module.css'
 
 export default function Home (){
 
     const dispatch = useDispatch();
-    const allProducts = useSelector((state) => state.products)
+    const allProducts = useSelector((state) => state.products.showedProducts)
     const allCategories = useSelector((state) => state.products.categoriesDb)
+
+    const [order, setOrder] = useState('')
+    const [currentPg, setCurrentPg] = useState(1);//seteo la pagina a renderizar
+    const [productPerPg, setProductPerPg] = useState(12); //12 products por pagina
+
+    const lastProduct = currentPg * productPerPg; //ultimo producto de la pagina renderizada
+    const firstProduct = lastProduct - productPerPg;
+    const currentProduct = allProducts.slice(firstProduct, lastProduct)//products renderizados por pagina
+
+    const paginado = (pgNumber) => {
+        setCurrentPg(pgNumber)
+    }
 
     useEffect(() => {
         dispatch(getAllProducts());
@@ -25,15 +37,15 @@ export default function Home (){
         //console.log(allCategories)
     }, [dispatch])
 
-    //mantener un boton que lleve a la pagina de admin
     //ProductCard ---> (name, img, price, rating)
     return(
         <div>
             <NavBar categories={allCategories}/>
             <div className={style.cards}>
                 {
-                    allProducts.showedProducts ? 
-                        allProducts.showedProducts.map(p => {
+                    currentProduct ? 
+                        currentProduct.map(p => {
+                            if (p.stock === 0) return;
                             return(
                                     <ProductCard
                                         id={p.id}
@@ -48,6 +60,13 @@ export default function Home (){
                         <Loader/>
                 }
             </div>
+            <Pages
+                productPerPg = {productPerPg}
+                allProducts = {allProducts.length}
+                paginado= {paginado}
+                currentPg = {currentPg}
+                setCurrentPg= {setCurrentPg}
+            />
         </div>
     )
 }
