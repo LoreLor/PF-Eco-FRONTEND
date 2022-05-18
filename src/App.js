@@ -10,11 +10,10 @@ import Login from './components/login/Login';
 import ProductDetail from './components/detalleProducto/ProductDetail';
 import Error404 from './components/Error404/Error404';
 import Register from './components/registro/Register';
+import Cart from './components/cart/Cart';
 
 
 function App() {
-  
-  
   
   return (
     <Fragment>
@@ -28,6 +27,7 @@ function App() {
         <Route path ='/admin/categoryAdmin/:name' element={<CategoryAdmin/>}/>
         <Route path ='/login' element={<Login />} />
         <Route path = '/home/:id' element={<ProductDetail/>}/>
+        <Route path = '/cart'element={<Cart/>}/>
         <Route path = '/register' element={<Register />} />
         <Route path={'*'} element={<Error404/>}/>
       </Routes>
