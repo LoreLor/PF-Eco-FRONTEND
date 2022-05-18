@@ -11,6 +11,7 @@ import Loader from "../Loading/Loader"
 import Pages from "../Pages/Pages"
 
 import style from './Home.module.css'
+import Footer from "../Footer/Footer"
 
 export default function Home (){
 
@@ -67,6 +68,7 @@ export default function Home (){
                 currentPg = {currentPg}
                 setCurrentPg= {setCurrentPg}
             />
+            <Footer/>
         </div>
     )
 }

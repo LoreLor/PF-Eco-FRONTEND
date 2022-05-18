@@ -28,7 +28,7 @@
 
 .footHead{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding-bottom: 10px;
 }
@@ -84,6 +84,7 @@ h3{
     font-weight: 600;
     font-size: 30px;
     text-decoration: none;
+    transition: 0.5s;
 }
 .title:hover{
     color: #EFEFEF;
