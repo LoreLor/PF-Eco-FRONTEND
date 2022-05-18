@@ -1,0 +1,26 @@
+/* Checkout Steps */
+
+.contenedor{
+  height: 100%;
+  
+  display: row;
+  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  padding: 30px;
+  margin-left: 30px;
+}
+
+.btn{
+  color: #FFFFFF; 
+  background-color: #112B3C; 
+  border-color: #393f44; 
+  border-radius: 8px;
+  height: 40px;
+}
+.btn:hover{
+    color: #FFFFFF; 
+    background-color: #F66B0E; 
+    border-color: #F66B0E; 
+}

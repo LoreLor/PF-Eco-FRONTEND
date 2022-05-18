@@ -14,7 +14,8 @@ import LoginGoogle from "../login/LoginGoogle";
 export default function NavBar({categories}){
     const user = JSON.parse(localStorage.getItem('userInfo'))
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const clientId = localStorage.getItem('clientId')
 
 
     function handleCart(e){
@@ -41,7 +42,7 @@ export default function NavBar({categories}){
                         <SearchBar/>
                         <div className={style.conte}>
                             {
-                                user ? (
+                                user || clientId ? (
                                     <div className={style.drop}>
                                         <button className={style.perfil} type="button" data-toggle="dropdown">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#F66B0E" className="bi bi-person-circle" viewBox="0 0 16 16">
@@ -59,10 +60,9 @@ export default function NavBar({categories}){
                                 </div>    
                             ) : (
                                 <NavLink to="/login" className={style.mybtn}>Log In</NavLink>
-                            )}       
-                            
+                            )}                  
                         </div>
-                        </div>
+                    </div>
                 </div>
             </nav>
                 <div className={style.footHead}>
@@ -75,8 +75,7 @@ export default function NavBar({categories}){
                         {/* <NavLink to="/" className={style.mybtn}>Help</NavLink> */}
                     </div>
                     }
-                    <div>  
-                        
+                    <div>                 
                         <NavLink to="/admin" className={style.mybtn}>Admin</NavLink>
                         <button className="btn btn-secundary" type="button" style={{marginRight:'10px'}} onClick={e => handleCart(e)}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#F66B0E" className="bi bi-cart-check" viewBox="0 0 16 16">
