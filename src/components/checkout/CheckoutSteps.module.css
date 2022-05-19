@@ -1,6 +1,17 @@
+/* Checkout Steps */
+
 .contenedor{
-    background-color: #112B3C;
+  height: 100%;
+  
+  display: row;
+  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  padding: 30px;
+  margin-left: 30px;
 }
+
 .btn{
   color: #FFFFFF; 
   background-color: #112B3C; 
@@ -12,15 +23,4 @@
     color: #FFFFFF; 
     background-color: #F66B0E; 
     border-color: #F66B0E; 
-}
-
-.carrousel{
-    margin-top: 150px;
-}
-
-
-@media screen and(max-width:1000px){
-    .carrousel{
-        display:none
-    }
 }

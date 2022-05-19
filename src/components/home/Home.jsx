@@ -36,7 +36,7 @@ export default function Home (){
         dispatch(getCategories())
         //console.log(allProducts)
         //console.log(allCategories)
-    }, [dispatch])
+    }, [])
 
     //ProductCard ---> (name, img, price, rating)
     return(

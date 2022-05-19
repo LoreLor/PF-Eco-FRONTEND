@@ -4,17 +4,16 @@ import Categories from "../categorias/Categories";
 import OrderPrice from "../orderPrice/OrderPrice";
 import { logout } from '../../redux/actions/user'
 import style from './NavBar.module.css'
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import FilterPrice from "../filterPrice/FilterPrice";
-import { getAllProducts } from "../../redux/actions/products";
-import LoginGoogle from "../login/LoginGoogle";
+
 
 
 export default function NavBar({categories}){
     const user = JSON.parse(localStorage.getItem('userInfo'))
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const clientId = localStorage.getItem('clientId')
 
 
     // function handleCart(e){
@@ -61,7 +60,7 @@ export default function NavBar({categories}){
                     <div className={style.logCart}> 
                         <div className={style.conte}>
                             {
-                                user ? (
+                                user || clientId? (
                                     <div className={style.drop}>
                                         <button className={style.perfil} type="button" data-toggle="dropdown">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#F66B0E" className="bi bi-person-circle" viewBox="0 0 16 16">
