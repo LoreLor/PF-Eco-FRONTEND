@@ -14,6 +14,7 @@ import {
     CLEAN_DETAIL,
     GET_REVIEWS_PRODUCT,
     CREATE_REVIEW,
+    CLEAN_REVIEW,
     EDIT_PRODUCT
 } from "./constants";
 import axios from 'axios';
@@ -131,3 +132,9 @@ export const getReviewsProduct = (id) => async (dispatch) => {
         return error;
     }
 };
+
+export function cleanReview(){
+    return {
+        type: CLEAN_REVIEW
+    }
+}

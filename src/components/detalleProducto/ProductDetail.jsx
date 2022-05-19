@@ -6,7 +6,7 @@ import { Rating } from "@mui/material";
 
 import { getCategories } from "../../redux/actions/categories";
 
-import { getProductById, getReviewsProduct, limpiarDetail } from "../../redux/actions/products";
+import { cleanReview, getProductById, getReviewsProduct, limpiarDetail } from "../../redux/actions/products";
 
 import style from './ProductDetail.module.css'
 
@@ -28,7 +28,11 @@ export default function ProductDetail() {
         dispatch(getProductById(id))
         dispatch(getCategories())
         dispatch(getReviewsProduct(id))
-        return () => { dispatch(limpiarDetail()) }
+        return () => {
+            dispatch(limpiarDetail()) 
+            dispatch(cleanReview()) 
+            
+        }
     }, [id, dispatch])
 
     function handleSelectQty(e) {
