@@ -6,8 +6,9 @@ import submitValidators from "./validators/submitValidations"
 import { getAllUsers } from "../../../redux/actions/user"
 
 export default function UserAdmin({user,setModalA,setUser}){
-    const userData = useSelector((state)=>state.users.userEdit)
     const dispatch = useDispatch()
+    const userData = useSelector((state)=>state.users.userEdit)
+ 
     const [errors,setErrors]= useState("")
     const [input,setInput] = useState({
         isActive: "",
@@ -77,7 +78,7 @@ export default function UserAdmin({user,setModalA,setUser}){
             <br/>
             <input type="submit" value="Edit" onClick={onSubmit}/>
         </form>
-        <Banner isOpen={isOpen} setIsOpen={setIsOpen}>
+        <Banner isOpen={isOpen} setIsOpen={setIsOpen} closePrev={setModalA} resetData={setUser}>
                     { keyword.length ? (
                         <>
                         <h2>{keyword}</h2>

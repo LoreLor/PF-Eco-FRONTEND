@@ -9,6 +9,7 @@ import ProductsSB from './searchBars/productsSB'
 import style from './AdminPage.module.css'
 import Banner from '../Banner'
 import UserAdmin from '../userAdmin/UserAdmin'
+import CategoryAdmin from "../categoryForm/CategoryAdmin"
 import UserSB from './searchBars/userSB'
 
 export default function AdminPage (){
@@ -23,10 +24,16 @@ export default function AdminPage (){
     const [category,setCategory] = useState("")
     const [productName,setProductName]= useState("")
     const [product,setProduct]= useState("")
-    console.log(userName)
-    console.log(user)
+    console.log(category)
     const [modalA,setModalA] = useState(false)
+    const [modalB,setModalB] = useState(false)
     
+    function handleModal(e){
+        e.preventDefault()
+        setCategory("")
+        setModalB(true)
+    }
+
     useEffect(()=>{
         dispatch(getCategories())
         dispatch(getAllProducts())
@@ -36,7 +43,12 @@ export default function AdminPage (){
 
     return(
         <div>
-            <header><h1 className={style.hola}>Admin</h1></header>
+            <header>
+                <h1 className={style.header}>Admin Page</h1>
+            </header>
+            <Link to="/">
+                <button className={style.backBtn}p>Go Back</button>
+            </Link>
             <div className={style.adminPage}>
 
                 <div className={style.box}>
@@ -45,17 +57,17 @@ export default function AdminPage (){
                 setUser={setUser} setModalA={setModalA}/>
                 </div>
                 <Banner setIsOpen={setModalA} isOpen={modalA}>
-                        <UserAdmin user={user[0]} setModalA= {setModalA} setUser={setUser}/>
-                    </Banner> 
+                    <UserAdmin user={user[0]} setModalA= {setModalA} setUser={setUser}/>
+                </Banner> 
                 <div className={style.box}>
                     <h2>Categories</h2>
-                    <Link to='/admin/categoryAdmin/'>
-                        <button className={style.mybtn}>Create category</button>
-                    </Link>
-                    <CategoriesSB categories={categories} categoryName={categoryName} 
-                    category={category} setCategoryName={setCategoryName} setCategory={setCategory}/>
+                    <button className={style.mybtn } onClick={handleModal}>Create category</button>
+                <CategoriesSB categories={categories} categoryName={categoryName} category={category} 
+                setCategoryName={setCategoryName} setCategory={setCategory} setModalB={setModalB}/>
                 </div>
-
+                <Banner setIsOpen={setModalB} isOpen={modalB}>
+                    <CategoryAdmin category={category[0]} setModalB={setModalB} setCategory={setCategory}/>
+                </Banner>
                 <div className={style.box}>
                     <h2>Products</h2>
                     <Link to='/admin/productAdmin'>
@@ -64,9 +76,6 @@ export default function AdminPage (){
                     <ProductsSB products={products} productName={productName} 
                     product={product} setProductName={setProductName} setProduct={setProduct}/>
                 </div>
-                <Link to="/">
-                    <button className={style.mybtn}p>Go Back</button>
-                </Link>
             </div>
         </div>
     )

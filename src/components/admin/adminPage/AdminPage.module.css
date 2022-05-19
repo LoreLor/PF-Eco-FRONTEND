@@ -1,13 +1,17 @@
-.hola{
+.header{
+    display: flex;
     color: #ffff;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
     font-size: 50px ;
+    height: 120px;
 }
 .adminPage{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+    gap: 100px;
     width: 80%;
+    height: 25rem;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 40px;
@@ -23,4 +27,9 @@
     border-radius: 10px;
     background-color: #EFEFEF;
     padding: 10px;
+}
+h2{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }

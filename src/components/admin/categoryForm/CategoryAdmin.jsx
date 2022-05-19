@@ -2,52 +2,49 @@ import React,{useEffect, useState} from "react"
 import activeValidations from "./validators/activeValidations"
 import submitValidations from "./validators/submitValidations"
 import {useDispatch, useSelector} from 'react-redux'
-import { Link, useNavigate,useParams } from "react-router-dom"
 import {getCategories} from "../../../redux/actions/categories"
 import style from './CategoryAdmin.module.css'
 import Banner from '../Banner'
-import { getAllProducts } from "../../../redux/actions/products"
 import axios from "axios"
 
-export default function CategoryForm(){
+export default function CategoryForm({category,setModalB,setCategory}){
     const dispatch = useDispatch()
-    const navigate = useNavigate()
-
-    const {name} =useParams()
-
+    console.log(category)
     const categoriesDb = useSelector((state)=>state.products.categoriesDb)
     const categoryEdit = useSelector((state)=>state.products.editCategory)
-    
-    const [keyword,setKeyword] = useState("")
-    const [isOpen,setIsOpen] =useState(false)
-
+    console.log(categoryEdit)
     const [errors,setErrors]=useState({})
     const [input,setInput] = useState({
         name: "",
     })
+    console.log(input)
+    const [keyword,setKeyword] = useState("")
+    const [isOpen,setIsOpen] =useState(false)
     
-    function handleReturn(i){
-        dispatch(getCategories)
-        dispatch(getAllProducts)
-    }
     function handleInputChange(i){  
-        setErrors(activeValidations(name,{...input,[i.target.name]:i.target.value},categoriesDb))
+        setErrors(activeValidations(category,{...input,[i.target.name]:i.target.value},categoriesDb))
         setInput({...input,[i.target.name]:i.target.value})            
     }
     
+    function handleClose(e){
+        e.preventDefault()
+        setIsOpen(false)
+        setModalB(false)
+        setCategory("")
+    }
 
     async function handleSubmit(event){
         event.preventDefault()
         const data = {
         name: input.name.toLocaleLowerCase() || "",
         }
-        setErrors(submitValidations(name,data,categoriesDb))
+        setErrors(submitValidations(category,data,categoriesDb))
         if(Object.keys(errors).length === 0
         && input.name !== ""
         ){
         let response = null
             try {
-            name?
+            category?
                 (response = await fetch(`http://localhost:3001/categories/${categoryEdit.id}`,
                 {method:"PUT",
                 headers: {
@@ -67,7 +64,7 @@ export default function CategoryForm(){
         setKeyword(result.msg)
         
         if(!isOpen && result){
-            setIsOpen(state => !state);
+            setIsOpen(true)
         if(result.msg === "Category created"){
             dispatch(getCategories())
             setInput({
@@ -94,7 +91,7 @@ export default function CategoryForm(){
         const result = response.data
        
         setKeyword(result.msg)
-     
+        
         if(!isOpen && result){
             setIsOpen(state => !state);
         if(result.msg === "Category deleted"){
@@ -108,12 +105,17 @@ export default function CategoryForm(){
     }
 
     useEffect(()=>{
-        if(name && categoryEdit){
+        if(!category){
+            setInput({
+                name: ""
+            })
+        }
+        if(category && categoryEdit){
             setInput({
                 name: categoryEdit.name
             })
         }
-    },[name,categoryEdit])
+    },[category,categoryEdit])
 
     return (
         <div className={style.container}>
@@ -122,7 +124,7 @@ export default function CategoryForm(){
                         <div>
                             <h3>Add or Edit</h3>
                             <p>Name:</p>
-                            {name && categoryEdit? <p>Previus name: {categoryEdit.name}</p>:<></>}
+                            {category && categoryEdit? <p>Previus name: {categoryEdit.name}</p>:<></>}
                             <input className={errors.name && style.danger} type='text' placeholder="Add a name..." name='name' value={input.name} onChange={handleInputChange}/>
                         </div>
                         {
@@ -133,34 +135,28 @@ export default function CategoryForm(){
                         <div>
                             {
                                 Object.keys(errors).length === 0 && Object.keys(input).length > 0 && 
-                                <input type='submit' value= {name? "Edit" : "Add"} onClick={handleSubmit}/>   
+                                <input type='submit' value= {category? "Edit" : "Add"} onClick={handleSubmit}/>   
                             }   
                         </div>
                     <div>
-                        {name && categoryEdit ? <button onClick={handleDelete}>Delete</button> :<></>}
+                        {category && categoryEdit ? <button onClick={handleDelete}>Delete</button> :<></>}
                     </div>
-                    
-                        <div>
-                            <Link to="/admin">
-                                <button onClick={handleReturn} >Go Back</button>
-                            </Link>
-                        </div>
                     </div>
                 </form>
-                <Banner isOpen={isOpen} setIsOpen={setIsOpen}>
+                <Banner isOpen={isOpen} setIsOpen={setIsOpen} closePrev={setModalB} resetData={setCategory}>
                     { keyword.length ? (
                         <>
                         <h2>{keyword}</h2>
                         {keyword === "Category created" || keyword === "Category updated" || keyword === "Category deleted" ? 
                             <>
                             
-                            <button onClick={()=> navigate("/admin",{replace:true})}> 
-                                Go to Admin
+                            <button onClick={handleClose}> 
+                                Close All
                             </button>
                             </>
                         : 
                             <>
-                            <button onClick={()=> setIsOpen(state=>!state)}>Ok</button>
+                            <button onClick={()=> setIsOpen(false)}>Try Again</button>
                             </>
                         
                     }
