@@ -14,6 +14,8 @@ import { GET_ALL_CATEGORIES,
     ORDER_BY_PRICE,
     FILTER_BY_PRICE,
     CLEAN_DETAIL,
+    GET_REVIEWS_PRODUCT,
+    CREATE_REVIEW,
     EDIT_PRODUCT
 } from "../actions/constants";
 
@@ -21,6 +23,7 @@ import { GET_ALL_CATEGORIES,
 const initialState ={
     products:[],
     showedProducts: [],
+    reviews: [],
     detail:{},
     loading: true,
     error: {},
@@ -154,7 +157,15 @@ export const productsReducer = (state=initialState, action) => {
                 ...state,
                 detail: {}
             }
-
+        case GET_REVIEWS_PRODUCT:
+            return {
+                ...state,
+                reviews: action.payload
+            }
+        case CREATE_REVIEW:
+            return {
+                ...state,
+            }
         default:
             return state
     }

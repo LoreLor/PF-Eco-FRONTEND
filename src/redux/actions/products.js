@@ -12,6 +12,8 @@ import {
     ORDER_BY_PRICE,
     FILTER_BY_PRICE,
     CLEAN_DETAIL,
+    GET_REVIEWS_PRODUCT,
+    CREATE_REVIEW,
     EDIT_PRODUCT
 } from "./constants";
 import axios from 'axios';
@@ -98,3 +100,34 @@ export function editProduct(payload){
         payload
     }
 }
+
+export const createReview = (id, body) => async(dispatch) => {
+    try{
+      const {data} = await axios.post(`${SERVER}/review?detailId=${id}`, body)
+      
+        dispatch({
+          type: CREATE_REVIEW,
+          payload: data
+        });
+        
+      }catch(error){
+        console.log(error);
+      }
+  
+    }
+
+export const getReviewsProduct = (id) => async (dispatch) => {
+    dispatch({
+        type: GET_REVIEWS_PRODUCT
+    })
+    try {
+        const product = await axios.get(`${SERVER}/review/product?productId=${id}`)
+        dispatch({
+            type: GET_REVIEWS_PRODUCT,
+            payload: product.data
+        })
+
+    } catch (error) {
+        return error;
+    }
+};

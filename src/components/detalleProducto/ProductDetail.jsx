@@ -6,7 +6,7 @@ import { Rating } from "@mui/material";
 
 import { getCategories } from "../../redux/actions/categories";
 
-import { getProductById, limpiarDetail } from "../../redux/actions/products";
+import { getProductById, getReviewsProduct, limpiarDetail } from "../../redux/actions/products";
 
 import style from './ProductDetail.module.css'
 
@@ -21,11 +21,13 @@ export default function ProductDetail (){
     const [items, setItems] = useState(1)
     const detailProduct = useSelector((state) => state.products.detail)
     const categories = useSelector((state) => state.products.categoriesDb)
+    const reviews = useSelector((state) => state.products.reviews)
     //console.log(detailProduct)
     
     useEffect(() => {
         dispatch(getProductById(id))
         dispatch(getCategories())
+        dispatch(getReviewsProduct(id))
         return ()=>{dispatch(limpiarDetail())}
     },[id, dispatch])
 

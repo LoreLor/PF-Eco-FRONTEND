@@ -22,6 +22,9 @@ export const FILTER_BY_PRICE = "FILTER_BY_PRICE"
 
 export const CLEAN_DETAIL = 'CLEAN_DETAIL'
 
+export const GET_REVIEWS_PRODUCT = 'GET_REVIEWS_PRODUCT'
+export const CREATE_REVIEW = 'CREATE_REVIEW'
+
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const USER_REGISTER ='USER_REGISTER';
