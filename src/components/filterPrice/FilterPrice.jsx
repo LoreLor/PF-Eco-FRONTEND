@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { filterByPrice, getAllProducts } from "../../redux/actions/products";
+import { filterByPrice, getAllProducts} from "../../redux/actions/products";
 import { useDispatch } from "react-redux";
 
 import style from './FilterPrice.module.css'
@@ -49,6 +49,5 @@ export default function FilterPrice() {
                 <button type="submit" className={style.mybtn}>GO</button>
             </form>
         </div>
-
     )
 }
