@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { Link, useLocation } from "react-router-dom"
+import React from 'react';
+import { Link } from "react-router-dom"
 import { useNavigate } from 'react-router-dom';
 import { userLogin } from "../../redux/actions/user"
-import { useDispatch, useSelector} from "react-redux";
+import { useDispatch } from "react-redux";
 import s from "./Login.module.css";
 import { useState } from 'react';
 import Swal from "sweetalert2";
@@ -16,23 +16,10 @@ import LoginGoogle from './LoginGoogle';
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const user = useSelector((state) => state.user);
-   
-
-//queryString de login...si true te lleva al home
-    const { search } = useLocation();
-    const redirectInUrl = new URLSearchParams(search).get('redirect')
-    const redirect = redirectInUrl ? redirectInUrl : '/';
-
-    useEffect(() => {
-        if(user){
-           navigate(redirect)
-        }
-    }, [navigate, user, redirect]);
-    
 
     const handleSubmitLogin = (e) => {
         e.preventDefault();
@@ -95,6 +82,7 @@ const Login = () => {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
+
                                 />
                             </div>
                             <div className="d-grid">
@@ -102,17 +90,13 @@ const Login = () => {
                             </div>
                             <div className="container w-100 my-5">
                                 <div className="row my-3 text-center">
-                                    <div className="col-12"> Or LogIn width </div>
-                                </div>
-                                {/* Login con google */}
-                                <div className="row">
-                                    <div className="col">
-                                            <LoginGoogle />
-                                    </div>             
+                                    <div className="col-12"> 
+                                            <LoginGoogle />                            
+                                    </div>                           
                                 </div>
                             </div>
                             <div className="row my-3 text-center">
-                            <Link to={`/register?redirect=${redirect}`}>Create your account</Link>
+                                <span> You don't have an account?  Go to...<Link to="/register">Register</Link></span>
                             </div>
                         </div>
                     </div>
