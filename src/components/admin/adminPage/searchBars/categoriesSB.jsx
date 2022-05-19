@@ -1,15 +1,15 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
+
 import { getSingleCategory } from "../../../../redux/actions/categories"
 import Banner from "../../Banner"
 
-export default function CategoriesSB({categories,categoryName,category,setCategoryName,setCategory}){
+export default function CategoriesSB({categories,categoryName,category,setCategoryName,setCategory,setModalB}){
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const [isOpen,setIsOpen] = useState(false)
     
     function changeCategorie(e){
+        e.preventDefault()
         setCategoryName(e.target.value)
     }
 
@@ -32,8 +32,9 @@ export default function CategoriesSB({categories,categoryName,category,setCatego
 
     function confirmEdit(e){
         if(e.target.name ==="edit"){
+            setIsOpen(false)
+            setModalB(true)
             dispatch( getSingleCategory(category[0].name))
-            navigate(`/admin/categoryAdmin/${category[0].name}`,{replace:true})
         }
     }
 return (<>

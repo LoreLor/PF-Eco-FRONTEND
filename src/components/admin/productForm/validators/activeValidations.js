@@ -3,42 +3,42 @@ export default function productValidations(id,input,products){
     let errors={}
 if(input.name){
     if(input.name.trim()=== ""){
-        errors.name = "Se requiere un nombre para crear el producto"
+        errors.name = "Must have a name"
     }
     else if(!/^[A-Za-z0-9\s]+$/g.test(input.name.trim())){
-        errors.name = "El nombre no debe incluir caracteres especiales"
+        errors.name = "Must not include special characters"
     }
     else if(input.name.length < 5 || input.name.length > 30){
-        errors.name = "El nombre debe tener entre 5 y 30 caracteres"
+        errors.name = "Must be between 5 and 30 characters"
     }
     if(!id){ let checkDb = products && products.filter(product => product.name.toLowerCase() === input.name.toLowerCase())
-        if(checkDb && checkDb.length > 0){errors.name = "El producto ya existe"}}
+        if(checkDb && checkDb.length > 0){errors.name = "Product already exists"}}
     else if(id){ 
         let preData = products && products.filter(product => product.id !== id)
         let checkDb = preData && preData.filter(product => product.name.toLowerCase() === input.name.toLowerCase())
-        if(checkDb && checkDb.length > 0){errors.name = "El producto ya existe"} }
+        if(checkDb && checkDb.length > 0){errors.name = "Product already exists"} }
 
 }
     if(input.price){
         if(input.price.trim()=== ""){
-            errors.price = "Es necesario un precio"
+            errors.price = "Must have a price"
         }
         else if (!/^[0-9]*$/.test(input.price)){
-            errors.price = "El valor debe ser un numero"
+            errors.price = "Must be a number"
             }
     }
     
     if(input.description){
     if(input.description.trim()=== ""){
-    errors.description = "El producto debe tener una descripción"
+    errors.description = "Must have a description"
     }}
 
 
     if(input.stock){
         if(input.stock.trim()=== ""){
-            errors.stock = "Es necesario un valor de inventario"}
+            errors.stock = "Must have a description"}
         else if (!/^[0-9]*$/.test(input.stock)){
-            errors.stock = "El valor debe ser un numero"
+            errors.stock = "Must be a number"
         }    
     }
 

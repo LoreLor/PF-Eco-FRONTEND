@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { USER_LOGIN, USER_LOGOUT, USER_REGISTER, USER_REGISTER_CLEAR } from './constants';
+import { USER_LOGIN, USER_LOGOUT, USER_REGISTER, USER_REGISTER_CLEAR, GET_USERS,GET_USER } from './constants';
 
 
 const SERVER = "http://localhost:3001";
@@ -61,3 +61,30 @@ export function onSignIn(googleUser) {
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 }
+
+export function getAllUsers (){
+  return async function(dispatch){
+      try {
+      const response = await fetch(`${SERVER}/user`);
+      const users = await response.json();
+      dispatch({ type: GET_USERS, payload: users });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+export function getSingleUser(id){
+  return async function(dispatch){
+    try{
+      const response = await fetch(`${SERVER}/user/${id}`)
+      const user = await response.json();
+      dispatch({type:GET_USER,payload:user})
+    }catch(error){
+      console.log(error)
+    }
+  }
+}
+
+
+
