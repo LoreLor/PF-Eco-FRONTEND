@@ -50,56 +50,58 @@ export default function ProductDetail (){
     return(
         <div>
             <NavBar categories={categories}/>
-            {
-                detailProduct.rating >= 0 ?
+            <div className={style.card_container}>
+                {
+                    detailProduct.rating >= 0 ?
                     <div className={style.card}>
-                        <div className={style.card_img}>
-                            <div className={style.imgContainer}>
-                                <img src={detailProduct.img} alt= 'img product'/>
-                            </div>
-                        </div>
-                        <div className={style.card_data}>
-                            <NavLink to={"/"}>
-                                <button className={style.btnBack}>X</button>
-                            </NavLink>
-                            {detailProduct.categories?.map(c => {
-                                return(
-                                    <span key={c.name}>{c.name}</span>
-                                )
-                            })}
-                            <h3>{detailProduct.name}</h3>
-                            <h4>${detailProduct.price}</h4>
-                            <Rating readOnly value={detailProduct.rating}/>
-                            <div className={style.desc}>
-                                <p>{detailProduct.description}</p>
-                            </div>
-                            {
-                                detailProduct.stock === 0 ? 
-                                    <div>
-                                        <h2>Product out of stock</h2>
-                                    </div>
-                                :
-                                <div className={style.card_dataBtm}>
-                                    <div className={style.qty}>
-                                        <h5>Choise Qty:</h5>
-                                        <select className={style.select} onChange={e => handleSelectQty(e)}>
-                                            {
-                                                stockItems.map(i => {
-                                                    return(
-                                                        <option key={i} value={i}>{i}</option>
-                                                        )
-                                                    })  
-                                                }
-                                        </select>
-                                    </div>
-                                    <h5>{detailProduct.stock} Available!</h5>
+                            <div className={style.card_img}>
+                                <div className={style.imgContainer}>
+                                    <img src={detailProduct.img} alt= 'img product'/>
                                 </div>
-                            }
-                            <button onClick={e => handleBuy(e)} className={style.myBtn} disabled={detailProduct.stock === 0}>Buy Now</button>
-                        </div>
-                    </div>:
-                    <Loader/>
-            }
+                            </div>
+                            <div className={style.card_data}>
+                                <NavLink to={"/"}>
+                                    <button className={style.btnBack}>X</button>
+                                </NavLink>
+                                {detailProduct.categories?.map(c => {
+                                    return(
+                                        <span key={c.name}>{c.name}</span>
+                                        )
+                                    })}
+                                <h3>{detailProduct.name}</h3>
+                                <h4>${detailProduct.price}</h4>
+                                <Rating readOnly value={detailProduct.rating}/>
+                                <div className={style.desc}>
+                                    <p>{detailProduct.description}</p>
+                                </div>
+                                {
+                                    detailProduct.stock === 0 ? 
+                                    <div>
+                                            <h2>Product out of stock</h2>
+                                        </div>
+                                    :
+                                    <div className={style.card_dataBtm}>
+                                        <div className={style.qty}>
+                                            <h5>Choise Qty:</h5>
+                                            <select className={style.select} onChange={e => handleSelectQty(e)}>
+                                                {
+                                                    stockItems.map(i => {
+                                                        return(
+                                                            <option key={i} value={i}>{i}</option>
+                                                            )
+                                                        })  
+                                                    }
+                                            </select>
+                                        </div>
+                                        <h5>{detailProduct.stock} Available!</h5>
+                                    </div>
+                                }
+                                <button onClick={e => handleBuy(e)} className={style.myBtn} disabled={detailProduct.stock === 0}>Buy Now</button>
+                            </div>
+                        </div>:
+                        <Loader/>
+                    }
+                </div>
         </div>
     )
 }
