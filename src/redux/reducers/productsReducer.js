@@ -1,14 +1,15 @@
 
-import { GET_ALL_CATEGORIES, 
-    GET_ALL_PRODUCTS_FAIL, 
-    GET_ALL_PRODUCTS_REQUEST, 
-    GET_ALL_PRODUCTS_SUCCESS, 
-    GET_SINGLE_CATEGORY, 
-    GET_PRODUCT_BY_ID_FAIL, 
-    GET_PRODUCT_BY_ID_REQUEST, 
-    GET_PRODUCT_BY_ID_SUCCESS, 
-    GET_PRODUCT_BY_NAME_FAIL, 
-    GET_PRODUCT_BY_NAME_REQUEST, 
+import {
+    GET_ALL_CATEGORIES,
+    GET_ALL_PRODUCTS_FAIL,
+    GET_ALL_PRODUCTS_REQUEST,
+    GET_ALL_PRODUCTS_SUCCESS,
+    GET_SINGLE_CATEGORY,
+    GET_PRODUCT_BY_ID_FAIL,
+    GET_PRODUCT_BY_ID_REQUEST,
+    GET_PRODUCT_BY_ID_SUCCESS,
+    GET_PRODUCT_BY_NAME_FAIL,
+    GET_PRODUCT_BY_NAME_REQUEST,
     GET_PRODUCT_BY_NAME_SUCCESS,
     FILTER_BY_CATEGORY,
     ORDER_BY_PRICE,
@@ -16,26 +17,27 @@ import { GET_ALL_CATEGORIES,
     CLEAN_DETAIL,
     GET_REVIEWS_PRODUCT,
     CREATE_REVIEW,
+    CLEAN_REVIEW,
     EDIT_PRODUCT
 } from "../actions/constants";
 
 
-const initialState ={
-    products:[],
+const initialState = {
+    products: [],
     showedProducts: [],
     reviews: [],
-    detail:{},
+    detail: {},
     loading: true,
     error: {},
-    categoriesDb:[],
-    editCategory:{},
+    categoriesDb: [],
+    editCategory: {},
     editProduct: {}
 }
 
-export const productsReducer = (state=initialState, action) => {
-    switch(action.type){
+export const productsReducer = (state = initialState, action) => {
+    switch (action.type) {
         case GET_ALL_PRODUCTS_REQUEST:
-            return{
+            return {
                 ...state,
                 loading: true
             }
@@ -43,7 +45,7 @@ export const productsReducer = (state=initialState, action) => {
         case GET_ALL_PRODUCTS_SUCCESS:
             return {
                 ...state,
-                loading:false,
+                loading: false,
                 products: action.payload,
                 showedProducts: action.payload,
             }
@@ -51,12 +53,12 @@ export const productsReducer = (state=initialState, action) => {
         case GET_ALL_PRODUCTS_FAIL:
             return {
                 ...state,
-                loading:false,
-                error:action.payload
+                loading: false,
+                error: action.payload
             }
 
         case GET_PRODUCT_BY_NAME_REQUEST:
-            return{
+            return {
                 ...state,
                 loading: true
             }
@@ -64,7 +66,7 @@ export const productsReducer = (state=initialState, action) => {
         case GET_PRODUCT_BY_NAME_SUCCESS:
             return {
                 ...state,
-                loading:false,
+                loading: false,
                 products: action.payload,
                 showedProducts: action.payload,
             }
@@ -72,12 +74,12 @@ export const productsReducer = (state=initialState, action) => {
         case GET_PRODUCT_BY_NAME_FAIL:
             return {
                 ...state,
-                loading:false,
-                error:action.payload
+                loading: false,
+                error: action.payload
             }
 
         case GET_PRODUCT_BY_ID_REQUEST:
-            return{
+            return {
                 ...state,
                 loading: true
             }
@@ -85,33 +87,33 @@ export const productsReducer = (state=initialState, action) => {
         case GET_PRODUCT_BY_ID_SUCCESS:
             return {
                 ...state,
-                loading:false,
+                loading: false,
                 detail: action.payload
             }
 
         case GET_PRODUCT_BY_ID_FAIL:
             return {
                 ...state,
-                loading:false,
-                error:action.payload
+                loading: false,
+                error: action.payload
             }
 
         case GET_ALL_CATEGORIES:
             return {
                 ...state,
-                categoriesDb:action.payload
+                categoriesDb: action.payload
             }
 
-            case GET_SINGLE_CATEGORY:
-                return {
-                    ...state,
-                    editCategory: action.payload
-                }
-            case EDIT_PRODUCT:
-                 return {
-                    ...state,
-                    editProduct: action.payload
-                }     
+        case GET_SINGLE_CATEGORY:
+            return {
+                ...state,
+                editCategory: action.payload
+            }
+        case EDIT_PRODUCT:
+            return {
+                ...state,
+                editProduct: action.payload
+            }
         case FILTER_BY_CATEGORY:
             const all = state.products;
             const filter = action.payload === 'all' ? all : all.filter(p => p.categories.find(d => d.name === action.payload))
@@ -120,21 +122,21 @@ export const productsReducer = (state=initialState, action) => {
                 showedProducts: filter
             }
         case ORDER_BY_PRICE:
-            if(action.payload === "default") return {
+            if (action.payload === "default") return {
                 ...state,
             }
             let sortedByPrice = [...state.showedProducts];
-            sortedByPrice = action.payload === "asc" ? 
-            state.showedProducts.sort(function(a,b) {
-                if(a.price > b.price) return 1;
-                if(a.price < b.price) return -1;
-                return 0
-            })  :
-            state.showedProducts.sort(function(a,b) {
-                if (a.price < b.price) return 1;
-                if (a.price > b.price) return -1;
-                return 0;
-            });
+            sortedByPrice = action.payload === "asc" ?
+                state.showedProducts.sort(function (a, b) {
+                    if (a.price > b.price) return 1;
+                    if (a.price < b.price) return -1;
+                    return 0
+                }) :
+                state.showedProducts.sort(function (a, b) {
+                    if (a.price < b.price) return 1;
+                    if (a.price > b.price) return -1;
+                    return 0;
+                });
             return {
                 ...state,
                 showedProducts: sortedByPrice,
@@ -142,7 +144,7 @@ export const productsReducer = (state=initialState, action) => {
         case FILTER_BY_PRICE:
             const all2 = state.products;
             const filter2 = all2.filter(p => p.price >= action.payload.min && p.price <= action.payload.max)
-            if(filter2.length === 0) {
+            if (filter2.length === 0) {
                 alert("No products were found in that range, all products were displayed again.")
                 return {
                     ...state,
@@ -153,7 +155,7 @@ export const productsReducer = (state=initialState, action) => {
                 showedProducts: filter2
             }
         case CLEAN_DETAIL:
-            return{
+            return {
                 ...state,
                 detail: {}
             }
@@ -165,6 +167,11 @@ export const productsReducer = (state=initialState, action) => {
         case CREATE_REVIEW:
             return {
                 ...state,
+            }
+        case CLEAN_REVIEW:
+            return {
+                ...state,
+                reviews: []
             }
         default:
             return state
