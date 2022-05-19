@@ -44,7 +44,6 @@ export const getProductByName = (name) => async (dispatch) => {
     })
     try {
         const product = await axios.get(`${SERVER}/products?name=${name}`)
-        console.log(product)
         dispatch({
             type: GET_PRODUCT_BY_NAME_SUCCESS,
             payload: product.data

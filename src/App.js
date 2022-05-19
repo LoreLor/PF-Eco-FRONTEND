@@ -1,7 +1,7 @@
 import React,{Fragment} from 'react';
 import './App.css';
 import Home from './components/home/Home'
-import AdminPage from './components/admin/AdminPage'
+import AdminPage from './components/admin/adminPage/AdminPage'
 import CategoryAdmin from './components/admin/categoryForm/CategoryAdmin'
 import ProductAdmin from './components/admin/productForm/ProductAdmin'
 import UserAdmin from './components/admin/userAdmin/UserAdmin'

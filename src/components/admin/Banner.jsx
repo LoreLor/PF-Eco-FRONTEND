@@ -11,10 +11,7 @@ export default function Banner({children, isOpen,setIsOpen}){
                 <div>
                 <button onClick={()=>setIsOpen(state=>!state)} className={styles.bannerButton}>X</button>
                 </div>
-            <button className={styles.reload}>
                 {children}
-            </button>
-            
             </div>
         </div>
     )

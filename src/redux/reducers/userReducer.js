@@ -1,9 +1,10 @@
-import { USER_LOGIN, USER_LOGOUT, USER_REGISTER, USER_REGISTER_CLEAR } from "../actions/constants"
+import { GET_USER, GET_USERS, USER_LOGIN, USER_LOGOUT, USER_REGISTER, USER_REGISTER_CLEAR } from "../actions/constants"
 
 
 const initialState = {
     userInfo:{},
-    
+    userEdit:{},
+    users: []
 }
 
 export const userReducer =(state=initialState, action)=>{
@@ -27,6 +28,16 @@ export const userReducer =(state=initialState, action)=>{
             return {
                 ...state,
                 userInfo:{}
+            }
+        case GET_USERS:
+            return {
+                ...state,
+                users: action.payload
+            }
+        case GET_USER:
+            return{
+                ...state,
+                userEdit: action.payload
             }
 
         default:

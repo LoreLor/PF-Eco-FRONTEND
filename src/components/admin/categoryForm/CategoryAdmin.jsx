@@ -1,11 +1,13 @@
 import React,{useEffect, useState} from "react"
-import categoryValidations from './validators/categoryValidation'
+import activeValidations from "./validators/activeValidations"
+import submitValidations from "./validators/submitValidations"
 import {useDispatch, useSelector} from 'react-redux'
 import { Link, useNavigate,useParams } from "react-router-dom"
 import {getCategories} from "../../../redux/actions/categories"
 import style from './CategoryAdmin.module.css'
 import Banner from '../Banner'
 import { getAllProducts } from "../../../redux/actions/products"
+import axios from "axios"
 
 export default function CategoryForm(){
     const dispatch = useDispatch()
@@ -29,7 +31,7 @@ export default function CategoryForm(){
         dispatch(getAllProducts)
     }
     function handleInputChange(i){  
-        setErrors(categoryValidations({...input,[i.target.name]:i.target.value},categoriesDb))
+        setErrors(activeValidations(name,{...input,[i.target.name]:i.target.value},categoriesDb))
         setInput({...input,[i.target.name]:i.target.value})            
     }
     
@@ -39,7 +41,7 @@ export default function CategoryForm(){
         const data = {
         name: input.name.toLocaleLowerCase() || "",
         }
-        setErrors(categoryValidations(data,categoriesDb))
+        setErrors(submitValidations(name,data,categoriesDb))
         if(Object.keys(errors).length === 0
         && input.name !== ""
         ){
@@ -84,6 +86,27 @@ export default function CategoryForm(){
         }
     }
 
+    async function handleDelete(event){
+        event.preventDefault()
+        try {
+        let response = null
+        response = await axios.delete(`http://localhost:3001/categories/${categoryEdit.id}`)
+        const result = response.data
+       
+        setKeyword(result.msg)
+     
+        if(!isOpen && result){
+            setIsOpen(state => !state);
+        if(result.msg === "Category deleted"){
+            dispatch(getCategories())
+            setInput({
+                name:""
+            })}}
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(()=>{
         if(name && categoryEdit){
             setInput({
@@ -99,6 +122,7 @@ export default function CategoryForm(){
                         <div>
                             <h3>Add or Edit</h3>
                             <p>Name:</p>
+                            {name && categoryEdit? <p>Previus name: {categoryEdit.name}</p>:<></>}
                             <input className={errors.name && style.danger} type='text' placeholder="Add a name..." name='name' value={input.name} onChange={handleInputChange}/>
                         </div>
                         {
@@ -112,6 +136,10 @@ export default function CategoryForm(){
                                 <input type='submit' value= {name? "Edit" : "Add"} onClick={handleSubmit}/>   
                             }   
                         </div>
+                    <div>
+                        {name && categoryEdit ? <button onClick={handleDelete}>Delete</button> :<></>}
+                    </div>
+                    
                         <div>
                             <Link to="/admin">
                                 <button onClick={handleReturn} >Go Back</button>
@@ -120,21 +148,22 @@ export default function CategoryForm(){
                     </div>
                 </form>
                 <Banner isOpen={isOpen} setIsOpen={setIsOpen}>
-                    {keyword.length ? (
+                    { keyword.length ? (
                         <>
                         <h2>{keyword}</h2>
-                        {keyword === "Category created" || "Category updated" ? (
+                        {keyword === "Category created" || keyword === "Category updated" || keyword === "Category deleted" ? 
                             <>
+                            
                             <button onClick={()=> navigate("/admin",{replace:true})}> 
                                 Go to Admin
                             </button>
                             </>
-                        ): (
+                        : 
                             <>
-                            {keyword}
                             <button onClick={()=> setIsOpen(state=>!state)}>Ok</button>
                             </>
-                        )}
+                        
+                    }
                         </>
                     ):(
                         <h2>Invalid Data</h2>

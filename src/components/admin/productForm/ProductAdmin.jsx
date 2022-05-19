@@ -6,8 +6,8 @@ import { getAllProducts} from "../../../redux/actions/products"
 import { getCategories } from "../../../redux/actions/categories"
 import style from './ProductAdmin.module.css'
 import Banner from '../Banner'
-import activeValidators from './validators/activeValidators'
-import submitValidators from './validators/submitValidators'
+import activeValidators from './validators/activeValidations'
+import submitValidators from './validators/submitValidations'
 
 
 export default function ProductForm (){
@@ -30,10 +30,11 @@ export default function ProductForm (){
         description:"",
         stock:"",
         categories: [],
-        img: []
+        img: [],
+        isActive: "Active"
     })
     const [file,setFile] = useState([])
-
+    console.log(input)
     function onValueChange (e){
         setErrors(activeValidators(id,{...input,[e.target.name]:e.target.value},productsDb))
         setInput({...input,[e.target.name]:e.target.value}) 
@@ -73,7 +74,8 @@ export default function ProductForm (){
         && input.rating !== ""
         && input.stock !== ""
         //&& input.img !== ""
-        && input.categories.length >0){
+        && input.categories.length >0
+        && input.isActive !== ""){
             let response = null
             try {
                 const data = new FormData();
@@ -93,24 +95,26 @@ export default function ProductForm (){
                     dispatch(getAllProducts())
                     dispatch(getCategories())
                     setInput({
-                    name: "",
+                name: "",
                 price: "",
                 description:"",
                 stock:"",
                 img: "",
                 categories: [],
+                isActive: ""
                     })
                     setFile([])
                 }else if(result.msg === "Product edited"){
                     dispatch(getAllProducts())
                     dispatch(getCategories())
                     setInput({
-                    name: "",
+                name: "",
                 price: "",
                 description:"",
                 stock:"",
                 img: "",
                 categories: [],
+                isActive:""
                     })
                     setFile([])
                 }
@@ -125,6 +129,14 @@ export default function ProductForm (){
         dispatch(getCategories)
         dispatch(getAllProducts)
 }
+    function onStatus(e){
+        e.preventDefault()
+        return(
+            setInput({
+            ...input,
+            [e.target.name]: e.target.value
+        }))
+    }
 
 useEffect(()=>{
     if(id && productEdit){
@@ -135,6 +147,7 @@ useEffect(()=>{
         stock: productEdit.stock.toString(),
         img: productEdit.img,
         categories: productEdit.categories.map(c=>c.name),
+        isActive: productEdit.isActive
         })
     }
 },[id,productEdit])
@@ -189,6 +202,12 @@ useEffect(()=>{
                             )
                         })}
                     </div>
+                        {id && productEdit ?<>
+                        <span>This product is: {input.isActive} </span>
+                        <button name ="isActive" value={input.isActive === "Active"? "Inactive": "Active"} onClick={onStatus}>Change</button>
+                        {errors?.isActive && <p className={style.danger}>{errors?.isActive}</p>}
+                        </>:<></>}
+                    
                     <div>
                         <p>Images:</p>
                         <input accept="image/png,image/jpg,image/jpeg" multiple={true} type='file' name="file"  onChange={(e)=>onFileChange(e.target.files)}/>

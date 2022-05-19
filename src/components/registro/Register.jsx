@@ -20,8 +20,9 @@ const Register = () => {
         dni: "",
         phone_number: "",
         address: "",
-        rol: 'user',
-        birthday: ""
+        rol: 'User',
+        birthday: "",
+        isActive: "Active"
     });
     const [errors, setErrors] = useState({});
     
@@ -74,7 +75,8 @@ const Register = () => {
                 phone_number: "",
                 address: "",
                 rol: '',
-                birthday: ""
+                birthday: "",
+                isActive: ""
             })
             dispatch(register(user))
             .then(res => {
@@ -265,7 +267,7 @@ const Register = () => {
                             <input 
                                 class="form-check-input" 
                                 type="checkbox" 
-                                value="user" 
+                                value="User" 
                                 id="flexCheckDefault"/>
                             <label class="form-check-label" for="flexCheckDefault">
                                 User
