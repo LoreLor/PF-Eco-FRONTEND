@@ -16,7 +16,7 @@ import Footer from "../Footer/Footer"
 export default function Home (){
 
     const dispatch = useDispatch();
-    const allProducts = useSelector((state) => state.products.showedProducts)
+    const allProducts = useSelector((state) => state.products)
     const allCategories = useSelector((state) => state.products.categoriesDb)
 
     const [order, setOrder] = useState('')
@@ -25,7 +25,7 @@ export default function Home (){
 
     const lastProduct = currentPg * productPerPg; //ultimo producto de la pagina renderizada
     const firstProduct = lastProduct - productPerPg;
-    const currentProduct = allProducts.slice(firstProduct, lastProduct)//products renderizados por pagina
+    const currentProduct = allProducts.showedProducts.slice(firstProduct, lastProduct)//products renderizados por pagina
 
     const paginado = (pgNumber) => {
         setCurrentPg(pgNumber)
@@ -66,7 +66,7 @@ export default function Home (){
             </div>
             <Pages
                 productPerPg = {productPerPg}
-                allProducts = {allProducts.length}
+                allProducts = {allProducts.showedProducts.length}
                 paginado= {paginado}
                 currentPg = {currentPg}
                 setCurrentPg= {setCurrentPg}

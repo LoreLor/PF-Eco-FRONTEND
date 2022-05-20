@@ -22,6 +22,8 @@ export default function SearchBar(){
             }
         }))
         //console.log(e.target.value)
+        dispatch(getProductByName(e.target.value))
+
     }
 
     function handleSearch(e){
@@ -45,7 +47,7 @@ export default function SearchBar(){
 
     useEffect(()=>{
         dispatch(getAllProducts())
-    },[])
+    },[dispatch])
 
     return(
         <div className={style.search} >
