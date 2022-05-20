@@ -17,8 +17,10 @@ import {
     CLEAN_DETAIL,
     EDIT_PRODUCT,
     ADD_CART,
+    DELETE_ONE_PRODUCT_CART,
     GET_CART,
     DELETE_PRODUCT_CART,
+    DELETE_ALL_PRODUCTS_CART,
     GET_REVIEWS_PRODUCT,
     CREATE_REVIEW,
     CLEAN_REVIEW,
@@ -168,12 +170,22 @@ export const productsReducer = (state = initialState, action) => {
                 ...state,
                 cart: action.payload
             }
+        case DELETE_ONE_PRODUCT_CART:
+            return{
+                ...state,
+                cart: action.payload
+            }
         case GET_CART:
             return{
                 ...state,
                 cart: action.payload
             }
         case DELETE_PRODUCT_CART:
+            return{
+                ...state,
+                cart: action.payload
+            }
+        case DELETE_ALL_PRODUCTS_CART:
             return{
                 ...state,
                 cart: action.payload
