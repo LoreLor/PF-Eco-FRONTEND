@@ -7,7 +7,6 @@ export default function submitValidations(id,input,products){
         let preData = products && products.filter(product => product.id !== id)
         let checkDb = preData && preData.filter(product => product.name.toLowerCase() === input.name.toLowerCase())
         if(checkDb && checkDb.length > 0){errors.name = "The product already exists"} 
-        if(input.isActive !== "Active" && input.isActive !=="Inactive"){errors.isActive = "The status can not be hacked"}
     }
 
     if(!input.name){

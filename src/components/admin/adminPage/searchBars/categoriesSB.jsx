@@ -15,7 +15,7 @@ export default function CategoriesSB({categories,categoryName,category,setCatego
 
     function submitCategorie(e){
         e.preventDefault()
-        var result = categories.filter((category)=>category.name === categoryName.toLowerCase())
+        var result = categories.filter((category)=>category.name.toLowerCase() === categoryName.toLowerCase())
         setCategory(result?.length ? result : "Not found")
         setCategoryName("")
     }

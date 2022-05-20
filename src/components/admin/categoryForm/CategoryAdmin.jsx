@@ -9,15 +9,14 @@ import axios from "axios"
 
 export default function CategoryForm({category,setModalB,setCategory}){
     const dispatch = useDispatch()
-    console.log(category)
+
     const categoriesDb = useSelector((state)=>state.products.categoriesDb)
     const categoryEdit = useSelector((state)=>state.products.editCategory)
-    console.log(categoryEdit)
     const [errors,setErrors]=useState({})
     const [input,setInput] = useState({
         name: "",
     })
-    console.log(input)
+
     const [keyword,setKeyword] = useState("")
     const [isOpen,setIsOpen] =useState(false)
     
@@ -36,7 +35,7 @@ export default function CategoryForm({category,setModalB,setCategory}){
     async function handleSubmit(event){
         event.preventDefault()
         const data = {
-        name: input.name.toLocaleLowerCase() || "",
+        name: input.name || "",
         }
         setErrors(submitValidations(category,data,categoriesDb))
         if(Object.keys(errors).length === 0

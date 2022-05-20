@@ -20,9 +20,7 @@ const Register = () => {
         dni: "",
         phone_number: "",
         address: "",
-        rol: 'User',
         birthday: "",
-        isActive: "Active"
     });
     const [errors, setErrors] = useState({});
     
@@ -74,9 +72,7 @@ const Register = () => {
                 dni: "",
                 phone_number: "",
                 address: "",
-                rol: '',
                 birthday: "",
-                isActive: ""
             })
             dispatch(register(user))
             .then(res => {
@@ -264,15 +260,14 @@ const Register = () => {
                             />
                         </div>
                             {errors.img && <p class='text-danger'>{errors.img}</p>} 
-                            <input 
+                            {/* <input 
                                 class="form-check-input" 
                                 type="checkbox" 
                                 value="User" 
                                 id="flexCheckDefault"/>
                             <label class="form-check-label" for="flexCheckDefault">
                                 User
-                            </label>
-                            {errors.rol && <p class='text-danger'>{errors.rol}</p>} 
+                            </label> */}
                         
                         <div className="d-grid">
                                 <button
