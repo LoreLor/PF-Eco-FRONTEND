@@ -9,7 +9,7 @@ import ProductDetail from './components/detalleProducto/ProductDetail';
 import Error404 from './components/Error404/Error404';
 import Register from './components/registro/Register';
 import Cart from './components/cart/Cart';
-
+import PrivateRoute from './components/admin/adminPage/PrivateRoute';
 
 function App() {
   
@@ -17,7 +17,7 @@ function App() {
     <Fragment>
       <Routes>
       <Route path='/' element={<Home/>}/>
-        <Route path='/admin' element={<AdminPage/>}/>
+        <Route path='/admin' element={<PrivateRoute><AdminPage/></PrivateRoute>}/>
         <Route path='/admin/productAdmin' element={<ProductAdmin/>}/>
         <Route path='/admin/productAdmin/:id' element={<ProductAdmin/>}/>
         <Route path ='/login' element={<Login />} />

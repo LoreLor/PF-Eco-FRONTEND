@@ -16,6 +16,10 @@ import {
     ADD_CART,
     GET_CART, 
     DELETE_PRODUCT_CART
+    GET_REVIEWS_PRODUCT,
+    CREATE_REVIEW,
+    CLEAN_REVIEW,
+    EDIT_PRODUCT
 } from "./constants";
 import axios from 'axios';
 
@@ -132,3 +136,40 @@ export const deleteProductCart = (userId, id) => async (dispatch) => {
 }
 
 //localhost:3001/cart?userId=e7db2292-18d8-4e63-8b90-71ebf59fb934&productId=19b46859-4a77-42e2-9ffc-4ff9858cb1cb&required_quantity=1 
+
+export const createReview = (id, body) => async(dispatch) => {
+    try{
+      const {data} = await axios.post(`${SERVER}/review?detailId=${id}`, body)
+      
+        dispatch({
+          type: CREATE_REVIEW,
+          payload: data
+        });
+        
+      }catch(error){
+        console.log(error);
+      }
+  
+    }
+
+export const getReviewsProduct = (id) => async (dispatch) => {
+    dispatch({
+        type: GET_REVIEWS_PRODUCT
+    })
+    try {
+        const product = await axios.get(`${SERVER}/review/product?productId=${id}`)
+        dispatch({
+            type: GET_REVIEWS_PRODUCT,
+            payload: product.data
+        })
+
+    } catch (error) {
+        return error;
+    }
+};
+
+export function cleanReview(){
+    return {
+        type: CLEAN_REVIEW
+    }
+}

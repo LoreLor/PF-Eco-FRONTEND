@@ -31,7 +31,7 @@ export default function ProductForm (){
         stock:"",
         categories: [],
         img: [],
-        isActive: "Active"
+        isActive: ""
     })
     const [file,setFile] = useState([])
     console.log(input)
@@ -59,7 +59,27 @@ export default function ProductForm (){
             [e.target.name]: input[e.target.name].filter(item => item !== e.target.value)
         }))
     }
-
+    function onReturn(){
+        dispatch(getCategories)
+        dispatch(getAllProducts)
+}
+    function onStatus(e){
+        e.preventDefault()
+        if(e.target.name === "isActive"){
+            if(e.target.value === "true"){
+                return(setInput({
+                    ...input,
+                    [e.target.name]: false
+                }))
+            }
+            if(e.target.value === "false"){
+                return(setInput({
+                    ...input,
+                    [e.target.name]: true
+                }))
+            }
+        }
+    }
     function onFileChange(e){
         setFile(e)
     }
@@ -124,19 +144,6 @@ export default function ProductForm (){
             }
         }
   }
-
-    function onReturn(){
-        dispatch(getCategories)
-        dispatch(getAllProducts)
-}
-    function onStatus(e){
-        e.preventDefault()
-        return(
-            setInput({
-            ...input,
-            [e.target.name]: e.target.value
-        }))
-    }
 
 useEffect(()=>{
     if(id && productEdit){
@@ -203,8 +210,8 @@ useEffect(()=>{
                         })}
                     </div>
                         {id && productEdit ?<>
-                        <span>This product is: {input.isActive} </span>
-                        <button name ="isActive" value={input.isActive === "Active"? "Inactive": "Active"} onClick={onStatus}>Change</button>
+                        <span>This product is: {input.isActive === true ? "Active": "Inactive"} </span>
+                        <button name ="isActive" value={input.isActive} onClick={onStatus}>Change</button>
                         {errors?.isActive && <p className={style.danger}>{errors?.isActive}</p>}
                         </>:<></>}
                     

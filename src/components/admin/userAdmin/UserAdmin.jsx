@@ -4,6 +4,7 @@ import Banner from "../Banner"
 import axios from "axios"
 import submitValidators from "./validators/submitValidations"
 import { getAllUsers } from "../../../redux/actions/user"
+import capitalize from '../adminPage/Capitalize'
 
 export default function UserAdmin({user,setModalA,setUser}){
     const dispatch = useDispatch()
@@ -14,18 +15,35 @@ export default function UserAdmin({user,setModalA,setUser}){
         isActive: "",
         rol:""
     })
-
+    console.log(input)
     const [keyword,setKeyword]= useState("")
     const [isOpen,setIsOpen] =useState(false)
 
     function onChange(e){
         e.preventDefault()
+    if(e.target.name === "isActive"){
+        if(e.target.value === "true"){
+            return(setInput({
+                ...input,
+                [e.target.name]: false
+            }))
+        }
+        if(e.target.value === "false"){
+            return(setInput({
+                ...input,
+                [e.target.name]: true
+            }))
+        }
+    }
+    if(e.target.name === "rol"){
         return(
             setInput({
             ...input,
             [e.target.name]: e.target.value
         }))
     }
+}
+    
     function onClose(e){
         e.preventDefault()
         setIsOpen(false)
@@ -71,10 +89,10 @@ export default function UserAdmin({user,setModalA,setUser}){
     return(
         <>
         <form>
-            <span>User rol: {input.rol}</span>
-            <button name= "rol" value={input.rol === "User"? "Admin": "User"} onClick={onChange}>Change</button>
-            <span>User status: {input.isActive}</span>
-            <button name="isActive" value={input.isActive === "Active"? "Inactive": "Active"} onClick={onChange}>Change</button>
+            {input.rol ? <span>User rol: {capitalize(input.rol)}</span>: <></>}
+            <button name= "rol" value={input.rol === "user"? "admin": "user"} onClick={onChange}>Change</button>
+            <span>User status: {input.isActive === true ? "Active": "Inactive"}</span>
+            <button name="isActive" value={input.isActive} onClick={onChange}>Change</button>
             <br/>
             <input type="submit" value="Edit" onClick={onSubmit}/>
         </form>
