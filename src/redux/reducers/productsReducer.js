@@ -18,11 +18,10 @@ import {
     EDIT_PRODUCT,
     ADD_CART,
     GET_CART,
-    DELETE_PRODUCT_CART
+    DELETE_PRODUCT_CART,
     GET_REVIEWS_PRODUCT,
     CREATE_REVIEW,
     CLEAN_REVIEW,
-    EDIT_PRODUCT
 } from "../actions/constants";
 
 
@@ -178,6 +177,7 @@ export const productsReducer = (state = initialState, action) => {
             return{
                 ...state,
                 cart: action.payload
+            }
         case GET_REVIEWS_PRODUCT:
             return {
                 ...state,

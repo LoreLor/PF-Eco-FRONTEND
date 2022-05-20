@@ -15,12 +15,12 @@ import {
     EDIT_PRODUCT,
     ADD_CART,
     GET_CART, 
-    DELETE_PRODUCT_CART
+    DELETE_PRODUCT_CART,
     GET_REVIEWS_PRODUCT,
     CREATE_REVIEW,
     CLEAN_REVIEW,
-    EDIT_PRODUCT
 } from "./constants";
+
 import axios from 'axios';
 
 const SERVER = "http://localhost:3001";
@@ -110,7 +110,7 @@ export function addCartProduct (payload){
     //console.log(payload)
     return async function(dispatch){
         const json = await axios.post(`${SERVER}/cart?userId=${payload.userId}&productId=${payload.productId}&required_quantity=${payload.required_quantity}`)
-        console.log(json)
+        //console.log(json)
         return dispatch({
             type: ADD_CART,
             payload: json.data
