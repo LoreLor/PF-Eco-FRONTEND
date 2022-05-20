@@ -37,28 +37,9 @@ function CheckoutSteps() {
                 <hr/>
               </div>
               <span class="text-muted">Qty:</span>
-              <span class="text-muted">Amount:</span>
+              <span class="text-muted">Price:</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-              <h6 class="my-0">Product name</h6>
-                <img src={image1} className={s.small} alt=''></img>
-                <small class="text-muted">Brief description</small>
-                <hr/>
-              </div>
-              <span class="text-muted">Qty:</span>
-              <span class="text-muted">Amount:</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-              <h6 class="my-0">Product name</h6>
-                <img src={image1} className={s.small} alt=''></img>
-                <small class="text-muted">Brief description</small>
-                <hr/>
-              </div>
-              <span class="text-muted">Qty:</span>
-              <span class="text-muted">Amount:</span>
-            </li>
+            
             <li class="list-group-item d-flex justify-content-between bg-light">
               <div class="text-success">
                 <h6 class="my-0">Promo code</h6>
@@ -88,15 +69,15 @@ function CheckoutSteps() {
           <form class="needs-validation" novalidate>
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="firstName">First name</label>
+                <label for="firstName" className={s.label}>First name</label>
                 <input type="text" class="form-control" id="firstName" placeholder="" value="" required/>
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" value="" required/>
+                <label for="last_name"className={s.label} >Last name</label>
+                <input type="text" class="form-control" id="last_name" placeholder="" value="" required/>
                 <div class="invalid-feedback">
                   Valid last name is required.
                 </div>
@@ -104,28 +85,20 @@ function CheckoutSteps() {
             </div>
     
             <div class="mb-3">
-              <label for="username">Username</label>
+              <label for="username"className={s.label} >Email</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">@</span>
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Username" required/>
-                <div class="invalid-feedback" >
-                  Your username is required.
+                <input type="text" class="form-control" id="email" placeholder="Email" required/>
+                <div class="invalid-feedback">
+                  Please enter a valid email address for shipping updates.
                 </div>
               </div>
             </div>
     
             <div class="mb-3">
-              <label for="email">Email <span class="text-muted">(Optional)</span></label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com"/>
-              <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
-              </div>
-            </div>
-    
-            <div class="mb-3">
-              <label for="address">Address</label>
+              <label for="address" className={s.label}>Address</label>
               <input type="text" class="form-control" id="address" placeholder="1234 Main St" required/>
               <div class="invalid-feedback">
                 Please enter your shipping address.
@@ -133,8 +106,8 @@ function CheckoutSteps() {
             </div>
     
             <div class="mb-3">
-              <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="address2" placeholder="Apartment or suite"/>
+              <label for="address2"className={s.label} >Phone Number <span class="text-muted">(Optional)</span></label>
+              <input type="text" class="form-control" id="phone_number" placeholder="Only Numbers"/>
             </div>
     
             
@@ -142,22 +115,23 @@ function CheckoutSteps() {
             
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="save-info"/>
-              <label class="custom-control-label" for="save-info">Save this information for next time</label>
+              <label class="custom-control-label" for="save-info" className={s.label}>Save this information for next time</label>
             </div>
-            <hr class="mb-4"/>
-    
-            <h4 class="mb-3">Payment</h4>
-    
-            <div class="d-block my-3">
-              
+            <hr />
+            <div className={s.subtitulo}>
+              <p>Payment</p>
+            </div>
+            <div class="d-block my-3">         
               <div class="custom-control custom-radio">
-                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required/>
-                <label class="custom-control-label" for="paypal">PayPal</label>
+                <input id="paypal" name="payment_method" type="radio" class="custom-control-input" required/>
+                <label class="custom-control-label" for="paypal"className={s.label} >PayPal</label>
               </div>
             </div>
             
             <hr class="mb-4"/>
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+            <div className="d-grid">
+              <button class={s.btn} type="submit">Continue to Order Detail</button>
+            </div>
           </form>
           </div>
         </div>

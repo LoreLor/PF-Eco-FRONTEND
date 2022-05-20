@@ -12,7 +12,7 @@ import Pages from "../Pages/Pages"
 
 import style from './Home.module.css'
 import Footer from "../Footer/Footer"
-import ShippingAddress from "../checkout/ShippingAddress"
+
 
 export default function Home (){
 

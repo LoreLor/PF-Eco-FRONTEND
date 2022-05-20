@@ -8,15 +8,16 @@
 
 .btn{
   color: #FFFFFF; 
-  background-color: #112B3C; 
+  background-color: #F66B0E; 
   border-color: #393f44; 
   border-radius: 8px;
   height: 40px;
+  display: block;
 }
 .btn:hover{
     color: #FFFFFF; 
-    background-color: #F66B0E; 
-    border-color: #F66B0E; 
+    background-color: #393f44; 
+    border-color: #393f44; 
 }
 
 .small{
@@ -48,5 +49,8 @@
   color: #F66B0E;
   font-size: 2rem;
   font-weight: 400;
-
+}
+.label{
+  color: #F66B0E;
+  margin-left: 10px;
 }
