@@ -13,6 +13,7 @@ import Pages from "../Pages/Pages"
 import style from './Home.module.css'
 import Footer from "../Footer/Footer"
 
+
 export default function Home (){
 
     const dispatch = useDispatch();
@@ -39,12 +40,13 @@ export default function Home (){
         //console.log(cart)
         //console.log(allProducts)
         //console.log(allCategories)
-    }, [dispatch])
+    }, [])
 
     //ProductCard ---> (name, img, price, rating)
     return(
         <div>
             <NavBar categories={allCategories}/>
+            
             <div className={style.cards}>
                 {
                     currentProduct ? 

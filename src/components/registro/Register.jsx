@@ -20,7 +20,9 @@ const Register = () => {
         dni: "",
         phone_number: "",
         address: "",
+        rol: '',
         birthday: "",
+        isActive: true
     });
     const [errors, setErrors] = useState({});
     
@@ -107,7 +109,7 @@ const Register = () => {
     return (
         <>
           <div className={s.contenedor} >
-            <form class="needs-validation" onSubmit={(e)=> handleSubmit(e)} autocomplete="off">
+            <form class="needs-validation" onSubmit={handleSubmit} autocomplete="off">
                 <h1 class="fw-bold text-center pt-5 mb-5 ">Welcome:  Create Account</h1>     
                 <div class="container w-75  shadow-lg p-3 mb-5 bg-white rounded">
                 
@@ -260,22 +262,13 @@ const Register = () => {
                             />
                         </div>
                             {errors.img && <p class='text-danger'>{errors.img}</p>} 
-                            {/* <input 
-                                class="form-check-input" 
-                                type="checkbox" 
-                                value="User" 
-                                id="flexCheckDefault"/>
-                            <label class="form-check-label" for="flexCheckDefault">
-                                User
-                            </label> */}
                         
                         <div className="d-grid">
                                 <button
                                     type="submit"
                                     class={s.btn}>SUBMIT
-                                </button>
-                                
-                        </div>
+                                </button>           
+                            </div>
                         </div>
                     </div>
                 </div>

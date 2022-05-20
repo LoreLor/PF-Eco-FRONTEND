@@ -2,7 +2,7 @@ import { GET_USER, GET_USERS, USER_LOGIN, USER_LOGOUT, USER_REGISTER, USER_REGIS
 
 
 const initialState = {
-    userInfo:{},
+    userInfo:localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')): {},
     userEdit:{},
     users: []
 }
