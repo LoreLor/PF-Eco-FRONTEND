@@ -11,11 +11,9 @@ import FilterPrice from "../filterPrice/FilterPrice";
 
 
 export default function NavBar({categories}){
-    const user = localStorage.getItem('userInfo')
-        ? JSON.parse(localStorage.getItem('userInfo'))
-        : null
+    const user = localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')): null
     const dispatch = useDispatch();
-    
+   
 
 
     // function handleCart(e){
