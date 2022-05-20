@@ -15,6 +15,10 @@ import {
     ORDER_BY_PRICE,
     FILTER_BY_PRICE,
     CLEAN_DETAIL,
+    EDIT_PRODUCT,
+    ADD_CART,
+    GET_CART,
+    DELETE_PRODUCT_CART
     GET_REVIEWS_PRODUCT,
     CREATE_REVIEW,
     CLEAN_REVIEW,
@@ -29,9 +33,10 @@ const initialState = {
     detail: {},
     loading: true,
     error: {},
-    categoriesDb: [],
-    editCategory: {},
-    editProduct: {}
+    categoriesDb:[],
+    editCategory:{},
+    editProduct: {},
+    cart: []
 }
 
 export const productsReducer = (state = initialState, action) => {
@@ -159,6 +164,20 @@ export const productsReducer = (state = initialState, action) => {
                 ...state,
                 detail: {}
             }
+        case ADD_CART:
+            return{
+                ...state,
+                cart: action.payload
+            }
+        case GET_CART:
+            return{
+                ...state,
+                cart: action.payload
+            }
+        case DELETE_PRODUCT_CART:
+            return{
+                ...state,
+                cart: action.payload
         case GET_REVIEWS_PRODUCT:
             return {
                 ...state,

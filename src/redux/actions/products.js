@@ -12,6 +12,10 @@ import {
     ORDER_BY_PRICE,
     FILTER_BY_PRICE,
     CLEAN_DETAIL,
+    EDIT_PRODUCT,
+    ADD_CART,
+    GET_CART, 
+    DELETE_PRODUCT_CART
     GET_REVIEWS_PRODUCT,
     CREATE_REVIEW,
     CLEAN_REVIEW,
@@ -101,6 +105,37 @@ export function editProduct(payload){
         payload
     }
 }
+
+export function addCartProduct (payload){
+    //console.log(payload)
+    return async function(dispatch){
+        const json = await axios.post(`${SERVER}/cart?userId=${payload.userId}&productId=${payload.productId}&required_quantity=${payload.required_quantity}`)
+        console.log(json)
+        return dispatch({
+            type: ADD_CART,
+            payload: json.data
+        })
+    }
+}
+
+export const getCart = (id) => async (dispatch) => {
+    const {data} = await axios.get(`${SERVER}/cart/${id}`)
+        //console.log (data)
+        dispatch({
+            type: GET_CART,
+            payload: data
+        })
+}
+
+export const deleteProductCart = (userId, id) => async (dispatch) => {
+    const json = await axios.delete(`${SERVER}/cart?userId=${userId}&productId=${id}`)
+    return dispatch({
+        type: DELETE_PRODUCT_CART,
+        payload: json.data
+    })
+}
+
+//localhost:3001/cart?userId=e7db2292-18d8-4e63-8b90-71ebf59fb934&productId=19b46859-4a77-42e2-9ffc-4ff9858cb1cb&required_quantity=1 
 
 export const createReview = (id, body) => async(dispatch) => {
     try{
