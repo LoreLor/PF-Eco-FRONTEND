@@ -19,14 +19,14 @@ function App() {
       
       <Routes>
         <Route path='/' element={<Home/>}/>
-        {/* <Route path='/admin' element={<PrivateRoute><AdminPage/></PrivateRoute>}/>
+        <Route path='/admin' element={<PrivateRoute><AdminPage/></PrivateRoute>}/>
         <Route path='/admin/productAdmin' element={<ProductAdmin/>}/>
         <Route path='/admin/productAdmin/:id' element={<ProductAdmin/>}/>
         <Route path ='/login' element={<Login />} />
         <Route path = '/home/:id' element={<ProductDetail/>}/>
         <Route path = '/cart'element={<Cart/>}/>
         <Route path = '/register' element={<Register />} />
-        <Route path={'*'} element={<Error404/>}/> */}
+        <Route path={'*'} element={<Error404/>}/>
         <Route path="/check" element={<CheckoutSteps/>}/>
       </Routes>
     </Fragment>

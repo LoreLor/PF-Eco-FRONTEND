@@ -11,9 +11,11 @@ import FilterPrice from "../filterPrice/FilterPrice";
 
 
 export default function NavBar({categories}){
-    const user = JSON.parse(localStorage.getItem('userInfo'))
+    const user = localStorage.getItem('userInfo')
+        ? JSON.parse(localStorage.getItem('userInfo'))
+        : null
     const dispatch = useDispatch();
-    const clientId = localStorage.getItem('clientId')
+    
 
 
     // function handleCart(e){
@@ -60,7 +62,7 @@ export default function NavBar({categories}){
                     <div className={style.logCart}> 
                         <div className={style.conte}>
                             {
-                                user || clientId? (
+                                user ? (
                                     <div className={style.drop}>
                                         <button className={style.perfil} type="button" data-toggle="dropdown">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#F66B0E" className="bi bi-person-circle" viewBox="0 0 16 16">
