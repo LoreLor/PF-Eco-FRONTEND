@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 import { useDispatch, useSelector } from "react-redux"
 
-import { getAllProducts } from "../../redux/actions/products"
+import { getAllProducts, getCart } from "../../redux/actions/products"
 import { getCategories } from "../../redux/actions/categories"
 
 
@@ -30,10 +30,13 @@ export default function Home (){
     const paginado = (pgNumber) => {
         setCurrentPg(pgNumber)
     }
-
+    const user = JSON.parse(localStorage.getItem('userInfo'))
+    
     useEffect(() => {
         dispatch(getAllProducts());
-        dispatch(getCategories())
+        dispatch(getCategories());
+        //dispatch(getCart(user.id));
+        //console.log(cart)
         //console.log(allProducts)
         //console.log(allCategories)
     }, [])

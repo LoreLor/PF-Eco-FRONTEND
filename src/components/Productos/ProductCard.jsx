@@ -1,12 +1,25 @@
 import React from "react";
-import { Rating } from "@mui/material";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { Rating } from "@mui/material";
 import style from './ProductCard.module.css'
+import { addCartProduct, getCart } from "../../redux/actions/products";
 
 export default function ProductCard({name, img, price, rating, id}){
+    
+    const dispatch = useDispatch()
+    const user = JSON.parse(localStorage.getItem('userInfo'))
 
-    function handleAddCart(){
-        alert(`add to cart`)
+    let required_quantity = 0
+
+    function handleAddCart(id){
+        const addCart = {
+            userId: user.id,
+            productId: id,
+            required_quantity: ++required_quantity
+        }
+        dispatch(addCartProduct(addCart))
+        //console.log(addCart)
     }
 
     function handleFavourites(){
@@ -44,7 +57,7 @@ export default function ProductCard({name, img, price, rating, id}){
                     <span className={style.card_preci}>${price}</span>
                     <div className={style.card_ratBtn}>
                         <Rating name="read-only" value={rating} readOnly/>
-                        <a href="#" className={style.card_button} onClick={handleAddCart}>Buy Now</a>
+                        <a href="#" className={style.card_button} onClick={(e) => handleAddCart(id)}>AddCart</a>
                     </div>
                 </div>
             </div>

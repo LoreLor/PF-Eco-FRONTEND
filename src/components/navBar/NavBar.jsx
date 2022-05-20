@@ -80,7 +80,8 @@ export default function NavBar({categories}){
                                     <NavLink to="/login" className={style.mybtn}>Log In</NavLink>
                                 )}                            
                         </div>
-                        <NavLink to="/admin" className={style.mybtn}>Admin</NavLink>
+                        {user && user.rol === "admin" ? <NavLink to="/admin" className={style.mybtn}>Admin</NavLink> :<></>}
+                        
                         <NavLink to="/cart">
 
                         <button className="btn btn-secundary" type="button" style={{marginRight:'10px'}}>

@@ -16,7 +16,7 @@ export default function CategoriesSB({products,productName,product,setProductNam
 
     function submitCategorie(e){
         e.preventDefault()
-        var result = products.filter((product)=>product.name === productName.toLowerCase())
+        var result = products.filter((product)=>product.name.toLowerCase() === productName.toLowerCase())
         setProduct(result?.length ? result : "Not found")
         setProductName("")
     }
