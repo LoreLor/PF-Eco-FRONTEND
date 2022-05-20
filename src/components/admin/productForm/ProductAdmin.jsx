@@ -5,7 +5,7 @@ import { useNavigate,Link, useParams } from "react-router-dom"
 import { getAllProducts} from "../../../redux/actions/products"
 import { getCategories } from "../../../redux/actions/categories"
 import style from './ProductAdmin.module.css'
-import Banner from '../Banner'
+import FlashModal from '../AdminModals/FlashModal'
 import activeValidators from './validators/activeValidations'
 import submitValidators from './validators/submitValidations'
 
@@ -34,7 +34,7 @@ export default function ProductForm (){
         isActive: ""
     })
     const [file,setFile] = useState([])
-    console.log(input)
+
     function onValueChange (e){
         setErrors(activeValidators(id,{...input,[e.target.name]:e.target.value},productsDb))
         setInput({...input,[e.target.name]:e.target.value}) 
@@ -232,7 +232,7 @@ useEffect(()=>{
                         </button>
             </Link>
         </div>
-        <Banner isOpen={isOpen} setIsOpen={setIsOpen}>
+        <FlashModal isOpen={isOpen} setIsOpen={setIsOpen}>
                 {keyword.length ? (
                     <>
                     <h2>{keyword}</h2>
@@ -252,7 +252,7 @@ useEffect(()=>{
                     ):(
                         <h2>Invalid Data</h2>
                     )}
-                </Banner>
+                </FlashModal>
         </div>
     )
 }

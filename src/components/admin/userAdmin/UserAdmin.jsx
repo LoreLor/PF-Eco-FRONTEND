@@ -1,10 +1,11 @@
 import React,{useEffect,useState} from "react"
 import {useSelector,useDispatch} from "react-redux"
-import Banner from "../Banner"
+import FlashModal from '../AdminModals/FlashModal'
 import axios from "axios"
 import submitValidators from "./validators/submitValidations"
 import { getAllUsers } from "../../../redux/actions/user"
 import capitalize from '../adminPage/Capitalize'
+import style from './UserAdmin.module.css'
 
 export default function UserAdmin({user,setModalA,setUser}){
     const dispatch = useDispatch()
@@ -15,7 +16,7 @@ export default function UserAdmin({user,setModalA,setUser}){
         isActive: "",
         rol:""
     })
-    console.log(input)
+    
     const [keyword,setKeyword]= useState("")
     const [isOpen,setIsOpen] =useState(false)
 
@@ -61,6 +62,7 @@ export default function UserAdmin({user,setModalA,setUser}){
             try {
                 response = await axios.put(`http://localhost:3001/user/status/${userData.id}`,input)
                 const result = response.data
+                console.log(result)
                 setKeyword(result.msg)
                 if(!isOpen && result){
                     setIsOpen(state => !state);
@@ -87,16 +89,20 @@ export default function UserAdmin({user,setModalA,setUser}){
         }
     },[user,userData])
     return(
-        <>
+        <div className={style.container}>
+
         <form>
+            <div className={style.containerForm}>
             {input.rol ? <span>User rol: {capitalize(input.rol)}</span>: <></>}
             <button name= "rol" value={input.rol === "user"? "admin": "user"} onClick={onChange}>Change</button>
             <span>User status: {input.isActive === true ? "Active": "Inactive"}</span>
             <button name="isActive" value={input.isActive} onClick={onChange}>Change</button>
             <br/>
             <input type="submit" value="Edit" onClick={onSubmit}/>
+            </div>
         </form>
-        <Banner isOpen={isOpen} setIsOpen={setIsOpen} closePrev={setModalA} resetData={setUser}>
+
+        <FlashModal isOpen={isOpen} setIsOpen={setIsOpen} closePrev={setModalA} resetData={setUser}>
                     { keyword.length ? (
                         <>
                         <h2>{keyword}</h2>
@@ -116,8 +122,8 @@ export default function UserAdmin({user,setModalA,setUser}){
                     ):(
                         <h2>Invalid Data</h2>
                     )}
-                </Banner>
-        </>
+                </FlashModal>
+        </div>
         
     )
 }

@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { editProduct} from "../../../../redux/actions/products"
-import Banner from "../../Banner"
+import AlertModal from '../../AdminModals/AlertModal'
 import axios from "axios"
 
 export default function CategoriesSB({products,productName,product,setProductName,setProduct}){
@@ -54,10 +54,10 @@ return (<>
                 <span>{product[0].name}</span>
                 <button name="edit" onClick={editCategorie}>Edit</button>
                 <button name= "cancel" onClick={cancelAction}>Cancel</button>
-                <Banner setIsOpen={setIsOpen} isOpen={isOpen}>
+                <AlertModal setIsOpen={setIsOpen} isOpen={isOpen}>
                     <h2>Are you sure you want to edit "{product[0].name}"?</h2>
                     <button name="edit" onClick={confirmEdit}>Edit</button>
-                </Banner>
+                </AlertModal>
             </div>: <></>}
             {product && typeof(product) === "string" ? <p>Product not found</p>:<></>}
         </div>

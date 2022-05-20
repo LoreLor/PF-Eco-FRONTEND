@@ -1,5 +1,6 @@
 export default function activeValidations (name,input,categories){
     let errors = {}
+    console.log(name)
     if(input.name){
         if(input.name.trim()=== ""){
             errors.name = "Must have a name"
@@ -13,7 +14,8 @@ export default function activeValidations (name,input,categories){
         if(!name){let checkDb = categories && categories.filter(category => category.name.toLowerCase() === input.name.toLowerCase())
             if(checkDb && checkDb.length > 0){errors.name = "Category already exists"}}
         else if(name){
-            let preData = categories && categories.filter(category => category.name !== name)
+            let preData = categories && categories.filter(category => category.name.toLowerCase() !== name.name.toLowerCase())
+            console.log(preData)
             let checkDb = preData && preData.filter(category => category.name.toLowerCase() === input.name.toLowerCase())
             if(checkDb && checkDb.length > 0){errors.name = "Category already exists"}
         }

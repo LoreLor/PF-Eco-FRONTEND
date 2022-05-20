@@ -7,7 +7,8 @@ import { getAllUsers } from '../../../redux/actions/user'
 import CategoriesSB from './searchBars/categoriesSB'
 import ProductsSB from './searchBars/productsSB'
 import style from './AdminPage.module.css'
-import Banner from '../Banner'
+import BetaModal from '../AdminModals/BetaModal'
+import FormModal from '../AdminModals/FormModal'
 import UserAdmin from '../userAdmin/UserAdmin'
 import CategoryAdmin from "../categoryForm/CategoryAdmin"
 import UserSB from './searchBars/userSB'
@@ -24,7 +25,7 @@ export default function AdminPage (){
     const [category,setCategory] = useState("")
     const [productName,setProductName]= useState("")
     const [product,setProduct]= useState("")
-
+ 
     const [modalA,setModalA] = useState(false)
     const [modalB,setModalB] = useState(false)
     
@@ -56,18 +57,18 @@ export default function AdminPage (){
                 <UserSB users={users} userName={userName} user={user} setUserName={setUserName}
                 setUser={setUser} setModalA={setModalA}/>
                 </div>
-                <Banner setIsOpen={setModalA} isOpen={modalA}>
+                <BetaModal setIsOpen={setModalA} isOpen={modalA} resetData={setUser}>
                     <UserAdmin user={user[0]} setModalA= {setModalA} setUser={setUser}/>
-                </Banner> 
+                </BetaModal> 
                 <div className={style.box}>
                     <h2>Categories</h2>
                     <button className={style.mybtn } onClick={handleModal}>Create category</button>
                 <CategoriesSB categories={categories} categoryName={categoryName} category={category} 
                 setCategoryName={setCategoryName} setCategory={setCategory} setModalB={setModalB}/>
                 </div>
-                <Banner setIsOpen={setModalB} isOpen={modalB}>
+                <BetaModal setIsOpen={setModalB} isOpen={modalB} resetData={setCategory}>
                     <CategoryAdmin category={category[0]} setModalB={setModalB} setCategory={setCategory}/>
-                </Banner>
+                </BetaModal>
                 <div className={style.box}>
                     <h2>Products</h2>
                     <Link to='/admin/productAdmin'>

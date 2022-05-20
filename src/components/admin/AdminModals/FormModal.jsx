@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./Banner.module.css"
-export default function Banner({children, isOpen,setIsOpen, closePrev,resetData}){
+import styles from "./Modal.module.css"
+export default function Modal({children, isOpen,setIsOpen, closePrev,resetData}){
     function handleClick(e){
         e.stopPropagation()
     }
@@ -16,10 +16,10 @@ export default function Banner({children, isOpen,setIsOpen, closePrev,resetData}
     }
 
     return(
-        <div className={`${styles.banner} ${isOpen && styles.show}`} onClick={()=> setIsOpen(state =>!state)}>
-            <div className={styles["modal-content"]} onClick={handleClick}>
+        <div className={`${styles.modal} ${isOpen && styles.show}`} onClick={()=> setIsOpen(state =>!state)}>
+            <div className={styles.basicmodal} id={styles.form} onClick={handleClick}>
                 <div>
-                <button onClick={handleClose} className={styles.bannerButton}>X</button>
+                <button onClick={handleClose} className={styles.modalButton}>X</button>
                 </div>
                 {children}
             </div>
