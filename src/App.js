@@ -10,13 +10,15 @@ import Error404 from './components/Error404/Error404';
 import Register from './components/registro/Register';
 import Cart from './components/cart/Cart';
 import PrivateRoute from './components/admin/adminPage/PrivateRoute';
+import CheckoutSteps from './components/checkout/CheckoutSteps';
 
 function App() {
   
   return (
     <Fragment>
+      
       <Routes>
-      <Route path='/' element={<Home/>}/>
+        <Route path='/' element={<Home/>}/>
         <Route path='/admin' element={<PrivateRoute><AdminPage/></PrivateRoute>}/>
         <Route path='/admin/productAdmin' element={<ProductAdmin/>}/>
         <Route path='/admin/productAdmin/:id' element={<ProductAdmin/>}/>
@@ -25,6 +27,7 @@ function App() {
         <Route path = '/cart'element={<Cart/>}/>
         <Route path = '/register' element={<Register />} />
         <Route path={'*'} element={<Error404/>}/>
+        <Route path="/check" element={<CheckoutSteps/>}/>
       </Routes>
     </Fragment>
   );

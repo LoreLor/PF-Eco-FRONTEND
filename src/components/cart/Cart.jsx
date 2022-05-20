@@ -13,12 +13,14 @@ export default function Cart(){
     const dispatch =useDispatch();
     
     let total = 0;
-    const user = JSON.parse(localStorage.getItem('userInfo'))
+    const user = localStorage.getItem('userInfo')
+         ? JSON.parse(localStorage.getItem('userInfo'))
+         : null
 
     useEffect(() => {
         dispatch(getCart(user.id))
         //console.log('dentra')
-    }, [dispatch, user.id])
+    }, [])
 
     function hanleDelete (e, productId){
         e.preventDefault()
