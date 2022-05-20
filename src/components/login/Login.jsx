@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from "react-router-dom"
+import React, { useEffect } from 'react';
+import { Link, useLocation } from "react-router-dom"
 import { useNavigate } from 'react-router-dom';
 import { userLogin } from "../../redux/actions/user"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import s from "./Login.module.css";
 import { useState } from 'react';
 import Swal from "sweetalert2";
@@ -19,7 +19,21 @@ const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    
+    const user = useSelector((state) => state.user);
+   
 
+//queryString de login...si true te lleva al home
+    const { search } = useLocation();
+    const redirectInUrl = new URLSearchParams(search).get('redirect')
+    const redirect = redirectInUrl ? redirectInUrl : '/';
+    
+
+    useEffect(() => {
+        if(user){
+           navigate(redirect)
+        }
+    }, [navigate, user, redirect]);
 
     const handleSubmitLogin = (e) => {
         e.preventDefault();
@@ -32,7 +46,7 @@ const Login = () => {
                         title: 'login success',
                         icon: 'success'
                     })
-                    navigate('/')
+                    navigate(redirect)
                 } else {
                     alert("Email or password invalid.")
                 }
@@ -43,7 +57,7 @@ const Login = () => {
 
     return (
         <div style={{ marginBottom: 40 }} >
-            <form onSubmit={handleSubmitLogin} autoComplete="off">
+            <form onSubmit={(e)=>handleSubmitLogin(e)} autoComplete="off">
                 <div className="container w-75 mt-5 shadow-lg p-3 mb-5 bg-white rounded">
                     <div className="row align-items-center align-items-center ">
                         <div class='col-lg-5'>
@@ -96,8 +110,8 @@ const Login = () => {
                                 </div>
                             </div>
                             <div className="row my-3 text-center">
-                                <span> You don't have an account?  Go to...<Link to="/register">Register</Link></span>
-                            </div>
+                                <span> You don't have an account?  Go to...<strong><Link to={`/register?redirect=${redirect}`}>Create your account</Link></strong></span>
+                            </div>  
                         </div>
                     </div>
                 </div>

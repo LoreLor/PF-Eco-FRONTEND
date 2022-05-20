@@ -9,7 +9,7 @@ import ProductDetail from './components/detalleProducto/ProductDetail';
 import Error404 from './components/Error404/Error404';
 import Register from './components/registro/Register';
 import Cart from './components/cart/Cart';
-import PlaceOrder from './components/checkout/PlaceOrder'
+import CheckoutSteps from './components/checkout/CheckoutSteps';
 
 
 function App() {
@@ -19,15 +19,15 @@ function App() {
       
       <Routes>
       <Route path='/' element={<Home/>}/>
-        <Route path='/admin' element={<AdminPage/>}/>
+      <Route path="/check" element={<CheckoutSteps />}/>
+        {/* <Route path='/admin' element={<AdminPage/>}/>
         <Route path='/admin/productAdmin' element={<ProductAdmin/>}/>
         <Route path='/admin/productAdmin/:id' element={<ProductAdmin/>}/>
         <Route path ='/login' element={<Login />} />
         <Route path = '/home/:id' element={<ProductDetail/>}/>
         <Route path = '/cart'element={<Cart/>}/>
         <Route path = '/register' element={<Register />} />
-        <Route path="/placeOrder" element={<PlaceOrder />}></Route>
-        <Route path={'*'} element={<Error404/>}/>
+        <Route path={'*'} element={<Error404/>}/> */}
       </Routes>
     </Fragment>
   );
