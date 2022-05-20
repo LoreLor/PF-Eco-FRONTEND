@@ -21,7 +21,7 @@ export default function Cart(){
         dispatch(getCart(user.id))
     }, [dispatch, user.id])
 
-    function hanleDelete (e, productId){
+    function handleDelete (e, productId){
         e.preventDefault()
 //----borramos todos los productos iguales del carrito-----
         dispatch(deleteProductCart(user.id, productId))
