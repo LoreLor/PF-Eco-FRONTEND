@@ -102,13 +102,13 @@ const Login = () => {
                             <div className="d-grid">
                                 <button type="submit" className={s.btn}> Sign In </button>
                             </div>
-                            <div className="container w-100 my-5">
+                            {/* <div className="container w-100 my-5">
                                 <div className="row my-3 text-center">
                                     <div className="col-12"> 
                                             <LoginGoogle />                            
                                     </div>                           
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="row my-3 text-center">
                                 <span> You don't have an account?  Go to...<strong><Link to={`/register?redirect=${redirect}`}>Create your account</Link></strong></span>
                             </div>  
