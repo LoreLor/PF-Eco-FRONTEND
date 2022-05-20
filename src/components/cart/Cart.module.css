@@ -27,6 +27,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 15px;
+    margin: 20px;
     border-radius: 20px;
     background-color: #f6f6f6;
     box-shadow: 0.2rem 0.2rem 0.5rem rgb(0 0 0 / 20%);
@@ -40,7 +41,14 @@
 .cart_amount{
     display: flex;
     flex-direction: column;
-    width: 70px;
+    align-items: center;
+    width: 130px;
+}
+.cart_amount input {
+    width: 50px;
+    height: 36px;
+    font-size: medium;
+    font-weight: bold;
 }
 
 .cart_actions{

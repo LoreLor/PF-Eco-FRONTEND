@@ -14,7 +14,10 @@ import { GET_ALL_CATEGORIES,
     ORDER_BY_PRICE,
     FILTER_BY_PRICE,
     CLEAN_DETAIL,
-    EDIT_PRODUCT
+    EDIT_PRODUCT,
+    ADD_CART,
+    GET_CART,
+    DELETE_PRODUCT_CART
 } from "../actions/constants";
 
 
@@ -26,7 +29,8 @@ const initialState ={
     error: {},
     categoriesDb:[],
     editCategory:{},
-    editProduct: {}
+    editProduct: {},
+    cart: []
 }
 
 export const productsReducer = (state=initialState, action) => {
@@ -154,7 +158,21 @@ export const productsReducer = (state=initialState, action) => {
                 ...state,
                 detail: {}
             }
-
+        case ADD_CART:
+            return{
+                ...state,
+                cart: action.payload
+            }
+        case GET_CART:
+            return{
+                ...state,
+                cart: action.payload
+            }
+        case DELETE_PRODUCT_CART:
+            return{
+                ...state,
+                cart: action.payload
+            }
         default:
             return state
     }

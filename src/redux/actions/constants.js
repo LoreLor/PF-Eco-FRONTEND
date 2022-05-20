@@ -29,3 +29,7 @@ export const USER_REGISTER_CLEAR = 'USER_REGISTER_CLEAR';
 export const GET_USERS = "GET_USERS"
 export const GET_USER = "GET_USER"
 
+
+export const ADD_CART = 'ADD_CART'
+export const GET_CART = 'GET_CART'
+export const DELETE_PRODUCT_CART = 'DELETE_PRODUCT_CART'
