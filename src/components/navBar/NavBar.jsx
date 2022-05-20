@@ -13,7 +13,6 @@ import LoginGoogle from "../login/LoginGoogle";
 
 export default function NavBar({categories}){
     const user = JSON.parse(localStorage.getItem('userInfo'))
-    console.log(user)
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
@@ -82,7 +81,7 @@ export default function NavBar({categories}){
                                     <NavLink to="/login" className={style.mybtn}>Log In</NavLink>
                                 )}                            
                         </div>
-                        {user && user.rol === "Admin" ? <NavLink to="/admin" className={style.mybtn}>Admin</NavLink> :<></>}
+                        {user && user.rol === "admin" ? <NavLink to="/admin" className={style.mybtn}>Admin</NavLink> :<></>}
                         
                         <NavLink to="/cart">
 

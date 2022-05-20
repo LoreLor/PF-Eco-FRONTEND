@@ -24,7 +24,7 @@ export default function AdminPage (){
     const [category,setCategory] = useState("")
     const [productName,setProductName]= useState("")
     const [product,setProduct]= useState("")
-    console.log(category)
+
     const [modalA,setModalA] = useState(false)
     const [modalB,setModalB] = useState(false)
     
