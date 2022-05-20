@@ -12,6 +12,7 @@ import Pages from "../Pages/Pages"
 
 import style from './Home.module.css'
 import Footer from "../Footer/Footer"
+import ShippingAddress from "../checkout/ShippingAddress"
 
 export default function Home (){
 
@@ -45,6 +46,7 @@ export default function Home (){
     return(
         <div>
             <NavBar categories={allCategories}/>
+            
             <div className={style.cards}>
                 {
                     currentProduct ? 
