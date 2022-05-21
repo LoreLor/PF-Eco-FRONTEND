@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, NavLink, useParams } from "react-router-dom"
+import { Link, NavLink, useParams, useNavigate } from "react-router-dom"
 import { Rating } from "@mui/material";
+import Swal from 'sweetalert2';
 
 import { getCategories } from "../../redux/actions/categories";
 
-import { cleanReview, getProductById, getReviewsProduct, limpiarDetail } from "../../redux/actions/products";
+import { addCartProduct, cleanReview, getProductById, getReviewsProduct, limpiarDetail } from "../../redux/actions/products";
 
 import style from './ProductDetail.module.css'
 
@@ -16,13 +17,15 @@ import NavBar from "../navBar/NavBar";
 export default function ProductDetail() {
 
     let { id } = useParams()
-
+    
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const [items, setItems] = useState(1)
     const detailProduct = useSelector((state) => state.products.detail)
     const categories = useSelector((state) => state.products.categoriesDb)
     const reviewsProduct = useSelector((state) => state.products.reviews)
     //console.log(detailProduct)
+    const user = JSON.parse(localStorage.getItem('userInfo'))
 
     useEffect(() => {
         dispatch(getProductById(id))
@@ -31,7 +34,6 @@ export default function ProductDetail() {
         return () => {
             dispatch(limpiarDetail()) 
             dispatch(cleanReview()) 
-            
         }
     }, [id, dispatch])
 
@@ -41,9 +43,20 @@ export default function ProductDetail() {
         //console.log(`seleccionaste ${items} items`)
     }
 
-    function handleBuy(e) {
+    function handleBuy(e, productId) {
         e.preventDefault();
-        alert(`compraste ${items}`)
+        dispatch(addCartProduct({
+            userId: user.id,
+            productId: productId,
+            required_quantity: 1
+        }))
+        Swal.fire({
+            title: 'Product added to cart',
+            text:'Check Cart',
+            icon:'success',
+            confirmButtonText:'Ok'
+        })
+        navigate('/cart')
     }
 
 
@@ -87,22 +100,10 @@ export default function ProductDetail() {
                                         </div>
                                         :
                                         <div className={style.card_dataBtm}>
-                                            <div className={style.qty}>
-                                                <h5>Choise Qty:</h5>
-                                                <select className={style.select} onChange={e => handleSelectQty(e)}>
-                                                    {
-                                                        stockItems.map(i => {
-                                                            return (
-                                                                <option key={i} value={i}>{i}</option>
-                                                            )
-                                                        })
-                                                    }
-                                                </select>
-                                            </div>
                                             <h5>{detailProduct.stock} Available!</h5>
                                         </div>
                                 }
-                                <button onClick={e => handleBuy(e)} className={style.myBtn} disabled={detailProduct.stock === 0}>Buy Now</button>
+                                <button onClick={e => handleBuy(e, detailProduct.id)} className={style.myBtn} disabled={detailProduct.stock === 0}>Buy Now</button>
                             </div>
                         </div> :
                         <Loader />

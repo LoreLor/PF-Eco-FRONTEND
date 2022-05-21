@@ -45,10 +45,15 @@
     width: 130px;
 }
 .cart_amount input {
-    width: 50px;
+    width: 40px;
+    text-align: center;
     height: 36px;
     font-size: medium;
     font-weight: bold;
+    margin: 0 10px 0 10px;
+}
+.amount_input{
+    display: flex;
 }
 
 .cart_actions{
@@ -91,6 +96,40 @@
     color: #fff;
     display: flex;
     align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+}
+
+.btnAdd{
+    align-self: center;
+    text-transform: uppercase;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #6ecb63;
+    font-size: large;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+}
+.btnSubs{
+    align-self: center;
+    text-transform: uppercase;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #b20600;
+    font-size: large;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 1rem;
     padding: 0.5rem;
 }
