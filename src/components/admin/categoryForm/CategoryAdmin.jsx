@@ -135,7 +135,7 @@ export default function CategoryForm({category,setModalB,setCategory}){
                         <div>
                             {
                                 Object.keys(errors).length === 0 && Object.keys(input).length > 0 && 
-                                <input type='submit' value= {category? "Edit" : "Add"} onClick={handleSubmit}/>   
+                                <input type='submit' value= {category? "Edit" : "Add"} onClick={handleSubmit} className={style.mybtn}/>   
                             }   
                         </div>
                     <div>

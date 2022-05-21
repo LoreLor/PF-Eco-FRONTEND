@@ -1,35 +1,51 @@
-.header{
-    display: flex;
-    color: #ffff;
-    align-items: center;
-    justify-content: center;
-    font-size: 50px ;
-    height: 120px;
+.admin_container{
+    width: 100%;
+    height: auto;
 }
 .adminPage{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 90px;
-    width: 80%;
-    height: 23.5rem;
+    width: 70%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 40px;
-    margin-top: 20px;
+    margin-top: 200px;
 }
+
 .box{
     display: flex;
     flex-direction: column;
     text-align: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     width: 300px;
-    border: 1px solid black;
-    border-radius: 10px;
-    background-color: #EFEFEF;
-    padding: 10px;
+    height: 23.5rem;
+    border-radius: 20px;
+    background-color: rgb(207, 207, 215);
+    box-shadow: 0.2rem 0.2rem 0.5rem rgb(0 0 0 / 20%);
+    padding: 15px;
 }
 h2{
     display: flex;
     justify-content: center;
     align-items: flex-start;
+}
+
+.btnAdmin{
+    align-self: center;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0.5rem;
+    background: #6ecb63;
+    font-size: medium;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    margin: 0px 0px 0px 5px;
+}
+
+.btnAdmin:hover{
+    box-shadow: 0.2rem 0.2rem 0.5rem #6ecb63;
 }

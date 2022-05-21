@@ -28,7 +28,7 @@
 }
 .modalButton{
     position: absolute;
-    background-color: #0d6fa8;
+    background-color: #b20600;
     border: none;
     font-weight: bold;
     color: #fff;
@@ -56,6 +56,7 @@
     border-radius: 1rem;
     border: 1px solid #888;
     width: 60%;
+    height: 850px;
   }
 
   #alert{
@@ -66,5 +67,5 @@
   }
   #form{
     min-height: 37rem;
-    width: 80%;
+    width: 40%;
   }
