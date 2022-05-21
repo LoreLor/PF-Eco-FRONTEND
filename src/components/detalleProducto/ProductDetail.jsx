@@ -13,7 +13,8 @@ import style from './ProductDetail.module.css'
 
 import Loader from "../Loading/Loader";
 import NavBar from "../navBar/NavBar";
-
+import Carrousel from "../Carrousel/Carrousel"
+import Footer from "../Footer/Footer";
 export default function ProductDetail() {
 
     let { id } = useParams()
@@ -74,9 +75,7 @@ export default function ProductDetail() {
                     detailProduct.rating >= 0 ?
                         <div className={style.card}>
                             <div className={style.card_img}>
-                                <div className={style.imgContainer}>
-                                    <img src={detailProduct.img} alt='img product' />
-                                </div>
+                                <Carrousel img={detailProduct.img}/>
                             </div>
                             <div className={style.card_data}>
                                 <NavLink to={"/"}>
@@ -126,6 +125,7 @@ export default function ProductDetail() {
                         }</div> : <div> </div>
                 }
             </div>
+            <Footer/>
         </div>
     )
 }
