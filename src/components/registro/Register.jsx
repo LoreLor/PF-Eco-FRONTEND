@@ -4,14 +4,12 @@ import s from "./Register.module.css";
 import imagen1 from "../../assets/celulares4.jpg";
 import activeValidator from './validators/activeValidations'
 import submitValidator from './validators/submitValidations'
-import { useDispatch, useSelector } from "react-redux";
-import { register, registerClear } from "../../redux/actions/user";
 import axios from "axios";
 import AlertModal from '../admin/AdminModals/AlertModal'
+import Footer from "../Footer/Footer";
 
 const Register = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [user, setUser] = useState({
     name: "",
@@ -19,12 +17,6 @@ const Register = () => {
     user_name: "",
     email: "",
     password: "",
-    /* dni: "",
-    phone_number: "",
-    address: "",
-    rol: "",
-    birthday: "",
-    isActive: true, */
   });
   const [errors, setErrors] = useState({});
 
@@ -74,19 +66,7 @@ const Register = () => {
       } catch (error) {
         console.log(error)
       }
-        
-/*       dispatch(register(user)).then((res) => {
-        if (!res) {
-          alert("User created.");
-          navigate("/login");
-        } else {
-          alert("Email or user already exists.");
-        }
-        
-      }); */
-    } /* else {
-      alert("Check the fields.");
-    } */
+    } 
   };
 
   return (
@@ -182,28 +162,6 @@ const Register = () => {
                     {errors.email && <p class="text-danger">{errors.email}</p>}
                   </div>
 
-                  {/* <div class="mb-3">
-                    <label
-                      htmlFor="validationCustom03"
-                      class="form-label"
-                      className={s.label}
-                    >
-                      <strong>Bitrhday: </strong>
-                    </label>
-                    <input
-                      id="birthday"
-                      name="birthday"
-                      type="date"
-                      class="form-control"
-                      aria-describedby="Insert your Birthday"
-                      placeholder="Insert your Last Name"
-                      onChange={handleChange}
-                    />
-                    {errors.birthday && (
-                      <p class="text-danger">{errors.birthday}</p>
-                    )}
-                  </div> */}
-
                   <div class="mb-3">
                     <label
                       htmlFor="validationCustom03"
@@ -247,69 +205,6 @@ const Register = () => {
                   {errors.password && (
                     <p class="text-danger">{errors.password}</p>
                   )}
-
-                  {/* <div class="mb-3">
-                    <label
-                      htmlFor="validationCustom03"
-                      class="form-label"
-                      className={s.label}
-                    >
-                      <strong>Dni: </strong>
-                    </label>
-                    <input
-                      id="dni"
-                      name="dni"
-                      type="number"
-                      class="form-control"
-                      aria-describedby="Insert your dni"
-                      placeholder="Insert your dni or social segurity"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  {errors.dni && <p class="text-danger">{errors.dni}</p>} */}
-
-                  {/* <div class="mb-3">
-                    <label
-                      htmlFor="validationCustom03"
-                      class="form-label"
-                      className={s.label}
-                    >
-                      <strong>Address: </strong> Street - Number - City - Postal
-                      Code - Country{" "}
-                    </label>
-                    <input
-                      id="address"
-                      name="address"
-                      type="text"
-                      class="form-control"
-                      placeholder="Street Name/Number - City - Postal Code - Country"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  {errors.address && (
-                    <p class="text-danger">{errors.address}</p>
-                  )} */}
-
-                  {/* <div class="mb-3">
-                    <label
-                      htmlFor="validationCustom03"
-                      class="form-label"
-                      className={s.label}
-                    >
-                      <strong>Phone Number: </strong>
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="phone_number"
-                      name="phone_number"
-                      placeholder="Phone Number"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  {errors.phone_number && (
-                    <p class="text-danger">{errors.phone_number}</p>
-                  )} */}
 
                   <div class="mb-3">
                     <label
@@ -359,6 +254,7 @@ const Register = () => {
           </AlertModal>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };
