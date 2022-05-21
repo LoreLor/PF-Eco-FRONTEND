@@ -14,7 +14,7 @@ if(input.name){
     if(!id){ let checkDb = products && products.filter(product => product.name.toLowerCase() === input.name.toLowerCase())
         if(checkDb && checkDb.length > 0){errors.name = "Product already exists"}}
     else if(id){ 
-        let preData = products && products.filter(product => product.id !== id)
+        let preData = products && products.filter(product => product.id !== id.id)
         let checkDb = preData && preData.filter(product => product.name.toLowerCase() === input.name.toLowerCase())
         if(checkDb && checkDb.length > 0){errors.name = "Product already exists"} }
 

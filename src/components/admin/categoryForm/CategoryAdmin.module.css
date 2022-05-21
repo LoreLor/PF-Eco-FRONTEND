@@ -1,10 +1,22 @@
-p.danger {
+.errors {
   color: red;
   font-size: 12px;
 }
-  
-input.danger {
-  border: 2px solid red;
+
+.inputError{
+  animation: shake 300ms;
+}
+
+@keyframes shake {
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
 }
 .container{
   display: flex;
@@ -19,9 +31,6 @@ input.danger {
     flex-direction: row;
     justify-content: space-evenly;
     width: 500px;;
-    border: 1px solid black;
-    border-radius: 10px;
-    background-color: #EFEFEF;
     padding: 10px;
   }
 

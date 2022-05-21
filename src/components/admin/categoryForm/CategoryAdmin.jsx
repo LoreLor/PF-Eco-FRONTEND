@@ -4,21 +4,22 @@ import submitValidations from "./validators/submitValidations"
 import {useDispatch, useSelector} from 'react-redux'
 import {getCategories} from "../../../redux/actions/categories"
 import style from './CategoryAdmin.module.css'
-import Banner from '../Banner'
+import FlashModal from '../AdminModals/FlashModal'
 import axios from "axios"
 
 export default function CategoryForm({category,setModalB,setCategory}){
     const dispatch = useDispatch()
-
+    
     const categoriesDb = useSelector((state)=>state.products.categoriesDb)
     const categoryEdit = useSelector((state)=>state.products.editCategory)
+    
+    const [keyword,setKeyword] = useState("")
+    const [isOpen,setIsOpen] =useState(false)
+    
     const [errors,setErrors]=useState({})
     const [input,setInput] = useState({
         name: "",
     })
-
-    const [keyword,setKeyword] = useState("")
-    const [isOpen,setIsOpen] =useState(false)
     
     function handleInputChange(i){  
         setErrors(activeValidations(category,{...input,[i.target.name]:i.target.value},categoriesDb))
@@ -124,10 +125,10 @@ export default function CategoryForm({category,setModalB,setCategory}){
                             <h3>Add or Edit</h3>
                             <p>Name:</p>
                             {category && categoryEdit? <p>Previus name: {categoryEdit.name}</p>:<></>}
-                            <input className={errors.name && style.danger} type='text' placeholder="Add a name..." name='name' value={input.name} onChange={handleInputChange}/>
+                            <input className={errors?.name ? style.inputError:style.input} type='text' placeholder="Add a name..." name='name' value={input.name} onChange={handleInputChange}/>
                         </div>
                         {
-                            errors.name && (<p className={style.danger}>{errors.name}</p>)
+                            errors.name && (<p className={style.errors}>{errors.name}</p>)
                         }
                     </div>
                     <div className={style.btnContainer}>
@@ -142,13 +143,12 @@ export default function CategoryForm({category,setModalB,setCategory}){
                     </div>
                     </div>
                 </form>
-                <Banner isOpen={isOpen} setIsOpen={setIsOpen} closePrev={setModalB} resetData={setCategory}>
+                <FlashModal isOpen={isOpen} setIsOpen={setIsOpen} closePrev={setModalB} resetData={setCategory}>
                     { keyword.length ? (
                         <>
                         <h2>{keyword}</h2>
                         {keyword === "Category created" || keyword === "Category updated" || keyword === "Category deleted" ? 
                             <>
-                            
                             <button onClick={handleClose}> 
                                 Close All
                             </button>
@@ -163,7 +163,7 @@ export default function CategoryForm({category,setModalB,setCategory}){
                     ):(
                         <h2>Invalid Data</h2>
                     )}
-                </Banner>
+                </FlashModal>
             </div>
     )
 }

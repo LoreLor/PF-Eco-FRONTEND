@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-
+import AlertModal from '../../AdminModals/AlertModal'
 import { getSingleCategory } from "../../../../redux/actions/categories"
-import Banner from "../../Banner"
+
 
 export default function CategoriesSB({categories,categoryName,category,setCategoryName,setCategory,setModalB}){
     const dispatch = useDispatch()
@@ -49,10 +49,10 @@ return (<>
                 <span>{category[0].name}</span>
                 <button name="edit" onClick={editCategorie}>Edit</button>
                 <button name= "cancel" onClick={cancelAction}>X</button>
-                <Banner setIsOpen={setIsOpen} isOpen={isOpen}>
+                <AlertModal setIsOpen={setIsOpen} isOpen={isOpen}>
                     <h2>Are you sure you want to edit "{category[0].name}"?</h2>
                     <button name="edit" onClick={confirmEdit}>Edit</button>
-                </Banner>
+                </AlertModal>
             </div>: <></>}
             {category && typeof(category) === "string" ? <p>Category not found</p>:<></>}
         </div>

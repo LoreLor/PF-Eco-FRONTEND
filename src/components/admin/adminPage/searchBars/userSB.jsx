@@ -1,7 +1,7 @@
 import React,{ useState } from "react"
 import { useDispatch } from "react-redux"
 import { getSingleUser } from "../../../../redux/actions/user"
-import Banner from "../../Banner"
+import AlertModal from '../../AdminModals/AlertModal'
 
 export default function UserSB ({users,userName,user,setUserName,setUser,setModalA}){
     const dispatch = useDispatch()
@@ -46,10 +46,10 @@ export default function UserSB ({users,userName,user,setUserName,setUser,setModa
                 <span>{user[0].user_name}</span>
                 <button name="edit" onClick={editUser}>Edit</button>
                 <button name= "cancel" onClick={cancelAction}>X</button>
-                <Banner setIsOpen={setIsOpen} isOpen={isOpen}>
+                <AlertModal setIsOpen={setIsOpen} isOpen={isOpen}>
                     <h2>Are you sure you want to edit "{user[0].name}"?</h2>
                     <button name="edit" onClick={confirmEdit}>Edit</button>
-                </Banner>
+                </AlertModal>
             </div>: <></>}
             {user && typeof(user) === "string" ? <p>User not found</p>:<></>}
         </div>
