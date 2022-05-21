@@ -111,6 +111,7 @@ export default function CategoryForm({category,setModalB,setCategory}){
             })
         }
         if(category && categoryEdit){
+            console.log("HP2")
             setInput({
                 name: categoryEdit.name
             })
