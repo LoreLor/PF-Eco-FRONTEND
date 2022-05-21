@@ -10,6 +10,7 @@ import Register from './components/registro/Register';
 import Cart from './components/cart/Cart';
 import PrivateRoute from './components/admin/adminPage/PrivateRoute';
 import CheckoutSteps from './components/checkout/CheckoutSteps';
+import OrderDetail from './components/checkout/OrderDetail';
 
 function App() {
   
@@ -25,6 +26,8 @@ function App() {
         <Route path = '/register' element={<Register />} />
         <Route path={'*'} element={<Error404/>}/>
         <Route path="/check" element={<CheckoutSteps/>}/>
+        <Route path="/pay" element={<OrderDetail/>}/>
+        
       </Routes>
     </Fragment>
   );
