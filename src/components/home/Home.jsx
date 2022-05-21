@@ -31,7 +31,7 @@ export default function Home (){
     const paginado = (pgNumber) => {
         setCurrentPg(pgNumber)
     }
-    const user = JSON.parse(localStorage.getItem('userInfo'))
+    const users = JSON.parse(localStorage.getItem('userInfo'))
     
     useEffect(() => {
         dispatch(getAllProducts());
