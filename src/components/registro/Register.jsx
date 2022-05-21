@@ -4,6 +4,7 @@ import s from "./Register.module.css";
 import imagen1 from "../../assets/celulares4.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { register, registerClear } from "../../redux/actions/user";
+import Footer from "../Footer/Footer";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -353,6 +354,7 @@ const Register = () => {
           </form>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };
