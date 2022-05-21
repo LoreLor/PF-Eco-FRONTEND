@@ -1,23 +1,45 @@
-import { GoogleLogin } from "@react-oauth/google";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import GoogleLogin from 'react-google-login';
 
 
-function LoginGoogle() {
-  const navigate = useNavigate();
 
-  return (
-      <GoogleLogin
-        onSuccess={(credentialResponse) => {
-          console.log(credentialResponse);
-          navigate('/')
-        }
-      }
-        onError={() => {
-          console.log("Login Failed");
-        }}
-      /> 
-  )
+
+const responseGoogle = (response) => {
+  console.log(response);
 }
-export default LoginGoogle;
+
+ReactDOM.render(
+  <GoogleLogin
+    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+    buttonText="Login"
+    onSuccess={responseGoogle}
+    onFailure={responseGoogle}
+    cookiePolicy={'single_host_origin'}
+  />,
+  document.getElementById('googleButton')
+);
+
+// import { GoogleLogin } from "@react-oauth/google";
+// import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+
+
+// function LoginGoogle() {
+//   const navigate = useNavigate();
+
+//   return (
+//       <GoogleLogin
+//         onSuccess={(credentialResponse) => {
+//           console.log(credentialResponse);
+//           navigate('/')
+//         }
+//       }
+//         onError={() => {
+//           console.log("Login Failed");
+//         }}
+//       /> 
+//   )
+// }
+// export default LoginGoogle;
 
