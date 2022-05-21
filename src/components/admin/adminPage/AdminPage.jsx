@@ -1,6 +1,5 @@
 import { useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {Link} from 'react-router-dom'
 import { getCategories } from '../../../redux/actions/categories'
 import { getAllProducts } from '../../../redux/actions/products'
 import { getAllUsers } from '../../../redux/actions/user'
@@ -32,7 +31,7 @@ export default function AdminPage (){
     const [modalA,setModalA] = useState(false)
     const [modalB,setModalB] = useState(false)
     const [modalC,setModalC] = useState(false)
-    
+    console.log(product[0])
     function handleModalB(e){
         e.preventDefault()
         setCategory("")
@@ -86,7 +85,7 @@ export default function AdminPage (){
                 </div>
 
                 <FormModal setIsOpen={setModalC} isOpen={modalC} resetData={setProduct}>
-                    <ProductAdmin product={product[0]} setModalC={setModalC} setProduct={setProduct}/>
+                    <ProductAdmin product={product} setModalC={setModalC} setProduct={setProduct}/>
                 </FormModal>
             </div>
             <Footer/>
