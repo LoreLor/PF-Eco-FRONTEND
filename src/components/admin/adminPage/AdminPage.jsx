@@ -6,12 +6,13 @@ import { getAllProducts } from '../../../redux/actions/products'
 import { getAllUsers } from '../../../redux/actions/user'
 import CategoriesSB from './searchBars/categoriesSB'
 import ProductsSB from './searchBars/productsSB'
+import UserSB from './searchBars/userSB'
 import style from './AdminPage.module.css'
 import BetaModal from '../AdminModals/BetaModal'
 import FormModal from '../AdminModals/FormModal'
 import UserAdmin from '../userAdmin/UserAdmin'
 import CategoryAdmin from "../categoryForm/CategoryAdmin"
-import UserSB from './searchBars/userSB'
+import ProductAdmin from "../productForm/ProductAdmin"
 
 export default function AdminPage (){
     const categories = useSelector((state)=> state.products.categoriesDb)
@@ -28,11 +29,18 @@ export default function AdminPage (){
  
     const [modalA,setModalA] = useState(false)
     const [modalB,setModalB] = useState(false)
+    const [modalC,setModalC] = useState(false)
     
-    function handleModal(e){
+    function handleModalB(e){
         e.preventDefault()
         setCategory("")
         setModalB(true)
+    }
+
+    function handleModalC(e){
+        e.preventDefault()
+        setProduct("")
+        setModalC(true)
     }
 
     useEffect(()=>{
@@ -62,7 +70,7 @@ export default function AdminPage (){
                 </BetaModal> 
                 <div className={style.box}>
                     <h2>Categories</h2>
-                    <button className={style.mybtn } onClick={handleModal}>Create category</button>
+                    <button className={style.mybtn } onClick={handleModalB}>Create category</button>
                 <CategoriesSB categories={categories} categoryName={categoryName} category={category} 
                 setCategoryName={setCategoryName} setCategory={setCategory} setModalB={setModalB}/>
                 </div>
@@ -71,12 +79,13 @@ export default function AdminPage (){
                 </BetaModal>
                 <div className={style.box}>
                     <h2>Products</h2>
-                    <Link to='/admin/productAdmin'>
-                        <button className={style.mybtn}>Create product</button>
-                    </Link>
-                    <ProductsSB products={products} productName={productName} 
-                    product={product} setProductName={setProductName} setProduct={setProduct}/>
+                    <button className={style.mybtn} onClick={handleModalC}>Create product</button>
+                <ProductsSB products={products} productName={productName} 
+                product={product} setProductName={setProductName} setProduct={setProduct} setModalC={setModalC}/>
                 </div>
+                <FormModal setIsOpen={setModalC} isOpen={modalC} resetData={setProduct}>
+                    <ProductAdmin product={product[0]} setModalC={setModalC} setProduct={setProduct}/>
+                </FormModal>
             </div>
         </div>
     )

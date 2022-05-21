@@ -9,9 +9,9 @@
 .adminPage{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 96px;
+    gap: 90px;
     width: 80%;
-    height: 25rem;
+    height: 23.5rem;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 40px;

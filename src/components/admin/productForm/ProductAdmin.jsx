@@ -1,7 +1,6 @@
 import axios from "axios"
 import React,{useEffect,useState} from "react"
 import {useDispatch, useSelector} from 'react-redux'
-import { useNavigate,Link, useParams } from "react-router-dom"
 import { getAllProducts} from "../../../redux/actions/products"
 import { getCategories } from "../../../redux/actions/categories"
 import style from './ProductAdmin.module.css'
@@ -10,12 +9,9 @@ import activeValidators from './validators/activeValidations'
 import submitValidators from './validators/submitValidations'
 
 
-export default function ProductForm (){
+export default function ProductForm ({product,setModalC,setProduct}){
     const dispatch = useDispatch()
-    const navigate = useNavigate()
-
-    const {id} = useParams()
-
+    
     const categoriesDb = useSelector((state)=>state.products.categoriesDb)
     const productsDb = useSelector((state)=>state.products.products)
     const productEdit = useSelector((state)=>state.products.editProduct)
@@ -34,15 +30,13 @@ export default function ProductForm (){
         isActive: ""
     })
     const [file,setFile] = useState([])
-
+    
     function onValueChange (e){
-        setErrors(activeValidators(id,{...input,[e.target.name]:e.target.value},productsDb))
+        setErrors(activeValidators(product,{...input,[e.target.name]:e.target.value},productsDb))
         setInput({...input,[e.target.name]:e.target.value}) 
     }
 
-
     function onArrayChange(e){
-       // setErrors(activeValidators({...input,categories: [...input.categories,e.target.value]}))
         if(!input.categories.includes(e.target.value) && input.categories.length < 3){
             return(
                     setInput({...input,categories:[...input.categories,e.target.value]
@@ -59,10 +53,14 @@ export default function ProductForm (){
             [e.target.name]: input[e.target.name].filter(item => item !== e.target.value)
         }))
     }
-    function onReturn(){
-        dispatch(getCategories)
-        dispatch(getAllProducts)
-}
+
+    function onClose(e){
+        e.preventDefault()
+        setIsOpen(false)
+        setModalC(false)
+        setProduct("")
+    }
+
     function onStatus(e){
         e.preventDefault()
         if(e.target.name === "isActive"){
@@ -85,8 +83,8 @@ export default function ProductForm (){
     }
     async function onSubmit (event){
         event.preventDefault()
-        setErrors(activeValidators(id,input,productsDb))
-        setErrors(submitValidators(id,input,productsDb))
+        setErrors(activeValidators(product,input,productsDb))
+        setErrors(submitValidators(product,input,productsDb))
         if(Object.keys(errors).length === 0
         && input.name !== ""
         &&input.price !== ""
@@ -94,8 +92,7 @@ export default function ProductForm (){
         && input.rating !== ""
         && input.stock !== ""
         //&& input.img !== ""
-        && input.categories.length >0
-        && input.isActive !== ""){
+        && input.categories.length >0){
             let response = null
             try {
                 const data = new FormData();
@@ -104,13 +101,13 @@ export default function ProductForm (){
                     data.append("file", file[index]);
                 }
 
-                id? (response = await axios.put(`http://localhost:3001/products/${productEdit.id}`,data))
+                product? (response = await axios.put(`http://localhost:3001/products/${productEdit.id}`,data))
                 :(response = await axios.post("http://localhost:3001/products",data))
                 const result = response.data
                 setKeyword(result.msg)
                 
                 if(!isOpen && result){
-                    setIsOpen(state => !state);
+                    setIsOpen(true);
                 if(result.msg === "Product created"){
                     dispatch(getAllProducts())
                     dispatch(getCategories())
@@ -146,7 +143,18 @@ export default function ProductForm (){
   }
 
 useEffect(()=>{
-    if(id && productEdit){
+    if(!product){
+        setInput({
+        name: "",
+        price: "",
+        description:"",
+        stock:"",
+        categories: [],
+        img: [],
+        isActive: ""
+        })
+    }
+    if(product && productEdit){
         setInput({
         name: productEdit.name,
         price: productEdit.price.toString(),
@@ -157,38 +165,41 @@ useEffect(()=>{
         isActive: productEdit.isActive
         })
     }
-},[id,productEdit])
+},[product,productEdit])
 
     return(
         <div className={style.containerProd}>
-                <form>
-                    <div>
+                <form onSubmit={onSubmit}>
+                    
                         <h3>Add or edit</h3>
+                <div className="sectionA">
+                    
                         <p>Product name:</p>
-                        <input className={errors?.name? style.danger : style.input} type='text' placeholder="Product name..." name='name' value={input.name} onChange={onValueChange}/>
+                        <input className={errors?.name? style.inputError : style.input} type='text' placeholder="Product name..." name='name' value={input.name} onChange={onValueChange}/>
                         {
-                            errors.name && (<p className={style.danger}>{errors.name}</p>)
+                            errors.name && (<p className={style.errors}>{errors.name}</p>)
                         }
-                    </div>
-                    <div>
+                
+                    
                         <p>Price:</p>
-                        <input className={errors?.price? style.danger : style.input} type='text' placeholder="Product price..." name='price' value={input.price} onChange={onValueChange}/>
+                        <input className={errors?.price? style.inputError : style.input} type='text' placeholder="Product price..." name='price' value={input.price} onChange={onValueChange}/>
                         {
-                            errors.price && (<p className={style.danger}>{errors.price}</p>)
+                            errors.price && (<p className={style.errors}>{errors.price}</p>)
                         }               
-                    </div>
+                    
+                </div>
                     <div>
                         <p>Description:</p>
-                        <textarea rows={5} cols={70} className={errors?.description? style.danger : style.input} type='text' placeholder="Add more info..." name='description' value={input.description} onChange={onValueChange}/>
+                        <textarea rows={5} cols={70} className={errors?.description? style.inputError : style.input} type='text' placeholder="Add more info..." name='description' value={input.description} onChange={onValueChange}/>
                         {
-                            errors.description && (<p className={style.danger}>{errors.description}</p>)
+                            errors.description && (<p className={style.errors}>{errors.description}</p>)
                         }              
                     </div>
                     <div>
                         <p>Stock:</p>
-                        <input className={errors?.stock? style.danger : style.input} type='text' placeholder="Add a stock..." name='stock' value={input.stock} onChange={onValueChange}/>
+                        <input className={errors?.stock? style.inputError : style.input} type='text' placeholder="Add a stock..." name='stock' value={input.stock} onChange={onValueChange}/>
                         {
-                            errors.stock && (<p className={style.danger}>{errors.stock}</p>)
+                            errors.stock && (<p className={style.errors}>{errors.stock}</p>)
                         }              
                     </div>
                     <div>
@@ -200,7 +211,7 @@ useEffect(()=>{
                         <option key={category.id} value={category.name} className={style.categories}>{category.name}</option>
                         )})}
                         </select>:<span> No categories yet</span>}
-                        {errors?.categories && <p className={style.danger}>{errors?.categories}</p>}
+                        {errors?.categories && <p className={style.errors}>{errors?.categories}</p>}
                     </div>
                     <div>
                         {input.categories && input.categories.map((category)=>{
@@ -209,10 +220,10 @@ useEffect(()=>{
                             )
                         })}
                     </div>
-                        {id && productEdit ?<>
+                        {product && productEdit ?<>
                         <span>This product is: {input.isActive === true ? "Active": "Inactive"} </span>
                         <button name ="isActive" value={input.isActive} onClick={onStatus}>Change</button>
-                        {errors?.isActive && <p className={style.danger}>{errors?.isActive}</p>}
+                        {errors?.isActive && <p className={style.errors}>{errors?.isActive}</p>}
                         </>:<></>}
                     
                     <div>
@@ -221,31 +232,25 @@ useEffect(()=>{
                     </div>
                     <div>
                         {Object.keys(errors).length === 0 && Object.keys(input).length > 0 && 
-                        <input type='submit' value= {id? "Edit": "Add"} onClick={onSubmit}/>   
+                        <input type='submit' value= {product? "Edit": "Add"} onClick={onSubmit}/>   
                         }
                     </div>
+
                 </form>
-        <div>
-            <Link to="/admin">
-            <button onClick={onReturn}className='returnButton'> 
-                            Go Back
-                        </button>
-            </Link>
-        </div>
         <FlashModal isOpen={isOpen} setIsOpen={setIsOpen}>
                 {keyword.length ? (
                     <>
                     <h2>{keyword}</h2>
                     {keyword === "Product created" || "Product edited" ? (
                         <>
-                        <button onClick={()=> navigate("/admin",{replace:true})}className='bannerUpdate'> 
-                            Go to Admin
-                        </button>
+                            <button onClick={onClose}> 
+                                Close All
+                            </button>
                         </>
                         ): (
                             <>
                             {keyword}
-                            <button onClick={()=> setIsOpen(state=>!state)}>Ok</button>
+                            <button onClick={()=> setIsOpen(state=>!state)}>Try Again</button>
                             </>
                         )}
                         </>

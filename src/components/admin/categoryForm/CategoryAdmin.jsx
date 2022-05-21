@@ -12,13 +12,14 @@ export default function CategoryForm({category,setModalB,setCategory}){
     
     const categoriesDb = useSelector((state)=>state.products.categoriesDb)
     const categoryEdit = useSelector((state)=>state.products.editCategory)
+    
+    const [keyword,setKeyword] = useState("")
+    const [isOpen,setIsOpen] =useState(false)
+    
     const [errors,setErrors]=useState({})
     const [input,setInput] = useState({
         name: "",
     })
-
-    const [keyword,setKeyword] = useState("")
-    const [isOpen,setIsOpen] =useState(false)
     
     function handleInputChange(i){  
         setErrors(activeValidations(category,{...input,[i.target.name]:i.target.value},categoriesDb))
@@ -148,7 +149,6 @@ export default function CategoryForm({category,setModalB,setCategory}){
                         <h2>{keyword}</h2>
                         {keyword === "Category created" || keyword === "Category updated" || keyword === "Category deleted" ? 
                             <>
-                            
                             <button onClick={handleClose}> 
                                 Close All
                             </button>

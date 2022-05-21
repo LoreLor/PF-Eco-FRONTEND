@@ -65,6 +65,6 @@
     min-height: 11rem;
   }
   #form{
-    min-height: 11rem;
-    max-height: 30rem;
+    min-height: 37rem;
+    width: 80%;
   }
