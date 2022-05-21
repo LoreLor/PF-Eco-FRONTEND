@@ -85,6 +85,9 @@
     gap: 1rem;
     padding: 0.5rem;
 }
+.btnDelete:disabled{
+    opacity: 0.5;
+}
 .btnPurchase{
     align-self: center;
     text-transform: uppercase;
@@ -98,6 +101,9 @@
     align-items: center;
     gap: 1rem;
     padding: 0.5rem;
+}
+.btnPurchase:disabled{
+    opacity: 0.5;
 }
 
 .btnAdd{
@@ -116,6 +122,7 @@
     gap: 1rem;
     padding: 0.5rem;
 }
+
 .btnSubs{
     align-self: center;
     text-transform: uppercase;
@@ -132,4 +139,16 @@
     justify-content: center;
     gap: 1rem;
     padding: 0.5rem;
+}
+.noCart{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 50px;
+}
+.goHome{
+    text-decoration: underline #112B3C ;
+    color: #112B3C;
+    font-weight: bold;
+    font-size: 20px;
 }
