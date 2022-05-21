@@ -1,7 +1,8 @@
 import React,{ useState } from "react"
 import { useDispatch } from "react-redux"
 import { getSingleUser } from "../../../../redux/actions/user"
-import Banner from "../../Banner"
+import AlertModal from '../../AdminModals/AlertModal'
+import style from './searchBars.module.css'
 
 export default function UserSB ({users,userName,user,setUserName,setUser,setModalA}){
     const dispatch = useDispatch()
@@ -36,21 +37,26 @@ export default function UserSB ({users,userName,user,setUserName,setUser,setModa
         }
     }
     return(
-        <div>
-                <form onSubmit={handleSubmit}>
-                    <input type="search" value={userName} onChange={handleSearch} placeholder="Search by name..."/>
-                    <button type='submit' onClick={handleSubmit}>Search</button>
+        <div className={style.subBox}>
+                <form onSubmit={handleSubmit} className={style.searchForm}>
+                    <input type="search" value={userName} onChange={handleSearch} placeholder="Search by name..." className={style.inputAdmin}/>
+                    <button type='submit' onClick={handleSubmit} className={style.btnAdmin}>Search</button>
                 </form>
                 <div>
-            {user && Array.isArray(user)? <div>
-                <span>{user[0].user_name}</span>
-                <button name="edit" onClick={editUser}>Edit</button>
-                <button name= "cancel" onClick={cancelAction}>X</button>
-                <Banner setIsOpen={setIsOpen} isOpen={isOpen}>
-                    <h2>Are you sure you want to edit "{user[0].name}"?</h2>
-                    <button name="edit" onClick={confirmEdit}>Edit</button>
-                </Banner>
-            </div>: <></>}
+            {
+                user && 
+                    Array.isArray(user)? 
+                        <div className={style.showedOptions}>
+                            <span>{user[0].user_name}</span>
+                            <button name="edit" onClick={editUser} className={style.btnAdmin}>Edit</button>
+                            <button name= "cancel" onClick={cancelAction} className={style.btnCancel}>X</button>
+                            <AlertModal setIsOpen={setIsOpen} isOpen={isOpen}>
+                                <h2>Are you sure you want to edit "{user[0].name}"?</h2>
+                                <button name="edit" onClick={confirmEdit}>Edit</button>
+                            </AlertModal>
+                        </div>
+                        : <></>
+            }
             {user && typeof(user) === "string" ? <p>User not found</p>:<></>}
         </div>
         </div>

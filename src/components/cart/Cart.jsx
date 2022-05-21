@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCartProduct, deleteProductCart, getCart } from "../../redux/actions/products";
+import Swal from "sweetalert2";
+import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart } from "../../redux/actions/products";
 import Footer from "../Footer/Footer";
 import NavBar from "../navBar/NavBar";
 
@@ -8,7 +9,6 @@ import style from './Cart.module.css'
 
 export default function Cart(){
     
-    const [input, setInput] = useState(1)
     const cart = useSelector((state) => state.products.cart)
     const dispatch =useDispatch();
     
@@ -19,35 +19,73 @@ export default function Cart(){
 
     useEffect(() => {
         dispatch(getCart(user.id))
-        //console.log('dentra')
-    }, [])
+    }, [dispatch, user.id])
 
-    function hanleDelete (e, productId){
+    function handleDelete (e, productId){
         e.preventDefault()
+//----borramos todos los productos iguales del carrito-----
         dispatch(deleteProductCart(user.id, productId))
-        window.location.reload()
-        console.log(user.id, productId)
+        .then(r => {
+            dispatch(getCart(user.id))
+        })
     }
 
-    function handleQty (e, productId){
+    function handleDeleteALL(e, id){
         e.preventDefault()
-        //console.log(e.target.value)
-        setInput(e.target.value)
+        // console.log(id)
+        dispatch(deleteAllProductCart(id))
+        .then(r => {
+            dispatch(getCart(user.id))
+        })
+    }
+
+    function handleAdd(e, productId){
+        e.preventDefault()
         dispatch(addCartProduct({
             userId: user.id,
-            productId: productId, 
-            required_quantity: e.target.value
-            }
-        ))
+            productId: productId,
+        }))
+        .then(r => {
+            dispatch(getCart(user.id))
+            acount()
+        })
+
+    }
+    function handleSubtract(e, productId, bundle){
+        e.preventDefault()
+        if(bundle === 1){
+            console.log('entro')
+            dispatch(deleteProductCart(user.id, productId))
+            .then(r => {
+                dispatch(getCart(user.id))
+                acount()
+            })
+        }else{
+            dispatch(deleteOneProduct(user.id, productId))
+            .then(r => {
+                dispatch(getCart(user.id))
+                acount()
+            })
+        }
     }
 
-    async function acount ()  {
-        await cart.details?.map(p => {
+    function handleCheckout(e){
+        e.preventDefault()
+        Swal.fire({
+            title: 'CheckOut',
+            text:`${total}`,
+            icon:'success',
+            confirmButtonText:'Ok'
+        })
+    }
+
+    function acount ()  {
+        cart.details?.map(p => {
             return (
-                total = total + p.price_total
+                total += p.price_total
             )
         })
-    } 
+    }
     acount()
     
 
@@ -69,15 +107,21 @@ export default function Cart(){
                                             <span>{p.name}</span>
                                             <div className={style.cart_amount}>
                                                 <span>Qty: {`(${p.stock} max)`} </span>
-                                                <input 
-                                                    type='number'
-                                                    name="Qty"
-                                                    min={0}
-                                                    max={p.stock}
-                                                    onChange = {(e) => handleQty(e, p.productId)}
-                                                />
+                                                <div className={style.amount_input}>
+                                                    <button onClick={e=>handleAdd(e, p.productId)} className={style.btnAdd}>+</button>
+                                                    <input 
+                                                        type='number'
+                                                        name="Qty"
+                                                        min={0}
+                                                        max={p.stock}
+                                                        value={p.bundle}
+                                                        readOnly
+                                                        // onChange = {(e) => handleQty(e, p.productId)}
+                                                        />
+                                                    <button onClick={e=>handleSubtract(e, p.productId, p.bundle)} className={style.btnSubs}>-</button>
+                                                </div>
                                             </div>
-                                            <button className={style.btnDelete} onClick={e => hanleDelete(e, p.productId)}>
+                                            <button className={style.btnDelete} onClick={e => handleDelete(e, p.productId)}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                                     <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -90,7 +134,7 @@ export default function Cart(){
                         }
                 </div>
                 <div className={style.cart_actions}>
-                    <button className={style.btnDelete}>
+                    <button className={style.btnDelete} onClick={e=>handleDeleteALL(e, cart.id)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                             <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -98,7 +142,7 @@ export default function Cart(){
                         Delete All
                     </button>
                     <span>Total: ${total} </span>
-                    <button className={style.btnPurchase}>
+                    <button className={style.btnPurchase} onClick={e=> handleCheckout(e)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-bag" viewBox="0 0 16 16">
                             <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
                         </svg>

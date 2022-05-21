@@ -4,22 +4,26 @@ import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
 import style from './ProductCard.module.css'
 import { addCartProduct, getCart } from "../../redux/actions/products";
+import Swal from 'sweetalert2';
 
 export default function ProductCard({name, img, price, rating, id}){
     
     const dispatch = useDispatch()
     const user = JSON.parse(localStorage.getItem('userInfo'))
 
-    let required_quantity = 0
-
     function handleAddCart(id){
         const addCart = {
             userId: user.id,
             productId: id,
-            required_quantity: ++required_quantity
         }
         dispatch(addCartProduct(addCart))
         //console.log(addCart)
+        Swal.fire({
+            title: 'Product added to cart',
+            text:'Check Cart',
+            icon:'success',
+            confirmButtonText:'Ok'
+        })
     }
 
     function handleFavourites(){

@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-
+import AlertModal from '../../AdminModals/AlertModal'
 import { getSingleCategory } from "../../../../redux/actions/categories"
-import Banner from "../../Banner"
+import style from './searchBars.module.css'
 
 export default function CategoriesSB({categories,categoryName,category,setCategoryName,setCategory,setModalB}){
     const dispatch = useDispatch()
@@ -37,24 +37,29 @@ export default function CategoriesSB({categories,categoryName,category,setCatego
             dispatch( getSingleCategory(category[0].name))
         }
     }
-return (<>
-<span>Edit category</span>
-                <form onSubmit={submitCategorie}>
-                    <input type="search" value={categoryName} onChange={changeCategorie} placeholder="Search by name..."/>
-                    <button type='submit' onClick={submitCategorie}>Search</button>
-                </form>
+    return (
+        <>
+            <form onSubmit={submitCategorie} className={style.searchForm}>
+                <input type="search" value={categoryName} onChange={changeCategorie} placeholder="Search by name..." className={style.inputAdmin}/>
+                <button type='submit' onClick={submitCategorie}  className={style.btnAdmin}>Search</button>
+            </form>
 
-        <div>
-            {category && Array.isArray(category)? <div>
-                <span>{category[0].name}</span>
-                <button name="edit" onClick={editCategorie}>Edit</button>
-                <button name= "cancel" onClick={cancelAction}>X</button>
-                <Banner setIsOpen={setIsOpen} isOpen={isOpen}>
-                    <h2>Are you sure you want to edit "{category[0].name}"?</h2>
-                    <button name="edit" onClick={confirmEdit}>Edit</button>
-                </Banner>
-            </div>: <></>}
-            {category && typeof(category) === "string" ? <p>Category not found</p>:<></>}
-        </div>
-</>)
+            <div className={style.subBox}>
+                {
+                    category && 
+                        Array.isArray(category)? 
+                            <div className={style.showedOptions}>
+                                <span>{category[0].name}</span>
+                                <button name="edit" onClick={editCategorie} className={style.btnAdmin}>Edit</button>
+                                <button name= "cancel" onClick={cancelAction} className={style.btnCancel}>X</button>
+                                <AlertModal setIsOpen={setIsOpen} isOpen={isOpen}>
+                                    <h2>Are you sure you want to edit "{category[0].name}"?</h2>
+                                    <button name="edit" onClick={confirmEdit}>Edit</button>
+                                </AlertModal>
+                            </div>: <></>
+                }
+                {category && typeof(category) === "string" ? <p>Category not found</p>:<></>}
+            </div>
+        </>
+    )
 }

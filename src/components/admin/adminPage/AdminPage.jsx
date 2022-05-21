@@ -6,11 +6,15 @@ import { getAllProducts } from '../../../redux/actions/products'
 import { getAllUsers } from '../../../redux/actions/user'
 import CategoriesSB from './searchBars/categoriesSB'
 import ProductsSB from './searchBars/productsSB'
+import UserSB from './searchBars/userSB'
 import style from './AdminPage.module.css'
-import Banner from '../Banner'
+import BetaModal from '../AdminModals/BetaModal'
+import FormModal from '../AdminModals/FormModal'
 import UserAdmin from '../userAdmin/UserAdmin'
 import CategoryAdmin from "../categoryForm/CategoryAdmin"
-import UserSB from './searchBars/userSB'
+import ProductAdmin from "../productForm/ProductAdmin"
+import NavBarAdmin from './navBarAdmin/NavBarAdmin'
+import Footer from '../../Footer/Footer'
 
 export default function AdminPage (){
     const categories = useSelector((state)=> state.products.categoriesDb)
@@ -24,14 +28,21 @@ export default function AdminPage (){
     const [category,setCategory] = useState("")
     const [productName,setProductName]= useState("")
     const [product,setProduct]= useState("")
-
+ 
     const [modalA,setModalA] = useState(false)
     const [modalB,setModalB] = useState(false)
+    const [modalC,setModalC] = useState(false)
     
-    function handleModal(e){
+    function handleModalB(e){
         e.preventDefault()
         setCategory("")
         setModalB(true)
+    }
+
+    function handleModalC(e){
+        e.preventDefault()
+        setProduct("")
+        setModalC(true)
     }
 
     useEffect(()=>{
@@ -42,41 +53,43 @@ export default function AdminPage (){
 
 
     return(
-        <div>
-            <header>
-                <h1 className={style.header}>Admin Page</h1>
-            </header>
-            <Link to="/">
-                <button className={style.backBtn}p>Go Back</button>
-            </Link>
+        <div className={style.admin_container}>
+            <NavBarAdmin/>
             <div className={style.adminPage}>
 
                 <div className={style.box}>
                     <h2>Users</h2> 
-                <UserSB users={users} userName={userName} user={user} setUserName={setUserName}
-                setUser={setUser} setModalA={setModalA}/>
+                    <UserSB users={users} userName={userName} user={user} setUserName={setUserName} 
+                    setUser={setUser} setModalA={setModalA}/>
                 </div>
-                <Banner setIsOpen={setModalA} isOpen={modalA}>
+
+                <BetaModal setIsOpen={setModalA} isOpen={modalA} resetData={setUser}>
                     <UserAdmin user={user[0]} setModalA= {setModalA} setUser={setUser}/>
-                </Banner> 
+                </BetaModal>
+
                 <div className={style.box}>
                     <h2>Categories</h2>
-                    <button className={style.mybtn } onClick={handleModal}>Create category</button>
-                <CategoriesSB categories={categories} categoryName={categoryName} category={category} 
-                setCategoryName={setCategoryName} setCategory={setCategory} setModalB={setModalB}/>
+                    <button className={style.btnAdmin} onClick={handleModalB}>Create category</button>
+                    <CategoriesSB categories={categories} categoryName={categoryName} category={category} 
+                    setCategoryName={setCategoryName} setCategory={setCategory} setModalB={setModalB}/>
                 </div>
-                <Banner setIsOpen={setModalB} isOpen={modalB}>
+
+                <BetaModal setIsOpen={setModalB} isOpen={modalB} resetData={setCategory}>
                     <CategoryAdmin category={category[0]} setModalB={setModalB} setCategory={setCategory}/>
-                </Banner>
+                </BetaModal>
+
                 <div className={style.box}>
                     <h2>Products</h2>
-                    <Link to='/admin/productAdmin'>
-                        <button className={style.mybtn}>Create product</button>
-                    </Link>
+                    <button className={style.btnAdmin} onClick={handleModalC}>Create product</button>
                     <ProductsSB products={products} productName={productName} 
-                    product={product} setProductName={setProductName} setProduct={setProduct}/>
+                    product={product} setProductName={setProductName} setProduct={setProduct} setModalC={setModalC}/>
                 </div>
+
+                <FormModal setIsOpen={setModalC} isOpen={modalC} resetData={setProduct}>
+                    <ProductAdmin product={product[0]} setModalC={setModalC} setProduct={setProduct}/>
+                </FormModal>
             </div>
+            <Footer/>
         </div>
     )
 }

@@ -12,8 +12,10 @@ import {
     CLEAN_DETAIL,
     EDIT_PRODUCT,
     ADD_CART,
+    DELETE_ONE_PRODUCT_CART,
     GET_CART, 
     DELETE_PRODUCT_CART,
+    DELETE_ALL_PRODUCTS_CART,
     GET_REVIEWS_PRODUCT,
     CREATE_REVIEW,
     CLEAN_REVIEW,
@@ -104,10 +106,11 @@ export function editProduct(payload){
     }
 }
 
+//------añade un prodcto al carrito
 export function addCartProduct (payload){
     //console.log(payload)
     return async function(dispatch){
-        const json = await axios.post(`${SERVER}/cart?userId=${payload.userId}&productId=${payload.productId}&required_quantity=${payload.required_quantity}`)
+        const json = await axios.post(`${SERVER}/cart?userId=${payload.userId}&productId=${payload.productId}&updated_quantity=sum`)
         //console.log(json)
         return dispatch({
             type: ADD_CART,
@@ -116,6 +119,16 @@ export function addCartProduct (payload){
     }
 }
 
+//------resta un item del mismo carrito
+export const deleteOneProduct = (userId, id) => async (dispatch) => {
+    const json = await axios.post(`${SERVER}/cart?userId=${userId}&productId=${id}&updated_quantity=rest`)
+    return dispatch({
+        type: DELETE_ONE_PRODUCT_CART,
+        payload: json.data
+    })
+}
+
+//------trae el carrito
 export const getCart = (id) => async (dispatch) => {
     const {data} = await axios.get(`${SERVER}/cart/${id}`)
         //console.log (data)
@@ -125,6 +138,7 @@ export const getCart = (id) => async (dispatch) => {
         })
 }
 
+//------borra el producto del carrito
 export const deleteProductCart = (userId, id) => async (dispatch) => {
     const json = await axios.delete(`${SERVER}/cart?userId=${userId}&productId=${id}`)
     return dispatch({
@@ -133,7 +147,14 @@ export const deleteProductCart = (userId, id) => async (dispatch) => {
     })
 }
 
-//localhost:3001/cart?userId=e7db2292-18d8-4e63-8b90-71ebf59fb934&productId=19b46859-4a77-42e2-9ffc-4ff9858cb1cb&required_quantity=1 
+export const deleteAllProductCart = (cartId) => async (dispatch) => {
+    const json = await axios.delete(`${SERVER}/cart/all?cartId=${cartId}`)
+    return dispatch({
+        type: DELETE_ALL_PRODUCTS_CART,
+        payload: json.data
+    })
+}
+
 
 export const createReview = (id, body) => async(dispatch) => {
     try{

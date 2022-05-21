@@ -1,22 +1,30 @@
-p.danger {
-    color: red;
-    font-size: 12px;
-  }
-  
-  input.danger {
-    border: 2px solid red;
-  }
+.errors {
+  color: red;
+  font-size: 12px;
+}
 
+.inputError{
+  animation: shake 300ms;
+}
+
+@keyframes shake {
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
 .containerProd{
   display: flex;
   position: absolute;
-  top: 50%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -35%);
-  border: 1px solid black;
-  border-radius: 10px ;
   padding: 15px;
-  background-color: #EFEFEF;
 }
 
 .containerProd div {
@@ -25,4 +33,9 @@ p.danger {
 
 .btn{
   margin-left: 4px;
+}
+
+.sectionA{
+  display: flex;
+  flex-wrap: wrap;
 }
