@@ -4,7 +4,6 @@ import image1 from "../../assets/celulares2.jpg";
 import s from "./CheckoutSteps.module.css";
 
 function CheckoutSteps() {
-  
   return (
     <div className={s.contenedor}>
       <div class="container">

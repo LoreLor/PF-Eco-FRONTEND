@@ -17,7 +17,7 @@ function LoginGoogle() {
           console.log("Login Failed");
         }}
       /> 
-  );
+  )
 }
 export default LoginGoogle;
 

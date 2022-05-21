@@ -12,6 +12,7 @@ import Pages from "../Pages/Pages"
 
 import style from './Home.module.css'
 import Footer from "../Footer/Footer"
+import { Link } from "react-router-dom"
 
 
 export default function Home (){
@@ -32,6 +33,7 @@ export default function Home (){
         setCurrentPg(pgNumber)
     }
     const users = JSON.parse(localStorage.getItem('userInfo'))
+
     
     useEffect(() => {
         dispatch(getAllProducts());
