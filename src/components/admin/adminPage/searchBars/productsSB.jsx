@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import { editProduct} from "../../../../redux/actions/products"
 import AlertModal from '../../AdminModals/AlertModal'
 import axios from "axios"
+import style from './searchBars.module.css'
 
 export default function ProductsSB({products,productName,product,setProductName,setProduct,setModalC}){
     const dispatch = useDispatch()
@@ -42,24 +43,26 @@ export default function ProductsSB({products,productName,product,setProductName,
             }
         }
     }
-return (<>
-<span>Edit product</span>
-                <form onSubmit={submitProduct}>
-                    <input type="search" value={productName} onChange={changeCategorie} placeholder="Search by name..."/>
-                    <button type='submit' onClick={submitProduct}>Search</button>
-                </form>
 
-        <div>
-            {product && Array.isArray(product)? <div>
-                <span>{product[0].name}</span>
-                <button name="edit" onClick={handleProduct}>Edit</button>
-                <button name= "cancel" onClick={cancelAction}>Cancel</button>
-                <AlertModal setIsOpen={setIsOpen} isOpen={isOpen}>
-                    <h2>Are you sure you want to edit "{product[0].name}"?</h2>
-                    <button name="edit" onClick={confirmEdit}>Edit</button>
-                </AlertModal>
-            </div>: <></>}
-            {product && typeof(product) === "string" ? <p>Product not found</p>:<></>}
-        </div>
-</>)
+    return (
+        <>
+            <form onSubmit={submitProduct} className={style.searchForm}>
+                <input type="search" value={productName} onChange={changeCategorie} placeholder="Search by name..." className={style.inputAdmin}/>
+                <button type='submit' onClick={submitProduct} className={style.btnAdmin}>Search</button>
+            </form>
+
+            <div>
+                {product && Array.isArray(product)? <div>
+                    <span>{product[0].name}</span>
+                    <button name="edit" onClick={handleProduct}>Edit</button>
+                    <button name= "cancel" onClick={cancelAction}>Cancel</button>
+                    <AlertModal setIsOpen={setIsOpen} isOpen={isOpen}>
+                        <h2>Are you sure you want to edit "{product[0].name}"?</h2>
+                        <button name="edit" onClick={confirmEdit}>Edit</button>
+                    </AlertModal>
+                </div>: <></>}
+                {product && typeof(product) === "string" ? <p>Product not found</p>:<></>}
+            </div>
+        </>
+    )
 }
