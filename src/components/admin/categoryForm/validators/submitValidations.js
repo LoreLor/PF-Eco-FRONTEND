@@ -1,4 +1,4 @@
-export default function activeValidations (name,input,categories){
+export default function submitValidations (name,input,categories){
     let errors = {}
 
     if(!name){let checkDb = categories && categories.filter(category => category.name.toLowerCase() === input.name.toLowerCase())

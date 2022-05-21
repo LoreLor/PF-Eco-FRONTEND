@@ -83,7 +83,7 @@ export default function ProductForm ({product,setModalC,setProduct}){
     }
     async function onSubmit (event){
         event.preventDefault()
-        setErrors(activeValidators(product,input,productsDb))
+        /* setErrors(activeValidators(product,input,productsDb)) */
         setErrors(submitValidators(product,input,productsDb))
         if(Object.keys(errors).length === 0
         && input.name !== ""
