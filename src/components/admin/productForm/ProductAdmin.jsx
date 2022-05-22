@@ -14,11 +14,11 @@ export default function ProductForm ({product,setModalC,setProduct}){
     
     const categoriesDb = useSelector((state)=>state.products.categoriesDb)
     const productsDb = useSelector((state)=>state.products.products)
-    const productEdit = useSelector((state)=>state.products.editProduct)
+    //const productEdit = useSelector((state)=>state.products.editProduct)
 
     const [keyword,setKeyword] = useState("")
     const [isOpen,setIsOpen] =useState(false)
-
+    
     const [errors,setErrors]=useState({})
     const [input,setInput] = useState({
         name: "",
@@ -83,7 +83,7 @@ export default function ProductForm ({product,setModalC,setProduct}){
     }
     async function onSubmit (event){
         event.preventDefault()
-        setErrors(activeValidators(product,input,productsDb))
+        /* setErrors(activeValidators(product,input,productsDb)) */
         setErrors(submitValidators(product,input,productsDb))
         if(Object.keys(errors).length === 0
         && input.name !== ""
@@ -101,7 +101,7 @@ export default function ProductForm ({product,setModalC,setProduct}){
                     data.append("file", file[index]);
                 }
 
-                product? (response = await axios.put(`http://localhost:3001/products/${productEdit.id}`,data))
+                product? (response = await axios.put(`http://localhost:3001/products/${product.id}`,data))
                 :(response = await axios.post("http://localhost:3001/products",data))
                 const result = response.data
                 setKeyword(result.msg)
@@ -154,18 +154,18 @@ useEffect(()=>{
         isActive: ""
         })
     }
-    if(product && productEdit){
+    if(product /* && productEdit */){
         setInput({
-        name: productEdit.name,
-        price: productEdit.price.toString(),
-        description: productEdit.description,
-        stock: productEdit.stock.toString(),
-        img: productEdit.img,
-        categories: productEdit.categories.map(c=>c.name),
-        isActive: productEdit.isActive
+        name: product.name,
+        price: product.price.toString(),
+        description: product.description,
+        stock: product.stock.toString(),
+        img: product.img,
+        categories: product.categories.map(c=>c.name),
+        isActive: product.isActive
         })
     }
-},[product,productEdit])
+},[product])
 
     return(
         <div className={style.containerProd}>
@@ -220,7 +220,7 @@ useEffect(()=>{
                             )
                         })}
                     </div>
-                        {product && productEdit ?<>
+                        {product?<>
                         <span>This product is: {input.isActive === true ? "Active": "Inactive"} </span>
                         <button name ="isActive" value={input.isActive} onClick={onStatus}>Change</button>
                         {errors?.isActive && <p className={style.errors}>{errors?.isActive}</p>}

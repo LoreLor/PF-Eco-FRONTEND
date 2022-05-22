@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import s from "./Register.module.css";
 import imagen1 from "../../assets/celulares4.jpg";
-import { useDispatch, useSelector } from "react-redux";
-import { register, registerClear } from "../../redux/actions/user";
+import activeValidator from './validators/activeValidations'
+import submitValidator from './validators/submitValidations'
+import axios from "axios";
+import AlertModal from '../admin/AdminModals/AlertModal'
+import Footer from "../Footer/Footer";
 
 const Register = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [user, setUser] = useState({
     name: "",
@@ -15,90 +17,56 @@ const Register = () => {
     user_name: "",
     email: "",
     password: "",
-    dni: "",
-    phone_number: "",
-    address: "",
-    rol: "",
-    birthday: "",
-    isActive: true,
   });
   const [errors, setErrors] = useState({});
 
-  function registerValidate() {
-    let errors = {};
-    if (user.name.length < 4) {
-      errors.name = "you must enter a Name";
-    } else if (/[^a-zA-Z ]/g.test(user.firstName)) {
-      errors.name = "Only text";
-    }
-    if (!user.last_name) {
-      errors.last_name = "you must enter a last_name";
-    }
-    if (!user.user_name) {
-      errors.user_name = "you must enter a user name";
-    }
-    if (!user.email) {
-      errors.email = "Email is required";
-    }
-    if (!user.password) {
-      errors.password = "Should have 8 or more characters";
-    }
-    if (!user.address) {
-      errors.address = "you must enter an address";
-    }
-    if (user.dni.length < 3) {
-      errors.dni = "DNI is required";
-    } else if (/[^0-9]/g.test(user.dni)) {
-      errors.dni = "Received only numbers";
-    }
-    if (user.phone_number.length < 3) {
-      errors.phone = "Phone is required";
-    } else if (/[^0-9]/g.test(user.phone_number)) {
-      errors.phone_number = "Received only numbers";
-    }
-    return errors;
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (Object.keys(errors).length === 0 && user.name !== "") {
-      setUser({
-        name: "",
-        last_name: "",
-        user_name: "",
-        email: "",
-        password: "",
-        dni: "",
-        phone_number: "",
-        address: "",
-        rol: "",
-        birthday: "",
-        isActive: true,
-      });
-      dispatch(register(user)).then((res) => {
-        if (!res) {
-          alert("User created.");
-          navigate("/login");
-        } else {
-          alert("Email or user already exists.");
-        }
-      });
-    } else {
-      alert("Check the fields.");
-    }
-  };
+  const [isOpen,setIsOpen]= useState(false)
+  const [keyword,setKeyword]= useState("")
 
   const handleChange = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value,
-    });
     setErrors(
-      registerValidate({
+      activeValidator({
         ...user,
         [e.target.name]: e.target.value,
       })
     );
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrors(submitValidator(user))
+    if (Object.keys(errors).length === 0 
+    && user.name !== ""
+    && user.last_name !== ""
+    && user.user_name !== ""
+    && user.email !==""
+    && user.password !=="") {
+      let response = null
+      try {
+        response = await axios.post("http://localhost:3001/user",user)
+        const result = response.data
+        setKeyword(result.msg)
+        console.log(keyword)
+        if(!isOpen && result.msg === "User registered"){
+          setIsOpen(true);
+          setUser({
+            name: "",
+            last_name: "",
+            user_name: "",
+            email: "",
+            password: "",
+          });
+        }else{
+          setIsOpen(true)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    } 
   };
 
   return (
@@ -147,7 +115,7 @@ const Register = () => {
                       type="text"
                       class="form-control"
                       aria-describedby="Insert your name"
-                      placeholder="Insert your  Name"
+                      placeholder="Insert your name..."
                       onChange={handleChange}
                     />
                   </div>
@@ -167,7 +135,7 @@ const Register = () => {
                       type="text"
                       class="form-control"
                       aria-describedby="Insert your last_name"
-                      placeholder="Insert your Last Name"
+                      placeholder="Insert your last name..."
                       onChange={handleChange}
                     />
                     {errors.last_name && (
@@ -188,32 +156,10 @@ const Register = () => {
                       type="email"
                       class="form-control"
                       aria-describedby="Insert your email"
-                      placeholder="Insert your email example@algo.com"
+                      placeholder="Insert your email... example@mail.com"
                       onChange={handleChange}
                     />
                     {errors.email && <p class="text-danger">{errors.email}</p>}
-                  </div>
-
-                  <div class="mb-3">
-                    <label
-                      htmlFor="validationCustom03"
-                      class="form-label"
-                      className={s.label}
-                    >
-                      <strong>Bitrhday: </strong>
-                    </label>
-                    <input
-                      id="birthday"
-                      name="birthday"
-                      type="date"
-                      class="form-control"
-                      aria-describedby="Insert your Birthday"
-                      placeholder="Insert your Last Name"
-                      onChange={handleChange}
-                    />
-                    {errors.birthday && (
-                      <p class="text-danger">{errors.birthday}</p>
-                    )}
                   </div>
 
                   <div class="mb-3">
@@ -230,7 +176,7 @@ const Register = () => {
                       type="text"
                       class="form-control"
                       aria-describedby="Insert your user_name"
-                      placeholder="username"
+                      placeholder="Insert a username..."
                       onChange={handleChange}
                     />
                   </div>
@@ -252,75 +198,12 @@ const Register = () => {
                       type="password"
                       class="form-control"
                       aria-describedby="Insert your name"
-                      placeholder="Insert your password min characters 8"
+                      placeholder="Insert your password min 8 characters ..."
                       onChange={handleChange}
                     />
                   </div>
                   {errors.password && (
                     <p class="text-danger">{errors.password}</p>
-                  )}
-
-                  <div class="mb-3">
-                    <label
-                      htmlFor="validationCustom03"
-                      class="form-label"
-                      className={s.label}
-                    >
-                      <strong>Dni: </strong>
-                    </label>
-                    <input
-                      id="dni"
-                      name="dni"
-                      type="number"
-                      class="form-control"
-                      aria-describedby="Insert your dni"
-                      placeholder="Insert your dni or social segurity"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  {errors.dni && <p class="text-danger">{errors.dni}</p>}
-
-                  <div class="mb-3">
-                    <label
-                      htmlFor="validationCustom03"
-                      class="form-label"
-                      className={s.label}
-                    >
-                      <strong>Address: </strong> Street - Number - City - Postal
-                      Code - Country{" "}
-                    </label>
-                    <input
-                      id="address"
-                      name="address"
-                      type="text"
-                      class="form-control"
-                      placeholder="Street Name/Number - City - Postal Code - Country"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  {errors.address && (
-                    <p class="text-danger">{errors.address}</p>
-                  )}
-
-                  <div class="mb-3">
-                    <label
-                      htmlFor="validationCustom03"
-                      class="form-label"
-                      className={s.label}
-                    >
-                      <strong>Phone Number: </strong>
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="phone_number"
-                      name="phone_number"
-                      placeholder="Phone Number"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  {errors.phone_number && (
-                    <p class="text-danger">{errors.phone_number}</p>
                   )}
 
                   <div class="mb-3">
@@ -343,16 +226,35 @@ const Register = () => {
                   {errors.img && <p class="text-danger">{errors.img}</p>}
 
                   <div className="d-grid">
+                  {Object.keys(errors).length === 0 && Object.keys(user).length > 0 && 
                     <button type="submit" class={s.btn}>
                       SUBMIT
                     </button>
+                  }
                   </div>
                 </div>
               </div>
             </div>
           </form>
+          <AlertModal isOpen={isOpen} setIsOpen={setIsOpen}>
+          {keyword.length ? (
+                    <>
+                    <h2>{keyword}</h2>
+                    {keyword === "User registered" ? (
+                        <button onClick={()=> navigate("/login",{replace:true})}className='bannerUpdate'> 
+                            Go to Login
+                        </button>
+                    ): (
+                        <button onClick={()=> setIsOpen(state=>!state)}>Ok</button>
+                    )}
+                    </>
+                ):(
+                    <h2>Invalid Data</h2>
+                )}
+          </AlertModal>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

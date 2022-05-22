@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
 import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart } from "../../redux/actions/products";
 import Footer from "../Footer/Footer";
@@ -99,42 +100,47 @@ export default function Cart(){
                     </div>
                     {
                         cart &&
-                            cart.details?.map(p => {
-                                return(
-                                        <div className={style.cart_products}>
-                                            <img src={p.img} style={{width: "330px", height: "200px"}} alt=''/>
-                                            <span>$ {p.price}</span>
-                                            <span>{p.name}</span>
-                                            <div className={style.cart_amount}>
-                                                <span>Qty: {`(${p.stock} max)`} </span>
-                                                <div className={style.amount_input}>
-                                                    <button onClick={e=>handleAdd(e, p.productId)} className={style.btnAdd}>+</button>
-                                                    <input 
-                                                        type='number'
-                                                        name="Qty"
-                                                        min={0}
-                                                        max={p.stock}
-                                                        value={p.bundle}
-                                                        readOnly
-                                                        // onChange = {(e) => handleQty(e, p.productId)}
-                                                        />
-                                                    <button onClick={e=>handleSubtract(e, p.productId, p.bundle)} className={style.btnSubs}>-</button>
+                            cart.details?.length !== 0?
+                                cart.details?.map(p => {
+                                    return(
+                                            <div className={style.cart_products}>
+                                                <img src={p.img} style={{width: "330px", height: "200px"}} alt=''/>
+                                                <span>$ {p.price}</span>
+                                                <span>{p.name}</span>
+                                                <div className={style.cart_amount}>
+                                                    <span>Qty: {`(${p.stock} max)`} </span>
+                                                    <div className={style.amount_input}>
+                                                        <button onClick={e=>handleAdd(e, p.productId)} className={style.btnAdd}>+</button>
+                                                        <input 
+                                                            type='number'
+                                                            name="Qty"
+                                                            min={0}
+                                                            max={p.stock}
+                                                            value={p.bundle}
+                                                            readOnly
+                                                            // onChange = {(e) => handleQty(e, p.productId)}
+                                                            />
+                                                        <button onClick={e=>handleSubtract(e, p.productId, p.bundle)} className={style.btnSubs}>-</button>
+                                                    </div>
                                                 </div>
+                                                <button className={style.btnDelete} onClick={e => handleDelete(e, p.productId)}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
+                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                        <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                    </svg>
+                                                    Delete
+                                                </button>
                                             </div>
-                                            <button className={style.btnDelete} onClick={e => handleDelete(e, p.productId)}>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
-                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                    <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                </svg>
-                                                Delete
-                                            </button>
-                                        </div>
-                                )
-                            }) 
+                                    )
+                            }):
+                            <div className={style.noCart}>
+                                <h2>No products in cart</h2>
+                                <NavLink to={'/'} className={style.goHome}>Go to Home for add products</NavLink>
+                            </div> 
                         }
                 </div>
                 <div className={style.cart_actions}>
-                    <button className={style.btnDelete} onClick={e=>handleDeleteALL(e, cart.id)}>
+                    <button className={style.btnDelete} onClick={e=>handleDeleteALL(e, cart.id)} disabled={!cart.details?.length}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                             <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -142,7 +148,7 @@ export default function Cart(){
                         Delete All
                     </button>
                     <span>Total: ${total} </span>
-                    <button className={style.btnPurchase} onClick={e=> handleCheckout(e)}>
+                    <button className={style.btnPurchase} onClick={e=> handleCheckout(e)} disabled={!cart.details?.length}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-bag" viewBox="0 0 16 16">
                             <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
                         </svg>
@@ -150,7 +156,7 @@ export default function Cart(){
                     </button>
                 </div>
             </div>
-            {/* <Footer/> */}
+            <Footer/>
         </div>
         )
 }

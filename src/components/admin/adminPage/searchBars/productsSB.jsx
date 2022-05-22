@@ -9,8 +9,9 @@ export default function ProductsSB({products,productName,product,setProductName,
     const dispatch = useDispatch()
 
     const [isOpen,setIsOpen] = useState(false)
+    const [search,setSearch] =useState("")
     
-    function changeCategorie(e){
+    function changeProduct(e){
         e.preventDefault()
         setProductName(e.target.value)
     }
@@ -18,7 +19,8 @@ export default function ProductsSB({products,productName,product,setProductName,
     function submitProduct(e){
         e.preventDefault()
         var result = products.filter((product)=>product.name.toLowerCase() === productName.toLowerCase())
-        setProduct(result?.length ? result : "Not found")
+        console.log(result)
+        setSearch(result?.length ? result : "Not found")
         setProductName("")
     }
 
@@ -29,15 +31,16 @@ export default function ProductsSB({products,productName,product,setProductName,
     }
     function cancelAction(e){
         e.preventDefault()
-        setProduct("")
+        setSearch("")
     }
    
     async function confirmEdit(e){
         if(e.target.name ==="edit"){
-            const response = await axios.get(`http://localhost:3001/products/${product[0].id}`)
-            const result = response.data
-            if(result.id === product[0].id ){
-                dispatch(editProduct(result))
+            const response = await axios.get(`http://localhost:3001/products/${search[0].id}`)
+            const result = await response.data
+            if(result.id === search[0].id ){
+                setProduct(result)
+                console.log(result)
                 setIsOpen(false)
                 setModalC(true)
             }
@@ -47,17 +50,17 @@ export default function ProductsSB({products,productName,product,setProductName,
     return (
         <>
             <form onSubmit={submitProduct} className={style.searchForm}>
-                <input type="search" value={productName} onChange={changeCategorie} placeholder="Search by name..." className={style.inputAdmin}/>
+                <input type="search" value={productName} onChange={changeProduct} placeholder="Search by name..." className={style.inputAdmin}/>
                 <button type='submit' onClick={submitProduct} className={style.btnAdmin}>Search</button>
             </form>
 
             <div>
-                {product && Array.isArray(product)? <div>
-                    <span>{product[0].name}</span>
+                {search && Array.isArray(search)? <div>
+                    <span>{search[0].name}</span>
                     <button name="edit" onClick={handleProduct}>Edit</button>
                     <button name= "cancel" onClick={cancelAction}>Cancel</button>
                     <AlertModal setIsOpen={setIsOpen} isOpen={isOpen}>
-                        <h2>Are you sure you want to edit "{product[0].name}"?</h2>
+                        <h2>Are you sure you want to edit "{search[0].name}"?</h2>
                         <button name="edit" onClick={confirmEdit}>Edit</button>
                     </AlertModal>
                 </div>: <></>}
