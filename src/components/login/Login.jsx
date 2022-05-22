@@ -108,7 +108,7 @@ const Login = () => {
                                             <LoginGoogle />                            
                                     </div>                           
                                 </div>
-                            </div> */}
+                            </div>  */}
                             <div className="row my-3 text-center">
                                 <span> You don't have an account?  Go to...<strong><Link to={`/register?redirect=${redirect}`}>Create your account</Link></strong></span>
                             </div>  
@@ -117,7 +117,7 @@ const Login = () => {
                 </div>
             </form>
         </div>
-    )
-}
+    );
+};
 
 export default Login;
