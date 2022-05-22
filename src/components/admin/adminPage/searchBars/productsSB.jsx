@@ -1,12 +1,10 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux"
-import { editProduct} from "../../../../redux/actions/products"
 import AlertModal from '../../AdminModals/AlertModal'
 import axios from "axios"
 import style from './searchBars.module.css'
+import SERVER from "../../../../server"
 
 export default function ProductsSB({products,productName,product,setProductName,setProduct,setModalC}){
-    const dispatch = useDispatch()
 
     const [isOpen,setIsOpen] = useState(false)
     const [search,setSearch] =useState("")
@@ -19,7 +17,6 @@ export default function ProductsSB({products,productName,product,setProductName,
     function submitProduct(e){
         e.preventDefault()
         var result = products.filter((product)=>product.name.toLowerCase() === productName.toLowerCase())
-        console.log(result)
         setSearch(result?.length ? result : "Not found")
         setProductName("")
     }
@@ -36,11 +33,10 @@ export default function ProductsSB({products,productName,product,setProductName,
    
     async function confirmEdit(e){
         if(e.target.name ==="edit"){
-            const response = await axios.get(`http://localhost:3001/products/${search[0].id}`)
+            const response = await axios.get(`${SERVER}/products/${search[0].id}`)
             const result = await response.data
             if(result.id === search[0].id ){
                 setProduct(result)
-                console.log(result)
                 setIsOpen(false)
                 setModalC(true)
             }

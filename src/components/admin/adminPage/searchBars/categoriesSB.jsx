@@ -1,12 +1,14 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+
 import AlertModal from '../../AdminModals/AlertModal'
-import { getSingleCategory } from "../../../../redux/actions/categories"
+import axios from "axios"
 import style from './searchBars.module.css'
+import SERVER from "../../../../server"
 
 export default function CategoriesSB({categories,categoryName,category,setCategoryName,setCategory,setModalB}){
-    const dispatch = useDispatch()
+
     const [isOpen,setIsOpen] = useState(false)
+    const [search,setSearch] =useState("")
     
     function changeCategorie(e){
         e.preventDefault()
@@ -16,7 +18,7 @@ export default function CategoriesSB({categories,categoryName,category,setCatego
     function submitCategorie(e){
         e.preventDefault()
         var result = categories.filter((category)=>category.name.toLowerCase() === categoryName.toLowerCase())
-        setCategory(result?.length ? result : "Not found")
+        setSearch(result?.length ? result : "Not found")
         setCategoryName("")
     }
 
@@ -27,14 +29,18 @@ export default function CategoriesSB({categories,categoryName,category,setCatego
     }
     function cancelAction(e){
         e.preventDefault()
-        setCategory("")
+        setSearch("")
     }
 
-    function confirmEdit(e){
+    async function confirmEdit(e){
         if(e.target.name ==="edit"){
+            const response = await axios.get(`${SERVER}/categories/${search[0].name}`)
+            const result = await response.data
+            if(result.id === search[0].id ){
+                setCategory(result)
             setIsOpen(false)
             setModalB(true)
-            dispatch( getSingleCategory(category[0].name))
+            }
         }
     }
     return (
@@ -45,20 +51,18 @@ export default function CategoriesSB({categories,categoryName,category,setCatego
             </form>
 
             <div className={style.subBox}>
-                {
-                    category && 
-                        Array.isArray(category)? 
+                {search && Array.isArray(search)? 
                             <div className={style.showedOptions}>
-                                <span>{category[0].name}</span>
+                                <span>{search[0].name}</span>
                                 <button name="edit" onClick={editCategorie} className={style.btnAdmin}>Edit</button>
                                 <button name= "cancel" onClick={cancelAction} className={style.btnCancel}>X</button>
                                 <AlertModal setIsOpen={setIsOpen} isOpen={isOpen}>
-                                    <h2>Are you sure you want to edit "{category[0].name}"?</h2>
+                                    <h2>Are you sure you want to edit "{search[0].name}"?</h2>
                                     <button name="edit" onClick={confirmEdit}>Edit</button>
                                 </AlertModal>
                             </div>: <></>
                 }
-                {category && typeof(category) === "string" ? <p>Category not found</p>:<></>}
+                {search && typeof(search) === "string" ? <p>Category not found</p>:<></>}
             </div>
         </>
     )

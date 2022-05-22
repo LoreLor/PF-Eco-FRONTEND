@@ -6,12 +6,12 @@ import {getCategories} from "../../../redux/actions/categories"
 import style from './CategoryAdmin.module.css'
 import FlashModal from '../AdminModals/FlashModal'
 import axios from "axios"
+import SERVER from "../../../server"
 
 export default function CategoryForm({category,setModalB,setCategory}){
     const dispatch = useDispatch()
     
     const categoriesDb = useSelector((state)=>state.products.categoriesDb)
-    const categoryEdit = useSelector((state)=>state.products.editCategory)
     
     const [keyword,setKeyword] = useState("")
     const [isOpen,setIsOpen] =useState(false)
@@ -45,14 +45,14 @@ export default function CategoryForm({category,setModalB,setCategory}){
         let response = null
             try {
             category?
-                (response = await fetch(`http://localhost:3001/categories/${categoryEdit.id}`,
+                (response = await fetch(`${SERVER}/categories/${category.id}`,
                 {method:"PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(data)
                 })):
-                (response = await fetch('http://localhost:3001/categories',
+                (response = await fetch(`${SERVER}/categories`,
                 {method:"POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -87,7 +87,7 @@ export default function CategoryForm({category,setModalB,setCategory}){
         event.preventDefault()
         try {
         let response = null
-        response = await axios.delete(`http://localhost:3001/categories/${categoryEdit.id}`)
+        response = await axios.delete(`http://localhost:3001/categories/${category.id}`)
         const result = response.data
        
         setKeyword(result.msg)
@@ -110,13 +110,12 @@ export default function CategoryForm({category,setModalB,setCategory}){
                 name: ""
             })
         }
-        if(category && categoryEdit){
-            console.log("HP2")
+        if(category){
             setInput({
-                name: categoryEdit.name
+                name: category.name
             })
         }
-    },[category,categoryEdit])
+    },[category])
 
     return (
         <div className={style.container}>
@@ -125,7 +124,7 @@ export default function CategoryForm({category,setModalB,setCategory}){
                         <div>
                             <h3>Add or Edit</h3>
                             <p>Name:</p>
-                            {category && categoryEdit? <p>Previus name: {categoryEdit.name}</p>:<></>}
+                            {category? <p>Previus name: {category.name}</p>:<></>}
                             <input className={errors?.name ? style.inputError:style.input} type='text' placeholder="Add a name..." name='name' value={input.name} onChange={handleInputChange}/>
                         </div>
                         {
@@ -140,7 +139,7 @@ export default function CategoryForm({category,setModalB,setCategory}){
                             }   
                         </div>
                     <div>
-                        {category && categoryEdit ? <button onClick={handleDelete}>Delete</button> :<></>}
+                        {category ? <button onClick={handleDelete}>Delete</button> :<></>}
                     </div>
                     </div>
                 </form>

@@ -6,6 +6,7 @@ import submitValidators from "./validators/submitValidations"
 import { getAllUsers } from "../../../redux/actions/user"
 import capitalize from '../adminPage/Capitalize'
 import style from './UserAdmin.module.css'
+import SERVER from "../../../server"
 
 export default function UserAdmin({user,setModalA,setUser}){
     const dispatch = useDispatch()
@@ -60,7 +61,7 @@ export default function UserAdmin({user,setModalA,setUser}){
         && input.rol !== ""){
             let response = null
             try {
-                response = await axios.put(`http://localhost:3001/user/status/${userData.id}`,input)
+                response = await axios.put(`${SERVER}/user/status/${userData.id}`,input)
                 const result = response.data
                 console.log(result)
                 setKeyword(result.msg)
