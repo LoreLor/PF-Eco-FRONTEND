@@ -169,7 +169,7 @@ useEffect(()=>{
 
     return(
         <div className={style.containerProd}>
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} className={style.formProduct}>
                     
                         <h3>Add or edit</h3>
                 <div className="sectionA">
@@ -206,7 +206,7 @@ useEffect(()=>{
                         <p>Categories:</p>
                         {
                             categoriesDb.length ?
-                                <select className={style.select} name ='categories' onChange={onArrayChange} multiple={true} size={categoriesDb && categoriesDb.length < 10 ? categoriesDb.length : 10}>
+                                <select className={style.select} name ='categories' onChange={onArrayChange} multiple={true} >
                         {categoriesDb && categoriesDb.map((category)=>{return(
                         <option key={category.id} value={category.name} className={style.categories}>{category.name}</option>
                         )})}
@@ -232,7 +232,7 @@ useEffect(()=>{
                     </div>
                     <div>
                         {Object.keys(errors).length === 0 && Object.keys(input).length > 0 && 
-                        <input type='submit' value= {product? "Edit": "Add"} onClick={onSubmit}/>   
+                        <input type='submit' value= {product? "Edit": "Add"} onClick={onSubmit} className={style.mybtn}/>   
                         }
                     </div>
 
@@ -243,7 +243,7 @@ useEffect(()=>{
                     <h2>{keyword}</h2>
                     {keyword === "Product created" || "Product edited" ? (
                         <>
-                            <button onClick={onClose}> 
+                            <button onClick={onClose} className={style.mybtn}> 
                                 Close All
                             </button>
                         </>

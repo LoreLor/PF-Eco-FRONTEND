@@ -26,6 +26,42 @@
   transform: translate(-50%, -35%);
   padding: 15px;
 }
+.containerProd h3{
+  font-weight: bold;
+  font-size: 20px;
+}
+.formProduct{
+  padding: 20px;
+}
+
+.input{
+  outline: none;
+  padding: 10px;
+  border: 0;
+  background-color: #E1E1E1;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: box-shadow 0.15s
+}
+.input:hover{
+  box-shadow: 0 0 0 3px #F66B0E;
+}
+
+.inputError{
+  animation: shake 300ms;
+  outline: none;
+  padding: 10px;
+  border: 0;
+  background-color: #E1E1E1;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: box-shadow 0.15s
+}
+.inputError:hover{
+  box-shadow: 0 0 0 3px #F66B0E;
+}
 
 .containerProd div {
   padding-bottom: 4px;
@@ -33,8 +69,32 @@
 
 .btn{
   margin-left: 4px;
+  background-color: #112B3C;
+  color: #E1E1E1;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  padding: 7px;
 }
-
+.mybtn{
+  align-self: center;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 0.5rem;
+  background: #6ecb63;
+  font-size: large;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+.select{
+  background-color: #E1E1E1;
+  border: none;
+  border-radius:5px;
+}
 .sectionA{
   display: flex;
   flex-wrap: wrap;

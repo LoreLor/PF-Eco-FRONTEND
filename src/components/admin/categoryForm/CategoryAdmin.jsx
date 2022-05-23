@@ -149,7 +149,7 @@ export default function CategoryForm({category,setModalB,setCategory}){
                         <h2>{keyword}</h2>
                         {keyword === "Category created" || keyword === "Category updated" || keyword === "Category deleted" ? 
                             <>
-                            <button onClick={handleClose}> 
+                            <button onClick={handleClose} className={style.mybtn}> 
                                 Close All
                             </button>
                             </>

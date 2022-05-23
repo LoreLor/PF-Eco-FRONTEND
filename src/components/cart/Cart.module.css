@@ -34,6 +34,15 @@
     box-shadow: 0.2rem 0.2rem 0.5rem rgb(0 0 0 / 20%);
 }
 
+.cart_img{
+    width: 200px;
+    height: auto;
+}
+
+.cart_img img {
+    width: 100%;
+}
+
 .cart_products span{
     font-size: larger;
     font-weight: bold;

@@ -57,7 +57,7 @@ export default function Cart(){
     function handleSubtract(e, productId, bundle){
         e.preventDefault()
         if(bundle === 1){
-            console.log('entro')
+            //console.log('entro')
             dispatch(deleteProductCart(user.id, productId))
             .then(r => {
                 dispatch(getCart(user.id))
@@ -77,14 +77,13 @@ export default function Cart(){
         if (user.id && user.email?.length) {
             navigate('/check')      
             closeCart()
-            
          } else {
              navigate('/register');
          }
 
         Swal.fire({
             title: 'CheckOut',
-            text:`${total}`,
+            text:`$ ${total}`,
             icon:'success',
             confirmButtonText:'Ok'
         })
@@ -113,8 +112,10 @@ export default function Cart(){
                             cart.details?.length !== 0?
                                 cart.details?.map(p => {
                                     return(
-                                            <div className={style.cart_products}>
-                                                <img src={p.img} style={{width: "330px", height: "200px"}} alt=''/>
+                                            <div className={style.cart_products} key={p.id}>
+                                                <div className={style.cart_img}>
+                                                    <img src={p.img} alt=''/>
+                                                </div>
                                                 <span>$ {p.price}</span>
                                                 <span>{p.name}</span>
                                                 <div className={style.cart_amount}>

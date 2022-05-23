@@ -241,11 +241,11 @@ const Register = () => {
                     <>
                     <h2>{keyword}</h2>
                     {keyword === "User registered" ? (
-                        <button onClick={()=> navigate("/login",{replace:true})}className='bannerUpdate'> 
+                        <button onClick={()=> navigate("/login",{replace:true})} className={s.btn}> 
                             Go to Login
                         </button>
                     ): (
-                        <button onClick={()=> setIsOpen(state=>!state)}>Ok</button>
+                        <button onClick={()=> setIsOpen(state=>!state)} className={s.btn}>Ok</button>
                     )}
                     </>
                 ):(

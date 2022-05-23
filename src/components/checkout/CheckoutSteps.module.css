@@ -1,8 +1,10 @@
 /* Checkout Steps */
 
 .contenedor {
-  box-shadow: 0 .5rem 1rem #112B3C!important;
   background-color: #112B3C;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 
