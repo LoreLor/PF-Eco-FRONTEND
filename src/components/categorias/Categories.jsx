@@ -1,5 +1,5 @@
-import React, { useEffect } from "react"
-import { filterByCategory, getAllProducts } from "../../redux/actions/products";
+import React from "react"
+import { filterByCategory } from "../../redux/actions/products";
 import { useDispatch } from "react-redux"
 
 import style from './Categories.module.css'
