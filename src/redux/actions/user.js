@@ -73,10 +73,10 @@ export function getSingleUser(id){
   }
 }
 
-export const userUpdate = ( userId) => async(dispatch) =>{
+export const userUpdate = ( userId, body) => async(dispatch) =>{
   try {
-    const {data} = await axios.put(`${SERVER}/user/${userId}`)
-    console.log('userId', userId)
+    const {data} = await axios.put(`${SERVER}/user/${userId}`,body)
+    console.log('data', data)
     dispatch({
       type: USER_UPDATE,
       payload: data

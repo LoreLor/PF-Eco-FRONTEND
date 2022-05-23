@@ -5,21 +5,23 @@ import image1 from "../../assets/celulares2.jpg";
 import activeValidations from "../registro/validators/activeValidations";
 import submitValidations from "../registro/validators/submitValidations"
 import {getSingleUser, userUpdate} from '../../redux/actions/user'
-import { savePaymentMethod } from "../../redux/actions/products";
+import { getCart, savePaymentMethod } from "../../redux/actions/products";
 import s from "./CheckoutSteps.module.css";
 
 function CheckoutSteps() {
-  const{id}=useParams()
+
   const navigate = useNavigate();
   const dispacth = useDispatch();
   const user = useSelector((state) => state.users.userInfo)
-  console.log('user', user)
-  const cart = useSelector((state) => state.cart)
-  
+  const cart = useSelector((state) => state.products.cart)
+
+  const toPrice = (num) => Number(num.toFixed(2)); //ejemplo 6.123 -'5.12' - 5.12
+  const amount= toPrice(cart.details.reduce((a, c) => a + c.bundle * c.price, 0));
+  const total_amount= toPrice(amount)
+
 
 
   const [input, setInput] = useState({
-
     name: user.name,
     last_name: user.last_name,
     phone_number: user.phone_number,
@@ -27,15 +29,14 @@ function CheckoutSteps() {
     address: user.address 
   })
 
-  console.log('input :>> ', input);
+
 
   const [paymentMethod, setPaymentMethod] = useState('paypal');
-
-
   const [errors, setErrors] = useState({});
   
   useEffect(()=>{
-    getSingleUser(id)
+    getSingleUser(user.id)
+    getCart(cart.id)
   }, [])
 
   const handleChange = (e) =>{
@@ -57,7 +58,7 @@ function CheckoutSteps() {
   const handleSubmit =(e) => {
       e.preventDefault();
       setErrors(submitValidations(user))
-      dispacth(userUpdate(id))
+      dispacth(userUpdate(user.id, input))
       dispacth(savePaymentMethod(paymentMethod));
       //navigate('/order')  
 
@@ -101,29 +102,38 @@ function CheckoutSteps() {
               <span class="badge badge-secondary badge-pill">3</span>
             </h4>
             <ul class="list-group mb-3">
+                  {cart ? cart.details.map((p) => {
+                    return(
               <li class="list-group-item d-flex justify-content-between lh-condensed">
-                <div>
-                  <h6 class="my-0">Product name</h6>
-                  <img src={image1} className={s.small} alt=""></img>
-                  <small class="text-muted">Brief description</small>
-                  <hr />
-                </div>
-                <span class="text-muted">Qty:</span>
-                <span class="text-muted">Price:</span>
-              </li>
+                    <>
+                    <div key={p.id}>
+                      <h6 class="my-0">Product name: {p.name}</h6>
+                      <img src={p.img} className={s.small} alt=""></img>
+                      <small class="text-muted">Brief description: {p.description}</small>
+                      <hr />
+                    </div>
+                    <span class="text-muted">Qty:{p.bundle}</span>
+                    <span class="text-muted">Price:{p.price}</span>
+                    </>
+                </li>
 
-              <li class="list-group-item d-flex justify-content-between bg-light">
-                <div class="text-success">
-                  <h6 class="my-0">Promo code</h6>
-                  <small>EXAMPLECODE</small>
-                </div>
-                <span class="text-success">-$5</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between">
-                <span>Total (USD)</span>
-                <strong>$20</strong>
-              </li>
-            </ul>
+                    )
+                }): null
+              }
+  
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                  <div class="text-success">
+                    <h6 class="my-0">Promo code</h6>
+                    <small>EXAMPLECODE</small>
+                  </div>
+                  <span class="text-success">-$5</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Total (AR)</span>
+                  <strong>{total_amount}</strong>
+                </li>
+              </ul>
+                  
 
             <form class="card p-2">
               <div class="input-group">
@@ -154,7 +164,7 @@ function CheckoutSteps() {
                   <input
                     type="text"
                     class="form-control"
-                    id="name"
+                    name="name"
                     placeholder=""
                     value={input.name}
                     onChange={handleChange}
@@ -171,7 +181,7 @@ function CheckoutSteps() {
                   <input
                     type="text"
                     class="form-control"
-                    id="last_name"
+                    name="last_name"
                     placeholder=""
                     value={input.last_name}
                     onChange={handleChange}
@@ -194,7 +204,7 @@ function CheckoutSteps() {
                   <input
                     type="text"
                     class="form-control"
-                    id="email"
+                    name="email"
                     value={input.email}
                     placeholder="Email"
                     onChange={handleChange}
@@ -213,7 +223,7 @@ function CheckoutSteps() {
                 <input
                   type="text"
                   class="form-control"
-                  id="address"
+                  name="address"
                   value={input.address}
                   placeholder="1234 Main St"
                   onChange={handleChange}
@@ -231,7 +241,7 @@ function CheckoutSteps() {
                 <input
                   type="text"
                   class="form-control"
-                  id="phone_number"
+                  name="phone_number"
                   value={input.phone_number}
                   placeholder="Only Numbers"
                   onChange={handleChange}
@@ -245,8 +255,8 @@ function CheckoutSteps() {
               <div class="d-block my-3">
                 <div class="custom-control custom-radio">
                   <input
-                    id="paypal"
-                    name="payment_method"
+                    name="paypal"
+                  
                     type="radio"
                     class="custom-control-input"
                     //value={cart.payment_method}
