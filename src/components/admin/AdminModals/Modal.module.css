@@ -24,7 +24,7 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    overflow:overlay;  
+      
 }
 .flash.show{
     display: flex;
@@ -38,7 +38,7 @@
     font-weight: bold;
     color: #fff;
     top: 0.5rem;
-    right: 0.5rem;
+    right: 1.2rem;
     width: 2rem;
     height: 2rem;
     border-radius: 0.2rem;
@@ -62,15 +62,20 @@
     border: 1px solid #888;
     width: 60%;
     height: max-content;
+    overflow:overlay;
   }
 
   #alert{
     min-height: 10rem;
+    width: 55%;
   }
   #beta{
     min-height: 11rem;
   }
   #form{
-    min-height: 50rem;
+    min-height: 38rem;
     /* width: 40%; */
   }
+  .basicmodal::-webkit-scrollbar {
+    display: none;
+    }

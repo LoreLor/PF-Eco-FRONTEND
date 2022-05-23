@@ -169,10 +169,14 @@ useEffect(()=>{
 
     return(
         <div className={style.containerProd}>
+                <div>
+                <form>
+                    
+                </form>
                 <form onSubmit={onSubmit} className={style.formProduct}>
                     
                         <h3>Add or edit</h3>
-                <div className="sectionA">
+                
                     
                         <p>Product name:</p>
                         <input className={errors?.name? style.inputError : style.input} type='text' placeholder="Product name..." name='name' value={input.name} onChange={onValueChange}/>
@@ -187,7 +191,7 @@ useEffect(()=>{
                             errors.price && (<p className={style.errors}>{errors.price}</p>)
                         }               
                     
-                </div>
+               
                     <div>
                         <p>Description:</p>
                         <textarea rows={5} cols={70} className={errors?.description? style.inputError : style.input} type='text' placeholder="Add more info..." name='description' value={input.description} onChange={onValueChange}/>
@@ -222,7 +226,7 @@ useEffect(()=>{
                     </div>
                         {product?<>
                         <span>This product is: {input.isActive === true ? "Active": "Inactive"} </span>
-                        <button name ="isActive" value={input.isActive} onClick={onStatus}>Change</button>
+                        <button name ="isActive" value={input.isActive} onClick={onStatus} className={style.btn}>Change</button>
                         {errors?.isActive && <p className={style.errors}>{errors?.isActive}</p>}
                         </>:<></>}
                     
@@ -237,11 +241,12 @@ useEffect(()=>{
                     </div>
 
                 </form>
+                </div>
         <FlashModal isOpen={isOpen} setIsOpen={setIsOpen}>
                 {keyword.length ? (
                     <>
                     <h2>{keyword}</h2>
-                    {keyword === "Product created" || "Product edited" ? (
+                    {keyword === "Product created" || keyword === "Product edited" ? (
                         <>
                             <button onClick={onClose} className={style.mybtn}> 
                                 Close All
@@ -250,7 +255,7 @@ useEffect(()=>{
                         ): (
                             <>
                             {keyword}
-                            <button onClick={()=> setIsOpen(state=>!state)}>Try Again</button>
+                            <button className={style.mybtn} onClick={()=> setIsOpen(state=>!state)}>Try Again</button>
                             </>
                         )}
                         </>

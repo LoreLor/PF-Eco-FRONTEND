@@ -1,11 +1,9 @@
 .errors {
+  padding-top: 3px;
   color: red;
   font-size: 12px;
 }
 
-.inputError{
-  animation: shake 300ms;
-}
 
 @keyframes shake {
   25% {
@@ -25,6 +23,7 @@
   left: 50%;
   transform: translate(-50%, -35%);
   padding: 15px;
+  margin-top: 3rem;
 }
 .containerProd h3{
   font-weight: bold;

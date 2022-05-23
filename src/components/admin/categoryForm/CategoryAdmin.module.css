@@ -87,3 +87,23 @@
   gap: 1rem;
   padding: 0.5rem;
 }
+
+.mybtn2{
+  align-self: center;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 0.5rem;
+  background: #b20600;
+  font-size: large;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  margin-left: 1rem;
+}
+.btnContainer{
+  display: flex;
+  align-items: center;
+}

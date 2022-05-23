@@ -14,6 +14,7 @@ import CategoryAdmin from "../categoryForm/CategoryAdmin"
 import ProductAdmin from "../productForm/ProductAdmin"
 import NavBarAdmin from './navBarAdmin/NavBarAdmin'
 import Footer from '../../Footer/Footer'
+import ManageUsers from './manageUsers/ManageUsers'
 
 export default function AdminPage (){
     const categories = useSelector((state)=> state.products.categoriesDb)
@@ -27,10 +28,12 @@ export default function AdminPage (){
     const [category,setCategory] = useState("")
     const [productName,setProductName]= useState("")
     const [product,setProduct]= useState("")
-    console.log(category)
+    const [base,setBase]=useState([])
+    
     const [modalA,setModalA] = useState(false)
     const [modalB,setModalB] = useState(false)
     const [modalC,setModalC] = useState(false)
+    const [modalD,setModalD] = useState(false)
    
     function handleModalB(e){
         e.preventDefault()
@@ -42,6 +45,11 @@ export default function AdminPage (){
         e.preventDefault()
         setProduct("")
         setModalC(true)
+    }
+
+    function handleModalD(e){
+        e.preventDefault()
+        setModalD(true)
     }
 
     useEffect(()=>{
@@ -58,9 +66,13 @@ export default function AdminPage (){
 
                 <div className={style.box}>
                     <h2>Users</h2> 
+                    <button className={style.btnAdmin} onClick={handleModalD}>Manage users</button>
                     <UserSB users={users} userName={userName} user={user} setUserName={setUserName} 
                     setUser={setUser} setModalA={setModalA}/>
                 </div>
+                <BetaModal setIsOpen={setModalD} isOpen={modalD} resetData={setBase}>
+                    <ManageUsers setBase={setBase} base={base} setModalD={setModalD}/>
+                </BetaModal>
 
                 <BetaModal setIsOpen={setModalA} isOpen={modalA} resetData={setUser}>
                     <UserAdmin user={user[0]} setModalA= {setModalA} setUser={setUser}/>
