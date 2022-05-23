@@ -31,7 +31,8 @@ export const USER_LOGOUT = 'USER_LOGOUT';
 export const USER_REGISTER ='USER_REGISTER';
 export const USER_REGISTER_CLEAR = 'USER_REGISTER_CLEAR';
 export const GET_USERS = "GET_USERS"
-export const GET_USER = "GET_USER"
+export const GET_USER = "GET_USER";
+export const USER_UPDATE = 'USER_UPDATE'
 
 
 export const ADD_CART = 'ADD_CART'
@@ -39,3 +40,5 @@ export const DELETE_ONE_PRODUCT_CART = 'DELETE_ONE_PRODUCT_CART'
 export const GET_CART = 'GET_CART'
 export const DELETE_PRODUCT_CART = 'DELETE_PRODUCT_CART'
 export const DELETE_ALL_PRODUCTS_CART = 'DELETE_ALL_PRODUCTS_CART'
+export const CLOSE_CART = 'CLOSE_CART';
+export const SAVE_PAYMENT_METHOD = 'SAVE_PAYMENT_METHOD'

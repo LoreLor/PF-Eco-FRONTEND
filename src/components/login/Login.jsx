@@ -48,7 +48,10 @@ const Login = () => {
                     })
                     navigate(redirect)
                 } else {
-                    alert("Email or password invalid.")
+                    Swal.fire({
+                        title:"Email or password invalid.",
+                        icon:'error'
+                    })
                 }
             }
         )

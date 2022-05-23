@@ -1,9 +1,72 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import image1 from "../../assets/celulares2.jpg";
+import activeValidations from "../registro/validators/activeValidations";
+import submitValidations from "../registro/validators/submitValidations"
+import {getSingleUser, userUpdate} from '../../redux/actions/user'
+import { savePaymentMethod } from "../../redux/actions/products";
 import s from "./CheckoutSteps.module.css";
 
 function CheckoutSteps() {
+  const{id}=useParams()
+  const navigate = useNavigate();
+  const dispacth = useDispatch();
+  const user = useSelector((state) => state.users.userInfo)
+  console.log('user', user)
+  const cart = useSelector((state) => state.cart)
+  
+
+
+  const [input, setInput] = useState({
+
+    name: user.name,
+    last_name: user.last_name,
+    phone_number: user.phone_number,
+    email: user.email,
+    address: user.address 
+  })
+
+  console.log('input :>> ', input);
+
+  const [paymentMethod, setPaymentMethod] = useState('paypal');
+
+
+  const [errors, setErrors] = useState({});
+  
+  useEffect(()=>{
+    getSingleUser(id)
+  }, [])
+
+  const handleChange = (e) =>{
+    e.preventDefault();
+    setErrors(
+      activeValidations({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
+    setPaymentMethod(paymentMethod)
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+ 
+  const handleSubmit =(e) => {
+      e.preventDefault();
+      setErrors(submitValidations(user))
+      dispacth(userUpdate(id))
+      dispacth(savePaymentMethod(paymentMethod));
+      //navigate('/order')  
+
+    } 
+
+  
+  
+  
+
   return (
     <div className={s.contenedor}>
       <div class="container">
@@ -81,18 +144,20 @@ function CheckoutSteps() {
             <div className={s.subtitulo}>
               <p>Billing Address</p>
             </div>
-            <form class="needs-validation" novalidate>
+            {user?(
+            <form class="needs-validation" novalidate onSubmit={handleSubmit}>
               <div class="row">
                 <div class="col-md-6 mb-3">
-                  <label for="firstName" className={s.label}>
-                    First name
+                  <label htmlFor="name" className={s.label}>
+                    Name
                   </label>
                   <input
                     type="text"
                     class="form-control"
-                    id="firstName"
+                    id="name"
                     placeholder=""
-                    value=""
+                    value={input.name}
+                    onChange={handleChange}
                     required
                   />
                   <div class="invalid-feedback">
@@ -100,7 +165,7 @@ function CheckoutSteps() {
                   </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="last_name" className={s.label}>
+                  <label htmlFor="last_name" className={s.label}>
                     Last name
                   </label>
                   <input
@@ -108,7 +173,8 @@ function CheckoutSteps() {
                     class="form-control"
                     id="last_name"
                     placeholder=""
-                    value=""
+                    value={input.last_name}
+                    onChange={handleChange}
                     required
                   />
                   <div class="invalid-feedback">
@@ -118,7 +184,7 @@ function CheckoutSteps() {
               </div>
 
               <div class="mb-3">
-                <label for="username" className={s.label}>
+                <label htmlFor="email" className={s.label}>
                   Email
                 </label>
                 <div class="input-group">
@@ -129,7 +195,9 @@ function CheckoutSteps() {
                     type="text"
                     class="form-control"
                     id="email"
+                    value={input.email}
                     placeholder="Email"
+                    onChange={handleChange}
                     required
                   />
                   <div class="invalid-feedback">
@@ -139,14 +207,16 @@ function CheckoutSteps() {
               </div>
 
               <div class="mb-3">
-                <label for="address" className={s.label}>
-                  Address
+                <label htmlFor="address" className={s.label}>
+                  Address: street - city - postal-code - country
                 </label>
                 <input
                   type="text"
                   class="form-control"
                   id="address"
+                  value={input.address}
                   placeholder="1234 Main St"
+                  onChange={handleChange}
                   required
                 />
                 <div class="invalid-feedback">
@@ -155,33 +225,19 @@ function CheckoutSteps() {
               </div>
 
               <div class="mb-3">
-                <label for="address2" className={s.label}>
+                <label htmlFor="phone_number" className={s.label}>
                   Phone Number <span class="text-muted">(Optional)</span>
                 </label>
                 <input
                   type="text"
                   class="form-control"
                   id="phone_number"
+                  value={input.phone_number}
                   placeholder="Only Numbers"
+                  onChange={handleChange}
                 />
               </div>
-
-              <hr class="mb-4" />
-
-              <div class="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  class="custom-control-input"
-                  id="save-info"
-                />
-                <label
-                  class="custom-control-label"
-                  for="save-info"
-                  className={s.label}
-                >
-                  Save this information for next time
-                </label>
-              </div>
+            
               <hr />
               <div className={s.subtitulo}>
                 <p>Payment</p>
@@ -193,11 +249,12 @@ function CheckoutSteps() {
                     name="payment_method"
                     type="radio"
                     class="custom-control-input"
+                    //value={cart.payment_method}
                     required
                   />
                   <label
                     class="custom-control-label"
-                    for="paypal"
+                    htmlFor="paypal"
                     className={s.label}
                   >
                     PayPal
@@ -211,7 +268,7 @@ function CheckoutSteps() {
                   Continue to Order Detail
                 </button>
               </div>
-            </form>
+            </form>):null}
           </div>
         </div>
       </div>
