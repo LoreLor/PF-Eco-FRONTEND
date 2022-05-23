@@ -167,7 +167,7 @@ export const createReview = (id, body) => async(dispatch) => {
         });
         
       }catch(error){
-        console.log(error);
+        return error;
       }
   
     }
