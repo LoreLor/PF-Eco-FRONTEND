@@ -1,0 +1,41 @@
+.container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 40px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    justify-items: center;
+}
+
+.reviewCard{
+    width: 350px;
+    background-color: #112B3C;
+    color: #f6f6f6;
+    border-radius: 15px ;
+    border: solid 1px black;
+    padding: 10px;
+}
+
+.btnAdmin{
+    align-self: center;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0.5rem;
+    background: #6ecb63;
+    font-size: medium;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    margin: 0px 0px 0px 5px;
+}
+
+.btnAdmin:hover{
+    box-shadow: 0.2rem 0.2rem 0.5rem #6ecb63;
+}

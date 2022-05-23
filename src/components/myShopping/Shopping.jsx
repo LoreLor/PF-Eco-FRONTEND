@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../navBar/NavBar";
 import { getShopping } from "../../redux/actions/products";
 import Review from "../review/Review";
+import style from './myShopping.module.css'
+import Swal from "sweetalert2";
 
 export default function Shopping() {
     const dispatch = useDispatch();
@@ -19,13 +21,13 @@ export default function Shopping() {
             <div>
                 <NavBar />
             </div>
-            <div>
+            <div className={style.container}>
 
                 {shopping?.map(s => {
                     return (
                         s.details?.map(d => {
                             return (
-                                <div>
+                                <div className={style.reviewCard}>
                                     <h4>{d.name}</h4>
                                     <div>
                                         <Review id={d.id}>
