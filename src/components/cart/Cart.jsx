@@ -74,23 +74,20 @@ export default function Cart(){
 
     function handleCheckout(e){
         e.preventDefault()
-        if (user.id && user.email?.length) {
-            navigate('/check')      
-            closeCart()
-            
-         } else {
-             navigate('/register');
-         }
-
-        Swal.fire({
-            title: 'CheckOut',
-            text:`${total}`,
-            icon:'success',
-            confirmButtonText:'Ok'
-        })
+        if(cart.details.length === 0) {
+            alert("Por favor, ingrese productos antes de realizar el CHECKOUT.")
+        } else {
+            dispatch(paidCartTemporal(cart.id))
+            Swal.fire({
+                title: 'CheckOut',
+                text:`${total}`,
+                icon:'success',
+                confirmButtonText:'Ok'
+            })
+        }
     }
-  
-      // function handleCheckout(e){
+
+    // function handleCheckout(e){
     //     e.preventDefault()
     //     if (user.id && user.email?.length) {
     //         navigate('/check')      
