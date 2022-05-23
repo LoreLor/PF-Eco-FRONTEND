@@ -29,7 +29,7 @@ export default function Carrousel(img) {
   };
 
   return (
-    <Box sx={{ maxWidth: 500, flexGrow: 1 }}>
+    <Box sx={{ maxWidth: 500, flexGrow: 1, marginTop: 5, marginBottom: 8}}>
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
@@ -44,7 +44,6 @@ export default function Carrousel(img) {
                             <Box
                                 component="img"
                                 sx={{
-                                    height: 500,
                                     display: 'block',
                                     maxWidth: 500,
                                     overflow: 'hidden',

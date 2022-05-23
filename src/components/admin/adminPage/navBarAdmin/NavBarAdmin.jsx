@@ -26,9 +26,6 @@ export default function NavBarAdmin({categories}){
                         </svg>
                         City Cell
                     </NavLink>
-                    <div className={style.box}>
-                        <SearchBar/>
-                    </div>
                 </div>
             </nav>
                 <div className={style.footHead}>

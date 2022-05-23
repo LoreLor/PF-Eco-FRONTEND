@@ -95,11 +95,11 @@ export default function UserAdmin({user,setModalA,setUser}){
         <form>
             <div className={style.containerForm}>
             {input.rol ? <span>User rol: {capitalize(input.rol)}</span>: <></>}
-            <button name= "rol" value={input.rol === "user"? "admin": "user"} onClick={onChange}>Change</button>
+            <button name= "rol" value={input.rol === "user"? "admin": "user"} onClick={onChange} className={style.btnAdmin}>Change</button>
             <span>User status: {input.isActive === true ? "Active": "Inactive"}</span>
-            <button name="isActive" value={input.isActive} onClick={onChange}>Change</button>
+            <button name="isActive" value={input.isActive} onClick={onChange} className={style.btnAdmin}>Change</button>
             <br/>
-            <input type="submit" value="Edit" onClick={onSubmit}/>
+            <input type="submit" value="Edit" onClick={onSubmit} className={style.btnAdmin}/>
             </div>
         </form>
 

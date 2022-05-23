@@ -24,7 +24,7 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    overflow:overlay    
+    overflow:overlay;  
 }
 .flash.show{
     display: flex;
@@ -61,7 +61,7 @@
     border-radius: 1rem;
     border: 1px solid #888;
     width: 60%;
-    /* height: 850px; */
+    height: max-content;
   }
 
   #alert{
@@ -73,5 +73,4 @@
   #form{
     min-height: 50rem;
     /* width: 40%; */
-    margin-top: 12rem;
   }

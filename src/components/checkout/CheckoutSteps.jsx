@@ -7,6 +7,7 @@ import submitValidations from "../registro/validators/submitValidations"
 import {getSingleUser, userUpdate} from '../../redux/actions/user'
 import { savePaymentMethod } from "../../redux/actions/products";
 import s from "./CheckoutSteps.module.css";
+import Footer from "../Footer/Footer";
 
 function CheckoutSteps() {
   const{id}=useParams()
@@ -62,10 +63,6 @@ function CheckoutSteps() {
       //navigate('/order')  
 
     } 
-
-  
-  
-  
 
   return (
     <div className={s.contenedor}>
@@ -272,8 +269,8 @@ function CheckoutSteps() {
           </div>
         </div>
       </div>
-
-      <footer class="my-5 pt-5 text-muted text-center text-small">
+      <Footer/>
+      {/* <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">© 2022 - 2045 cell city</p>
         <ul class="list-inline">
           <li class="list-inline-item">
@@ -286,7 +283,7 @@ function CheckoutSteps() {
             <Link to="#">Support</Link>
           </li>
         </ul>
-      </footer>
+      </footer> */}
     </div>
   );
 }

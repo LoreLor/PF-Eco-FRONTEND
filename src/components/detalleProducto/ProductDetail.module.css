@@ -12,13 +12,15 @@
     position: relative;
     border-radius: 10px;
     background-color: #f6f6f6;
-    box-shadow: 0.2rem 0.2rem 0.5rem rgb(0 0 0 / 20%)
+    box-shadow: 0.2rem 0.2rem 0.5rem rgb(0 0 0 / 20%);
+    height: 700px;
 }
 
 .card_img{
     display: flex;
     width: 820px;
     justify-content: center;
+    align-items: center;
 }
 .imgContainer{
     display: flex;

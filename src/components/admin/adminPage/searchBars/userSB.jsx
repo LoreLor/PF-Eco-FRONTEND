@@ -52,7 +52,7 @@ export default function UserSB ({users,userName,user,setUserName,setUser,setModa
                             <button name= "cancel" onClick={cancelAction} className={style.btnCancel}>X</button>
                             <AlertModal setIsOpen={setIsOpen} isOpen={isOpen}>
                                 <h2>Are you sure you want to edit "{user[0].name}"?</h2>
-                                <button name="edit" onClick={confirmEdit}>Edit</button>
+                                <button name="edit" onClick={confirmEdit} className={style.btnAdmin}>Edit</button>
                             </AlertModal>
                         </div>
                         : <></>

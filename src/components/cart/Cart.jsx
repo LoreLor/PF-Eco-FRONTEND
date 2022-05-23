@@ -57,7 +57,7 @@ export default function Cart(){
     function handleSubtract(e, productId, bundle){
         e.preventDefault()
         if(bundle === 1){
-            console.log('entro')
+            //console.log('entro')
             dispatch(deleteProductCart(user.id, productId))
             .then(r => {
                 dispatch(getCart(user.id))
@@ -72,7 +72,7 @@ export default function Cart(){
         }
     }
 
-    function handleCheckout(e){
+function handleCheckout(e){
         e.preventDefault()
         if(cart.details.length === 0) {
             alert("Por favor, ingrese productos antes de realizar el CHECKOUT.")
@@ -80,7 +80,7 @@ export default function Cart(){
             dispatch(paidCartTemporal(cart.id))
             Swal.fire({
                 title: 'CheckOut',
-                text:`${total}`,
+                text:${total},
                 icon:'success',
                 confirmButtonText:'Ok'
             })
@@ -90,7 +90,7 @@ export default function Cart(){
     // function handleCheckout(e){
     //     e.preventDefault()
     //     if (user.id && user.email?.length) {
-    //         navigate('/check')      
+    //         navigate('/check')
     //         closeCart()
 
     //      } else {
@@ -99,7 +99,7 @@ export default function Cart(){
 
     //     Swal.fire({
     //         title: 'CheckOut',
-    //         text:`${total}`,
+    //         text:${total},
     //         icon:'success',
     //         confirmButtonText:'Ok'
     //     })
@@ -128,8 +128,10 @@ export default function Cart(){
                             cart.details?.length !== 0?
                                 cart.details?.map(p => {
                                     return(
-                                            <div className={style.cart_products}>
-                                                <img src={p.img} style={{width: "330px", height: "200px"}} alt=''/>
+                                            <div className={style.cart_products} key={p.id}>
+                                                <div className={style.cart_img}>
+                                                    <img src={p.img} alt=''/>
+                                                </div>
                                                 <span>$ {p.price}</span>
                                                 <span>{p.name}</span>
                                                 <div className={style.cart_amount}>
