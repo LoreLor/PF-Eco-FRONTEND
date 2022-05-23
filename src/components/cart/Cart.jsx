@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, paidCartTemporal, deleteProductCartGuest, addCartProductGuest  } from "../../redux/actions/products";
-// import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, closeCart } from "../../redux/actions/products";
+// import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, closeCart, deleteProductCartGuest, addCartProductGuest} from "../../redux/actions/products";
 import Footer from "../Footer/Footer";
 import NavBar from "../navBar/NavBar";
 import style from './Cart.module.css'
@@ -28,7 +28,6 @@ export default function Cart(){
     
     //si hay usur logueado cargo su carrito, si no, el de invitados
     const cart = user ? cartUser.details : cartGuest
-    //console.log(cart)
 
     function handleDelete (e, productId){
         e.preventDefault()
@@ -45,45 +44,39 @@ export default function Cart(){
 
     function handleDeleteALL(e, id){
         e.preventDefault()
-        // console.log(id)
         dispatch(deleteAllProductCart(id))
         .then(r => {
             dispatch(getCart(user.id))
         })
     }
 
-    function handleAdd(e, productId){
+    function handleAdd(e, productId, bundle, stock){
         e.preventDefault()
         if(user){
-            dispatch(addCartProduct({
-                userId: user.id,
-                productId: productId,
-            }))
-            .then(r => {
-                dispatch(getCart(user.id))
-                acount()
-            })
+            if(bundle !== stock){
+                dispatch(addCartProduct({
+                    userId: user.id,
+                    productId: productId,
+                }))
+                .then(r => {
+                    dispatch(getCart(user.id))
+                    acount()
+                })
+            }else{
+                Swal.fire({
+                    title: 'No more Stock',
+                    text:`${stock} max`,
+                    icon:'error',
+                    confirmButtonText:'Ok'
+                })
+            }
         }
-        // }else{
-        //     let algo = cart.filter(p => {
-        //         return p.id === productId
-        //     })
-        //     if(!algo){
-        //         addCartProductGuest(productId)
-        //     }else{
-        //         setInput({
-        //             ...input, 
-        //             productId: input.productId + 1 
-        //         })
-        //     }
-        // }
     }
 
     function handleSubtract(e, productId, bundle){
         e.preventDefault()
         if(user){
             if(bundle === 1){
-                //console.log('entro')
                 dispatch(deleteProductCart(user.id, productId))
                 .then(r => {
                     dispatch(getCart(user.id))
@@ -97,20 +90,6 @@ export default function Cart(){
                 })
             }
         }
-        // }else{
-        //     let algo = cart.filter(p => {
-        //         return p.id === productId
-        //     })
-        //     if(algo){
-        //         setInput({
-        //             ...input, 
-        //             bundle: input.bundle - 1 
-        //         })
-        //     }
-        //     if(input.bundle === 1){
-        //         dispatch(deleteProductCartGuest(productId))
-        //     }
-        // }
     }
 
 function handleCheckout(e){
@@ -128,23 +107,6 @@ function handleCheckout(e){
         }
     }
 
-    // function handleCheckout(e){
-    //     e.preventDefault()
-    //     if (user.id && user.email?.length) {
-    //         navigate('/check')
-    //         closeCart()
-
-    //      } else {
-    //          navigate('/register');
-    //      }
-
-    //     Swal.fire({
-    //         title: 'CheckOut',
-    //         text:${total},
-    //         icon:'success',
-    //         confirmButtonText:'Ok'
-    //     })
-    // }
 
     function acount ()  {
         cart?.map(p => {
@@ -180,7 +142,7 @@ function handleCheckout(e){
                                                     {
                                                         user ?
                                                         <div className={style.amount_input}>
-                                                        <button onClick={e=>handleAdd(e, p.productId || p.id)} className={style.btnAdd}>+</button>
+                                                        <button onClick={e=>handleAdd(e, p.productId || p.id, p.bundle, p.stock)} className={style.btnAdd}>+</button>
                                                         <input 
                                                             type='number'
                                                             name="Qty"
@@ -188,7 +150,6 @@ function handleCheckout(e){
                                                             max={p.stock}
                                                             value={p.bundle}
                                                             readOnly
-                                                            // onChange = {(e) => handleQty(e, p.productId)}
                                                             />
                                                         <button onClick={e=>handleSubtract(e, p.productId || p.id, p.bundle)} className={style.btnSubs}>-</button>
                                                     </div>
