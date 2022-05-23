@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
-import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart } from "../../redux/actions/products";
+import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, paidCartTemporal  } from "../../redux/actions/products";
 import Footer from "../Footer/Footer";
 import NavBar from "../navBar/NavBar";
-
 import style from './Cart.module.css'
 
 export default function Cart(){
@@ -72,12 +71,17 @@ export default function Cart(){
 
     function handleCheckout(e){
         e.preventDefault()
-        Swal.fire({
-            title: 'CheckOut',
-            text:`${total}`,
-            icon:'success',
-            confirmButtonText:'Ok'
-        })
+        if(cart.details.length === 0) {
+            alert("Por favor, ingrese productos antes de realizar el CHECKOUT.")
+        } else {
+            dispatch(paidCartTemporal(cart.id))
+            Swal.fire({
+                title: 'CheckOut',
+                text:`${total}`,
+                icon:'success',
+                confirmButtonText:'Ok'
+            })
+        }
     }
 
     function acount ()  {

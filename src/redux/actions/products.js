@@ -19,6 +19,8 @@ import {
     GET_REVIEWS_PRODUCT,
     CREATE_REVIEW,
     CLEAN_REVIEW,
+    PAID_CART_TEMPORAL,
+    GET_SHOPPING
 } from "./constants";
 
 import axios from 'axios';
@@ -189,3 +191,27 @@ export function cleanReview(){
         type: CLEAN_REVIEW
     }
 }
+
+export const paidCartTemporal = (cartId) => async (dispatch) => {
+    const json = await axios.put(`${SERVER}/cart/?cartId=${cartId}`)
+    return dispatch({
+        type: PAID_CART_TEMPORAL,
+        payload: json.data
+    })
+}
+
+export const getShopping = (userId) => async (dispatch) => {
+    dispatch({
+        type: GET_SHOPPING
+    })
+    try {
+        const product = await axios.get(`${SERVER}/cart?userId=${userId}`)
+        dispatch({
+            type: GET_SHOPPING,
+            payload: product.data
+        })
+
+    } catch (error) {
+        return error;
+    }
+};
