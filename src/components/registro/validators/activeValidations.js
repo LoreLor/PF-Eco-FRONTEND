@@ -4,7 +4,7 @@ if(user.name){
     if(user.name.trim()=== ""){
         errors.name = "Must add a first name"
     }
-    else if(!/^[A-Za-z\s]+$/g.test(user.name.trim())){
+    else if(!/^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$/g.test(user.name.trim())){
         errors.name = "Must not include special characters"
     }
     else if(user.name.length < 3 || user.name.length > 30){
@@ -16,7 +16,7 @@ if(user.last_name){
     if(user.last_name.trim()=== ""){
         errors.last_name = "Must add a last name"
     }
-    else if(!/^[A-Za-z0-9\s]+$/g.test(user.last_name.trim())){
+    else if(!/^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$/g.test(user.last_name.trim())){
         errors.last_name = "Must not include special characters"
     }
     else if(user.last_name.length < 3 || user.last_name.length > 30){
@@ -28,11 +28,11 @@ if(user.user_name){
     if(user.user_name.trim()=== ""){
         errors.user_name = "Must add a username"
     }
-    else if(!/^[A-Za-z0-9\s]+$/g.test(user.user_name.trim())){
+/*     else if(!/^[A-Za-z0-9\s]+$/g.test(user.user_name.trim())){
         errors.user_name = "Must not include special characters"
-    }
-    else if(user.last_name.length < 5 || user.last_name.length > 20){
-        errors.user_name = "Must be between 5 and 20 characters"
+    } */
+    else if(user.last_name.length < 3 || user.last_name.length > 20){
+        errors.user_name = "Must be between 3 and 20 characters"
     }
 }
 

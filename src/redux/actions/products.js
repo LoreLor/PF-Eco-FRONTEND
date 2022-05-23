@@ -24,10 +24,7 @@ import {
 } from "./constants";
 
 import axios from 'axios';
-
-const SERVER = "http://localhost:3001";
-
-
+import SERVER from "../../server";
 
 export const getAllProducts = () => async (dispatch) => {
     dispatch({

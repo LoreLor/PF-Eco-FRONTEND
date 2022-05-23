@@ -5,9 +5,9 @@ export default function activeValidations (name,input,categories){
         if(input.name.trim()=== ""){
             errors.name = "Must have a name"
         }
-        else if(!/^[A-Za-z\u00f1\u00d1\s]+$/g.test(input.name.trim())){
+/*         else if(!/^[A-Za-z\u00f1\u00d1\s]+$/g.test(input.name.trim())){
             errors.name = "Must not include special characters"
-        }
+        } */
         else if(input.name.length < 2 || input.name.length > 30){
             errors.name = "Must be between 2 and 30 characters"
         }

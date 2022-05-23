@@ -27,11 +27,11 @@ export default function AdminPage (){
     const [category,setCategory] = useState("")
     const [productName,setProductName]= useState("")
     const [product,setProduct]= useState("")
- 
+    console.log(category)
     const [modalA,setModalA] = useState(false)
     const [modalB,setModalB] = useState(false)
     const [modalC,setModalC] = useState(false)
-    console.log(product[0])
+   
     function handleModalB(e){
         e.preventDefault()
         setCategory("")
@@ -74,7 +74,7 @@ export default function AdminPage (){
                 </div>
 
                 <BetaModal setIsOpen={setModalB} isOpen={modalB} resetData={setCategory}>
-                    <CategoryAdmin category={category[0]} setModalB={setModalB} setCategory={setCategory}/>
+                    <CategoryAdmin category={category} setModalB={setModalB} setCategory={setCategory}/>
                 </BetaModal>
 
                 <div className={style.box}>

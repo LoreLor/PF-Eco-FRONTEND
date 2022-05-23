@@ -7,6 +7,7 @@ import submitValidator from './validators/submitValidations'
 import axios from "axios";
 import AlertModal from '../admin/AdminModals/AlertModal'
 import Footer from "../Footer/Footer";
+import SERVER from "../../server";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -47,10 +48,9 @@ const Register = () => {
     && user.password !=="") {
       let response = null
       try {
-        response = await axios.post("http://localhost:3001/user",user)
+        response = await axios.post(`${SERVER}/user`,user)
         const result = response.data
         setKeyword(result.msg)
-        console.log(keyword)
         if(!isOpen && result.msg === "User registered"){
           setIsOpen(true);
           setUser({

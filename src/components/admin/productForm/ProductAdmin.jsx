@@ -7,7 +7,7 @@ import style from './ProductAdmin.module.css'
 import FlashModal from '../AdminModals/FlashModal'
 import activeValidators from './validators/activeValidations'
 import submitValidators from './validators/submitValidations'
-
+import SERVER from "../../../server"
 
 export default function ProductForm ({product,setModalC,setProduct}){
     const dispatch = useDispatch()
@@ -101,8 +101,8 @@ export default function ProductForm ({product,setModalC,setProduct}){
                     data.append("file", file[index]);
                 }
 
-                product? (response = await axios.put(`http://localhost:3001/products/${product.id}`,data))
-                :(response = await axios.post("http://localhost:3001/products",data))
+                product? (response = await axios.put(`${SERVER}/products/${product.id}`,data))
+                :(response = await axios.post(`${SERVER}/products`,data))
                 const result = response.data
                 setKeyword(result.msg)
                 
