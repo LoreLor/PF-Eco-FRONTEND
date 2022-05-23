@@ -18,6 +18,7 @@
     "bootstrap-icons": "^1.8.2",
     "dotenv": "^16.0.0",
     "fontawesome": "^5.6.3",
+    "jwt-decode": "^3.1.2",
     "react": "^18.1.0",
     "react-autocomplete-hint": "^2.0.0",
     "react-dom": "^18.1.0",

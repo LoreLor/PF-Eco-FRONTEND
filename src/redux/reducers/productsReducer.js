@@ -1,4 +1,5 @@
 
+import Swal from "sweetalert2";
 import {
     GET_ALL_CATEGORIES,
     GET_ALL_PRODUCTS_FAIL,
@@ -25,7 +26,8 @@ import {
     CREATE_REVIEW,
     CLEAN_REVIEW,
     PAID_CART_TEMPORAL,
-    GET_SHOPPING
+    GET_SHOPPING,
+    CLOSE_CART,
 } from "../actions/constants";
 
 
@@ -154,7 +156,10 @@ export const productsReducer = (state = initialState, action) => {
             const all2 = state.products;
             const filter2 = all2.filter(p => p.price >= action.payload.min && p.price <= action.payload.max)
             if (filter2.length === 0) {
-                alert("No products were found in that range, all products were displayed again.")
+                Swal.fire({
+                    title:"No products were found in that range, all products were displayed again.",
+                    icon: "error"
+                })
                 return {
                     ...state,
                 }
@@ -222,6 +227,11 @@ export const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 reviews: []
+            }
+        case CLOSE_CART:
+            return{
+                ...state,
+                cart:action.payload
             }
         default:
             return state

@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, paidCartTemporal  } from "../../redux/actions/products";
+// import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, closeCart } from "../../redux/actions/products";
 import Footer from "../Footer/Footer";
 import NavBar from "../navBar/NavBar";
 import style from './Cart.module.css'
@@ -11,6 +12,8 @@ export default function Cart(){
     
     const cart = useSelector((state) => state.products.cart)
     const dispatch =useDispatch();
+    const navigate = useNavigate();
+ 
     
     let total = 0;
     const user = localStorage.getItem('userInfo')
@@ -19,7 +22,7 @@ export default function Cart(){
 
     useEffect(() => {
         dispatch(getCart(user.id))
-    }, [dispatch, user.id])
+    }, [])
 
     function handleDelete (e, productId){
         e.preventDefault()
@@ -49,8 +52,8 @@ export default function Cart(){
             dispatch(getCart(user.id))
             acount()
         })
-
     }
+
     function handleSubtract(e, productId, bundle){
         e.preventDefault()
         if(bundle === 1){
@@ -71,18 +74,39 @@ export default function Cart(){
 
     function handleCheckout(e){
         e.preventDefault()
-        if(cart.details.length === 0) {
-            alert("Por favor, ingrese productos antes de realizar el CHECKOUT.")
-        } else {
-            dispatch(paidCartTemporal(cart.id))
-            Swal.fire({
-                title: 'CheckOut',
-                text:`${total}`,
-                icon:'success',
-                confirmButtonText:'Ok'
-            })
-        }
+        if (user.id && user.email?.length) {
+            navigate('/check')      
+            closeCart()
+            
+         } else {
+             navigate('/register');
+         }
+
+        Swal.fire({
+            title: 'CheckOut',
+            text:`${total}`,
+            icon:'success',
+            confirmButtonText:'Ok'
+        })
     }
+  
+      // function handleCheckout(e){
+    //     e.preventDefault()
+    //     if (user.id && user.email?.length) {
+    //         navigate('/check')      
+    //         closeCart()
+
+    //      } else {
+    //          navigate('/register');
+    //      }
+
+    //     Swal.fire({
+    //         title: 'CheckOut',
+    //         text:`${total}`,
+    //         icon:'success',
+    //         confirmButtonText:'Ok'
+    //     })
+    // }
 
     function acount ()  {
         cart.details?.map(p => {

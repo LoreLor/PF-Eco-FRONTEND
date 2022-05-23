@@ -20,7 +20,9 @@ import {
     CREATE_REVIEW,
     CLEAN_REVIEW,
     PAID_CART_TEMPORAL,
-    GET_SHOPPING
+    GET_SHOPPING,
+    CLOSE_CART,
+    SAVE_PAYMENT_METHOD,
 } from "./constants";
 
 import axios from 'axios';
@@ -192,6 +194,7 @@ export function cleanReview(){
     }
 }
 
+
 export const paidCartTemporal = (cartId) => async (dispatch) => {
     const json = await axios.put(`${SERVER}/cart/?cartId=${cartId}`)
     return dispatch({
@@ -215,3 +218,24 @@ export const getShopping = (userId) => async (dispatch) => {
         return error;
     }
 };
+
+export const closeCart = (userId) => async(dispatch) => {
+    try {
+        const {data}= await axios.put(`${SERVER}/cart?userId=${userId}&open=false`)
+        dispatch({
+            type: CLOSE_CART,
+            payload: data
+        })
+        
+    } catch (error) {
+        console.log( error)      
+    }
+}
+
+export const savePaymentMethod = (data) => (dispatch) => {
+    dispatch({
+        type: SAVE_PAYMENT_METHOD,
+        payload: data
+    })
+}
+
