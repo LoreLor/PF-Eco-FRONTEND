@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createReview } from "../../redux/actions/products";
-
+import style from './review.module.css'
+import Swal from "sweetalert2";
 
 export default function Review({id}) {
     const dispatch = useDispatch();
@@ -33,7 +34,11 @@ export default function Review({id}) {
             dispatch(createReview(id,input))
             .then(r => {
                 if(!r){
-                    alert("Review added.")
+                    Swal.fire({
+                        title: 'Review Added',
+                        icon:'succes',
+                        confirmButtonText:'Ok'
+                    })
                     navigate("/")
                 } else {
                     alert("This product already has a review added.")
@@ -41,7 +46,12 @@ export default function Review({id}) {
             })
             
         } else {
-            alert("Complete all the fields. Fields cannot be null.")
+            Swal.fire({
+                title: 'Review',
+                text:"Complete all the fields. Fields cannot be null.",
+                icon:'error',
+                confirmButtonText:'Ok'
+            })
         }
     }
 
@@ -50,13 +60,14 @@ export default function Review({id}) {
             {/* <div>
                 <NavBar />
             </div> */}
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={style.formReview}>
                 <div><label>Title: </label></div>
                 <input
                     type={"text"}
                     name={"title"}
                     value={input.title}
                     onChange={e => handleChange(e)}
+                    className={style.inputReview}
                 ></input>
                 <div><label>Description: </label></div>
                 <input
@@ -64,6 +75,7 @@ export default function Review({id}) {
                     name={"description"}
                     value={input.description}
                     onChange={e => handleChange(e)}
+                    className={style.inputReview}
                 ></input>
                 <div><label>Points: </label></div>
                 <input
@@ -73,13 +85,14 @@ export default function Review({id}) {
                     min={0}
                     max={5}
                     onChange={e => handleChange(e)}
+                    className={style.inputReviewPoints}
                 ></input>
 
             <br></br>
             <br></br>
 
-                <div>
-                    <button type="submit" >CREATE REVIEW</button>
+                <div className={style.btnContainer}>
+                    <button type="submit" className={style.btnAdmin}>CREATE REVIEW</button>
                 </div>
             </form>
         </div>
