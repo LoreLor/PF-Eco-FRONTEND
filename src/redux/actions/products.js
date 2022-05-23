@@ -23,6 +23,8 @@ import {
     GET_SHOPPING,
     CLOSE_CART,
     SAVE_PAYMENT_METHOD,
+    ADD_PRODUCT_GUEST,
+    DELETE_ONE_PRODUCT_GUEST
 } from "./constants";
 
 import axios from 'axios';
@@ -120,6 +122,17 @@ export function addCartProduct (payload){
     }
 }
 
+export function addCartProductGuest (payload){
+    return async function (dispatch){
+        const {data} = await axios.get(`${SERVER}/products/${payload.productId}`)
+        return dispatch({
+            type: ADD_PRODUCT_GUEST,
+            payload: data 
+        })
+    }
+}
+
+
 //------resta un item del mismo carrito
 export const deleteOneProduct = (userId, id) => async (dispatch) => {
     const json = await axios.post(`${SERVER}/cart?userId=${userId}&productId=${id}&updated_quantity=rest`)
@@ -146,6 +159,15 @@ export const deleteProductCart = (userId, id) => async (dispatch) => {
         type: DELETE_PRODUCT_CART,
         payload: json.data
     })
+}
+
+export const deleteProductCartGuest = (id) => {
+    return function (dispatch){
+        return dispatch({
+            type: DELETE_ONE_PRODUCT_GUEST,
+            payload: id
+        })
+    }
 }
 
 export const deleteAllProductCart = (cartId) => async (dispatch) => {
@@ -238,4 +260,6 @@ export const savePaymentMethod = (data) => (dispatch) => {
         payload: data
     })
 }
+
+
 
