@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -74,36 +74,33 @@ export default function Cart(){
 
 function handleCheckout(e){
         e.preventDefault()
-        if(cart.details.length === 0) {
-            alert("Por favor, ingrese productos antes de realizar el CHECKOUT.")
-        } else {
-            dispatch(paidCartTemporal(cart.id))
-            Swal.fire({
-                title: 'CheckOut',
-                text:`$ ${total}`,
-                icon:'success',
-                confirmButtonText:'Ok'
-            })
+        if (user.id && user.email?.length) {
+            navigate('/check')
+         } else {
+             navigate('/register');
+         }
+
+        Swal.fire({
+            title: 'CheckOut',
+            text:`${total}`,
+            icon:'success',
+            confirmButtonText:'Ok'
+        })
+        
+        // if(cart.details.length === 0) {
+        //     alert("Por favor, ingrese productos antes de realizar el CHECKOUT.")
+        // } else {
+        //     dispatch(paidCartTemporal(cart.id))
+        //     Swal.fire({
+        //         title: 'CheckOut',
+        //         text:`$ ${total}`,
+        //         icon:'success',
+        //         confirmButtonText:'Ok'
+        //     })
         }
-    }
+    
 
-    // function handleCheckout(e){
-    //     e.preventDefault()
-    //     if (user.id && user.email?.length) {
-    //         navigate('/check')
-    //         closeCart()
-
-    //      } else {
-    //          navigate('/register');
-    //      }
-
-    //     Swal.fire({
-    //         title: 'CheckOut',
-    //         text:${total},
-    //         icon:'success',
-    //         confirmButtonText:'Ok'
-    //     })
-    // }
+  
 
     function acount ()  {
         cart.details?.map(p => {

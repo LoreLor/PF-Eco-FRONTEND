@@ -232,10 +232,5 @@ export const closeCart = (userId) => async(dispatch) => {
     }
 }
 
-export const savePaymentMethod = (data) => (dispatch) => {
-    dispatch({
-        type: SAVE_PAYMENT_METHOD,
-        payload: data
-    })
-}
+
 
