@@ -139,7 +139,7 @@ export default function CategoryForm({category,setModalB,setCategory}){
                             }   
                         </div>
                     <div>
-                        {category ? <button onClick={handleDelete}>Delete</button> :<></>}
+                        {category ? <button onClick={handleDelete} className={style.mybtn2}>Delete</button> :<></>}
                     </div>
                     </div>
                 </form>
@@ -155,7 +155,7 @@ export default function CategoryForm({category,setModalB,setCategory}){
                             </>
                         : 
                             <>
-                            <button onClick={()=> setIsOpen(false)}>Try Again</button>
+                            <button className={style.mybtn}onClick={()=> setIsOpen(false)}>Ok</button>
                             </>
                         
                     }

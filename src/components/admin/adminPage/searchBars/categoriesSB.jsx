@@ -58,7 +58,7 @@ export default function CategoriesSB({categories,categoryName,category,setCatego
                                 <button name= "cancel" onClick={cancelAction} className={style.btnCancel}>X</button>
                                 <AlertModal setIsOpen={setIsOpen} isOpen={isOpen}>
                                     <h2>Are you sure you want to edit "{search[0].name}"?</h2>
-                                    <button name="edit" onClick={confirmEdit}>Edit</button>
+                                    <button name="edit" onClick={confirmEdit} className={style.btnAdmin}>Edit</button>
                                 </AlertModal>
                             </div>: <></>
                 }
