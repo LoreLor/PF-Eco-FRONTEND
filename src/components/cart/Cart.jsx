@@ -80,7 +80,7 @@ function handleCheckout(e){
             dispatch(paidCartTemporal(cart.id))
             Swal.fire({
                 title: 'CheckOut',
-                text:${total},
+                text:`$ ${total}`,
                 icon:'success',
                 confirmButtonText:'Ok'
             })
