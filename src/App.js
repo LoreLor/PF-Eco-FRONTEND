@@ -11,6 +11,8 @@ import Cart from './components/cart/Cart';
 import PrivateRoute from './components/admin/adminPage/PrivateRoute';
 import CheckoutSteps from './components/checkout/CheckoutSteps';
 import OrderDetail from './components/checkout/OrderDetail';
+import Shopping from './components/myShopping/Shopping';
+import Review from './components/review/Review';
 
 function App() {
   
@@ -23,6 +25,8 @@ function App() {
         <Route path ='/login' element={<Login />} />
         <Route path = '/home/:id' element={<ProductDetail/>}/>
         <Route path = '/cart'element={<Cart/>}/>
+        <Route path = '/myShopping'element={<Shopping/>}/>
+        <Route path = '/review'element={<Review/>}/>
         <Route path = '/register' element={<Register />} />
         <Route path={'*'} element={<Error404/>}/>
         <Route path="/check" element={<CheckoutSteps/>}/>

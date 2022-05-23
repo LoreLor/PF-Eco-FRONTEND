@@ -19,6 +19,8 @@ import {
     GET_REVIEWS_PRODUCT,
     CREATE_REVIEW,
     CLEAN_REVIEW,
+    PAID_CART_TEMPORAL,
+    GET_SHOPPING,
     CLOSE_CART,
     SAVE_PAYMENT_METHOD,
 } from "./constants";
@@ -192,6 +194,31 @@ export function cleanReview(){
     }
 }
 
+
+export const paidCartTemporal = (cartId) => async (dispatch) => {
+    const json = await axios.put(`${SERVER}/cart/?cartId=${cartId}`)
+    return dispatch({
+        type: PAID_CART_TEMPORAL,
+        payload: json.data
+    })
+}
+
+export const getShopping = (userId) => async (dispatch) => {
+    dispatch({
+        type: GET_SHOPPING
+    })
+    try {
+        const product = await axios.get(`${SERVER}/cart?userId=${userId}`)
+        dispatch({
+            type: GET_SHOPPING,
+            payload: product.data
+        })
+
+    } catch (error) {
+        return error;
+    }
+};
+
 export const closeCart = (userId) => async(dispatch) => {
     try {
         const {data}= await axios.put(`${SERVER}/cart?userId=${userId}&open=false`)
@@ -211,3 +238,4 @@ export const savePaymentMethod = (data) => (dispatch) => {
         payload: data
     })
 }
+
