@@ -10,6 +10,7 @@ import imagen1 from '../../assets/celulares.jpg';
 import imagen2 from '../../assets/celulares1.jpg';
 import imagen3 from '../../assets/celulares3.jpg';
 import LoginGoogle from './LoginGoogle';
+import Footer from '../Footer/Footer';
 
 
 
@@ -119,6 +120,7 @@ const Login = () => {
                     </div>
                 </div>
             </form>
+            <Footer/> 
         </div>
     );
 };

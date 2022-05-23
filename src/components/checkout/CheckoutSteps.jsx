@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
-import image1 from "../../assets/celulares2.jpg";
+import { NavLink, useNavigate} from "react-router-dom";
 import activeValidations from "../registro/validators/activeValidations";
 import submitValidations from "../registro/validators/submitValidations"
 import {getSingleUser, userUpdate} from '../../redux/actions/user'
@@ -18,7 +17,7 @@ function CheckoutSteps() {
 
   const toPrice = (num) => Number(num.toFixed(2)); //ejemplo 6.123 -'5.12' - 5.12
   const amount= toPrice(cart.details.reduce((a, c) => a + c.bundle * c.price, 0));
-  const total_amount= toPrice(amount)
+  const total_amount= (cart.price_total - 5)
 
 
 
@@ -27,13 +26,11 @@ function CheckoutSteps() {
     last_name: user.last_name,
     phone_number: user.phone_number,
     email: user.email,
-    address: user.address 
+    address: user.address,
+    payment_method: ""
   })
 
-
-
-  const [paymentMethod, setPaymentMethod] = useState('paypal');
-  const [errors, setErrors] = useState({});
+  const [, setErrors] = useState({});
   
   useEffect(()=>{
     getSingleUser(user.id)
@@ -48,7 +45,6 @@ function CheckoutSteps() {
         [e.target.name]: e.target.value,
       })
     );
-    setPaymentMethod(paymentMethod)
     setInput({
       ...input,
       [e.target.name]: e.target.value,
@@ -60,12 +56,12 @@ function CheckoutSteps() {
       e.preventDefault();
       setErrors(submitValidations(user))
       dispacth(userUpdate(user.id, input))
-      dispacth(savePaymentMethod(paymentMethod));
-      //navigate('/order')  
+      navigate('/order')  
 
     } 
 
   return (
+    <div>
     <div className={s.contenedor}>
       <div class="container">
         <div class="py-5 text-center">
@@ -96,7 +92,7 @@ function CheckoutSteps() {
               <div className={s.subtitulo}>
                 <p>Your Cart</p>
               </div>
-              <span class="badge badge-secondary badge-pill">3</span>
+              <span class="badge badge-secondary badge-pill"></span>
             </h4>
             <ul class="list-group mb-3">
                   {cart ? cart.details.map((p) => {
@@ -112,9 +108,7 @@ function CheckoutSteps() {
                     <span class="text-muted">Qty:{p.bundle}</span>
                     <span class="text-muted">Price:{p.price}</span>
                     </>
-                </li>
-
-                    )
+                </li> )
                 }): null
               }
   
@@ -130,8 +124,6 @@ function CheckoutSteps() {
                   <strong>{total_amount}</strong>
                 </li>
               </ul>
-                  
-
             <form class="card p-2">
               <div class="input-group">
                 <input
@@ -151,8 +143,8 @@ function CheckoutSteps() {
             <div className={s.subtitulo}>
               <p>Billing Address</p>
             </div>
-            {user?(
-            <form class="needs-validation" novalidate onSubmit={handleSubmit}>
+            {user ? (
+            <form class="needs-validation" noValidate onSubmit={handleSubmit}>
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <label htmlFor="name" className={s.label}>
@@ -252,34 +244,36 @@ function CheckoutSteps() {
               <div class="d-block my-3">
                 <div class="custom-control custom-radio">
                   <input
-                    name="paypal"
-                  
+                    name="payment_method"              
                     type="radio"
                     class="custom-control-input"
-                    //value={cart.payment_method}
+                    value="paypal"
                     required
+                    onChange={handleChange}
                   />
                   <label
                     class="custom-control-label"
-                    htmlFor="paypal"
+                    htmlFor="payment_method"
                     className={s.label}
+
                   >
                     PayPal
                   </label>
                 </div>
               </div>
-
               <hr class="mb-4" />
               <div className="d-grid">
                 <button class={s.btn} type="submit">
-                  Continue to Order Detail
+                  Proceed to Payment
                 </button>
               </div>
             </form>):null}
           </div>
         </div>
       </div>
-      <Footer/>
+      </div>
+       <Footer /> 
+     
       {/* <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">© 2022 - 2045 cell city</p>
         <ul class="list-inline">

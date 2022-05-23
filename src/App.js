@@ -30,7 +30,7 @@ function App() {
         <Route path = '/register' element={<Register />} />
         <Route path={'*'} element={<Error404/>}/>
         <Route path="/check" element={<CheckoutSteps/>}/>
-        <Route path="/pay" element={<OrderDetail/>}/>
+        <Route path="/order" element={<OrderDetail/>}/>
         
       </Routes>
     </Fragment>

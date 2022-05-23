@@ -48,7 +48,7 @@ const Register = () => {
     && user.password !=="") {
       let response = null
       try {
-        response = await axios.post(`${SERVER}/user`,user)
+        response = await axios.post(`${SERVER}/user`,user) //no entiendo para que se hace esto aca si esta en redux
         const result = response.data
         setKeyword(result.msg)
         if(!isOpen && result.msg === "User registered"){
@@ -254,7 +254,7 @@ const Register = () => {
           </AlertModal>
         </div>
       </div>
-      <Footer/>
+       <Footer/> 
     </>
   );
 };
