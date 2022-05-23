@@ -31,8 +31,15 @@ export default function Review({id}) {
         e.preventDefault();
         if (/* Object.keys(errors).length === 0 && */ input.title && input.description && input.points) {
             dispatch(createReview(id,input))
-            alert("Review added.")
-            navigate("/")
+            .then(r => {
+                if(!r){
+                    alert("Review added.")
+                    navigate("/")
+                } else {
+                    alert("This product already has a review added.")
+                }
+            })
+            
         } else {
             alert("Complete all the fields. Fields cannot be null.")
         }
