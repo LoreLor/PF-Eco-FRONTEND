@@ -25,6 +25,8 @@ import {
     GET_REVIEWS_PRODUCT,
     CREATE_REVIEW,
     CLEAN_REVIEW,
+    PAID_CART_TEMPORAL,
+    GET_SHOPPING,
     CLOSE_CART,
 } from "../actions/constants";
 
@@ -36,10 +38,11 @@ const initialState = {
     detail: {},
     loading: true,
     error: {},
-    categoriesDb:[],
-    editCategory:{},
+    categoriesDb: [],
+    editCategory: {},
     editProduct: {},
-    cart: []
+    cart: [],
+    shopping: []
 }
 
 export const productsReducer = (state = initialState, action) => {
@@ -171,12 +174,12 @@ export const productsReducer = (state = initialState, action) => {
                 detail: {}
             }
         case ADD_CART:
-            return{
+            return {
                 ...state,
                 cart: action.payload
             }
         case DELETE_ONE_PRODUCT_CART:
-            return{
+            return {
                 ...state,
                 cart: action.payload
             }
@@ -186,19 +189,30 @@ export const productsReducer = (state = initialState, action) => {
                 if (a.id < b.id) return -1;
                 return 0
             })
-            return{
+            return {
                 ...state,
                 cart: action.payload
             }
         case DELETE_PRODUCT_CART:
-            return{
+            return {
                 ...state,
                 cart: action.payload
             }
         case DELETE_ALL_PRODUCTS_CART:
-            return{
+            return {
                 ...state,
                 cart: action.payload
+            }
+        case PAID_CART_TEMPORAL:
+            return {
+                ...state,
+                cart: [],
+                // cart: action.payload
+            }
+        case GET_SHOPPING:
+            return {
+                ...state,
+                shopping: action.payload
             }
         case GET_REVIEWS_PRODUCT:
             return {

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, closeCart } from "../../redux/actions/products";
+import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, paidCartTemporal  } from "../../redux/actions/products";
+// import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, closeCart } from "../../redux/actions/products";
 import Footer from "../Footer/Footer";
 import NavBar from "../navBar/NavBar";
-
 import style from './Cart.module.css'
 
 export default function Cart(){
@@ -72,22 +72,38 @@ export default function Cart(){
         }
     }
 
-    function handleCheckout(e){
+function handleCheckout(e){
         e.preventDefault()
-        if (user.id && user.email?.length) {
-            navigate('/check')      
-            closeCart()
-         } else {
-             navigate('/register');
-         }
-
-        Swal.fire({
-            title: 'CheckOut',
-            text:`$ ${total}`,
-            icon:'success',
-            confirmButtonText:'Ok'
-        })
+        if(cart.details.length === 0) {
+            alert("Por favor, ingrese productos antes de realizar el CHECKOUT.")
+        } else {
+            dispatch(paidCartTemporal(cart.id))
+            Swal.fire({
+                title: 'CheckOut',
+                text:${total},
+                icon:'success',
+                confirmButtonText:'Ok'
+            })
+        }
     }
+
+    // function handleCheckout(e){
+    //     e.preventDefault()
+    //     if (user.id && user.email?.length) {
+    //         navigate('/check')
+    //         closeCart()
+
+    //      } else {
+    //          navigate('/register');
+    //      }
+
+    //     Swal.fire({
+    //         title: 'CheckOut',
+    //         text:${total},
+    //         icon:'success',
+    //         confirmButtonText:'Ok'
+    //     })
+    // }
 
     function acount ()  {
         cart.details?.map(p => {
