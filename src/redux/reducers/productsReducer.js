@@ -28,6 +28,8 @@ import {
     PAID_CART_TEMPORAL,
     GET_SHOPPING,
     CLOSE_CART,
+    ADD_PRODUCT_GUEST,
+    DELETE_ONE_PRODUCT_GUEST
 } from "../actions/constants";
 
 
@@ -42,7 +44,8 @@ const initialState = {
     editCategory: {},
     editProduct: {},
     cart: [],
-    shopping: []
+    shopping: [],
+    cartGuest: []
 }
 
 export const productsReducer = (state = initialState, action) => {
@@ -232,6 +235,17 @@ export const productsReducer = (state = initialState, action) => {
             return{
                 ...state,
                 cart:action.payload
+            }
+        case ADD_PRODUCT_GUEST:
+            return{
+                ...state,
+                cartGuest: [...state.cartGuest, action.payload]
+            }
+        case DELETE_ONE_PRODUCT_GUEST:
+            // console.log(action.payload)
+            return{
+                ...state,
+                cartGuest: state.cartGuest.filter(p => p.id !== action.payload)
             }
         default:
             return state

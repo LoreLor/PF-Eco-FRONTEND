@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
 import style from './ProductCard.module.css'
-import { addCartProduct, getCart } from "../../redux/actions/products";
+import { addCartProduct, getCart, addCartProductGuest } from "../../redux/actions/products";
 import Swal from 'sweetalert2';
 
 export default function ProductCard({name, img, price, rating, id}){
@@ -12,11 +12,19 @@ export default function ProductCard({name, img, price, rating, id}){
     const user = JSON.parse(localStorage.getItem('userInfo'))
 
     function handleAddCart(id){
-        const addCart = {
-            userId: user.id,
-            productId: id,
+        if(user){
+            const addCart = {
+                userId: user.id,
+                productId: id,
+            }
+            dispatch(addCartProduct(addCart))
+        }else{
+            const addCart = {
+                userID: 'guest',
+                productId: id
+            }
+            dispatch(addCartProductGuest(addCart))
         }
-        dispatch(addCartProduct(addCart))
         //console.log(addCart)
         Swal.fire({
             title: 'Product added to cart',
