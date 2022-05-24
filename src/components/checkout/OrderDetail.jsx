@@ -6,7 +6,7 @@ import { getCart } from "../../redux/actions/products";
 import { getSingleUser } from "../../redux/actions/user";
 import { PayPalButton } from 'react-paypal-button-v2';
 import s from "./OrderDetail.module.css";
-import SERVER from "../../server";
+
 
     function OrderDetail() {
         const user = useSelector((state) => state.users.userInfo);
