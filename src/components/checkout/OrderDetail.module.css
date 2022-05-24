@@ -1,0 +1,58 @@
+/* Checkout Steps */
+
+.contenedor {
+    background-color: #112B3C;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  
+  
+  .btn{
+    color: #FFFFFF; 
+    background-color: #F66B0E; 
+    border-color: #393f44; 
+    border-radius: 8px;
+    height: 40px;
+    display: block;
+  }
+  .btn:hover{
+      color: #FFFFFF; 
+      background-color: #393f44; 
+      border-color: #393f44; 
+  }
+  
+  .small{
+    max-width: 5rem;
+    width: 100%;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+  .titulo{
+    color: #F66B0E;
+    font-size: 3rem;
+    font-weight: 800;
+    align-items: center;
+    flex-direction: center;
+    margin: 15px;
+  }
+  .title{
+    color: #F66B0E;
+    font-size: 3rem;
+    font-weight: 800;
+    align-items: center;
+    flex-direction: center;
+    margin: 15px;
+  }
+  .titulo:hover{
+    color: #9b978f;
+  }
+  .subtitulo{
+    color: #F66B0E;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+  .label{
+    color: #F66B0E;
+    margin-left: 10px;
+  }
