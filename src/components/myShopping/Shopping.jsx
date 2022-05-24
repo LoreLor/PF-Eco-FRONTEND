@@ -4,7 +4,7 @@ import NavBar from "../navBar/NavBar";
 import { getShopping } from "../../redux/actions/products";
 import Review from "../review/Review";
 import style from './myShopping.module.css'
-import Swal from "sweetalert2";
+
 
 export default function Shopping() {
     const dispatch = useDispatch();
