@@ -4,7 +4,9 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getCart } from "../../redux/actions/products";
 import { getSingleUser } from "../../redux/actions/user";
+import { PayPalButton } from 'react-paypal-button-v2';
 import s from "./OrderDetail.module.css";
+import SERVER from "../../server";
 
     function OrderDetail() {
         const user = useSelector((state) => state.users.userInfo);
@@ -18,20 +20,23 @@ import s from "./OrderDetail.module.css";
 
         useEffect(() => {
             const addPayPalScript = async () => {
-                const { data } = await axios.get('/api/config/paypal');
+                
                 const script = document.createElement('script');
                 script.type = 'text/javascript';
-                script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
+                script.src = `https://www.paypal.com/sdk/js?client-id=AdsAkmfwSAIPaPa0yvzZBos6p0rMGQSm2yF9sR9FA5wl6hiR24qdEqJmQ_r08R_5PgYZ8F_EkMLfPk9E`;
                 script.async = true;
                 script.onload = () => {
                 setSdkReady(true);
                 };
                 document.body.appendChild(script);
             };
-            addPayPalScript();
-        })
+            addPayPalScript()
+            
+        },[])
+        
 
-        const handlePayPal = ()=>{
+        const handlePayPal = (e)=>{
+            e.preventDefault();
             
         }
 
@@ -112,14 +117,14 @@ import s from "./OrderDetail.module.css";
                     </li>
                 </ul>
                 </div>
-                <button
+            </div>
+                <PayPalButton
                     amount={cart.price_total}
                     onSuccess={handlePayPal}>
-                </button>
-            </div>
+                </PayPalButton>
             </div>
         </div>
-        </div>
+    </div>
   );
 }
 
