@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../navBar/NavBar";
-import { getShopping } from "../../redux/actions/products";
-import Review from "../review/Review";
+import { getReviewsProductDetail, getShopping } from "../../redux/actions/products";
 import style from './myShopping.module.css'
-import Swal from "sweetalert2";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Shopping() {
     const dispatch = useDispatch();
     const shopping = useSelector((state) => state.products.shopping)
     const user = useSelector((state) => state.users)
+    const navigate = useNavigate();
 
 
     useEffect(() => {
         dispatch(getShopping(user.userInfo.id))
     }, [user.userInfo.id, dispatch])
+
+    function handleClick(e, id) {
+        e.preventDefault()
+        dispatch(getReviewsProductDetail(id))
+        .then(r => {
+            navigate("/review")
+        })
+    }
 
     return (
         <div>
@@ -29,12 +37,7 @@ export default function Shopping() {
                             return (
                                 <div className={style.reviewCard}>
                                     <h4>{d.name}</h4>
-                                    <div>
-                                        <Review id={d.id}>
-                                        </Review>
-                                        <br></br>
-                                        <br></br>
-                                    </div>
+                                    <button onClick={e => handleClick(e, d.id)}>ADD REVIEW</button>
                                 </div>
                             )
                         })

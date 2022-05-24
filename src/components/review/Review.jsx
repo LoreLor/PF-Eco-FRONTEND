@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createReview } from "../../redux/actions/products";
 import style from './review.module.css'
 import Swal from "sweetalert2";
 
-export default function Review({id}) {
+export default function Review() {
     const dispatch = useDispatch();
-    // const shopping = useSelector((state) => state.products.shopping)
+    const reviews = useSelector((state) => state.products.reviews)
     // const user = useSelector((state) => state.users)
     const navigate = useNavigate();
-
+    
     const [input, setInput] = useState({
         title: "",
         description: "",
@@ -31,19 +31,25 @@ export default function Review({id}) {
     let handleSubmit = (e) => {
         e.preventDefault();
         if (/* Object.keys(errors).length === 0 && */ input.title && input.description && input.points) {
-            dispatch(createReview(id,input))
-            .then(r => {
-                if(!r){
-                    Swal.fire({
-                        title: 'Review Added',
-                        icon:'succes',
-                        confirmButtonText:'Ok'
-                    })
-                    navigate("/")
-                } else {
+
+            if(Array.isArray(reviews)) {
+                if(reviews.length) {
                     alert("This product already has a review added.")
                 }
-            })
+            } else {
+                dispatch(createReview(reviews,input))
+                .then(r => {
+                    if(!r){
+                        Swal.fire({
+                            title: 'Review Added',
+                            icon:'succes',
+                            confirmButtonText:'Ok'
+                        })
+                        navigate("/")
+            }
+        })
+    }
+
             
         } else {
             Swal.fire({
