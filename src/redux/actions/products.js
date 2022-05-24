@@ -22,7 +22,6 @@ import {
     PAID_CART_TEMPORAL,
     GET_SHOPPING,
     CLOSE_CART,
-    SAVE_PAYMENT_METHOD,
     ADD_PRODUCT_GUEST,
     DELETE_ONE_PRODUCT_GUEST
 } from "./constants";
@@ -231,6 +230,7 @@ export const getShopping = (userId) => async (dispatch) => {
     })
     try {
         const product = await axios.get(`${SERVER}/cart?userId=${userId}`)
+        console.log('product', product)
         dispatch({
             type: GET_SHOPPING,
             payload: product.data
@@ -243,7 +243,7 @@ export const getShopping = (userId) => async (dispatch) => {
 
 export const closeCart = (userId) => async(dispatch) => {
     try {
-        const {data}= await axios.put(`${SERVER}/cart?userId=${userId}&open=false`)
+        const {data}= await axios.put(`${SERVER}/cart?userId=${userId}`)
         dispatch({
             type: CLOSE_CART,
             payload: data

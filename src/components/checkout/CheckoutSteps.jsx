@@ -4,7 +4,7 @@ import { NavLink, useNavigate} from "react-router-dom";
 import activeValidations from "../registro/validators/activeValidations";
 import submitValidations from "../registro/validators/submitValidations"
 import {getSingleUser, userUpdate} from '../../redux/actions/user'
-import { getCart, savePaymentMethod } from "../../redux/actions/products";
+import { closeCart, getCart, paidCartTemporal } from "../../redux/actions/products";
 import s from "./CheckoutSteps.module.css";
 import Footer from "../Footer/Footer";
 
@@ -31,11 +31,13 @@ function CheckoutSteps() {
   })
 
   const [, setErrors] = useState({});
-  
+
+
+
   useEffect(()=>{
     getSingleUser(user.id)
-    getCart(cart.id)
-  }, [])
+    getCart(user.id)
+  }, [user])
 
   const handleChange = (e) =>{
     e.preventDefault();
@@ -56,6 +58,8 @@ function CheckoutSteps() {
       e.preventDefault();
       setErrors(submitValidations(user))
       dispacth(userUpdate(user.id, input))
+      dispacth(getCart(user.id))
+
       navigate('/order')  
 
     } 
@@ -248,8 +252,8 @@ function CheckoutSteps() {
                     type="radio"
                     class="custom-control-input"
                     value="paypal"
-                    required
                     onChange={handleChange}
+                    required
                   />
                   <label
                     class="custom-control-label"

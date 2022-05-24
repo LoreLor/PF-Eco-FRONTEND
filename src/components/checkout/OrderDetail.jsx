@@ -1,172 +1,126 @@
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { getCart } from "../../redux/actions/products";
+import { getSingleUser } from "../../redux/actions/user";
+import s from "./OrderDetail.module.css";
 
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams} from 'react-router-dom';
-//import { PayPalButton } from 'react-paypal-button-v2';
+    function OrderDetail() {
+        const user = useSelector((state) => state.users.userInfo);
+        const cart = useSelector((state) => state.products.cart);
+        const [sdkReady, setSdkReady] = useState(false);
 
-import axios from 'axios';
-import { getShopping, paidCartTemporal } from '../../redux/actions/products';
+        useEffect(() => {
+            getSingleUser(user.id);
+            getCart(user.id);
+        }, [user]);
 
-
-
-function OrderDetail() {
-    const dispatch = useDispatch();
-    const {id} = useParams()
-    
-    const [sdkReady, setSdkReady] = useState(false);
-    const cart = useSelector((status) => status.products.cart)
-    const shopping= useSelector((state) => state.products.shopping);
-    const user = useSelector((state) => state.users.userInfo)
-  console.log('shopping',shopping)
-    
-    useEffect(() => {
-        const addPayPalScript = async () => {
-            const { data } = await axios.get('/api/config/paypal');
-            const script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
-            script.async = true;
-            script.onload = () => {
-              setSdkReady(true);
-            };
-            document.body.appendChild(script);
-          };
-         
-            dispatch(getShopping(id));
-     
-            if (cart.status!=='paid') {
-              if (!window.paypal) {
-                addPayPalScript();
-              } else {
+        useEffect(() => {
+            const addPayPalScript = async () => {
+                const { data } = await axios.get('/api/config/paypal');
+                const script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
+                script.async = true;
+                script.onload = () => {
                 setSdkReady(true);
-              }
-            }     
-        }, [dispatch,id, sdkReady, cart, shopping]);
-      
+                };
+                document.body.appendChild(script);
+            };
+            addPayPalScript();
+        })
+
+        const handlePayPal = ()=>{
+            
+        }
 
 
-
-
-    const handlePayPal = ( paymentResult)=>{
-        dispatch(paidCartTemporal(shopping, paymentResult))
-    
-    }
-
-    
   return (
         <div>
-            <div>
-                <h1>Order: {' '} {id}</h1>
-                <div className='row top'>
-                    <div className='col-2'>
-                        <ul>
-                            <li>
-                                <div className='card card-body'>
-                                    <h2>Shipping</h2>
-                                    <div >
-                                        <strong>Name:{' '}</strong>
-                                        <br />
-                                        <strong>Address:{' '}</strong> 
-                                        <br />
-                                        <strong>City:{' '}</strong>
-                                        <br />
-                                        <strong>Postal Code:{' '}</strong>
-                                        <br />
-                                        <strong>Country:{' '}</strong>
-                                        
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div className='card card-body'>
-                                    <h2>Payment</h2>
-                                    <p>
-                                        <strong>Method:{' '}</strong>      
-                                    </p>
-                                
-                                </div>
-                            </li>
-                            <li>
-                                <div className='card card-body'>
-                                    <h2>Order Items</h2>
-                                    <ul>
-                                    
-                                        <li >
-                                            <div className='row'> 
-                                                <div>
-                                                    <img 
-                                                        src='holass' 
-                                                        alt='jajaj'
-                                                        className='small'>
-                                                    </img>
-                                                </div>                                 
-                                                <div className='min-30'>
-                                                    <Link to={`/product/${id}`}>nombre producto</Link>
-                                                </div>                
-                                                <div> x $  ={' '} $</div>
-                                            </div>
-                                            </li>
-                                     
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className='col-1'>
-                        <div className='card card-body'>
-                            <ul>
-                                <li>
-                                    <h2>Order Summary</h2>
-                                </li>
-                                <li>
-                                    <div className='row'>
-                                        <div>Items</div>
-                                        <div>$</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className='row'>
-                                        <div>Shipping</div>
-                                        <div>$ </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className='row'>
-                                        <div>Tax</div>
-                                        <div>$ </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className='row'>
-                                        <div>
-                                            <strong>Order Total</strong>
-                                        </div>
-                                        <div>
-                                            <strong>$ </strong>
-                                        </div>
-                                    </div>
-                                </li>
-                               
-                                    <li>
-                                        {sdkReady ? 
-                                      
-                                            <>
-                                           
-                                            {/* <PayPalButton
-                                                amount='hola'
-                                                onSuccess={handlePayPal}>
-                                            </PayPalButton> */}
-                                            </>
-                                        : null}
-                                    </li>
-                            </ul>
-                        </div>
-                    </div>
+            <div className={s.contenedor}>
+                <div class="container">
+                    <div class="py-5 text-center">
+                        <h2 className={s.title}>
+                        Your Order{" "}
+                    <div>
+                    <NavLink to="/" className={s.titulo}>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        fill="currentColor"
+                        className="bi bi-phone"
+                        viewBox="0 0 16 16"
+                    >
+                        <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z" />
+                        <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                    </svg>
+                    City Cell
+                    </NavLink>
                 </div>
-            </div> 
-        
-    </div>        
-    )
+                </h2>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 order-md-2 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <div className={s.subtitulo}>
+                    <p>Purchase Order N°{" "}</p>
+                    <span>{cart.id}</span>
+                    </div>
+                    <span class="badge badge-secondary badge-pill"></span>
+                </h4>
+                <ul class="list-group mb-3">
+                    {cart
+                    ? cart.details.map((p) => {
+                        return (
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <>
+                                <div key={p.id}>
+                                <h6 class="my-0">Your Products</h6>
+                                <h6 class="my-0">Product name: {p.name}</h6>
+                                <img src={p.img} className={s.small} alt=""></img>
+                                <small class="text-muted">
+                                    Brief description: {p.description}
+                                </small>
+                                <hr />
+                                </div>
+                                <span class="text-muted">Qty:{p.bundle}</span>
+                                <span class="text-muted">Price:{p.price}</span>
+                            </>
+                            </li>
+                        );
+                        })
+                    : null}
+                    <li class="list-group-item d-flex justify-content-between bg-light">
+                    <div class="text-success">
+                        <h6 class="my-0">Shipping Address</h6>
+                        <li class="list-group-item d-flex justify-content-between">
+                        <strong>FullName: </strong>
+                        {user.name} {user.last_name}
+                        <br />
+                        <strong>Address: </strong>
+                        {user.address}
+                        <br />
+                        </li>
+                        <h6 class="my-0">Payment Method</h6>
+                        <li class="list-group-item d-flex justify-content-between">
+                        <strong>{user.payment_method} </strong>
+                        </li>
+                    </div>
+                    </li>
+                </ul>
+                </div>
+                <button
+                    amount={cart.price_total}
+                    onSuccess={handlePayPal}>
+                </button>
+            </div>
+            </div>
+        </div>
+        </div>
+  );
 }
 
-export default OrderDetail
+export default OrderDetail;
