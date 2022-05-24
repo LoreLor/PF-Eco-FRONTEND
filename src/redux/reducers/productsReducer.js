@@ -29,7 +29,8 @@ import {
     GET_SHOPPING,
     CLOSE_CART,
     ADD_PRODUCT_GUEST,
-    DELETE_ONE_PRODUCT_GUEST
+    DELETE_ONE_PRODUCT_GUEST,
+    GET_REVIEWS_PRODUCT_DETAIL
 } from "../actions/constants";
 
 
@@ -218,6 +219,11 @@ export const productsReducer = (state = initialState, action) => {
                 shopping: action.payload
             }
         case GET_REVIEWS_PRODUCT:
+            return {
+                ...state,
+                reviews: action.payload
+            }
+        case GET_REVIEWS_PRODUCT_DETAIL:
             return {
                 ...state,
                 reviews: action.payload

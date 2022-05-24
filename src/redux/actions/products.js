@@ -24,7 +24,8 @@ import {
     CLOSE_CART,
     SAVE_PAYMENT_METHOD,
     ADD_PRODUCT_GUEST,
-    DELETE_ONE_PRODUCT_GUEST
+    DELETE_ONE_PRODUCT_GUEST,
+    GET_REVIEWS_PRODUCT_DETAIL
 } from "./constants";
 
 import axios from 'axios';
@@ -202,6 +203,22 @@ export const getReviewsProduct = (id) => async (dispatch) => {
         const product = await axios.get(`${SERVER}/review/product?productId=${id}`)
         dispatch({
             type: GET_REVIEWS_PRODUCT,
+            payload: product.data
+        })
+
+    } catch (error) {
+        return error;
+    }
+};
+
+export const getReviewsProductDetail = (id) => async (dispatch) => {
+    dispatch({
+        type: GET_REVIEWS_PRODUCT_DETAIL
+    })
+    try {
+        const product = await axios.get(`${SERVER}/review/detail?detailId=${id}`)
+        dispatch({
+            type: GET_REVIEWS_PRODUCT_DETAIL,
             payload: product.data
         })
 
