@@ -19,11 +19,7 @@ export default function ProductCard({name, img, price, rating, id}){
             }
             dispatch(addCartProduct(addCart))
         }else{
-            const addCart = {
-                userID: 'guest',
-                productId: id
-            }
-            dispatch(addCartProductGuest(addCart))
+            dispatch(addCartProductGuest(id))
         }
         //console.log(addCart)
         Swal.fire({

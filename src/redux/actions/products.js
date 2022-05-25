@@ -24,7 +24,10 @@ import {
     CLOSE_CART,
     ADD_PRODUCT_GUEST,
     DELETE_ONE_PRODUCT_GUEST,
-    GET_REVIEWS_PRODUCT_DETAIL
+    GET_REVIEWS_PRODUCT_DETAIL,
+    DELETE_CART_GUEST,
+    GET_CART_GUEST,
+    SUBSTRACT_PRODUCT_GUEST
 } from "./constants";
 
 import axios from 'axios';
@@ -122,9 +125,10 @@ export function addCartProduct (payload){
     }
 }
 
-export function addCartProductGuest (payload){
+export function addCartProductGuest (id){
     return async function (dispatch){
-        const {data} = await axios.get(`${SERVER}/products/${payload.productId}`)
+        const {data} = await axios.get(`${SERVER}/products/${id}`)
+        data.bundle = 1
         return dispatch({
             type: ADD_PRODUCT_GUEST,
             payload: data 
@@ -142,6 +146,13 @@ export const deleteOneProduct = (userId, id) => async (dispatch) => {
     })
 }
 
+export const substractOneProduct = (id) => (dispatch) => {
+    return dispatch({
+        type: SUBSTRACT_PRODUCT_GUEST,
+        payload: id
+    })
+}
+
 //------trae el carrito
 export const getCart = (id) => async (dispatch) => {
     const {data} = await axios.get(`${SERVER}/cart/${id}`)
@@ -150,6 +161,12 @@ export const getCart = (id) => async (dispatch) => {
             type: GET_CART,
             payload: data
         })
+}
+
+export const getCartGuest = () => (dispatch) => {
+    dispatch({
+        type: GET_CART_GUEST
+    })
 }
 
 //------borra el producto del carrito
@@ -175,6 +192,12 @@ export const deleteAllProductCart = (cartId) => async (dispatch) => {
     return dispatch({
         type: DELETE_ALL_PRODUCTS_CART,
         payload: json.data
+    })
+}
+
+export const deleteCartGuest = () => (dispatch) => {
+    dispatch({
+        type: DELETE_CART_GUEST
     })
 }
 
