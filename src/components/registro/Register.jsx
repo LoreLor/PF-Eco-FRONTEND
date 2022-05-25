@@ -60,6 +60,7 @@ const Register = () => {
             email: "",
             password: "",
           });
+          
         }else{
           setIsOpen(true)
         }
