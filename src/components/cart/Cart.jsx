@@ -92,42 +92,42 @@ export default function Cart() {
         }
     }
 
-    function handleCheckout(e) {
-        e.preventDefault()
-        if (cart.length === 0) {
-            alert("Por favor, ingrese productos antes de realizar el CHECKOUT.")
-        } else {
-            dispatch(paidCartTemporal(cartUser.id))
-            Swal.fire({
-                title: 'CheckOut',
-                text: `$ ${total}`,
-                icon: 'success',
-                confirmButtonText: 'Ok'
-            })
-        }
-    }
-
-    // function handleCheckout(e){
-    //         e.preventDefault()
-    //     if (user.id && user.email?.length) {
-    //         navigate('/check')
-
-
-    //        } else {
-    //             navigate('/register');
-    //          }
-    //         // if(cart.length === 0) {
-    //         //     alert("Por favor, ingrese productos antes de realizar el CHECKOUT.")
-    //         // } else {
-    //         //     dispatch(paidCartTemporal(cartUser.id))
-    //         //     Swal.fire({
-    //         //         title: 'CheckOut',
-    //         //         text:`$ ${total}`,
-    //         //         icon:'success',
-    //         //         confirmButtonText:'Ok'
-    //         //     })
-    //         // }
+    // function handleCheckout(e) {
+    //     e.preventDefault()
+    //     if (cart.length === 0) {
+    //         alert("Por favor, ingrese productos antes de realizar el CHECKOUT.")
+    //     } else {
+    //         dispatch(paidCartTemporal(cartUser.id))
+    //         Swal.fire({
+    //             title: 'CheckOut',
+    //             text: `$ ${total}`,
+    //             icon: 'success',
+    //             confirmButtonText: 'Ok'
+    //         })
     //     }
+    // }
+
+    function handleCheckout(e){
+            e.preventDefault()
+        if (user.id && user.email?.length) {
+            navigate('/check')
+
+
+           } else {
+                navigate('/register');
+             }
+            // if(cart.length === 0) {
+            //     alert("Por favor, ingrese productos antes de realizar el CHECKOUT.")
+            // } else {
+            //     dispatch(paidCartTemporal(cartUser.id))
+            //     Swal.fire({
+            //         title: 'CheckOut',
+            //         text:`$ ${total}`,
+            //         icon:'success',
+            //         confirmButtonText:'Ok'
+            //     })
+            // }
+        }
 
 
     function acount() {
