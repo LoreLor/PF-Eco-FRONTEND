@@ -7,21 +7,20 @@ import {BrowserRouter} from 'react-router-dom'
 import { Provider } from 'react-redux';
 import store, {Persistor} from './redux/store/index';
 import { PersistGate } from 'redux-persist/integration/react';
-
-import  {  GoogleOAuthProvider  } from '@react-oauth/google'
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <GoogleOAuthProvider clientId="74065711880-a66epk147cn7qohac76h2s5fq8qpqpsm.apps.googleusercontent.com">
-    <Provider store={store}>
-        <BrowserRouter>
-          <PersistGate loading={null} persistor={Persistor}>
-            <App />
-          </PersistGate>
-        </BrowserRouter>   
-      </Provider>
-      </GoogleOAuthProvider>;
+      <PayPalScriptProvider options={{ "client-id": "AaQI-1adqVEH1wWgNAa9IlvPvWf4rOLo5-zttK1nrlMMxkU1WBUo0zSmPfWpKVWaBTL3TpwiQl1dEaDQ"}}>
+        <Provider store={store}>
+          <BrowserRouter>
+            <PersistGate loading={null} persistor={Persistor}>
+              <App />
+            </PersistGate>
+          </BrowserRouter>   
+        </Provider>
+      </PayPalScriptProvider>
   </React.StrictMode>
 );
 
