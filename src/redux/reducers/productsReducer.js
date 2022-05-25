@@ -30,7 +30,10 @@ import {
     CLOSE_CART,
     ADD_PRODUCT_GUEST,
     DELETE_ONE_PRODUCT_GUEST,
-    GET_REVIEWS_PRODUCT_DETAIL
+    GET_REVIEWS_PRODUCT_DETAIL,
+    DELETE_CART_GUEST,
+    GET_CART_GUEST,
+    SUBSTRACT_PRODUCT_GUEST
 } from "../actions/constants";
 
 
@@ -243,15 +246,58 @@ export const productsReducer = (state = initialState, action) => {
                 cart:action.payload
             }
         case ADD_PRODUCT_GUEST:
+            const item = action.payload;
+            const existItem = state.cartGuest.find((p) => p.id === item.id);
+            // console.log(item) el que se quiere añadir
+            //console.log(existeItem) el que ya se encuentra en el carrito
+            if(existItem){
+                existItem.bundle += 1
+                //console.log(existItem.bundle)
+                return {
+                    ...state,
+                    cartGuest: state.cartGuest.map((p) => 
+                        p.id === existItem.id ? existItem : p
+                    )
+                };
+            }else{
+                //console.log('no hay concateno')
+                return{
+                    ...state,
+                    cartGuest: [...state.cartGuest, item] //concatena lo que ya habia a lo nuevo
+                }
+            }
+        case GET_CART_GUEST: 
             return{
                 ...state,
-                cartGuest: [...state.cartGuest, action.payload]
+                cartGuest: state.cartGuest
             }
         case DELETE_ONE_PRODUCT_GUEST:
             // console.log(action.payload)
             return{
                 ...state,
                 cartGuest: state.cartGuest.filter(p => p.id !== action.payload)
+            }
+        case DELETE_CART_GUEST:
+            return{
+                ...state,
+                cartGuest: []
+            }
+        case SUBSTRACT_PRODUCT_GUEST:
+            const id = action.payload;
+            const itemCart = state.cartGuest.find((p) => p.id === id);
+            if(itemCart){
+                itemCart.bundle -= 1
+                return {
+                    ...state,
+                    cartGuest: state.cartGuest.map((p) => 
+                        p.id === itemCart.id ? itemCart : p
+                    )
+                }
+            }else{
+                return{
+                    ...state,
+                    cartGuest: state.cartGuest
+                }
             }
         default:
             return state

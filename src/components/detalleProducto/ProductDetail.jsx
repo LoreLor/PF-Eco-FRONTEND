@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 
 import { getCategories } from "../../redux/actions/categories";
 
-import { addCartProduct, cleanReview, getProductById, getReviewsProduct, limpiarDetail } from "../../redux/actions/products";
+import { addCartProduct, addCartProductGuest, cleanReview, getProductById, getReviewsProduct, limpiarDetail } from "../../redux/actions/products";
 
 import style from './ProductDetail.module.css'
 
@@ -21,7 +21,6 @@ export default function ProductDetail() {
     
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    const [items, setItems] = useState(1)
     const detailProduct = useSelector((state) => state.products.detail)
     const categories = useSelector((state) => state.products.categoriesDb)
     const reviewsProduct = useSelector((state) => state.products.reviews)
@@ -38,26 +37,32 @@ export default function ProductDetail() {
         }
     }, [id, dispatch])
 
-    function handleSelectQty(e) {
-        e.preventDefault();
-        setItems(e.target.value)
-        //console.log(`seleccionaste ${items} items`)
-    }
 
     function handleBuy(e, productId) {
         e.preventDefault();
-        dispatch(addCartProduct({
-            userId: user.id,
-            productId: productId,
-            required_quantity: 1
-        }))
-        Swal.fire({
-            title: 'Product added to cart',
-            text:'Check Cart',
-            icon:'success',
-            confirmButtonText:'Ok'
-        })
-        navigate('/cart')
+        if(user){
+            dispatch(addCartProduct({
+                userId: user.id,
+                productId: productId,
+                required_quantity: 1
+            }))
+            Swal.fire({
+                title: 'Product added to cart',
+                text:'Check Cart',
+                icon:'success',
+                confirmButtonText:'Ok'
+            })
+            navigate('/cart')
+        }else{
+            dispatch(addCartProductGuest(productId))
+            Swal.fire({
+                title: 'Product added to cart',
+                text:'Check Cart',
+                icon:'success',
+                confirmButtonText:'Ok'
+            })
+            navigate('/cart')
+        }
     }
 
 
