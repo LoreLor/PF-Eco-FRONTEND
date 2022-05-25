@@ -38,6 +38,7 @@ const initialState = {
     products: [],
     showedProducts: [],
     reviews: [],
+    review: [],
     detail: {},
     loading: true,
     error: {},
@@ -226,7 +227,7 @@ export const productsReducer = (state = initialState, action) => {
         case GET_REVIEWS_PRODUCT_DETAIL:
             return {
                 ...state,
-                reviews: action.payload
+                review: action.payload
             }
         case CREATE_REVIEW:
             return {
@@ -235,7 +236,8 @@ export const productsReducer = (state = initialState, action) => {
         case CLEAN_REVIEW:
             return {
                 ...state,
-                reviews: []
+                reviews: [],
+                review: [],
             }
         case CLOSE_CART:
             return{

@@ -247,7 +247,6 @@ export const getShopping = (userId) => async (dispatch) => {
     })
     try {
         const product = await axios.get(`${SERVER}/cart?userId=${userId}`)
-        console.log('product', product)
         dispatch({
             type: GET_SHOPPING,
             payload: product.data
