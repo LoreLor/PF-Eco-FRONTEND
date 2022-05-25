@@ -42,7 +42,7 @@ export default function Home (){
         //console.log(cart)
         //console.log(allProducts)
         //console.log(allCategories)
-    }, [])
+    }, [dispatch])
 
     //ProductCard ---> (name, img, price, rating)
     return(

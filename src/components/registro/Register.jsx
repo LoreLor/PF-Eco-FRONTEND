@@ -272,7 +272,7 @@ const Register = () => {
           </AlertModal>
         </div>
       </div>
-      {/* <Footer/> */}
+      <Footer/>
     </>
   );
 };

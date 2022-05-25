@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 export default function Review() {
     const dispatch = useDispatch();
-    const reviews = useSelector((state) => state.products.reviews)
+    const review = useSelector((state) => state.products.review)
     // const user = useSelector((state) => state.users)
     const navigate = useNavigate();
     
@@ -32,12 +32,12 @@ export default function Review() {
         e.preventDefault();
         if (/* Object.keys(errors).length === 0 && */ input.title && input.description && input.points) {
 
-            if(Array.isArray(reviews)) {
-                if(reviews.length) {
+            if(Array.isArray(review)) {
+                if(review.length) {
                     alert("This product already has a review added.")
                 }
             } else {
-                dispatch(createReview(reviews,input))
+                dispatch(createReview(review,input))
                 .then(r => {
                     if(!r){
                         Swal.fire({
