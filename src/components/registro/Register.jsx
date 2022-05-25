@@ -60,7 +60,7 @@ const Register = () => {
             email: "",
             password: "",
           });
-          navigate('/login')
+          
         }else{
           setIsOpen(true)
         }

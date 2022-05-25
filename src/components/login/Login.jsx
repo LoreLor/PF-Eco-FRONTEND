@@ -40,12 +40,7 @@ const Login = () => {
         e.preventDefault();
         dispatch(userLogin(email, password))
         //     .then(res => { 
-        //         if(res){
-        //             Swal.fire({
-        //                 title:"Email or password invalid.",
-        //                 icon:'error'
-        //             })
-        //         } else {
+        //         if(!res){
         //             setEmail('')
         //             setPassword('')
         //             Swal.fire({
@@ -53,9 +48,15 @@ const Login = () => {
         //                 icon: 'success'
         //             })
         //             navigate(redirect)
+        //         } else {
+        //             Swal.fire({
+        //                 title:"Email or password invalid.",
+        //                 icon:'error'
+        //             })
         //         }
         //     }
         // )
+        navigate(redirect)
     }
 
 
