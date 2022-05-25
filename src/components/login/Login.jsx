@@ -39,23 +39,23 @@ const Login = () => {
     const handleSubmitLogin = (e) => {
         e.preventDefault();
         dispatch(userLogin(email, password))
-            .then(res => { 
-                if(!res){
-                    setEmail('')
-                    setPassword('')
-                    Swal.fire({
-                        title: 'login success',
-                        icon: 'success'
-                    })
-                    navigate(redirect)
-                } else {
-                    Swal.fire({
-                        title:"Email or password invalid.",
-                        icon:'error'
-                    })
-                }
-            }
-        )
+        //     .then(res => { 
+        //         if(res){
+        //             Swal.fire({
+        //                 title:"Email or password invalid.",
+        //                 icon:'error'
+        //             })
+        //         } else {
+        //             setEmail('')
+        //             setPassword('')
+        //             Swal.fire({
+        //                 title: 'login success',
+        //                 icon: 'success'
+        //             })
+        //             navigate(redirect)
+        //         }
+        //     }
+        // )
     }
 
 
