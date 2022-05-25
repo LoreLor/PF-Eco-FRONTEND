@@ -21,7 +21,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     
-    const user = useSelector((state) => state.user);
+    const user = useSelector((state) => state.users.userInfo);
    
 
 //queryString de login...si true te lleva al home
@@ -31,7 +31,7 @@ const Login = () => {
     
 
     useEffect(() => {
-        if(user){
+        if(user.user_name){
            navigate(redirect)
         }
     }, [navigate, user, redirect]);
@@ -39,24 +39,21 @@ const Login = () => {
     const handleSubmitLogin = (e) => {
         e.preventDefault();
         dispatch(userLogin(email, password))
-        //     .then(res => { 
-        //         if(!res){
-        //             setEmail('')
-        //             setPassword('')
-        //             Swal.fire({
-        //                 title: 'login success',
-        //                 icon: 'success'
-        //             })
-        //             navigate(redirect)
-        //         } else {
-        //             Swal.fire({
-        //                 title:"Email or password invalid.",
-        //                 icon:'error'
-        //             })
-        //         }
-        //     }
-        // )
-        navigate(redirect)
+            .then(res => { 
+                if(!res){
+                    setEmail('')
+                    setPassword('')
+                    
+                } else {
+                    Swal.fire({
+                        title: 'login success',
+                        icon: 'success'
+                    })
+                    navigate(redirect)
+                }
+            }
+        )
+       
     }
 
 
