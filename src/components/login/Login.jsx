@@ -58,7 +58,7 @@ const Login = () => {
 
 
     return (
-        <div style={{ marginBottom: 40 }} >
+        <div>
             <div class="py-5 text-center">
             <h2 className={s.title}>
               Sign In{" "}
