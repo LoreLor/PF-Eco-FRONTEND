@@ -2,9 +2,8 @@ import axios from 'axios';
 import { USER_LOGIN, USER_LOGOUT, USER_REGISTER, USER_REGISTER_CLEAR, GET_USERS,GET_USER, USER_UPDATE } from './constants';
 import SERVER from '../../server';
 
-export const userLogin = (email, password) => async(dispatch) =>{
+export const userLogin = (data) => async(dispatch) =>{
     try {
-    const { data } = await axios.post(`${SERVER}/user/signin`, {email,password} )
     dispatch({
       type: USER_LOGIN,
       payload: data

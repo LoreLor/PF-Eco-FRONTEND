@@ -8,7 +8,8 @@ import ProductDetail from './components/detalleProducto/ProductDetail';
 import Error404 from './components/Error404/Error404';
 import Register from './components/registro/Register';
 import Cart from './components/cart/Cart';
-import PrivateRoute from './components/admin/adminPage/PrivateRoute';
+import PrivateAdmin from './components/admin/adminPage/PrivateAdmin';
+import PrivateUser from './components/login/PrivateUser'
 import CheckoutSteps from './components/checkout/CheckoutSteps';
 import OrderDetail from './components/checkout/OrderDetail';
 import Shopping from './components/myShopping/Shopping';
@@ -24,9 +25,9 @@ function App() {
       <ToastContainer/>
       <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/admin' element={<PrivateRoute><AdminPage/></PrivateRoute>}/>
+        <Route path='/admin' element={<PrivateAdmin><AdminPage/></PrivateAdmin>}/>
         <Route path='/profile' element={<UserProfile/>}/>
-        <Route path ='/login' element={<Login />} />
+        <Route path ='/login' element={<PrivateUser><Login /></PrivateUser>} />
         <Route path = '/home/:id' element={<ProductDetail/>}/>
         <Route path = '/cart'element={<Cart/>}/>
         <Route path='/favs' element = {<Favorites/>}/>

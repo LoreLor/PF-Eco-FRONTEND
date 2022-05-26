@@ -51,6 +51,8 @@ const Register = () => {
         response = await axios.post(`${SERVER}/user`,user) //no entiendo para que se hace esto aca si esta en redux
         const result = response.data
         setKeyword(result.msg)
+        if(!isOpen && result){
+          setIsOpen(true);
         if(!isOpen && result.msg === "User registered"){
           setIsOpen(true);
           setUser({
@@ -60,10 +62,8 @@ const Register = () => {
             email: "",
             password: "",
           });
-          
-        }else{
-          setIsOpen(true)
         }
+      }
       } catch (error) {
         console.log(error)
       }
