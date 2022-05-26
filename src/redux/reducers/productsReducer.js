@@ -224,6 +224,13 @@ export const productsReducer = (state = initialState, action) => {
                 // cart: action.payload
             }
         case GET_SHOPPING:
+            if(action.payload   ) {
+                action.payload.sort(function (a, b) {
+                    if (a.id > b.id) return 1;
+                    if (a.id < b.id) return -1;
+                    return 0
+                })
+            }
             return {
                 ...state,
                 shopping: action.payload

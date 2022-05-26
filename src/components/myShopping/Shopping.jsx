@@ -44,12 +44,15 @@ export default function Shopping() {
                     {shopping?.map((s, i) => {
                         return (
                             <div key={s.id}>
-                                <h3>Compra {i}</h3>
+                                <h3>BUY {i}</h3>
                                 {
                                     s.details?.map(d => {
                                         return (
                                             <div className={style.reviewCard} key={d.id}>
                                                 <h4>{d.name}</h4>
+                                                <h4>Quantity: {d.bundle}</h4>
+                                                <h4>Unit price: {d.price}</h4>
+                                                <h4>{d.date}</h4>
                                                 {!d.hasReview ?
                                                     <button onClick={e => handleClick(e, d.id)}>ADD REVIEW</button> :
                                                     <div></div>}
@@ -57,6 +60,7 @@ export default function Shopping() {
                                         )
                                     })
                                 }
+                                <h3>Price total: {s.price_total}</h3>
                             </div>
                         )
                     })}
