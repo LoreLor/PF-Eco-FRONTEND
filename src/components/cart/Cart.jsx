@@ -49,7 +49,7 @@ export default function Cart(){
         e.preventDefault()
         //console.log(id)
         if(user){
-            dispatch(deleteAllProductCart(id))
+            dispatch(deleteAllProductCart(cartUser.id))
             .then(r => {
                 dispatch(getCart(user.id))
             })  
