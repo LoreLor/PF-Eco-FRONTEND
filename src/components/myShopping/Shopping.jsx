@@ -20,20 +20,9 @@ export default function Shopping() {
 
     function handleClick(e, id) {
         e.preventDefault()
-        dispatch(cleanReview())
         dispatch(getReviewsProductDetail(id))
-        .then( () => {
-            if(review) {
-                if(Array.isArray(review)) {
-                    console.log("Tiene review")
-                } else {
-                    console.log("No tiene review")
-                    navigate("/review")
-                }
-            }
-        })
+        navigate("/review")
     }
-
 
     return (
         <div>
@@ -48,8 +37,10 @@ export default function Shopping() {
                             return (
                                 <div className={style.reviewCard}>
                                     <h4>{d.name}</h4>
-                                    <button onClick={e => handleClick(e, d.id)}>ADD REVIEW</button>
-                                </div>
+                                    {!d.hasReview ? 
+                                    <button onClick={e => handleClick(e, d.id)}>ADD REVIEW</button> :
+                                    <div></div> }
+                                </div> 
                             )
                         })
                     )
