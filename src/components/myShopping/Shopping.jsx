@@ -35,32 +35,32 @@ export default function Shopping() {
                 </div> */}
                 
 
-                {!shopping ?
-                    <div>
-                        {shopping?.map((s, i) => {
-                            return (
-                                <div key={s.id}>
-                                    <h3>Compra {i}</h3>
-                                    {
-                                        s.details?.map(d => {
-                                            return (
-                                                <div className={style.reviewCard} key={d.id}>
-                                                    <h4>{d.name}</h4>
-                                                    {!d.hasReview ?
-                                                        <button onClick={e => handleClick(e, d.id)}>ADD REVIEW</button> :
-                                                        <div></div>}
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            )
-                        })}
-                    </div> :
+                {!shopping?.length ?
                     <div className={style.noCart}>
                         <h2>No products purchased</h2>
                         <NavLink to={'/'} className={style.goHome}>Go to Home for buy products</NavLink>
-                    </div>
+                    </div> :
+                    <div>
+                    {shopping?.map((s, i) => {
+                        return (
+                            <div key={s.id}>
+                                <h3>Compra {i}</h3>
+                                {
+                                    s.details?.map(d => {
+                                        return (
+                                            <div className={style.reviewCard} key={d.id}>
+                                                <h4>{d.name}</h4>
+                                                {!d.hasReview ?
+                                                    <button onClick={e => handleClick(e, d.id)}>ADD REVIEW</button> :
+                                                    <div></div>}
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        )
+                    })}
+                </div>
                 }
 
 
