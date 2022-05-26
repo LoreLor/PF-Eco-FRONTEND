@@ -1,5 +1,5 @@
 import axios from "axios"
-import React,{useEffect,useState} from "react"
+import React,{useEffect,useRef,useState} from "react"
 import {useDispatch, useSelector} from 'react-redux'
 import { getAllProducts} from "../../../redux/actions/products"
 import { getCategories } from "../../../redux/actions/categories"
@@ -7,19 +7,23 @@ import style from './ProductAdmin.module.css'
 import FlashModal from '../AdminModals/FlashModal'
 import activeValidators from './validators/activeValidations'
 import submitValidators from './validators/submitValidations'
+import fileValidators from './validators/fileValidations'
 import SERVER from "../../../server"
+import ProductPictures from "./ProductPictures"
 
 export default function ProductForm ({product,setModalC,setProduct}){
     const dispatch = useDispatch()
-    
+    const ref = useRef()
+
     const categoriesDb = useSelector((state)=>state.products.categoriesDb)
     const productsDb = useSelector((state)=>state.products.products)
-    //const productEdit = useSelector((state)=>state.products.editProduct)
+
 
     const [keyword,setKeyword] = useState("")
     const [isOpen,setIsOpen] =useState(false)
     
     const [errors,setErrors]=useState({})
+    const [fileErrors,setFileErrors] = useState({})
     const [input,setInput] = useState({
         name: "",
         price: "",
@@ -30,7 +34,7 @@ export default function ProductForm ({product,setModalC,setProduct}){
         isActive: ""
     })
     const [file,setFile] = useState([])
-    
+
     function onValueChange (e){
         setErrors(activeValidators(product,{...input,[e.target.name]:e.target.value},productsDb))
         setInput({...input,[e.target.name]:e.target.value}) 
@@ -81,18 +85,30 @@ export default function ProductForm ({product,setModalC,setProduct}){
     function onFileChange(e){
         setFile(e)
     }
+    function resetFile(){
+        ref.current.value=""
+    }
+    function resetFileBtn(e){
+        e.preventDefault()
+        ref.current.value=""
+        setFileErrors({})
+    }
+    
     async function onSubmit (event){
         event.preventDefault()
-        /* setErrors(activeValidators(product,input,productsDb)) */
-        setErrors(submitValidators(product,input,productsDb))
+        var filelength = file.length? file.length : 0
+        setErrors(submitValidators(product,input,productsDb,file))
+        setFileErrors(fileValidators(input,file))
         if(Object.keys(errors).length === 0
+        && Object.keys(fileErrors).length === 0
         && input.name !== ""
         &&input.price !== ""
         && input.description !== ""
         && input.rating !== ""
         && input.stock !== ""
-        //&& input.img !== ""
-        && input.categories.length >0){
+        && input.categories.length >0
+        && input.img.length + filelength <=5
+        ){
             let response = null
             try {
                 const data = new FormData();
@@ -153,8 +169,10 @@ useEffect(()=>{
         img: [],
         isActive: ""
         })
+        setFile([])
+        resetFile()
     }
-    if(product /* && productEdit */){
+    if(product){
         setInput({
         name: product.name,
         price: product.price.toString(),
@@ -164,11 +182,13 @@ useEffect(()=>{
         categories: product.categories.map(c=>c.name),
         isActive: product.isActive
         })
+        setFile([])
+        resetFile()
     }
 },[product])
 
     return(
-        <div className={style.containerProd}>
+        <div className={product? style.containerProd2:style.containerProd}>
                 <div>
                 <form>
                     
@@ -232,10 +252,17 @@ useEffect(()=>{
                     
                     <div>
                         <p>Images:</p>
-                        <input accept="image/png,image/jpg,image/jpeg" multiple={true} type='file' name="file"  onChange={(e)=>onFileChange(e.target.files)}/>
+                        <div className={style.imgBox}>
+
+                        {input.img.length > 0 ? <ProductPictures input={input} setInput={setInput}/> :<></>}
+                        </div>
+                        <input className={style.btn}accept="image/png,image/jpg,image/jpeg" multiple={true} type='file' name="file" ref={ref} onChange={(e)=>onFileChange(e.target.files)}/>
+                        <br></br>
+                        <button className={style.btn} id={style.btnB}onClick={resetFileBtn}>Unselect images</button>
+                        {fileErrors?.img && <p className={style.errors}>{fileErrors?.img}</p>}
                     </div>
                     <div>
-                        {Object.keys(errors).length === 0 && Object.keys(input).length > 0 && 
+                        {Object.keys(errors).length === 0 && Object.keys(fileErrors).length === 0 && Object.keys(input).length > 0 && 
                         <input type='submit' value= {product? "Edit": "Add"} onClick={onSubmit} className={style.mybtn}/>   
                         }
                     </div>

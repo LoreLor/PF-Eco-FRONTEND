@@ -1,4 +1,4 @@
-export default function submitValidations(id,input,products){
+export default function submitValidations(id,input,products,file){
     let errors={}
     
     if(!id){ let checkDb = products && products.filter(product => product.name.toLowerCase() === input.name.toLowerCase())
@@ -24,9 +24,6 @@ export default function submitValidations(id,input,products){
     if(!input.categories){
         errors.categories = "Must have at least one category"
     }
-    
-    /* if(!input.img){
-        errors.img = "El producto debe tener al menos una imagen"
-        } */
+
 return errors
 }

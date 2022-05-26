@@ -38,7 +38,7 @@
     font-weight: bold;
     color: #fff;
     top: 0.5rem;
-    right: 1.2rem;
+    right: 0.5rem;
     width: 2rem;
     height: 2rem;
     border-radius: 0.2rem;
@@ -66,16 +66,17 @@
   }
 
   #alert{
-    min-height: 10rem;
+    min-height: 12rem;
     width: 55%;
   }
   #beta{
-    min-height: 11rem;
+    min-height: 13rem;
   }
   #form{
     min-height: 38rem;
     /* width: 40%; */
   }
+  
   .basicmodal::-webkit-scrollbar {
     display: none;
     }
