@@ -7,6 +7,7 @@ import {getSingleUser, userUpdate} from '../../redux/actions/user'
 import { closeCart, getCart, paidCartTemporal } from "../../redux/actions/products";
 import s from "./CheckoutSteps.module.css";
 import Footer from "../Footer/Footer";
+import numberFormat from "../detalleProducto/numberFormat";
 
 function CheckoutSteps() {
 
@@ -109,7 +110,7 @@ function CheckoutSteps() {
                       <hr />
                     </div>
                     <span class="text-muted">Qty:{p.bundle}</span>
-                    <span class="text-muted">Price:{p.price}</span>
+                    <span class="text-muted">Price:{numberFormat(p.price)}</span>
                     </>
                 </li> )
                 }): null
@@ -124,7 +125,7 @@ function CheckoutSteps() {
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
                   <span>Total (AR)</span>
-                  <strong>{total_amount}</strong>
+                  <strong>{numberFormat(total_amount)}</strong>
                 </li>
               </ul>
             <form class="card p-2">
@@ -284,10 +285,11 @@ function CheckoutSteps() {
         </div>
       </div>
       </div>
+
       <foot>
         <Footer />  
-
       </foot>
+
      
       {/* <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">© 2022 - 2045 cell city</p>

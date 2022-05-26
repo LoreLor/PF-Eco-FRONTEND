@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink, useParams, useNavigate } from "react-router-dom"
 import { Rating } from "@mui/material";
 import Swal from 'sweetalert2';
+import numberFormat from "./numberFormat";
 
 import { getCategories } from "../../redux/actions/categories";
 
@@ -24,7 +25,7 @@ export default function ProductDetail() {
     const detailProduct = useSelector((state) => state.products.detail)
     const categories = useSelector((state) => state.products.categoriesDb)
     const reviewsProduct = useSelector((state) => state.products.reviews)
-    //console.log(detailProduct)
+   
     const user = JSON.parse(localStorage.getItem('userInfo'))
 
     useEffect(() => {
@@ -92,7 +93,7 @@ export default function ProductDetail() {
                                     )
                                 })}
                                 <h3>{detailProduct.name}</h3>
-                                <h4>${detailProduct.price}</h4>
+                                <h4>${numberFormat(detailProduct.price)}</h4>
                                 <Rating readOnly value={detailProduct.rating} />
                                 <div className={style.desc}>
                                     <p>{detailProduct.description}</p>

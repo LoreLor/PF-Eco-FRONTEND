@@ -5,9 +5,6 @@ if(input.name){
     if(input.name.trim()=== ""){
         errors.name = "Must have a name"
     }
-/*     else if(!/^[A-Za-z0-9\s]+$/g.test(input.name.trim())){
-        errors.name = "Must not include special characters"
-    } */
     else if(input.name.length < 5 || input.name.length > 30){
         errors.name = "Must be between 5 and 30 characters"
     }
@@ -42,8 +39,5 @@ if(input.name){
         }    
     }
 
-    /* if(!input.img){
-        errors.img = "El producto debe tener al menos una imagen"
-        } */
 return errors
 }

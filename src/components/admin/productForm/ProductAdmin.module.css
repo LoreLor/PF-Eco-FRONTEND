@@ -19,13 +19,28 @@
 .containerProd{
   display: flex;
   position: absolute;
-  top: 35%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -35%);
   padding: 15px;
-  margin-top: 3rem;
+  width: 90%;
 }
 .containerProd h3{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.containerProd2{
+  display: flex;
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -35%);
+  padding: 15px;
+  width: 90%;
+  margin-top: 17%;
+}
+.containerProd2 h3{
   font-weight: bold;
   font-size: 20px;
 }
@@ -75,6 +90,11 @@
   border-radius: 10px;
   padding: 7px;
 }
+
+#btnB{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 .mybtn{
   align-self: center;
   text-transform: uppercase;
@@ -93,8 +113,88 @@
   background-color: #E1E1E1;
   border: none;
   border-radius:5px;
+  width: 100%;
+  cursor: pointer;
 }
 .sectionA{
   display: flex;
   flex-wrap: wrap;
+}
+.img{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.imgBox{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 90%;
+}
+.imgDiv{
+  height: 300px;
+  width: 300px;
+  margin: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.categories{
+  display: flex;
+  justify-content: center;
+/*   color: aliceblue;
+  background-color: #112B3C; */
+}
+
+.imgbtn{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.imgZone{
+  display: flex;
+  flex-direction: column;
+}
+.page{    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  background-color: #112B3C;
+  border: none;
+  border-radius: 5px;
+  color: beige;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  font-size: large;
+  cursor: pointer;
+}
+
+.pageActive{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  background-color: #E1E1E1;
+  border: #112B3C solid 2px;
+  border-radius: 5px;
+  color: #112B3C;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  font-size: large;
+  cursor: pointer;
+}
+.delbtn{
+  margin-top: 0.5rem;
+  width: 100%;
+  border-radius: 5px;
+  background-color: #112B3C;
+  color: #E1E1E1;
+  border: none;
 }
