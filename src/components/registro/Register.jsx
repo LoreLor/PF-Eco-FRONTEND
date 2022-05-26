@@ -71,7 +71,7 @@ const Register = () => {
   };
 
   return (
-    <>
+    <div>
       <div className={s.contenedor}>
         <div class="container">
         <div class="py-5 text-center">
@@ -272,10 +272,8 @@ const Register = () => {
           </AlertModal>
         </div>
       </div>
-{/*       <foot>
         <Footer/>
-      </foot> */}
-    </>
+      </div>
   );
 };
 
