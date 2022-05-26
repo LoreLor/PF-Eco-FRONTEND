@@ -39,3 +39,17 @@
 .btnAdmin:hover{
     box-shadow: 0.2rem 0.2rem 0.5rem #6ecb63;
 }
+
+.noCart{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 50px;
+}
+
+.goHome{
+    text-decoration: underline #112B3C ;
+    color: #112B3C;
+    font-weight: bold;
+    font-size: 20px;
+}
