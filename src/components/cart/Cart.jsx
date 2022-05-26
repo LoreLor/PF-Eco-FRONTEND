@@ -128,7 +128,6 @@ export default function Cart(){
         }
     }
 
-
     function acount ()  {
         if(user){
             cart?.map(p => {
@@ -163,7 +162,7 @@ export default function Cart(){
                                     return(
                                             <div className={style.cart_products} key={p.id}>
                                                 <div className={style.cart_img}>
-                                                    <img src={p.img} alt=''/>
+                                                    <img className={style.imgBox}src={user ? p.img :p.img[0]} alt='...'/>
                                                 </div>
                                                 <span>$ {numberFormat(p.price)}</span>
                                                 <span>{p.name}</span>

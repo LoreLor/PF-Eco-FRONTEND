@@ -35,13 +35,22 @@
 }
 
 .cart_img{
-    width: 200px;
-    height: auto;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.cart_img img {
-    width: 100%;
+.imgBox{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+
 }
+/* .cart_img img {
+    width: 100%;
+} */
 
 .cart_products span{
     font-size: larger;
