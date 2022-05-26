@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, NavLink, useParams, useNavigate } from "react-router-dom"
+import { NavLink, useParams, useNavigate } from "react-router-dom"
 import { Rating } from "@mui/material";
 import { toast } from 'react-toastify';
 import numberFormat from "./numberFormat";
@@ -113,7 +113,7 @@ export default function ProductDetail() {
                     Array.isArray(reviewsProduct) ? <div>{
                         reviewsProduct.map(r => {
                             return (
-                                <div>
+                                <div key={r.id}>
                                     <p>{r.autor}</p>
                                     <p>{r.points}</p>
                                     <p>{r.title}</p>

@@ -33,12 +33,12 @@ export default function Shopping() {
 
                 {shopping?.map((s,i) => {
                     return (
-                        <div> 
+                        <div key={s.id}> 
                             <h3>Compra {i}</h3>
                         {
                             s.details?.map(d => {
                                 return (
-                                    <div className={style.reviewCard}>
+                                    <div className={style.reviewCard} key={d.id}>
                                     <h4>{d.name}</h4>
                                     {!d.hasReview ? 
                                         <button onClick={e => handleClick(e, d.id)}>ADD REVIEW</button> :
