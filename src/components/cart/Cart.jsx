@@ -49,7 +49,7 @@ export default function Cart(){
         e.preventDefault()
         //console.log(id)
         if(user){
-            dispatch(deleteAllProductCart(id))
+            dispatch(deleteAllProductCart(cartUser.id))
             .then(r => {
                 dispatch(getCart(user.id))
             })  
@@ -153,10 +153,9 @@ export default function Cart(){
                     <div className={style.cart_title}>
                         <h1>Cart</h1>
                     </div>
-                    {
-                        cart ?
-                            cart.length !== 0?
-                                cart?.map(p => {
+                    {   cart?
+                            cart.length !== 0 ?
+                                cart.map(p => {
                                     return(
                                             <div className={style.cart_products} key={p.id}>
                                                 <div className={style.cart_img}>
@@ -188,12 +187,14 @@ export default function Cart(){
                                                 </button>
                                             </div>
                                     )
-                            }):
-                            <div className={style.noCart}>
-                                <h2>No products in cart</h2>
-                                <NavLink to={'/'} className={style.goHome}>Go to Home for add products</NavLink>
-                            </div> :
-                            <Loader/>
+                            })
+                            :
+                                <div className={style.noCart}>
+                                    <h2>No products in cart</h2>
+                                    <NavLink to={'/'} className={style.goHome}>Go to Home for add products</NavLink>
+                                </div>
+                            :
+                                null
                         }
                 </div>
 
