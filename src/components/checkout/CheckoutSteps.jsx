@@ -285,14 +285,11 @@ function CheckoutSteps() {
         </div>
       </div>
       </div>
-<<<<<<< HEAD
-       {/* <Footer />  */}
-=======
+
       <foot>
         <Footer />  
-
       </foot>
->>>>>>> 2515eea10461c6cb5eec9b21830abeaafd514cb3
+
      
       {/* <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">© 2022 - 2045 cell city</p>
