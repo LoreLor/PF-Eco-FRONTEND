@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../navBar/NavBar";
-import { getReviewsProductDetail, getShopping } from "../../redux/actions/products";
+import { cleanReview, getReviewsProductDetail, getShopping } from "../../redux/actions/products";
 import style from './myShopping.module.css'
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -10,6 +10,7 @@ export default function Shopping() {
     const dispatch = useDispatch();
     const shopping = useSelector((state) => state.products.shopping)
     const user = useSelector((state) => state.users)
+    const review = useSelector((state) => state.products.review)
     const navigate = useNavigate();
 
 
@@ -19,11 +20,20 @@ export default function Shopping() {
 
     function handleClick(e, id) {
         e.preventDefault()
+        dispatch(cleanReview())
         dispatch(getReviewsProductDetail(id))
-        .then(r => {
-            navigate("/review")
+        .then( () => {
+            if(review) {
+                if(Array.isArray(review)) {
+                    console.log("Tiene review")
+                } else {
+                    console.log("No tiene review")
+                    navigate("/review")
+                }
+            }
         })
     }
+
 
     return (
         <div>

@@ -106,7 +106,9 @@ function OrderDetail() {
           </div>
         </div>
       </div>
-  
+      <foot>
+      <Footer/>
+      </foot>
     </div>
   );
 }
