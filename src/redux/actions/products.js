@@ -32,7 +32,9 @@ import {
     DELETE_ALL_FAVS,
     DELETE_FAV,
     ADD_FAV,
-    CLEAR_STATES_PRODUCTS
+    CLEAR_STATES_PRODUCTS,
+    CLEAN_FAV,
+    CLEAN_CART
 } from "./constants";
 
 import axios from 'axios';
@@ -346,3 +348,14 @@ export function clearStatesProducts(){
     }
 }
 
+export const cleanFav = () => (dispatch) => {
+    dispatch({
+        type: CLEAN_FAV
+    })
+}
+
+export const cleanCart = () => (dispatch) => {
+    dispatch({
+        type: CLEAN_CART
+    })
+}
