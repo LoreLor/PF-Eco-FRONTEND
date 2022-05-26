@@ -47,7 +47,7 @@ export default function Home (){
     //ProductCard ---> (name, img, price, rating)
     return(
         <div>
-            <NavBar categories={allCategories}/>
+            <NavBar categories={allCategories} setCurrentPg={setCurrentPg}/>
             
             <div className={style.cards}>
                 {

@@ -4,12 +4,13 @@ import { useDispatch } from "react-redux"
 
 import style from './Categories.module.css'
 
-export default function Categories({categories}){
+export default function Categories({categories, setCurrentPg}){
     const dispatch = useDispatch();
 
     function handleChangeCategories (e){
         e.preventDefault();
         dispatch(filterByCategory(e.target.value));
+        setCurrentPg = 1
     }
     return(
         <select defaultValue="all" onChange={e => handleChangeCategories(e)} className={style.select}>

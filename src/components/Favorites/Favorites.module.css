@@ -1,0 +1,62 @@
+.favs_container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.favs{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: auto;
+}
+
+.favs_title{
+    padding: 0px 0px 40px 40px;
+    color: #F66B0E;
+}
+
+.btnDelete{
+    align-self: center;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0.5rem;
+    background: #b20600;
+    font-size: large;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+}
+.btnDelete:disabled{
+    opacity: 0.5;
+}
+
+.favs_actions{
+    display: flex;
+    width: 50%;
+    padding-top: 20px ;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.noCart{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 50px;
+}
+
+.goHome{
+    text-decoration: underline #112B3C ;
+    color: #112B3C;
+    font-weight: bold;
+    font-size: 20px;
+}

@@ -7,6 +7,7 @@ import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAll
 import Footer from "../Footer/Footer";
 import NavBar from "../navBar/NavBar";
 import style from './Cart.module.css'
+import Loader from "../Loading/Loader";
 import numberFormat from "../detalleProducto/numberFormat";
 
 export default function Cart(){
@@ -123,7 +124,7 @@ export default function Cart(){
                 icon:'error',
                 confirmButtonText:'Ok'
             })
-            navigate('/register');
+            navigate('/login');
         }
     }
 
@@ -156,7 +157,7 @@ export default function Cart(){
                         <h1>Cart</h1>
                     </div>
                     {
-                        cart &&
+                        cart ?
                             cart.length !== 0?
                                 cart?.map(p => {
                                     return(
@@ -194,7 +195,8 @@ export default function Cart(){
                             <div className={style.noCart}>
                                 <h2>No products in cart</h2>
                                 <NavLink to={'/'} className={style.goHome}>Go to Home for add products</NavLink>
-                            </div> 
+                            </div> :
+                            <Loader/>
                         }
                 </div>
 
