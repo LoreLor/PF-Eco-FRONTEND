@@ -87,6 +87,13 @@ export default function NavBar({ categories, setCurrentPg }) {
                                                 </NavLink>
                                             </li> : <li></li>
                                         }
+                                        {!window.location.href.includes("/profile") ?
+                                            <li>
+                                                <NavLink to="/profile">
+                                                    <button className={style.mybtn} /* onClick={} */>Profile</button>
+                                                </NavLink>
+                                            </li> : <li></li>
+                                        }
                                         {/* <li><a href="/register" className={style.logout}>Register</a></li> */}
                                     </ul>
                                 </div>

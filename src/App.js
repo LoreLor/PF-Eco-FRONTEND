@@ -15,6 +15,7 @@ import Shopping from './components/myShopping/Shopping';
 import Review from './components/review/Review';
 import Favorites from './components/Favorites/Favorites';
 import { ToastContainer } from 'react-toastify';
+import  UserProfile  from './components/userProfile/UserProfile';
 
 function App() {
   
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/admin' element={<PrivateRoute><AdminPage/></PrivateRoute>}/>
+        <Route path='/profile' element={<UserProfile/>}/>
         <Route path ='/login' element={<Login />} />
         <Route path = '/home/:id' element={<ProductDetail/>}/>
         <Route path = '/cart'element={<Cart/>}/>
