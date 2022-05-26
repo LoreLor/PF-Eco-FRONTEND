@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { filterByPrice, getAllProducts} from "../../redux/actions/products";
+import { filterByPrice, /* getAllProducts */} from "../../redux/actions/products";
 import { useDispatch } from "react-redux";
 
 import style from './FilterPrice.module.css'
@@ -9,8 +9,8 @@ export default function FilterPrice() {
     const dispatch = useDispatch();
 
     const [input, setInput] = useState({
-        min: "$Min",
-        max: "$Max",
+        min: "",
+        max: "",
     })
 
 

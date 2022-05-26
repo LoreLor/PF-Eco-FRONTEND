@@ -2,7 +2,7 @@ import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, paidCartTemporal, deleteProductCartGuest, addCartProductGuest, deleteCartGuest, getCartGuest, substractOneProduct  } from "../../redux/actions/products";
+import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, /* paidCartTemporal, */ deleteProductCartGuest, addCartProductGuest, deleteCartGuest, getCartGuest, substractOneProduct  } from "../../redux/actions/products";
 // import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, closeCart, deleteProductCartGuest, addCartProductGuest} from "../../redux/actions/products";
 import Footer from "../Footer/Footer";
 import NavBar from "../navBar/NavBar";
@@ -26,10 +26,8 @@ export default function Cart(){
     useEffect(() => {
         if(user){
             dispatch(getCart(user.id))
-            //console.log('hay usuario')
-        }else{
-            //console.log(' no hay usuario')
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[dispatch])
     
     //si hay usur logueado cargo su carrito, si no, el de invitados
