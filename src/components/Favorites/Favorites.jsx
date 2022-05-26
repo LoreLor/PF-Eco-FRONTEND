@@ -26,9 +26,9 @@ export default function Favorites(){
         })
     }
 
-    function handleDelete(e, productId){
+    function handleDelete(e, id){
         e.preventDefault();
-        dispatch(deleteFav(user.id, productId))
+        dispatch(deleteFav(user.id, id))
         .then(r => {
             dispatch(getFavs(user.id))
         })
@@ -42,15 +42,19 @@ export default function Favorites(){
                     <div className={style.favs_title}>
                         <h1>Favs</h1>
                     </div>
+                    <div className={style.favs_grid}>
                     {
                         user.id ?
-                            favs?
-                                favs.length !== 0? 
-                                    favs?.map(f => {
-                                        return(
-                                            <div key={f.productId}>
-                                                <h2>{f.productId}</h2>
-                                                <button className={style.btnDelete} onClick={e=> handleDelete(e, f.productId)}>X</button>
+                        favs?
+                        favs.length !== 0?
+                        favs?.map(f => {
+                            return(
+                                <div className={style.fav_card} key={f.id}>
+                                                <div className={style.fav_img}>
+                                                    <img src={f.img} alt="" />
+                                                </div>
+                                                <span>{f.name}</span>
+                                                <button className={style.btnDeleteFav} onClick={e=> handleDelete(e, f.id)}>X</button>
                                             </div>
                                         )
                                     }):
@@ -59,10 +63,11 @@ export default function Favorites(){
                                         <NavLink to={'/'} className={style.goHome}>Go to Home for add products</NavLink>
                                     </div> 
                             :
-                                <Loader/>
-                        :
+                            <Loader/>
+                            :
                             <h1>login</h1>
-                    }
+                        }
+                    </div>
                 </div>
                 <div className={style.favs_actions}>
                     <button className={style.btnDelete} onClick={e=>handleDeleteALL(e, user.id)} disabled={!favs?.length}>

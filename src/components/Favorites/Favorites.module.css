@@ -22,6 +22,17 @@
     color: #F66B0E;
 }
 
+.favs_grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 40px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
 .btnDelete{
     align-self: center;
     text-transform: uppercase;
@@ -38,6 +49,28 @@
 }
 .btnDelete:disabled{
     opacity: 0.5;
+}
+
+.btnDeleteFav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    text-transform: uppercase;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #b20600;
+    font-size: medium;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
 
 .favs_actions{
@@ -59,4 +92,33 @@
     color: #112B3C;
     font-weight: bold;
     font-size: 20px;
+}
+
+.fav_card{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+    padding: 15px;
+    margin: 20px;
+    border-radius: 20px;
+    background-color: #112B3C;
+    box-shadow: 0.2rem 0.2rem 0.5rem rgb(0 0 0 / 30%);
+}
+
+.fav_img{
+    width: 200px;
+    height: auto;
+}
+
+.fav_img img {
+    width: 100%;
+}
+
+.fav_card span{
+    font-size: larger;
+    font-weight: bold;
+    color: #fff;
 }

@@ -313,9 +313,13 @@ export const productsReducer = (state = initialState, action) => {
             }
         case DELETE_ALL_FAVS:
             return{
-                ...state
+                ...state,
+                favs: []
             }
         case DELETE_FAV:
+            if(state.favs.length === 1){
+                state.favs = []
+            }
             return{
                 ...state
             }
