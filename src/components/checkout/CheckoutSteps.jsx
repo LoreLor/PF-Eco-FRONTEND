@@ -7,6 +7,7 @@ import {getSingleUser, userUpdate} from '../../redux/actions/user'
 import { closeCart, getCart, paidCartTemporal } from "../../redux/actions/products";
 import s from "./CheckoutSteps.module.css";
 import Footer from "../Footer/Footer";
+import numberFormat from "../detalleProducto/numberFormat";
 
 function CheckoutSteps() {
 
@@ -30,7 +31,7 @@ function CheckoutSteps() {
     payment_method: ""
   })
 
-  const [, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
 
 
 
@@ -56,7 +57,6 @@ function CheckoutSteps() {
  
   const handleSubmit =(e) => {
       e.preventDefault();
-      setErrors(submitValidations(user))
       dispacth(userUpdate(user.id, input))
       dispacth(getCart(user.id))
 
@@ -110,7 +110,7 @@ function CheckoutSteps() {
                       <hr />
                     </div>
                     <span class="text-muted">Qty:{p.bundle}</span>
-                    <span class="text-muted">Price:{p.price}</span>
+                    <span class="text-muted">Price:{numberFormat(p.price)}</span>
                     </>
                 </li> )
                 }): null
@@ -125,7 +125,7 @@ function CheckoutSteps() {
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
                   <span>Total (AR)</span>
-                  <strong>{total_amount}</strong>
+                  <strong>{numberFormat(total_amount)}</strong>
                 </li>
               </ul>
             <form class="card p-2">
@@ -163,10 +163,12 @@ function CheckoutSteps() {
                     onChange={handleChange}
                     required
                   />
-                  <div class="invalid-feedback">
+                  <div className="invalid-feedback">
                     Valid first name is required.
                   </div>
                 </div>
+                  {errors.name && <p class="text-danger">{errors.name}</p>}
+
                 <div class="col-md-6 mb-3">
                   <label htmlFor="last_name" className={s.label}>
                     Last name
@@ -180,11 +182,13 @@ function CheckoutSteps() {
                     onChange={handleChange}
                     required
                   />
+                  
                   <div class="invalid-feedback">
                     Valid last name is required.
                   </div>
                 </div>
               </div>
+              {errors.last_name && <p class="text-danger">{errors.last_name}</p>}
 
               <div class="mb-3">
                 <label htmlFor="email" className={s.label}>
@@ -209,6 +213,7 @@ function CheckoutSteps() {
                 </div>
               </div>
 
+
               <div class="mb-3">
                 <label htmlFor="address" className={s.label}>
                   Address: street - city - postal-code - country
@@ -226,6 +231,7 @@ function CheckoutSteps() {
                   Please enter your shipping address.
                 </div>
               </div>
+              {errors.address && <p class="text-danger">{errors.address}</p>}
 
               <div class="mb-3">
                 <label htmlFor="phone_number" className={s.label}>
@@ -238,6 +244,7 @@ function CheckoutSteps() {
                   value={input.phone_number}
                   placeholder="Only Numbers"
                   onChange={handleChange}
+                  required
                 />
               </div>
             
@@ -249,10 +256,11 @@ function CheckoutSteps() {
                 <div class="custom-control custom-radio">
                   <input
                     name="payment_method"              
-                    type="radio"
+                    type="checkbox"
                     class="custom-control-input"
                     value="paypal"
                     onChange={handleChange}
+                    checked
                     required
                   />
                   <label
@@ -271,12 +279,17 @@ function CheckoutSteps() {
                   Proceed to Payment
                 </button>
               </div>
+              {errors.payment_method && <p class="text-danger">{errors.payment_method}</p>}
             </form>):null}
           </div>
         </div>
       </div>
       </div>
-       <Footer /> 
+
+      <foot>
+        <Footer />  
+      </foot>
+
      
       {/* <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">© 2022 - 2045 cell city</p>

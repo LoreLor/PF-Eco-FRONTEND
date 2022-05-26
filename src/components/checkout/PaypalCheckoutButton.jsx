@@ -24,7 +24,7 @@ function PaypalCheckoutButton() {
             icon: 'success',
             title: 'Succefully Purchase',
             text: ' Post reviews at your Products ',
-            footer: navigate('/review')
+            footer: navigate('/')
           })
         //redirigir a pagina con mensaje Gracias por su compra..recibira a la brevedad el detalle de su compra
     }

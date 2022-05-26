@@ -2,10 +2,12 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
-import style from './ProductCard.module.css'
+import style from './ProductCard.module.css';
 import { addCartProduct, getCart, addCartProductGuest, addFav } from "../../redux/actions/products";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
+import numberFormat from "../detalleProducto/numberFormat";
+
 
 export default function ProductCard({name, img, price, rating, id}){
     
@@ -72,7 +74,7 @@ export default function ProductCard({name, img, price, rating, id}){
                 </div>
                 <div className={style.card_data}>
                     <h1 className={style.card_title}>{name}</h1>
-                    <span className={style.card_preci}>${price}</span>
+                    <span className={style.card_preci}>${numberFormat(price)}</span>
                     <div className={style.card_ratBtn}>
                         <Rating name="read-only" value={rating} readOnly/>
                         <a href="#" className={style.card_button} onClick={(e) => handleAddCart(id)}>AddCart</a>

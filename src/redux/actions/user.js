@@ -66,7 +66,8 @@ export function getSingleUser(id){
   return async function(dispatch){
     try{
       const response = await axios.get(`${SERVER}/user/${id}`)
-      dispatch({type:GET_USER,payload:response})
+      const result = response.data
+      dispatch({type:GET_USER,payload:result})
     }catch(error){
       console.log(error)
     }
