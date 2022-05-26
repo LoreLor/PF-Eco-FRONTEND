@@ -31,7 +31,8 @@ import {
     GET_FAVS,
     DELETE_ALL_FAVS,
     DELETE_FAV,
-    ADD_FAV
+    ADD_FAV,
+    CLEAR_STATES_PRODUCTS
 } from "./constants";
 
 import axios from 'axios';
@@ -238,9 +239,6 @@ export const getReviewsProduct = (id) => async (dispatch) => {
 };
 
 export const getReviewsProductDetail = (id) => async (dispatch) => {
-    dispatch({
-        type: GET_REVIEWS_PRODUCT_DETAIL
-    })
     try {
         const product = await axios.get(`${SERVER}/review/detail?detailId=${id}`)
         dispatch({
@@ -342,5 +340,9 @@ export const deleteFav = (userId, productId) => async (dispatch) => {
     }
 }
 
-
+export function clearStatesProducts(){
+    return {
+        type: CLEAR_STATES_PRODUCTS
+    }
+}
 

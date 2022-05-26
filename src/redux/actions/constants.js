@@ -57,3 +57,5 @@ export const GET_FAVS = 'GET_FAVS'
 export const ADD_FAV = 'ADD_FAV'
 export const DELETE_ALL_FAVS = 'DELETE_ALL_FAVS'
 export const DELETE_FAV = 'DELETE_FAV'
+
+export const CLEAR_STATES_PRODUCTS = 'CLEAR_STATES_PRODUCTS'
