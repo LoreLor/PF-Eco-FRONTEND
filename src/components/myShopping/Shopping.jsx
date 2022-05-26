@@ -31,18 +31,23 @@ export default function Shopping() {
             </div>
             <div className={style.container}>
 
-                {shopping?.map(s => {
+                {shopping?.map((s,i) => {
                     return (
-                        s.details?.map(d => {
-                            return (
-                                <div className={style.reviewCard}>
+                        <div> 
+                            <h3>Compra {i}</h3>
+                        {
+                            s.details?.map(d => {
+                                return (
+                                    <div className={style.reviewCard}>
                                     <h4>{d.name}</h4>
                                     {!d.hasReview ? 
-                                    <button onClick={e => handleClick(e, d.id)}>ADD REVIEW</button> :
-                                    <div></div> }
-                                </div> 
-                            )
-                        })
+                                        <button onClick={e => handleClick(e, d.id)}>ADD REVIEW</button> :
+                                        <div></div> }
+                                        </div> 
+                                        )
+                                    })
+                                }
+                        </div>  
                     )
                 })}
 
