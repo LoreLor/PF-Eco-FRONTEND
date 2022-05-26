@@ -33,7 +33,11 @@ import {
     GET_REVIEWS_PRODUCT_DETAIL,
     DELETE_CART_GUEST,
     GET_CART_GUEST,
-    SUBSTRACT_PRODUCT_GUEST
+    SUBSTRACT_PRODUCT_GUEST,
+    GET_FAVS,
+    DELETE_ALL_FAVS,
+    DELETE_FAV,
+    ADD_FAV
 } from "../actions/constants";
 
 
@@ -50,7 +54,8 @@ const initialState = {
     editProduct: {},
     cart: [],
     shopping: [],
-    cartGuest: []
+    cartGuest: [],
+    favs: []
 }
 
 export const productsReducer = (state = initialState, action) => {
@@ -300,6 +305,23 @@ export const productsReducer = (state = initialState, action) => {
                     ...state,
                     cartGuest: state.cartGuest
                 }
+            }
+        case GET_FAVS:
+            return{
+                ...state,
+                favs: action.payload
+            }
+        case DELETE_ALL_FAVS:
+            return{
+                ...state
+            }
+        case DELETE_FAV:
+            return{
+                ...state
+            }
+        case ADD_FAV:
+            return{
+                ...state
             }
         default:
             return state

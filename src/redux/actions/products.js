@@ -27,7 +27,11 @@ import {
     GET_REVIEWS_PRODUCT_DETAIL,
     DELETE_CART_GUEST,
     GET_CART_GUEST,
-    SUBSTRACT_PRODUCT_GUEST
+    SUBSTRACT_PRODUCT_GUEST,
+    GET_FAVS,
+    DELETE_ALL_FAVS,
+    DELETE_FAV,
+    ADD_FAV
 } from "./constants";
 
 import axios from 'axios';
@@ -293,7 +297,50 @@ export const closeCart = (userId) => async(dispatch) => {
     }
 }
 
+export const getFavs = (userId) => async (dispatch) => {
+    try{
+        const {data} = await axios.get(`${SERVER}/favorites?userId=${userId}`)
+        dispatch({
+            type: GET_FAVS,
+            payload: data
+        })
+    }catch (error){
+        console.log(error)
+    }
+};
 
+export const addFav = (userId, productId) => async (dispatch) => {
+    try {
+        await axios.post(`${SERVER}/favorites?userId=${userId}&productId=${productId}`)
+        dispatch({
+            type: ADD_FAV
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const deleteAllFavs = (userId) => async (dispatch) => {
+    try{
+        await axios.delete(`${SERVER}/favorites?userId=${userId}`)
+        dispatch({
+            type: DELETE_ALL_FAVS,
+        })
+    }catch (error){
+        console.log(error)
+    }
+};
+
+export const deleteFav = (userId, productId) => async (dispatch) => {
+    try{
+        await axios.put(`${SERVER}/favorites?userId=${userId}&productId=${productId}`)
+        dispatch({
+            type: DELETE_FAV
+        })
+    }catch (error){
+        console.log(error)
+    }
+}
 
 
 

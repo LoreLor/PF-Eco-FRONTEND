@@ -3,13 +3,16 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
 import style from './ProductCard.module.css'
-import { addCartProduct, getCart, addCartProductGuest } from "../../redux/actions/products";
-import Swal from 'sweetalert2';
+import { addCartProduct, getCart, addCartProductGuest, addFav } from "../../redux/actions/products";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 export default function ProductCard({name, img, price, rating, id}){
     
     const dispatch = useDispatch()
     const user = JSON.parse(localStorage.getItem('userInfo'))
+    
+    let color = 'currentColor'
 
     function handleAddCart(id){
         if(user){
@@ -22,16 +25,23 @@ export default function ProductCard({name, img, price, rating, id}){
             dispatch(addCartProductGuest(id))
         }
         //console.log(addCart)
-        Swal.fire({
-            title: 'Product added to cart',
-            text:'Check Cart',
-            icon:'success',
-            confirmButtonText:'Ok'
-        })
+        toast.success("Product added to cart!", {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
     }
 
-    function handleFavourites(){
-        alert('añadiste a favoritos')
+    function handleFavourites(e, productId){
+        e.preventDefault()
+        if(user){
+            dispatch(addFav(user.id, productId))
+            toast.success("Product added to Favorites!!", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
+        }else{
+            toast.error("Login for add Favorites!", {
+                position: toast.POSITION.BOTTOM_RIGHT
+              });
+        }
     }
     
     return(
@@ -41,8 +51,8 @@ export default function ProductCard({name, img, price, rating, id}){
                     <ul className={style.card_icon}>
                         <li>
                             <span>Add to Favorites</span>
-                            <button className={style.btnIcon} onClick={handleFavourites}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-heart" viewBox="0 0 16 16">
+                            <button className={style.btnIcon} onClick={e=> handleFavourites(e, id)}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" color={color} fill='currentColor' className="bi bi-heart" viewBox="0 0 16 16">
                                     <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                                 </svg>
                             </button>

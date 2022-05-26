@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink, useParams, useNavigate } from "react-router-dom"
 import { Rating } from "@mui/material";
-import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 import { getCategories } from "../../redux/actions/categories";
 
@@ -46,21 +46,15 @@ export default function ProductDetail() {
                 productId: productId,
                 required_quantity: 1
             }))
-            Swal.fire({
-                title: 'Product added to cart',
-                text:'Check Cart',
-                icon:'success',
-                confirmButtonText:'Ok'
-            })
+            toast.success("Product added to cart!", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
             navigate('/cart')
         }else{
             dispatch(addCartProductGuest(productId))
-            Swal.fire({
-                title: 'Product added to cart',
-                text:'Check Cart',
-                icon:'success',
-                confirmButtonText:'Ok'
-            })
+            toast.success("Product added to cart!", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
             navigate('/cart')
         }
     }

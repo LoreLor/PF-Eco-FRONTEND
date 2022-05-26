@@ -10,7 +10,7 @@ import FilterPrice from "../filterPrice/FilterPrice";
 
 
 
-export default function NavBar({ categories }) {
+export default function NavBar({ categories, setCurrentPg }) {
     const user = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
     const dispatch = useDispatch();
 
@@ -50,7 +50,7 @@ export default function NavBar({ categories }) {
             <div className={style.footHead}>
                 {window.location.href.includes("http://localhost:3000/home/") || window.location.href.includes("http://localhost:3000/cart") || window.location.href.includes("http://localhost:3000/myShopping") || window.location.href.includes("http://localhost:3000/review") ? <NavLink to="/" className={style.mybtn}></NavLink> :
                     <div className={style.aux}>
-                        <Categories categories={categories} />
+                        <Categories categories={categories} setCurrentPg={setCurrentPg} />
                         <OrderPrice />
                         <FilterPrice />
                         <button onClick={e => handleClick(e)} className={style.mybtn}>Refresh</button>
@@ -77,6 +77,13 @@ export default function NavBar({ categories }) {
                                             <li>
                                                 <NavLink to="/myShopping">
                                                     <button className={style.mybtn} /* onClick={} */>My shopping</button>
+                                                </NavLink>
+                                            </li> : <li></li>
+                                        }
+                                        {!window.location.href.includes("/favs") ?
+                                            <li>
+                                                <NavLink to="/favs">
+                                                    <button className={style.mybtn} /* onClick={} */>Favorites</button>
                                                 </NavLink>
                                             </li> : <li></li>
                                         }
