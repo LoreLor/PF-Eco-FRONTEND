@@ -30,6 +30,10 @@ export default function Shopping() {
                 <NavBar />
             </div>
             <div className={style.container}>
+                {/* <div className={style.shopping_title}>
+                    <h1>MyShopping</h1>
+                </div> */}
+                
 
                 {!shopping ?
                     <div>
