@@ -29,7 +29,7 @@ function LoginGoogle() {
     // eslint-disable-next-line no-undef
     google.accounts.id.renderButton(
     document.getElementById('signInDiv'),
-    {theme:'outline', size:'large'}
+    {theme:'outline', size:'large', justifyContent: 'center'}
   )
   }, []);
 
