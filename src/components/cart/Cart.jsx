@@ -2,7 +2,7 @@ import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, /* paidCartTemporal, */ deleteProductCartGuest, addCartProductGuest, deleteCartGuest, getCartGuest, substractOneProduct  } from "../../redux/actions/products";
+import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, /* paidCartTemporal, */ deleteProductCartGuest, addCartProductGuest, deleteCartGuest, getCartGuest, substractOneProduct, cleanCartGuest  } from "../../redux/actions/products";
 // import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, closeCart, deleteProductCartGuest, addCartProductGuest} from "../../redux/actions/products";
 import Footer from "../Footer/Footer";
 import NavBar from "../navBar/NavBar";
@@ -153,9 +153,9 @@ export default function Cart(){
                     <div className={style.cart_title}>
                         <h1>Cart</h1>
                     </div>
-                    {   cart?
+                    {   cart &&
                             cart.length !== 0 ?
-                                cart.map(p => {
+                                cart?.map(p => {
                                     return(
                                             <div className={style.cart_products} key={p.id}>
                                                 <div className={style.cart_img}>
@@ -193,8 +193,6 @@ export default function Cart(){
                                     <h2>No products in cart</h2>
                                     <NavLink to={'/'} className={style.goHome}>Go to Home for add products</NavLink>
                                 </div>
-                            :
-                                null
                         }
                 </div>
 

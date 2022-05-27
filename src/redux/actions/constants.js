@@ -23,6 +23,7 @@ export const FILTER_BY_PRICE = "FILTER_BY_PRICE"
 export const CLEAN_DETAIL = 'CLEAN_DETAIL';
 export const CLEAN_CART = 'CLEAN_CART';
 export const CLEAN_FAV = 'CLEAN_FAV';
+export const CLEAN_CART_GUEST = 'CLEAN_CART_GUEST'
 
 
 export const GET_REVIEWS_PRODUCT = 'GET_REVIEWS_PRODUCT'

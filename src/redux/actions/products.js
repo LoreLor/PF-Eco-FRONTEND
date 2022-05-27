@@ -34,7 +34,8 @@ import {
     ADD_FAV,
     CLEAR_STATES_PRODUCTS,
     CLEAN_FAV,
-    CLEAN_CART
+    CLEAN_CART,
+    CLEAN_CART_GUEST
 } from "./constants";
 
 import axios from 'axios';
@@ -357,5 +358,11 @@ export const cleanFav = () => (dispatch) => {
 export const cleanCart = () => (dispatch) => {
     dispatch({
         type: CLEAN_CART
+    })
+}
+
+export const cleanCartGuest = () => dispatch => {
+    dispatch({
+        type: CLEAN_CART_GUEST
     })
 }

@@ -40,7 +40,8 @@ import {
     ADD_FAV,
     CLEAR_STATES_PRODUCTS,
     CLEAN_CART,
-    CLEAN_FAV
+    CLEAN_FAV,
+    CLEAN_CART_GUEST
 } from "../actions/constants";
 
 
@@ -348,6 +349,11 @@ export const productsReducer = (state = initialState, action) => {
                 ...state,
                 favs: []
             }
+        case CLEAN_CART_GUEST:
+                return{
+                    ...state,
+                    cartGuest: []
+                } 
         default:
             return state
     }
