@@ -30,6 +30,20 @@ export default function Cart(){
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[dispatch])
     
+    //agrega CartGuest a Cart
+    if(user && cartGuest.length !== 0){
+        cartGuest.map(p => {
+            //console.log(p.bundle)
+            dispatch(addCartProduct({
+                userId: user.id,
+                productId: p.id,
+                bundle: p.bundle
+            }))
+        })
+        dispatch(cleanCartGuest())
+        //console.log(cartGuest)
+    }
+
     //si hay usur logueado cargo su carrito, si no, el de invitados
     const cart = user ? cartUser.details : cartGuest
 
@@ -65,6 +79,7 @@ export default function Cart(){
                 dispatch(addCartProduct({
                     userId: user.id,
                     productId: productId,
+                    bundle: 1
                 }))
                 .then(r => {
                     dispatch(getCart(user.id))
