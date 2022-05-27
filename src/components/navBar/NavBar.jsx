@@ -7,6 +7,7 @@ import style from './NavBar.module.css'
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import FilterPrice from "../filterPrice/FilterPrice";
+import { cleanCart, cleanFav } from "../../redux/actions/products";
 
 
 
@@ -23,6 +24,8 @@ export default function NavBar({ categories, setCurrentPg }) {
 
     function handleLogout() {
         dispatch(logout())
+        dispatch(cleanCart())
+        dispatch(cleanFav())
         window.location.reload();
     }
 
@@ -48,7 +51,7 @@ export default function NavBar({ categories, setCurrentPg }) {
                 </div>
             </nav>
             <div className={style.footHead}>
-                {window.location.href.includes("http://localhost:3000/home/") || window.location.href.includes("http://localhost:3000/cart") || window.location.href.includes("http://localhost:3000/myShopping") || window.location.href.includes("http://localhost:3000/review") ? <NavLink to="/" className={style.mybtn}></NavLink> :
+                {window.location.href.includes("http://localhost:3000/favs") || window.location.href.includes("http://localhost:3000/home/") || window.location.href.includes("http://localhost:3000/cart") || window.location.href.includes("http://localhost:3000/myShopping") || window.location.href.includes("http://localhost:3000/review") ? <NavLink to="/" className={style.mybtn}></NavLink> :
                     <div className={style.aux}>
                         <Categories categories={categories} setCurrentPg={setCurrentPg} />
                         <OrderPrice />
@@ -84,6 +87,13 @@ export default function NavBar({ categories, setCurrentPg }) {
                                             <li>
                                                 <NavLink to="/favs">
                                                     <button className={style.mybtn} /* onClick={} */>Favorites</button>
+                                                </NavLink>
+                                            </li> : <li></li>
+                                        }
+                                        {!window.location.href.includes("/profile") ?
+                                            <li>
+                                                <NavLink to="/profile">
+                                                    <button className={style.mybtn} /* onClick={} */>Profile</button>
                                                 </NavLink>
                                             </li> : <li></li>
                                         }

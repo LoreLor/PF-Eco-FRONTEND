@@ -1,64 +1,72 @@
-import React, { useEffect } from 'react';
-import { Link, NavLink, useLocation } from "react-router-dom"
+import React from 'react';
+import { Link, NavLink} from "react-router-dom"
 import { useNavigate } from 'react-router-dom';
 import { userLogin } from "../../redux/actions/user"
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import s from "./Login.module.css";
 import { useState } from 'react';
-import Swal from "sweetalert2";
 import imagen1 from '../../assets/celulares.jpg';
 import imagen2 from '../../assets/celulares1.jpg';
 import imagen3 from '../../assets/celulares3.jpg';
 import LoginGoogle from './LoginGoogle';
 import Footer from '../Footer/Footer';
-
-
+import SERVER from '../../server';
+import AlertModal from '../admin/AdminModals/AlertModal'
 
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    
-    const user = useSelector((state) => state.users.userInfo);
-   
+    const [data, setData] = useState({
+        email: "",
+        password: ""
+    });
 
-//queryString de login...si true te lleva al home
-    const { search } = useLocation();
-    const redirectInUrl = new URLSearchParams(search).get('redirect')
-    const redirect = redirectInUrl ? redirectInUrl : '/';
-    
+    const [keyword,setKeyword] = useState("")
+    const [isOpen,setIsOpen] = useState(false)
 
-    useEffect(() => {
-        if(user.user_name){
-           navigate(redirect)
-        }
-    }, [navigate, user, redirect]);
-
-    const handleSubmitLogin = (e) => {
+    function onChange(e){
+        setData({
+            ...data,
+            [e.target.name]:e.target.value
+        })
+    }
+    async function handleSubmitLogin(e){
         e.preventDefault();
-        dispatch(userLogin(email, password))
-            .then(res => { 
-                if(!res){
-                    setEmail('')
-                    setPassword('')
-                    
-                } else {
-                    Swal.fire({
-                        title: 'login success',
-                        icon: 'success'
+        if(Object.keys(data).length === 2
+        &&data.email !== ""
+        && data.password !==""){
+            let response = null
+            try {
+                console.log(data)
+                response = await fetch(`${SERVER}/user/signin`,
+                {method:"POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            body: JSON.stringify(data)
+            })
+                const result = await response.json()
+                setKeyword(result.msg)
+            if(!isOpen && result){
+                setIsOpen(true);
+                if(!isOpen && result.msg === "Login success"){
+                    dispatch(userLogin(result.data))
+                    setIsOpen(true)
+                    setData({
+                        email: "",
+                        password: ""
                     })
-                    navigate(redirect)
                 }
             }
-        )
-       
+            } catch (error) {
+                console.log(error)
+            }
+        }
     }
 
-
     return (
-        <div style={{ marginBottom: 40 }} >
+        <div>
             <div class="py-5 text-center">
             <h2 className={s.title}>
               Sign In{" "}
@@ -81,7 +89,7 @@ const Login = () => {
               </div>
             </h2>
           </div>
-            <form onSubmit={(e)=>handleSubmitLogin(e)} autoComplete="off">
+            <form onSubmit={handleSubmitLogin} autoComplete="off">
                 <div className="container w-75 mt-5 shadow-lg p-3 mb-5 bg-white rounded">
                     <div className="row align-items-center align-items-center ">
                         <div class='col-lg-5'>
@@ -107,8 +115,9 @@ const Login = () => {
                                 <input type="text"
                                     className="form-control mb-2"
                                     placeholder="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    name='email'
+                                    value={data.email}
+                                    onChange={onChange}
                                     required
                                 />
                             </div>
@@ -117,14 +126,15 @@ const Login = () => {
                                 <input type="password"
                                     className="form-control"
                                     placeholder="Password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    name='password'
+                                    value={data.password}
+                                    onChange={onChange}
                                     required
 
                                 />
                             </div>
                             <div className="d-grid">
-                                <button type="submit" className={s.btn}> Sign In </button>
+                                <button type="submit" className={s.btn} onClick={handleSubmitLogin}> Sign In </button>
                             </div>
                              <div className="container w-100 my-5">
                                 <div className="row my-3 text-center">
@@ -134,13 +144,31 @@ const Login = () => {
                                 </div>
                             </div> 
                             <div className="row my-3 text-center">
-                                <span> You don't have an account?  Go to...<strong><Link to={`/register?redirect=${redirect}`}>Create your account</Link></strong></span>
+                                <span> You don't have an account?  Go to...<strong><Link to={"/register"}>Create your account</Link></strong></span>
                             </div>  
                         </div>
                     </div>
                 </div>
             </form>
-            <Footer/> 
+            <AlertModal isOpen={isOpen} setIsOpen={setIsOpen}>
+          {keyword.length ? (
+                    <>
+                    <h2>{keyword}</h2>
+                    {keyword === "Login success" ? (
+                        <button onClick={()=> navigate("/",{replace:true})} className={s.btn}> 
+                            Look at products
+                        </button>
+                    ): (
+                        <button onClick={()=> setIsOpen(state=>!state)} className={s.btn}>Ok</button>
+                    )}
+                    </>
+                ):(
+                    <h2>Invalid Data</h2>
+                )}
+          </AlertModal>
+        <div>
+            <Footer/>
+        </div> 
         </div>
     );
 };

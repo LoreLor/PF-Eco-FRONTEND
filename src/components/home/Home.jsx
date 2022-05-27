@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 import { useDispatch, useSelector } from "react-redux"
 
-import { getAllProducts, getCart } from "../../redux/actions/products"
+import { clearStatesProducts, getAllProducts, getCart } from "../../redux/actions/products"
 import { getCategories } from "../../redux/actions/categories"
 
 
@@ -38,6 +38,7 @@ export default function Home (){
     useEffect(() => {
         dispatch(getAllProducts());
         dispatch(getCategories());
+        dispatch(clearStatesProducts());
         //dispatch(getCart(user.id));
         //console.log(cart)
         //console.log(allProducts)

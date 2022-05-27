@@ -2,7 +2,7 @@ import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, paidCartTemporal, deleteProductCartGuest, addCartProductGuest, deleteCartGuest, getCartGuest, substractOneProduct  } from "../../redux/actions/products";
+import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, /* paidCartTemporal, */ deleteProductCartGuest, addCartProductGuest, deleteCartGuest, getCartGuest, substractOneProduct, cleanCartGuest  } from "../../redux/actions/products";
 // import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, closeCart, deleteProductCartGuest, addCartProductGuest} from "../../redux/actions/products";
 import Footer from "../Footer/Footer";
 import NavBar from "../navBar/NavBar";
@@ -26,10 +26,8 @@ export default function Cart(){
     useEffect(() => {
         if(user){
             dispatch(getCart(user.id))
-            //console.log('hay usuario')
-        }else{
-            //console.log(' no hay usuario')
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[dispatch])
     
     //si hay usur logueado cargo su carrito, si no, el de invitados
@@ -51,7 +49,7 @@ export default function Cart(){
         e.preventDefault()
         //console.log(id)
         if(user){
-            dispatch(deleteAllProductCart(id))
+            dispatch(deleteAllProductCart(cartUser.id))
             .then(r => {
                 dispatch(getCart(user.id))
             })  
@@ -128,7 +126,6 @@ export default function Cart(){
         }
     }
 
-
     function acount ()  {
         if(user){
             cart?.map(p => {
@@ -156,14 +153,13 @@ export default function Cart(){
                     <div className={style.cart_title}>
                         <h1>Cart</h1>
                     </div>
-                    {
-                        cart ?
-                            cart.length !== 0?
+                    {   cart &&
+                            cart.length !== 0 ?
                                 cart?.map(p => {
                                     return(
                                             <div className={style.cart_products} key={p.id}>
                                                 <div className={style.cart_img}>
-                                                    <img src={p.img} alt=''/>
+                                                    <img className={style.imgBox}src={user ? p.img :p.img[0]} alt='...'/>
                                                 </div>
                                                 <span>$ {numberFormat(p.price)}</span>
                                                 <span>{p.name}</span>
@@ -191,12 +187,12 @@ export default function Cart(){
                                                 </button>
                                             </div>
                                     )
-                            }):
-                            <div className={style.noCart}>
-                                <h2>No products in cart</h2>
-                                <NavLink to={'/'} className={style.goHome}>Go to Home for add products</NavLink>
-                            </div> :
-                            <Loader/>
+                            })
+                            :
+                                <div className={style.noCart}>
+                                    <h2>No products in cart</h2>
+                                    <NavLink to={'/'} className={style.goHome}>Go to Home for add products</NavLink>
+                                </div>
                         }
                 </div>
 

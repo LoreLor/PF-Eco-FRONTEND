@@ -37,7 +37,11 @@ import {
     GET_FAVS,
     DELETE_ALL_FAVS,
     DELETE_FAV,
-    ADD_FAV
+    ADD_FAV,
+    CLEAR_STATES_PRODUCTS,
+    CLEAN_CART,
+    CLEAN_FAV,
+    CLEAN_CART_GUEST
 } from "../actions/constants";
 
 
@@ -223,6 +227,13 @@ export const productsReducer = (state = initialState, action) => {
                 // cart: action.payload
             }
         case GET_SHOPPING:
+            if(action.payload   ) {
+                action.payload.sort(function (a, b) {
+                    if (a.date > b.date) return 1;
+                    if (a.date < b.date) return -1;
+                    return 0
+                })
+            }
             return {
                 ...state,
                 shopping: action.payload
@@ -327,6 +338,29 @@ export const productsReducer = (state = initialState, action) => {
             return{
                 ...state
             }
+        case CLEAR_STATES_PRODUCTS:
+            return{
+                ...state,
+                shopping: [],
+                review: [],
+                reviews: [],
+                favs: [],    
+            }
+        case CLEAN_CART:
+            return{
+                ...state,
+                cart: []
+            }
+        case CLEAN_FAV:
+            return{
+                ...state,
+                favs: []
+            }
+        case CLEAN_CART_GUEST:
+                return{
+                    ...state,
+                    cartGuest: []
+                } 
         default:
             return state
     }

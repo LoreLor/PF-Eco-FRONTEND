@@ -1,0 +1,42 @@
+.profileBox{
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-radius: 30px;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    width: 30%;
+    align-items: center;
+    background-color: rgb(221, 219, 219);
+}
+.imageBox{
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+#imageDiv{
+    max-width: 100%;
+    max-height: 100%;
+   border-radius: 50%;
+   border: 3px solid black;
+}
+#footer{
+    padding-top: 1rem;
+}
+
+.tytles{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.data{
+    font-weight: 500;
+}

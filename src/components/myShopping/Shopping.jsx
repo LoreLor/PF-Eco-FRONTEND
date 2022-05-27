@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../navBar/NavBar";
-import { cleanReview, getReviewsProductDetail, getShopping } from "../../redux/actions/products";
+import { getReviewsProductDetail, getShopping } from "../../redux/actions/products";
 import style from './myShopping.module.css'
 import { NavLink, useNavigate } from "react-router-dom";
+import Footer from "../Footer/Footer"
 
 
 export default function Shopping() {
     const dispatch = useDispatch();
     const shopping = useSelector((state) => state.products.shopping)
     const user = useSelector((state) => state.users)
-    const review = useSelector((state) => state.products.review)
     const navigate = useNavigate();
 
 
@@ -20,20 +20,9 @@ export default function Shopping() {
 
     function handleClick(e, id) {
         e.preventDefault()
-        dispatch(cleanReview())
         dispatch(getReviewsProductDetail(id))
-        .then( () => {
-            if(review) {
-                if(Array.isArray(review)) {
-                    console.log("Tiene review")
-                } else {
-                    console.log("No tiene review")
-                    navigate("/review")
-                }
-            }
-        })
+        navigate("/review")
     }
-
 
     return (
         <div>
@@ -41,21 +30,46 @@ export default function Shopping() {
                 <NavBar />
             </div>
             <div className={style.container}>
+                {/* <div className={style.shopping_title}>
+                    <h1>MyShopping</h1>
+                </div> */}
+                
 
-                {shopping?.map(s => {
-                    return (
-                        s.details?.map(d => {
-                            return (
-                                <div className={style.reviewCard}>
-                                    <h4>{d.name}</h4>
-                                    <button onClick={e => handleClick(e, d.id)}>ADD REVIEW</button>
-                                </div>
-                            )
-                        })
-                    )
-                })}
+                {!shopping?.length ?
+                    <div className={style.noCart}>
+                        <h2>No products purchased</h2>
+                        <NavLink to={'/'} className={style.goHome}>Go to Home for buy products</NavLink>
+                    </div> :
+                    <div>
+                    {shopping?.map((s, i) => {
+                        return (
+                            <div key={s.id}>
+                                <h3>BUY {i}</h3>
+                                {
+                                    s.details?.map(d => {
+                                        return (
+                                            <div className={style.reviewCard} key={d.id}>
+                                                <h4>{d.name}</h4>
+                                                <h4>Quantity: {d.bundle}</h4>
+                                                <h4>Unit price: ${d.price}</h4>
+                                                {!d.hasReview ?
+                                                    <button onClick={e => handleClick(e, d.id)}>ADD REVIEW</button> :
+                                                    <div></div>}
+                                            </div>
+                                        )
+                                    })
+                                }
+                                <h3>Price total: {s.price_total}</h3>
+                                <h3>Date: {s.date.replace("T"," ").replace("Z"," ")}</h3>
+                            </div>
+                        )
+                    })}
+                </div>
+                }
+
 
             </div>
+            <Footer />
         </div>
     )
 } 
