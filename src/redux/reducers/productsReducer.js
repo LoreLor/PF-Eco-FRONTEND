@@ -229,8 +229,8 @@ export const productsReducer = (state = initialState, action) => {
         case GET_SHOPPING:
             if(action.payload   ) {
                 action.payload.sort(function (a, b) {
-                    if (a.id > b.id) return 1;
-                    if (a.id < b.id) return -1;
+                    if (a.date > b.date) return 1;
+                    if (a.date < b.date) return -1;
                     return 0
                 })
             }
