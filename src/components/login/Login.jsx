@@ -11,6 +11,7 @@ import imagen2 from '../../assets/celulares1.jpg';
 import imagen3 from '../../assets/celulares3.jpg';
 import LoginGoogle from './LoginGoogle';
 import Footer from '../Footer/Footer';
+import SERVER from '../../server';
 
 
 
@@ -21,7 +22,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     
-    const user = useSelector((state) => state.users.userInfo);
+    const user = useSelector((state) => state.users);
    
 
 //queryString de login...si true te lleva al home
@@ -55,7 +56,7 @@ const Login = () => {
         )
        
     }
-
+    
 
     return (
         <div style={{ marginBottom: 40 }} >

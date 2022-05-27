@@ -5,13 +5,14 @@ import OrderPrice from "../orderPrice/OrderPrice";
 import { logout } from '../../redux/actions/user'
 import style from './NavBar.module.css'
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FilterPrice from "../filterPrice/FilterPrice";
 
 
 
 export default function NavBar({ categories, setCurrentPg }) {
     const user = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+   // const user = useSelector((state) => state.users.userInfo)
     const dispatch = useDispatch();
 
 
