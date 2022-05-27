@@ -38,7 +38,6 @@ const Login = () => {
         && data.password !==""){
             let response = null
             try {
-                console.log(data)
                 response = await fetch(`${SERVER}/user/signin`,
                 {method:"POST",
                 headers: {

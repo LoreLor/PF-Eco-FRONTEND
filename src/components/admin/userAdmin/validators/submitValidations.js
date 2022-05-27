@@ -1,5 +1,5 @@
 export default function submitValidations(input){
     let errors = {}
-    if (input.rol !== "Admin" && input.rol !=="User"){errors.isActive = "The rol can not be hacked"}
+    if (input.rol !== "admin" && input.rol !=="user"){errors.rol = "The rol can not be hacked"}
     return errors
 }

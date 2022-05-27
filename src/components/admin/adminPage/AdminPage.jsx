@@ -14,7 +14,7 @@ import CategoryAdmin from "../categoryForm/CategoryAdmin"
 import ProductAdmin from "../productForm/ProductAdmin"
 import NavBarAdmin from './navBarAdmin/NavBarAdmin'
 import Footer from '../../Footer/Footer'
-import ManageUsers from './manageUsers/ManageUsers'
+import ManageUsers from '../manageUsers/ManageUsers'
 
 export default function AdminPage (){
     const categories = useSelector((state)=> state.products.categoriesDb)
