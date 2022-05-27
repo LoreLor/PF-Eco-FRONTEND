@@ -16,7 +16,11 @@ import Shopping from './components/myShopping/Shopping';
 import Review from './components/review/Review';
 import Favorites from './components/Favorites/Favorites';
 import { ToastContainer } from 'react-toastify';
+<<<<<<< HEAD
 import  UserProfile  from './components/userProfile/UserProfile';
+=======
+import LoginGoogle from './components/login/LoginGoogle';
+>>>>>>> login-google-again
 
 function App() {
   
@@ -25,9 +29,15 @@ function App() {
       <ToastContainer/>
       <Routes>
         <Route path='/' element={<Home/>}/>
+<<<<<<< HEAD
         <Route path='/admin' element={<PrivateAdmin><AdminPage/></PrivateAdmin>}/>
         <Route path='/profile' element={<UserProfile/>}/>
         <Route path ='/login' element={<PrivateUser><Login /></PrivateUser>} />
+=======
+        <Route path='/admin' element={<PrivateRoute><AdminPage/></PrivateRoute>}/>
+        <Route path ='/login' element={<Login />} />
+        <Route path ='/auth/google' element={<LoginGoogle/>}/>
+>>>>>>> login-google-again
         <Route path = '/home/:id' element={<ProductDetail/>}/>
         <Route path = '/cart'element={<Cart/>}/>
         <Route path='/favs' element = {<Favorites/>}/>

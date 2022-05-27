@@ -17,7 +17,7 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
-    const [data, setData] = useState({
+    const [input, setInput] = useState({
         email: "",
         password: ""
     });
@@ -26,25 +26,25 @@ const Login = () => {
     const [isOpen,setIsOpen] = useState(false)
 
     function onChange(e){
-        setData({
-            ...data,
+        setInput({
+            ...input,
             [e.target.name]:e.target.value
         })
     }
     async function handleSubmitLogin(e){
         e.preventDefault();
-        if(Object.keys(data).length === 2
-        &&data.email !== ""
-        && data.password !==""){
+        if(Object.keys(input).length === 2
+        && input.email !== ""
+        && input.password !==""){
             let response = null
             try {
-                console.log(data)
+                console.log(input)
                 response = await fetch(`${SERVER}/user/signin`,
                 {method:"POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-            body: JSON.stringify(data)
+            body: JSON.stringify(input)
             })
                 const result = await response.json()
                 setKeyword(result.msg)
@@ -53,7 +53,7 @@ const Login = () => {
                 if(!isOpen && result.msg === "Login success"){
                     dispatch(userLogin(result.data))
                     setIsOpen(true)
-                    setData({
+                    setInput({
                         email: "",
                         password: ""
                     })
@@ -116,7 +116,7 @@ const Login = () => {
                                     className="form-control mb-2"
                                     placeholder="email"
                                     name='email'
-                                    value={data.email}
+                                    value={input.email}
                                     onChange={onChange}
                                     required
                                 />
@@ -127,7 +127,7 @@ const Login = () => {
                                     className="form-control"
                                     placeholder="Password"
                                     name='password'
-                                    value={data.password}
+                                    value={input.password}
                                     onChange={onChange}
                                     required
 
