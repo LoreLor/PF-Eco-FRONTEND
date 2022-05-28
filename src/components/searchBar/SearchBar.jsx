@@ -44,11 +44,7 @@ export default function SearchBar(){
         };
         setName('')
     };
-
-    useEffect(()=>{
-        dispatch(getAllProducts())
-    },[dispatch])
-
+    
     return(
         <div className={style.search} >
             <Hint options={Array.isArray(allProducts)?allProducts.map(p=>p.name):[]}>
