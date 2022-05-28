@@ -10,7 +10,7 @@
     padding: 5px;
     cursor: pointer;
     border-radius: 5px;
-    height: 10rem;
+    height: 8rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,5 +18,9 @@
 
 .section{
     width: 100%;
-    margin-top: 1.7rem
+    margin-top: 1.9rem
+}
+
+.warning{
+    font-size: smaller;
 }

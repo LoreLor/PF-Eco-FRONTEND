@@ -10,6 +10,7 @@ import Register from './components/registro/Register';
 import Cart from './components/cart/Cart';
 import PrivateAdmin from './components/admin/adminPage/PrivateAdmin';
 import PrivateUser from './components/login/PrivateUser'
+import PrivateProfile from './components/userProfile/PrivateProfile'
 import CheckoutSteps from './components/checkout/CheckoutSteps';
 import OrderDetail from './components/checkout/OrderDetail';
 import Shopping from './components/myShopping/Shopping';
@@ -26,7 +27,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/admin' element={<PrivateAdmin><AdminPage/></PrivateAdmin>}/>
-        <Route path='/profile' element={<UserProfile/>}/>
+        <Route path='/profile' element={<PrivateProfile><UserProfile/></PrivateProfile>}/>
         <Route path ='/login' element={<PrivateUser><Login /></PrivateUser>} />
         <Route path = '/home/:id' element={<ProductDetail/>}/>
         <Route path = '/cart'element={<Cart/>}/>

@@ -88,5 +88,16 @@ export const userUpdate = ( userId, body) => async(dispatch) =>{
   }
 }
 
+export const profileUpdate = (data) => async(dispatch) =>{
+  try {
+    dispatch({
+      type: USER_UPDATE,
+      payload: data
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 
 
