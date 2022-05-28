@@ -1,0 +1,26 @@
+.content {
+    padding: 6px;
+    background-color: #d1cfcf;
+    border-radius: 5px;
+}
+
+.header {
+    background-color: #112B3C;
+    color: aliceblue;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.section{
+    width: 100%;
+    margin-top: 1.9rem
+}
+
+.warning{
+    font-size: smaller;
+}

@@ -109,13 +109,13 @@ export default function UserAdmin({user,setModalA,setUser}){
                         <h2>{keyword}</h2>
                         {keyword === "Status updated" ? 
                             <>
-                            <button onClick={onClose}> 
+                            <button onClick={onClose} className={style.mybtn}> 
                                 Close All
                             </button>
                             </>
                         : 
                             <>
-                            <button onClick={()=> setIsOpen(false)}>Try Again</button>
+                            <button onClick={()=> setIsOpen(false)} className={style.mybtn}>Try Again</button>
                             </>
                         
                     }

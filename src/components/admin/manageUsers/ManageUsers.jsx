@@ -1,11 +1,11 @@
-import AlertModal from '../../AdminModals/AlertModal'
+import AlertModal from '../AdminModals/AlertModal'
 import { useDispatch, useSelector } from 'react-redux'
 import style from './manageUsers.module.css'
 import { useState } from 'react'
 import axios from "axios"
-import SERVER from '../../../../server'
-import { getAllUsers } from '../../../../redux/actions/user'
-import FlashModal from "../../AdminModals/FlashModal"
+import SERVER from '../../../server'
+import { getAllUsers } from '../../../redux/actions/user'
+import FlashModal from "../AdminModals/FlashModal"
 
 
 export default function ManageUsers({setBase,base,setModalD}){
@@ -45,7 +45,6 @@ export default function ManageUsers({setBase,base,setModalD}){
     async function confirmDelete(e){
         e.preventDefault()
         const data = {array: base}
-        console.log(data)
         if(e.target.name ==="confirm"){
             const response = await axios.put(`${SERVER}/user/bulk/off`,data)
             const result = await response.data
