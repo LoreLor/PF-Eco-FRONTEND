@@ -28,6 +28,9 @@ export function submitB(user) {
     }    if (!user.conf_password) {
       errors.conf_password = "Must confirm new password";
     }
+    if(user.prev_password === user.new_password){
+      errors.new_password = "Can't be the same password"
+    }
   return errors
 }
 

@@ -8,7 +8,7 @@
     margin-bottom: 1rem;
     padding: 1rem;
     width: 30%;
-    height: 32rem;
+    height: 34rem;
     align-items: center;
     background-color: #112B3C;
     color: aliceblue;
@@ -105,8 +105,41 @@
     background-color: #112B3C;
     color: #E1E1E1;
     font-weight: 500;
-    border: none;
+    border: 3px #112B3C solid;
     border-radius: 10px;
     padding: 7px;
     margin-top: 1rem;
+  }
+
+  .button:hover{
+    margin-left: 4px;
+    background-color: #112B3C;
+    color: #E1E1E1;
+    font-weight: 500;
+    border: 3px #F66B0E solid;
+    border-radius: 10px;
+    padding: 7px;
+    margin-top: 1rem;
+  }
+
+  .mybtn{
+    background-color:#E1E1E1 ;
+    color: #112B3C;
+    font-weight: 500;
+    border: 3px #E1E1E1 solid ;
+    border-radius: 10px;
+    width: 100%;
+  }
+
+  .mybtn:hover{
+    background-color:#E1E1E1 ;
+    color: #112B3C;
+    font-weight: 500;
+    border: 3px #F66B0E solid;
+    border-radius: 10px;
+    width: 100%;
+  }
+
+  .birthday{
+    cursor: pointer;
   }

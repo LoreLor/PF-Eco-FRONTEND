@@ -11,7 +11,8 @@ import imagen3 from '../../assets/celulares3.jpg';
 import LoginGoogle from './LoginGoogle';
 import Footer from '../Footer/Footer';
 import SERVER from '../../server';
-import AlertModal from '../admin/AdminModals/AlertModal'
+import { toast } from 'react-toastify';
+
 
 const Login = () => {
     const navigate = useNavigate()
@@ -21,9 +22,6 @@ const Login = () => {
         email: "",
         password: ""
     });
-
-    const [keyword,setKeyword] = useState("")
-    const [isOpen,setIsOpen] = useState(false)
 
     function onChange(e){
         setData({
@@ -47,16 +45,21 @@ const Login = () => {
             body: JSON.stringify(data)
             })
                 const result = await response.json()
-                setKeyword(result.msg)
-            if(!isOpen && result){
-                setIsOpen(true);
-                if(!isOpen && result.msg === "Login success"){
+            if(result){
+                if(result.msg === "Login success"){
                     dispatch(userLogin(result.data))
-                    setIsOpen(true)
                     setData({
                         email: "",
                         password: ""
                     })
+                    toast.success(`${result.msg}`, {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    });
+                    navigate("/",{replace:true})
+                }else{
+                    toast.error(`${result.msg}`, {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    });
                 }
             }
             } catch (error) {
@@ -150,22 +153,6 @@ const Login = () => {
                     </div>
                 </div>
             </form>
-            <AlertModal isOpen={isOpen} setIsOpen={setIsOpen}>
-          {keyword.length ? (
-                    <>
-                    <h2>{keyword}</h2>
-                    {keyword === "Login success" ? (
-                        <button onClick={()=> navigate("/",{replace:true})} className={s.btn}> 
-                            Look at products
-                        </button>
-                    ): (
-                        <button onClick={()=> setIsOpen(state=>!state)} className={s.btn}>Ok</button>
-                    )}
-                    </>
-                ):(
-                    <h2>Invalid Data</h2>
-                )}
-          </AlertModal>
         <div>
             <Footer/>
         </div> 
