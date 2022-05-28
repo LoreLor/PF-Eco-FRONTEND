@@ -285,26 +285,7 @@ function CheckoutSteps() {
         </div>
       </div>
       </div>
-
-      <foot>
-        <Footer />  
-      </foot>
-
-     
-      {/* <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">© 2022 - 2045 cell city</p>
-        <ul class="list-inline">
-          <li class="list-inline-item">
-            <Link to="#">Privacy</Link>
-          </li>
-          <li class="list-inline-item">
-            <Link to="#">Terms</Link>
-          </li>
-          <li class="list-inline-item">
-            <Link to="#">Support</Link>
-          </li>
-        </ul>
-      </footer> */}
+      <Footer />  
     </div>
   );
 }
