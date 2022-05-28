@@ -5,6 +5,11 @@
     margin: 6px;
     border-radius: 20px;
 }
+
+.input:focus {
+    outline-color: #F66B0E;
+}
+
 .mybtn{
     color: #EFEFEF;
     text-decoration: none;

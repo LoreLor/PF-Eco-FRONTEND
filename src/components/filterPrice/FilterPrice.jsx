@@ -3,6 +3,7 @@ import { filterByPrice, /* getAllProducts */} from "../../redux/actions/products
 import { useDispatch } from "react-redux";
 
 import style from './FilterPrice.module.css'
+import { toast } from "react-toastify";
 
 export default function FilterPrice() {
 
@@ -34,7 +35,9 @@ export default function FilterPrice() {
                 max: "$Max",
             })
         } else {
-            alert("Numbers cannot be null or negative!")
+            toast.warning('Numbers cannot be null or negative!', {
+                position: toast.POSITION.TOP_LEFT
+            })
         }
     }
 
