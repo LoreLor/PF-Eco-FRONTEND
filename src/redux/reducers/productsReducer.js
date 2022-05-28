@@ -363,7 +363,6 @@ export const productsReducer = (state = initialState, action) => {
                     cartGuest: []
                 } 
         case CLEAN_PRODUCTS:
-            console.log("HOLAAAAAAAAAAAA")
                 return{
                     ...state,
                     products: [],
