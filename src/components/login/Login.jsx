@@ -65,6 +65,10 @@ const Login = () => {
         }
     }
 
+    const handleLoginGoogle = () =>{
+        
+    }
+
     return (
         <div>
             <div class="py-5 text-center">
@@ -139,13 +143,14 @@ const Login = () => {
                              <div className="container w-100 my-5">
                                 <div className="row my-3 text-center">
                                     <div className="col-12"> 
-                                            <LoginGoogle />                            
+                                            <LoginGoogle onclick={handleLoginGoogle}/>                            
                                     </div>                           
                                 </div>
                             </div> 
                             <div className="row my-3 text-center">
                                 <span> You don't have an account?  Go to...<strong><Link to={"/register"}>Create your account</Link></strong></span>
                             </div>  
+            
                         </div>
                     </div>
                 </div>
