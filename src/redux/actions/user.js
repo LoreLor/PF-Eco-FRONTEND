@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { USER_LOGIN, USER_LOGOUT, USER_REGISTER, USER_REGISTER_CLEAR, GET_USERS,GET_USER, USER_UPDATE } from './constants';
+import { USER_LOGIN, USER_LOGOUT, USER_REGISTER, USER_REGISTER_CLEAR, GET_USERS,GET_USER, USER_UPDATE, USER_LOGIN_GOOGLE } from './constants';
 import SERVER from '../../server';
 
 export const userLogin = (data) => async(dispatch) =>{
@@ -30,7 +30,7 @@ export const register = (body) => async(dispatch) => {
         type: USER_REGISTER,
         payload: data
       });
-      localStorage.setItem('userRegister', JSON.stringify(data))
+    
       dispatch({
         type: USER_LOGIN,
         payload: data
@@ -86,6 +86,19 @@ export const userUpdate = ( userId, body) => async(dispatch) =>{
     console.log(error)
     
   }
+}
+
+export const userLoginGoogle = (data) => async(dispatch) =>{
+  try {
+  dispatch({
+    type: USER_LOGIN_GOOGLE,
+    payload: data
+  },
+  localStorage.setItem('userObj', JSON.stringify(data)))
+
+}catch (error) {
+console.log(error)
+} 
 }
 
 

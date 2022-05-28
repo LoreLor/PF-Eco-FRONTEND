@@ -17,6 +17,7 @@ import Review from './components/review/Review';
 import Favorites from './components/Favorites/Favorites';
 import { ToastContainer } from 'react-toastify';
 import  UserProfile  from './components/userProfile/UserProfile';
+import LoginGoogle from './components/login/LoginGoogle';
 
 function App() {
   
