@@ -1,15 +1,41 @@
+
+.formReview{
+  position: absolute;
+  right: 50%;
+  bottom: 60% ;
+  transform: translate(50%, 50%);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  background-color: #112B3C;
+  width: 500px;
+  height: auto;
+}
+.formReview label{
+  color: #F66B0E;
+  font-size: large;
+  font-weight: 600;
+}
+
+.review{
+  margin: 20px  ;
+}
+
 .btnContainer{
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 20px ;
 }
+
 .btnAdmin{
     align-self: center;
     text-transform: uppercase;
     border: none;
     border-radius: 0.5rem;
-    background: #6ecb63;
+    background: #F66B0E;
     font-size: medium;
     font-weight: 700;
     color: #fff;
@@ -21,7 +47,7 @@
 }
 
 .btnAdmin:hover{
-    box-shadow: 0.2rem 0.2rem 0.5rem #6ecb63;
+    box-shadow: 0.2rem 0.2rem 0.5rem #F66B0E;
 }
 
 .inputReview{
@@ -47,16 +73,10 @@
     border-radius: 5px;
     width: 100px;
     box-sizing: border-box;
-    transition: box-shadow 0.15s
+    transition: box-shadow 0.15s;
+    font-size: medium;
+    font-weight: bolder;
   }
   .inputReviewPoints:hover{
     box-shadow: 0 0 0 3px #F66B0E;
-  }
-
-  .formReview{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
   }

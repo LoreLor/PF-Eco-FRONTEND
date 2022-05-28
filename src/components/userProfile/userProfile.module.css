@@ -8,8 +8,10 @@
     margin-bottom: 1rem;
     padding: 1rem;
     width: 30%;
+    height: 32rem;
     align-items: center;
-    background-color: rgb(221, 219, 219);
+    background-color: #112B3C;
+    color: aliceblue;
 }
 .imageBox{
     width: 200px;
@@ -23,7 +25,7 @@
     max-width: 100%;
     max-height: 100%;
    border-radius: 50%;
-   border: 3px solid black;
+   border: 5px solid #F66B0E;
 }
 #footer{
     padding-top: 1rem;
@@ -40,3 +42,71 @@
 .data{
     font-weight: 500;
 }
+
+.page{
+    display: flex;
+}
+
+.forms{
+    width: 70%;
+    margin: 1rem;
+}
+
+.errors {
+    padding-top: 3px;
+    color: red;
+    font-size: 12px;
+  }
+  
+  
+  @keyframes shake {
+    25% {
+      transform: translateX(5px);
+    }
+    50% {
+      transform: translateX(-5px);
+    }
+    75% {
+      transform: translateX(5px);
+    }
+  }
+
+  .input{
+    outline: none;
+    padding: 10px;
+    border: 0;
+    background-color: #E1E1E1;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: box-shadow 0.15s
+  }
+  .input:hover{
+    box-shadow: 0 0 0 3px #F66B0E;
+  }
+  
+  .inputError{
+    animation: shake 300ms;
+    outline: none;
+    padding: 10px;
+    border: 0;
+    background-color: #E1E1E1;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: box-shadow 0.15s
+  }
+  .inputError:hover{
+    box-shadow: 0 0 0 3px #F66B0E;
+  }
+
+  .button{
+    margin-left: 4px;
+    background-color: #112B3C;
+    color: #E1E1E1;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    padding: 7px;
+    margin-top: 1rem;
+  }

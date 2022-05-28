@@ -88,6 +88,7 @@ export const userUpdate = ( userId, body) => async(dispatch) =>{
   }
 }
 
+<<<<<<< HEAD
 export const userLoginGoogle = (data) => async(dispatch) =>{
   try {
   dispatch({
@@ -99,6 +100,17 @@ export const userLoginGoogle = (data) => async(dispatch) =>{
 }catch (error) {
 console.log(error)
 } 
+=======
+export const profileUpdate = (data) => async(dispatch) =>{
+  try {
+    dispatch({
+      type: USER_UPDATE,
+      payload: data
+    })
+  } catch (error) {
+    console.log(error)
+  }
+>>>>>>> eceaea3c4a2725fee357e086d6f3c2dfd6329814
 }
 
 

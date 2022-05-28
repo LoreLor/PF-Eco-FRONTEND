@@ -81,6 +81,7 @@
     padding-top: 20px ;
     align-items: center;
     justify-content: space-evenly;
+    margin-bottom: 25px;
 }
 
 .cart_actions span{

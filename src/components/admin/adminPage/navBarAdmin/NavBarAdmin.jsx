@@ -45,6 +45,11 @@ export default function NavBarAdmin({categories}){
                                             <li>
                                                 <button className={style.mybtn} onClick={handleLogout}>Log Out</button>
                                             </li>
+                                            <li>
+                                                <NavLink to="/profile">
+                                                    <button className={style.mybtn} /* onClick={} */>Profile</button>
+                                                </NavLink>
+                                            </li>
                                             {/* <li><a href="/register" className={style.logout}>Register</a></li> */}
                                         </ul>
                                     </div>    

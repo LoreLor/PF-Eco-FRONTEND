@@ -2,7 +2,7 @@
 
 .contenedor {
     background-color: #112B3C;
-    position: absolute;
+    position: relative;
     width: 100%;
     height: max-content;
   }

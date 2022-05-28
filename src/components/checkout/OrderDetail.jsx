@@ -19,7 +19,7 @@ function OrderDetail() {
   }, [user]);
 
   return (
-    <div>
+    <div >
       <div className={s.contenedor}>
         <div class="container">
           <div class="py-5 text-center">
@@ -106,9 +106,7 @@ function OrderDetail() {
           </div>
         </div>
       </div>
-      <foot>
       <Footer/>
-      </foot>
     </div>
   );
 }

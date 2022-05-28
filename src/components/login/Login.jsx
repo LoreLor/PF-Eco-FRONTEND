@@ -38,7 +38,11 @@ const Login = () => {
         && input.password !==""){
             let response = null
             try {
+<<<<<<< HEAD
                 console.log(input)
+=======
+                
+>>>>>>> eceaea3c4a2725fee357e086d6f3c2dfd6329814
                 response = await fetch(`${SERVER}/user/signin`,
                 {method:"POST",
                 headers: {

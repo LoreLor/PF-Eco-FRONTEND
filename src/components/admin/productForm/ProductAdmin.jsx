@@ -281,7 +281,7 @@ useEffect(()=>{
                         </>
                         ): (
                             <>
-                            {keyword}
+                            
                             <button className={style.mybtn} onClick={()=> setIsOpen(state=>!state)}>Try Again</button>
                             </>
                         )}

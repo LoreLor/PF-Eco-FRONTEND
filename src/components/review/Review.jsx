@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createReview } from "../../redux/actions/products";
 import style from './review.module.css'
-import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import NavBar from "../navBar/NavBar";
+import Footer from "../Footer/Footer";
 
 export default function Review() {
     const dispatch = useDispatch();
@@ -40,67 +42,57 @@ export default function Review() {
                 dispatch(createReview(review,input))
                 .then(r => {
                     if(!r){
-                        Swal.fire({
-                            title: 'Review Added',
-                            icon:'succes',
-                            confirmButtonText:'Ok'
-                        })
+                        toast.success("Product reviewed!", {
+                            position: toast.POSITION.BOTTOM_RIGHT
+                        });
                         navigate("/")
             }
         })
-    }
-
-            
+    }       
         } else {
-            Swal.fire({
-                title: 'Review',
-                text:"Complete all the fields. Fields cannot be null.",
-                icon:'error',
-                confirmButtonText:'Ok'
-            })
+            toast.warning("Complete all the fields. Fields cannot be null.", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
         }
     }
 
     return (
         <div>
-            {/* <div>
-                <NavBar />
-            </div> */}
-            <form onSubmit={handleSubmit} className={style.formReview}>
-                <div><label>Title: </label></div>
-                <input
-                    type={"text"}
-                    name={"title"}
-                    value={input.title}
-                    onChange={e => handleChange(e)}
-                    className={style.inputReview}
-                ></input>
-                <div><label>Description: </label></div>
-                <input
-                    type={"text"}
-                    name={"description"}
-                    value={input.description}
-                    onChange={e => handleChange(e)}
-                    className={style.inputReview}
-                ></input>
-                <div><label>Points: </label></div>
-                <input
-                    type={"number"}
-                    name={"points"}
-                    value={input.points}
-                    min={0}
-                    max={5}
-                    onChange={e => handleChange(e)}
-                    className={style.inputReviewPoints}
-                ></input>
-
-            <br></br>
-            <br></br>
-
-                <div className={style.btnContainer}>
-                    <button type="submit" className={style.btnAdmin}>CREATE REVIEW</button>
-                </div>
-            </form>
+            <NavBar />
+                <form onSubmit={handleSubmit} className={style.formReview}>
+                    <div className={style.review}>
+                        <div><label>Title: </label></div>
+                        <input
+                            type={"text"}
+                            name={"title"}
+                            value={input.title}
+                            onChange={e => handleChange(e)}
+                            className={style.inputReview}
+                        />
+                        <div><label>Description: </label></div>
+                        <textarea rows={3} cols={30}
+                            type={"text"}
+                            name={"description"}
+                            value={input.description}
+                            onChange={e => handleChange(e)}
+                            className={style.inputReview}
+                        />
+                        <div><label>Points: </label></div>
+                        <input
+                            type={"number"}
+                            name={"points"}
+                            value={input.points}
+                            min={0}
+                            max={5}
+                            onChange={e => handleChange(e)}
+                            className={style.inputReviewPoints}
+                        />
+                        <div className={style.btnContainer}>
+                            <button type="submit" className={style.btnAdmin}>CREATE REVIEW</button>
+                        </div>
+                    </div>
+                </form>
+            <Footer/>
         </div>
     )
 } 

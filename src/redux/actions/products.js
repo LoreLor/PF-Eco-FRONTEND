@@ -35,7 +35,8 @@ import {
     CLEAR_STATES_PRODUCTS,
     CLEAN_FAV,
     CLEAN_CART,
-    CLEAN_CART_GUEST
+    CLEAN_CART_GUEST,
+    CLEAN_PRODUCTS
 } from "./constants";
 
 import axios from 'axios';
@@ -124,7 +125,7 @@ export function editProduct(payload){
 export function addCartProduct (payload){
     //console.log(payload)
     return async function(dispatch){
-        const json = await axios.post(`${SERVER}/cart?userId=${payload.userId}&productId=${payload.productId}&updated_quantity=sum`)
+        const json = await axios.post(`${SERVER}/cart?userId=${payload.userId}&productId=${payload.productId}&updated_quantity=sum&bundle=${payload.bundle}`)
         //console.log(json)
         return dispatch({
             type: ADD_CART,
@@ -147,7 +148,7 @@ export function addCartProductGuest (id){
 
 //------resta un item del mismo carrito
 export const deleteOneProduct = (userId, id) => async (dispatch) => {
-    const json = await axios.post(`${SERVER}/cart?userId=${userId}&productId=${id}&updated_quantity=rest`)
+    const json = await axios.post(`${SERVER}/cart?userId=${userId}&productId=${id}&updated_quantity=rest&bundle=null`)
     return dispatch({
         type: DELETE_ONE_PRODUCT_CART,
         payload: json.data
@@ -364,5 +365,11 @@ export const cleanCart = () => (dispatch) => {
 export const cleanCartGuest = () => dispatch => {
     dispatch({
         type: CLEAN_CART_GUEST
+    })
+}
+
+export const cleanProducts = () => dispatch => {
+    dispatch({
+        type: CLEAN_PRODUCTS
     })
 }

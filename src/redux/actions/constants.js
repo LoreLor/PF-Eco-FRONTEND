@@ -24,6 +24,7 @@ export const CLEAN_DETAIL = 'CLEAN_DETAIL';
 export const CLEAN_CART = 'CLEAN_CART';
 export const CLEAN_FAV = 'CLEAN_FAV';
 export const CLEAN_CART_GUEST = 'CLEAN_CART_GUEST'
+export const CLEAN_PRODUCTS = 'CLEAN_PRODUCTS'
 
 
 export const GET_REVIEWS_PRODUCT = 'GET_REVIEWS_PRODUCT'

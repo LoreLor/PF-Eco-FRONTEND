@@ -41,3 +41,18 @@
 .btnAdmin:hover{
     box-shadow: 0.2rem 0.2rem 0.5rem #6ecb63;
 }
+
+.mybtn{
+  align-self: center;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 0.5rem;
+  background: #6ecb63;
+  font-size: large;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+}
