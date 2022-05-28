@@ -108,21 +108,24 @@ export default function ProductDetail() {
                         <Loader />
                 }
             </div>
-            <div>
+            <div className={style.review_container}>
                 {
-                    Array.isArray(reviewsProduct) ? <div>{
+                    Array.isArray(reviewsProduct) ? 
+                    <div>
+                    {
                         reviewsProduct.map(r => {
                             return (
-                                <div key={r.id}>
-                                    <p>{r.autor}</p>
-                                    <p>{r.points}</p>
+                                <div key={r.id} className={style.review}>
+                                    <p>User:  {r.autor}</p>
+                                    <Rating readOnly value={r.points}/>
                                     <p>{r.title}</p>
-                                    <p>{r.description}</p> 
+                                    <span className={style.review_description}>{r.description}</span> 
                                     <br></br>
                                 </div>
                             )
                         })
-                        }</div> : <div> </div>
+                    }</div>: 
+                    <div></div>
                 }
             </div>
             <Footer/>

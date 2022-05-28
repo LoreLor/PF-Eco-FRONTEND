@@ -122,3 +122,29 @@
     color: #fff;
     padding: 0.5rem;
 }
+
+.review_container{
+    margin: 20px 0px 40px 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.review{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 250px;
+    height: auto;
+    border-radius: 20px;
+    padding: 15px;
+    background-color: #112B3C;
+}
+.review p {
+    color: #F66B0E;
+    margin-top: 10px;
+}
+.review_description{
+    text-transform: uppercase;
+    color: #F66B0E;
+}
