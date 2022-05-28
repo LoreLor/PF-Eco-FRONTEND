@@ -8,10 +8,10 @@ import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import FilterPrice from "../filterPrice/FilterPrice";
 import { cleanCart, cleanFav } from "../../redux/actions/products";
+import SERVER2 from "../../server2";
 
 
-
-export default function NavBar({ categories, setCurrentPg }) {
+export default function NavBar({ categories, paginado }) {
     const user = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
     const dispatch = useDispatch();
 
@@ -51,12 +51,12 @@ export default function NavBar({ categories, setCurrentPg }) {
                 </div>
             </nav>
             <div className={style.footHead}>
-                {window.location.href.includes("http://localhost:3000/profile") ||window.location.href.includes("http://localhost:3000/favs") || window.location.href.includes("http://localhost:3000/home/") || window.location.href.includes("http://localhost:3000/cart") || window.location.href.includes("http://localhost:3000/myShopping") || window.location.href.includes("http://localhost:3000/review") ? <NavLink to="/" className={style.mybtn}></NavLink> :
+                {window.location.href.includes(`${SERVER2}/profile`) ||window.location.href.includes(`${SERVER2}/favs`) || window.location.href.includes(`${SERVER2}/home`) || window.location.href.includes(`${SERVER2}/cart`) || window.location.href.includes(`${SERVER2}/myShopping`) || window.location.href.includes(`${SERVER2}/review`) ? <NavLink to="/" className={style.mybtn}></NavLink> :
                     <div className={style.aux}>
-                        <Categories categories={categories} setCurrentPg={setCurrentPg} />
+                        <Categories categories={categories} paginado= {paginado}/>
                         <OrderPrice />
                         <FilterPrice />
-                        <button onClick={e => handleClick(e)} className={style.mybtn}>Refresh</button>
+                        <button onClick={e => handleClick(e)} className={style.mybtn}>Clear filters</button>
                         {/* <NavLink to="/" className={style.mybtn}>Help</NavLink> */}
                     </div>
                 }
