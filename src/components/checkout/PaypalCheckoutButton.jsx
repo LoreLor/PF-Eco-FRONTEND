@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import {PayPalButtons} from '@paypal/react-paypal-js'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
+import { paidCartTemporal } from '../../redux/actions/products';
 
 function PaypalCheckoutButton() {
     const user = useSelector((state) => state.users.userInfo);
@@ -11,7 +12,7 @@ function PaypalCheckoutButton() {
     const [ paidFor, setPaidFor ] = useState(false);
     const [ error, setError ] = useState(null);
     const navigate = useNavigate()
-
+    const dispatch = useDispatch()
 
 
     const handleApprove = (orderid) => {
@@ -20,6 +21,7 @@ function PaypalCheckoutButton() {
     };
 
     if(paidFor){
+        dispatch(paidCartTemporal(cart.id))
         Swal.fire({
             icon: 'success',
             title: 'Succefully Purchase',
