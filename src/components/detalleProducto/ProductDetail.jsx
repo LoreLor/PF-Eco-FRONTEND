@@ -8,7 +8,7 @@ import numberFormat from "./numberFormat";
 
 import { getCategories } from "../../redux/actions/categories";
 
-import { addCartProduct, addCartProductGuest, cleanReview, getProductById, getReviewsProduct, limpiarDetail } from "../../redux/actions/products";
+import { addCartProduct, addCartProductGuest, cleanProducts, cleanReview, getProductById, getReviewsProduct, limpiarDetail } from "../../redux/actions/products";
 
 import style from './ProductDetail.module.css'
 
@@ -32,6 +32,7 @@ export default function ProductDetail() {
         dispatch(getProductById(id))
         dispatch(getCategories())
         dispatch(getReviewsProduct(id))
+        dispatch(cleanProducts())
         return () => {
             dispatch(limpiarDetail()) 
             dispatch(cleanReview()) 
