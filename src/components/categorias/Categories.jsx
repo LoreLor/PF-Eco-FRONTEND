@@ -13,7 +13,7 @@ export default function Categories({categories, setCurrentPg}){
         setCurrentPg = 1
     }
     return(
-        <select defaultValue="all" onChange={e => handleChangeCategories(e)} className={style.select}>
+        <select defaultValue="all" onChange={e => handleChangeCategories(e)} className={style.select_categories}>
             <option value="all" disabled>Filter Brand</option>
             {
                 categories?.map(cat => {

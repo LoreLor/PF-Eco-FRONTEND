@@ -1,4 +1,5 @@
 export default function activeValidations(user) {
+    
     let errors = {};
 if(user.name){
     if(user.name.trim()=== ""){
@@ -31,7 +32,7 @@ if(user.user_name){
 /*     else if(!/^[A-Za-z0-9\s]+$/g.test(user.user_name.trim())){
         errors.user_name = "Must not include special characters"
     } */
-    else if(user.last_name.length < 3 || user.last_name.length > 20){
+    else if(user.user_name.length < 3 || user.user_name.length > 20){
         errors.user_name = "Must be between 3 and 20 characters"
     }
 }
@@ -50,28 +51,24 @@ if(user.password){
         errors.password = "Must add a password"
     }
     else if(user.password.length < 8){
-        errors.user_name = "Must be at least 8 characters"
+        errors.password = "Must be at least 8 characters"
     }
 }
 
-    /* if (user.name.length < 4) {
-      errors.name = "you must enter a Name";
-    } else if (/[^a-zA-Z ]/g.test(user.firstName)) {
-      errors.name = "Only text";
-    } */
+if(user.address){
+    if(user.address.trim()=== ""){
+        errors.address = "Must add an address"
+    }
+}
 
-/*     if (!user.address) {
-      errors.address = "you must enter an address";
+if(user.phone_number){
+    if(user.phone_number.trim()=== ""){
+        errors.phone_number = "Must add a phone number"
     }
-    if (user.dni.length < 3) {
-      errors.dni = "DNI is required";
-    } else if (/[^0-9]/g.test(user.dni)) {
-      errors.dni = "Received only numbers";
-    }
-    if (user.phone_number.length < 3) {
-      errors.phone = "Phone is required";
-    } else if (/[^0-9]/g.test(user.phone_number)) {
-      errors.phone_number = "Received only numbers";
-    } */
+    else if (!/^[0-9]*$/.test(user.phone_number)){
+        errors.phone_number = "Must be a number"
+    }  
+}
+
     return errors;
   }

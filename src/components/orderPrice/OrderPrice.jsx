@@ -12,7 +12,7 @@ export default function OrderPrice() {
         dispatch(orderByPrice(e.target.value));
     }
     return (
-        <select defaultValue="default" name="numerical" onChange={e => handleOrderByPrice(e)} className={style.select}>
+        <select defaultValue="default" name="numerical" onChange={e => handleOrderByPrice(e)} className={style.select_Price}>
             <option value="default" disabled>Order price</option>
             <option value="asc">Min to Max</option>
             <option value="desc">Max to Min</option>

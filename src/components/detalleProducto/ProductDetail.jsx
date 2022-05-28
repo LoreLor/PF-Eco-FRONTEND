@@ -8,7 +8,7 @@ import numberFormat from "./numberFormat";
 
 import { getCategories } from "../../redux/actions/categories";
 
-import { addCartProduct, addCartProductGuest, cleanReview, getProductById, getReviewsProduct, limpiarDetail } from "../../redux/actions/products";
+import { addCartProduct, addCartProductGuest, cleanProducts, cleanReview, getProductById, getReviewsProduct, limpiarDetail } from "../../redux/actions/products";
 
 import style from './ProductDetail.module.css'
 
@@ -32,6 +32,7 @@ export default function ProductDetail() {
         dispatch(getProductById(id))
         dispatch(getCategories())
         dispatch(getReviewsProduct(id))
+        dispatch(cleanProducts())
         return () => {
             dispatch(limpiarDetail()) 
             dispatch(cleanReview()) 
@@ -108,21 +109,24 @@ export default function ProductDetail() {
                         <Loader />
                 }
             </div>
-            <div>
+            <div className={style.review_container}>
                 {
-                    Array.isArray(reviewsProduct) ? <div>{
+                    Array.isArray(reviewsProduct) ? 
+                    <div>
+                    {
                         reviewsProduct.map(r => {
                             return (
-                                <div key={r.id}>
-                                    <p>{r.autor}</p>
-                                    <p>{r.points}</p>
+                                <div key={r.id} className={style.review}>
+                                    <p>User:  {r.autor}</p>
+                                    <Rating readOnly value={r.points}/>
                                     <p>{r.title}</p>
-                                    <p>{r.description}</p> 
+                                    <span className={style.review_description}>{r.description}</span> 
                                     <br></br>
                                 </div>
                             )
                         })
-                        }</div> : <div> </div>
+                    }</div>: 
+                    <div></div>
                 }
             </div>
             <Footer/>

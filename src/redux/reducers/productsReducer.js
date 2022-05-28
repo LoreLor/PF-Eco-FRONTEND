@@ -41,7 +41,8 @@ import {
     CLEAR_STATES_PRODUCTS,
     CLEAN_CART,
     CLEAN_FAV,
-    CLEAN_CART_GUEST
+    CLEAN_CART_GUEST,
+    CLEAN_PRODUCTS
 } from "../actions/constants";
 
 
@@ -360,6 +361,12 @@ export const productsReducer = (state = initialState, action) => {
                 return{
                     ...state,
                     cartGuest: []
+                } 
+        case CLEAN_PRODUCTS:
+                return{
+                    ...state,
+                    products: [],
+                    showedProducts: []
                 } 
         default:
             return state

@@ -1,48 +1,49 @@
-import React, {useEffect, useState} from "react"
-import { useDispatch, useSelector } from "react-redux"
+import React, {useEffect, useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { clearStatesProducts, getAllProducts, getCart } from "../../redux/actions/products"
-import { getCategories } from "../../redux/actions/categories"
+import { clearStatesProducts, getAllProducts, getCart, getFavs } from "../../redux/actions/products";
+import { getCategories } from "../../redux/actions/categories";
 
 
-import NavBar from '../navBar/NavBar'
-import ProductCard from '../Productos/ProductCard'
-import Loader from "../Loading/Loader"
-import Pages from "../Pages/Pages"
+import NavBar from '../navBar/NavBar';
+import ProductCard from '../Productos/ProductCard';
+import Loader from "../Loading/Loader";
+import Pages from "../Pages/Pages";
 
-import style from './Home.module.css'
-import Footer from "../Footer/Footer"
-import { Link } from "react-router-dom"
+import style from './Home.module.css';
+import Footer from "../Footer/Footer";
+
 
 
 export default function Home (){
 
     const dispatch = useDispatch();
-    const allProducts = useSelector((state) => state.products)
-    const allCategories = useSelector((state) => state.products.categoriesDb)
+    const allProducts = useSelector((state) => state.products);
+    const allCategories = useSelector((state) => state.products.categoriesDb);
+    const fav = useSelector((state) => state.products.favs);
 
-    const [order, setOrder] = useState('')
-    const [currentPg, setCurrentPg] = useState(1);//seteo la pagina a renderizar
-    const [productPerPg, setProductPerPg] = useState(12); //12 products por pagina
+    const [order, setOrder] = useState('');
+    const [currentPg, setCurrentPg] = useState(1);
+    const [productPerPg, setProductPerPg] = useState(12);
 
-    const lastProduct = currentPg * productPerPg; //ultimo producto de la pagina renderizada
+    const lastProduct = currentPg * productPerPg; 
     const firstProduct = lastProduct - productPerPg;
-    const currentProduct = allProducts.showedProducts.slice(firstProduct, lastProduct)//products renderizados por pagina
+    const currentProduct = allProducts.showedProducts.slice(firstProduct, lastProduct);
 
     const paginado = (pgNumber) => {
         setCurrentPg(pgNumber)
     }
-    const users = JSON.parse(localStorage.getItem('userInfo'))
-
+    const users = JSON.parse(localStorage.getItem('userInfo'));
     
+    let isFaved = false
+
     useEffect(() => {
         dispatch(getAllProducts());
         dispatch(getCategories());
         dispatch(clearStatesProducts());
-        //dispatch(getCart(user.id));
-        //console.log(cart)
-        //console.log(allProducts)
-        //console.log(allCategories)
+        if(users){
+            dispatch(getFavs(users.id))
+        }
     }, [dispatch])
 
     //ProductCard ---> (name, img, price, rating)
@@ -55,6 +56,7 @@ export default function Home (){
                     currentProduct ? 
                         currentProduct.map(p => {
                             if (p.stock === 0) return;
+                            isFaved = fav.some(item => item.id === p.id)
                             return(
                                     <ProductCard
                                         id={p.id}
@@ -63,6 +65,7 @@ export default function Home (){
                                         price={p.price}
                                         img={p.img}
                                         rating={p.rating}
+                                        isFaved={isFaved}
                                     />
                             )
                         }):

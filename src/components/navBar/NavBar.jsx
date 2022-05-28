@@ -49,7 +49,11 @@ export default function NavBar({ categories, setCurrentPg }) {
                 </div>
             </nav>
             <div className={style.footHead}>
+<<<<<<< HEAD
                 {window.location.href.includes("http://localhost:3000/home/") || window.location.href.includes("http://localhost:3000/cart") || window.location.href.includes("http://localhost:3000/myShopping") || window.location.href.includes("http://localhost:3000/review") ? <NavLink to="/" className={style.mybtn}></NavLink> :
+=======
+                {window.location.href.includes("http://localhost:3000/profile") ||window.location.href.includes("http://localhost:3000/favs") || window.location.href.includes("http://localhost:3000/home/") || window.location.href.includes("http://localhost:3000/cart") || window.location.href.includes("http://localhost:3000/myShopping") || window.location.href.includes("http://localhost:3000/review") ? <NavLink to="/" className={style.mybtn}></NavLink> :
+>>>>>>> eceaea3c4a2725fee357e086d6f3c2dfd6329814
                     <div className={style.aux}>
                         <Categories categories={categories} setCurrentPg={setCurrentPg} />
                         <OrderPrice />

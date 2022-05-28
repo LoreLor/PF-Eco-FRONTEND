@@ -1,60 +1,84 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
 import style from './ProductCard.module.css';
-import { addCartProduct, getCart, addCartProductGuest, addFav } from "../../redux/actions/products";
+import { addCartProduct, getCart, addCartProductGuest, addFav, getFavs, deleteFav } from "../../redux/actions/products";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import numberFormat from "../detalleProducto/numberFormat";
 
 
-export default function ProductCard({name, img, price, rating, id}){
+export default function ProductCard({name, img, price, rating, id, isFaved}){
     
     const dispatch = useDispatch()
     const user = JSON.parse(localStorage.getItem('userInfo'))
-    
-    let color = 'currentColor'
+    //console.log(isFaved, name)
 
     function handleAddCart(id){
         if(user){
             const addCart = {
                 userId: user.id,
                 productId: id,
+                bundle: 1
             }
             dispatch(addCartProduct(addCart))
         }else{
             dispatch(addCartProductGuest(id))
         }
-        //console.log(addCart)
         toast.success("Product added to cart!", {
             position: toast.POSITION.BOTTOM_RIGHT
         });
     }
-
+    
     function handleFavourites(e, productId){
         e.preventDefault()
         if(user){
-            dispatch(addFav(user.id, productId))
-            toast.success("Product added to Favorites!!", {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
+            if(isFaved){
+                dispatch(deleteFav(user.id, productId))
+                .then(r => {
+                    dispatch(getFavs(user.id))
+                })
+                toast.error("Product removed to Favorites!!", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+            }else{
+                dispatch(addFav(user.id, productId))
+                .then(r => {
+                    dispatch(getFavs(user.id))
+                })
+                toast.success("Product added to Favorites!!", {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+            }
         }else{
             toast.error("Login for add Favorites!", {
                 position: toast.POSITION.BOTTOM_RIGHT
               });
         }
     }
-    
+
+    const [
+        color,
+        span
+    ] = isFaved 
+        ? [
+            'red',
+            'Remove Favorites'
+        ] : [
+            'currentColor',
+            'Add to Favorites'
+        ]
+
     return(
             <div className={style.card}>
                 <div className={style.card_img}>
                     <img src={img[0]} alt="" /> 
                     <ul className={style.card_icon}>
                         <li>
-                            <span>Add to Favorites</span>
+                            <span>{span}</span>
                             <button className={style.btnIcon} onClick={e=> handleFavourites(e, id)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" color={color} fill='currentColor' className="bi bi-heart" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill={color} className="bi bi-heart" viewBox="0 0 16 16">
                                     <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                                 </svg>
                             </button>
