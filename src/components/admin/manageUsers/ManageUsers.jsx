@@ -10,8 +10,9 @@ import FlashModal from "../AdminModals/FlashModal"
 
 export default function ManageUsers({setBase,base,setModalD}){
     const dispatch = useDispatch()
-    const user = JSON.parse(localStorage.getItem('userInfo'))
+    const user = useSelector((state)=>state.users.userInfo)
     const usersDb = useSelector((state)=>state.users.users)
+   
     const array = usersDb.filter((userDb)=> userDb.id !== user.id)
     const users = array.filter((user)=> user.isActive === true)
   

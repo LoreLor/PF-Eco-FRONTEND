@@ -26,7 +26,7 @@ export default function ProductDetail() {
     const categories = useSelector((state) => state.products.categoriesDb)
     const reviewsProduct = useSelector((state) => state.products.reviews)
    
-    const user = useSelector((state) => state.users.users[0])
+    const user = useSelector((state)=>state.users.userInfo)
 
     useEffect(() => {
         dispatch(getProductById(id))
@@ -42,7 +42,7 @@ export default function ProductDetail() {
 
     function handleBuy(e, productId) {
         e.preventDefault();
-        if(user){
+        if(user && user.id){
             dispatch(addCartProduct({
                 userId: user.id,
                 productId: productId,
@@ -66,7 +66,6 @@ export default function ProductDetail() {
     for (var i = 1; i <= detailProduct.stock; i++) {
         stockItems.push(i)
     }
-    //console.log(stockItems)
 
     return (
         <div>

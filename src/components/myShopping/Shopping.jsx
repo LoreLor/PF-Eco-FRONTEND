@@ -11,13 +11,13 @@ import numberFormat from "../detalleProducto/numberFormat";
 export default function Shopping() {
     const dispatch = useDispatch();
     const shopping = useSelector((state) => state.products.shopping)
-    const user = useSelector((state) => state.users)
+    const user = useSelector((state)=>state.users.userInfo)
     const navigate = useNavigate();
 
 
     useEffect(() => {
-        dispatch(getShopping(user.userInfo.id))
-    }, [user.userInfo.id, dispatch])
+        dispatch(getShopping(user.id))
+    }, [user.id, dispatch])
 
     function handleClick(e, id) {
         e.preventDefault()

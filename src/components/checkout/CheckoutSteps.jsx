@@ -13,7 +13,7 @@ function CheckoutSteps() {
 
   const navigate = useNavigate();
   const dispacth = useDispatch();
-  const user = useSelector((state) => state.users.users[0])
+  const user = useSelector((state)=>state.users.userInfo)
   const cart = useSelector((state) => state.products.cart)
 
   const toPrice = (num) => Number(num.toFixed(2)); //ejemplo 6.123 -'5.12' - 5.12

@@ -14,7 +14,6 @@ export default function Pages({productPerPg, allProducts, paginado, currentPg, s
     for(let i = 1; i <= Math.ceil(allProducts/productPerPg); i++){
         pageNumbers.push(i)
     }
-    //console.log(pageNumbers.map())
 
     const renderPage  = pageNumbers.map((number) => {
         if(number < maxPageLimit+1 && number > minPageLimit){
@@ -28,7 +27,6 @@ export default function Pages({productPerPg, allProducts, paginado, currentPg, s
         }
     })
     const handlePrev = (e) => {
-        //console.log('prev')
         setCurrentPg(currentPg - 1)
         if((currentPg - 1) % pageNumberLimit === 0){
             setMaxPageLimit(maxPageLimit - pageNumberLimit)
@@ -37,7 +35,6 @@ export default function Pages({productPerPg, allProducts, paginado, currentPg, s
     }
     
     const handleNext = (e) => {
-        //console.log('next')
         setCurrentPg(currentPg+1)
         if(currentPg + 1 > maxPageLimit){
             setMaxPageLimit(maxPageLimit + pageNumberLimit)

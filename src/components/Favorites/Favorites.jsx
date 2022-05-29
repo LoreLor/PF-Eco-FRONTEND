@@ -12,7 +12,7 @@ export default function Favorites(){
     const dispatch = useDispatch()
 
     const favs = useSelector((state) => state.products.favs)
-    const user = useSelector((state) => state.users.users[0])
+    const user = useSelector((state)=>state.users.userInfo)
 
     useEffect(() => {
         dispatch(getFavs(user.id))
@@ -44,7 +44,7 @@ export default function Favorites(){
                     </div>
                     <div className={style.favs_grid}>
                     {
-                        user.id ?
+                        user && user.id ?
                         favs?
                         favs.length !== 0?
                         favs?.map(f => {
