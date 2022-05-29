@@ -61,7 +61,7 @@ export default function ManageUsers({setBase,base,setModalD}){
         <div className={style.container}>
             {users && users.map((user)=>{
                 return(
-                    <div className={base.includes(user.id)?style.box2:style.box}>
+                    <div key={user.id} className={base.includes(user.id)?style.box2:style.box}>
                         <h3 className={style.title}>{user.user_name}</h3>
                         <button className={style.btn} value = {user.id}onClick={onDeactivate}>{base.includes(user.id)?"Cancel": "Deactivate"}</button>
                     </div>

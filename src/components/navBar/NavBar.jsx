@@ -16,7 +16,6 @@ export default function NavBar({ categories, paginado }) {
     const dispatch = useDispatch();
 
 
-
     // function handleCart(e){
     //     e.preventDefault()
     //     alert('carrito')
