@@ -11,6 +11,7 @@
   background-color: #112B3C;
   width: 500px;
   height: auto;
+  border-radius: 20px;
 }
 .formReview label{
   color: #F66B0E;

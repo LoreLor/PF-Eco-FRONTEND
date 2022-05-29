@@ -4,13 +4,13 @@ import { useDispatch } from "react-redux"
 
 import style from './Categories.module.css'
 
-export default function Categories({categories, setCurrentPg}){
+export default function Categories({categories, paginado}){
     const dispatch = useDispatch();
 
     function handleChangeCategories (e){
         e.preventDefault();
         dispatch(filterByCategory(e.target.value));
-        setCurrentPg = 1
+        paginado(1)
     }
     return(
         <select defaultValue="all" onChange={e => handleChangeCategories(e)} className={style.select_categories}>

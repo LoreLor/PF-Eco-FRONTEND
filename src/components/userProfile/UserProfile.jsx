@@ -6,19 +6,20 @@ import Accordion from "./Accordion";
 import style from "./userProfile.module.css"
 import activeValidations from "../registro/validators/activeValidations"
 import PasswordValidations from "./validators/PasswordValidation"
-import { submitA,submitB,submitC } from "./validators/SubmitValidators";
-import AlertModal from '../admin/AdminModals/AlertModal'
+import { submitA,submitB} from "./validators/SubmitValidators";
+import { toast } from "react-toastify";
 import axios from "axios";
 import SERVER from "../../server";
 import { profileUpdate, logout } from "../../redux/actions/user";
 import { cleanCart, cleanFav } from "../../redux/actions/products";
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function UserProfile (){
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const user = useSelector((state)=>state.users.userInfo)
-    /* console.log(user) */
+
     const [profile,setProfile]= useState({
         name:"",
         last_name:"",
@@ -26,7 +27,7 @@ export default function UserProfile (){
         email:"",
         birthday:""
     })
-   /* console.log(profile) */
+
     const [password,setPassword]= useState({
         prev_password:"",
         new_password:"",
@@ -36,15 +37,11 @@ export default function UserProfile (){
     const [shipping, setShipping] = useState({
         address: "",
         phone_number: "",
-        /* payment_method:"" */
     })
 
     const [errorsA, setErrorsA] =useState({})
     const [errorsB, setErrorsB] =useState({})
     const [errorsC, setErrorsC] =useState({})
-
-    const [keyword,setKeyword] = useState("")
-    const [isOpen,setIsOpen]= useState(false)
 
     function handleChangeA(e){
         setErrorsA(activeValidations({...profile,[e.target.name]:e.target.value}))
@@ -83,10 +80,8 @@ export default function UserProfile (){
             try {
                 response = await axios.put(`${SERVER}/user/update/${user.id}`,profile)
                 const result = response.data
-                setKeyword(result.msg)
 
-                if(!isOpen && result){
-                    setIsOpen(true);
+                if(result){
                 if(result.msg === "Profile data updated"){
                     dispatch(profileUpdate(result.user))
                     setProfile({
@@ -96,6 +91,13 @@ export default function UserProfile (){
                         email:"",
                         birthday:"",
                     })
+                    toast.success(`${result.msg}`, {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    });
+                }else{
+                    toast.error(`${result.msg}`, {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    });
                 }
                 }
             } catch (error) {
@@ -109,29 +111,34 @@ export default function UserProfile (){
         if (Object.keys(errorsB).length === 0
         && password.prev_password !== ""
         && password.new_password !==""
+        && password.new_password !== password.prev_password
         && password.conf_password !== ""){
             let response = null
             try {
                 response = await axios.put(`${SERVER}/user/update/${user.id}`,password)
                 const result = response.data
-                setKeyword(result.msg)
-
-                if(!isOpen && result.msg === "Password updated"){
-                    setPassword({
-                        prev_password:"",
-                        new_password:"",
-                        conf_password:"",
-                    })
-                    dispatch(logout())
-                    dispatch(cleanCart())
-                    dispatch(cleanFav())
-                    navigate("/login",{replace:true})
+        
+                if(result){
+                    if(result.msg === "Password updated"){
+                        setPassword({
+                            prev_password:"",
+                            new_password:"",
+                            conf_password:"",
+                        })
+                        dispatch(logout())
+                        dispatch(cleanCart())
+                        dispatch(cleanFav())
+                        toast.success(`${result.msg}`, {
+                            position: toast.POSITION.BOTTOM_RIGHT
+                        });
+                        navigate("/login",{replace:true})
+                    }
+                    else{
+                        toast.error(`${result.msg}`, {
+                            position: toast.POSITION.BOTTOM_RIGHT
+                        });
+                    }
                 }
-                else if(!isOpen && result.msg === "Password incorrect"){
-                    setIsOpen(true)
-                }
-                
-
             } catch (error) {
                 console.log(error)
             }
@@ -145,29 +152,28 @@ export default function UserProfile (){
                 response = await axios.put(`${SERVER}/user/update/${user.id}`,shipping)
                 const result = response.data
 
-                setKeyword(result.msg)
-
-                if(!isOpen && result){
-                    setIsOpen(true);
+                if(result){
                 if(result.msg === "Shipping data updated"){
                     dispatch(profileUpdate(result.user))
                     setShipping({
                         address:"",
                         phone_number:""
                     })
-                }
+                    toast.success(`${result.msg}`, {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    });
+                }else{
+                    toast.error(`${result.msg}`, {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    });
+                    }
                 }               
-
             } catch (error) {
                 console.log(error)
             }
         }
     }
 
-    function onClose(e){
-        e.preventDefault()
-        setIsOpen(false)
-    }
     function partDate(e){
         return e.split("T")[0]
     }
@@ -210,9 +216,9 @@ useEffect(()=>{
                 <p>Last name: {user.last_name}</p>
                 <p>Address: {user.address ? user.address : "No address added"}</p>
                 <p>Phone number: {user.phone_number ? user.phone_number: "No phone number added"}</p>
-                {/* <p>DNI: {user.dni ? user.dni : "No DNI added"}</p> */}
-                {/* <p>Payment method: {user.payment_method ? user.payment_method: "No option selected"}</p> */}
-
+                <NavLink to="/myShopping">
+                <button className={style.mybtn} /* onClick={} */>My shopping</button>
+                </NavLink>
                 </div>
             </div>
             <div className={style.forms}>
@@ -231,7 +237,7 @@ useEffect(()=>{
                     <input className={errorsA?.email? style.inputError : style.input} name="email" value={profile.email}type="email" placeholder="Add your email..." onChange={handleChangeA}/>
                     {errorsA.email && (<p className={style.errors}>{errorsA.email}</p>)}
                     <p>Birthday:</p>
-                    <input name="birthday" type="date" value={profile.birthday}onChange={handleChangeA}/>
+                    <input className={style.birthday}name="birthday" type="date" value={profile.birthday}onChange={handleChangeA}/>
                     {errorsA.birthday && (<p className={style.errors}>{errorsA.birthday}</p>)}
                     <br></br>
                     <input className={style.button} type="submit" value="Edit" onClick={handleSubmitA}/>
@@ -260,34 +266,11 @@ useEffect(()=>{
                     <p>Phone number:</p>
                     <input className={errorsC?.phone_number? style.inputError : style.input} name="phone_number" value={shipping.phone_number}type="text" placeholder="Add your phone number..." onChange={handleChangeC}/>
                     {errorsC.phone_number && (<p className={style.errors}>{errorsC.phone_number}</p>)}
-                    {/*<p>Payment method:</p>
-                    <input name="payment_method" type="checkbox"value="paypal"/><span> PayPal</span> */}
                     <input className={style.button} type="submit" value="Edit" onClick={handleSubmitC}/>
                 </form>
             </Accordion>
             </div>
             </div>
-            <AlertModal isOpen={isOpen} setIsOpen={setIsOpen}>
-            {keyword.length ? (
-                    <>
-                    <h2>{keyword}</h2>
-                    {keyword === "Profile data updated" || keyword === "Shipping data updated" ? (
-                        <>
-                            <button onClick={onClose} className={style.mybtn}> 
-                                Close
-                            </button>
-                        </>
-                        ): (
-                            <>
-                            <button className={style.mybtn} onClick={()=> setIsOpen(state=>!state)}>Ok</button>
-                            </>
-                        )}
-                        </>
-                    ):(
-                        <h2>Invalid Data</h2>
-                    )}
-            </AlertModal>
-            
                 <div id={style.footer}>
                 <Footer/>
                 </div>

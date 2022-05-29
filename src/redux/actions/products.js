@@ -286,19 +286,6 @@ export const getShopping = (userId) => async (dispatch) => {
     }
 };
 
-export const closeCart = (userId) => async(dispatch) => {
-    try {
-        const {data}= await axios.put(`${SERVER}/cart?userId=${userId}`)
-        dispatch({
-            type: CLOSE_CART,
-            payload: data
-        })
-        
-    } catch (error) {
-        console.log( error)      
-    }
-}
-
 export const getFavs = (userId) => async (dispatch) => {
     try{
         const {data} = await axios.get(`${SERVER}/favorites?userId=${userId}`)

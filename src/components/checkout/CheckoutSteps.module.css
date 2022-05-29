@@ -1,9 +1,16 @@
 /* Checkout Steps */
+.box{
+  display: flex;
+  margin: 70px 0px;
+  justify-content: center;
+}
 
 .contenedor {
   background-color: #112B3C;
-  width: 100%;
+  width: auto;
   height: max-content;
+  padding: 0px 100px;
+  border-radius: 20px;
 }
 
 

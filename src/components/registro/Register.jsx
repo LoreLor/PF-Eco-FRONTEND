@@ -5,9 +5,9 @@ import imagen1 from "../../assets/celulares4.jpg";
 import activeValidator from './validators/activeValidations'
 import submitValidator from './validators/submitValidations'
 import axios from "axios";
-import AlertModal from '../admin/AdminModals/AlertModal'
 import Footer from "../Footer/Footer";
 import SERVER from "../../server";
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -20,9 +20,6 @@ const Register = () => {
     password: "",
   });
   const [errors, setErrors] = useState({});
-
-  const [isOpen,setIsOpen]= useState(false)
-  const [keyword,setKeyword]= useState("")
 
   const handleChange = (e) => {
     setErrors(
@@ -48,13 +45,11 @@ const Register = () => {
     && user.password !=="") {
       let response = null
       try {
-        response = await axios.post(`${SERVER}/user`,user) 
+        response = await axios.post(`${SERVER}/user`,user)
         const result = response.data
-        setKeyword(result.msg)
-        if(!isOpen && result){
-          setIsOpen(true);
-        if(!isOpen && result.msg === "User registered"){
-          setIsOpen(true);
+        if(result){
+        if(result.msg === "User registered"){
+          
           setUser({
             name: "",
             last_name: "",
@@ -62,6 +57,14 @@ const Register = () => {
             email: "",
             password: "",
           });
+          toast.success(`${result.msg}`, {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
+          navigate("/login",{replace:true})
+        }else {
+          toast.error(`${result.msg}`, {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
         }
       }
       } catch (error) {
@@ -254,22 +257,6 @@ const Register = () => {
               </div>
             </div>
           </form>
-          <AlertModal isOpen={isOpen} setIsOpen={setIsOpen}>
-          {keyword.length ? (
-                    <>
-                    <h2>{keyword}</h2>
-                    {keyword === "User registered" ? (
-                        <button onClick={()=> navigate("/login",{replace:true})} className={s.btn}> 
-                            Go to Login
-                        </button>
-                    ): (
-                        <button onClick={()=> setIsOpen(state=>!state)} className={s.btn}>Ok</button>
-                    )}
-                    </>
-                ):(
-                    <h2>Invalid Data</h2>
-                )}
-          </AlertModal>
         </div>
       </div>
         <Footer/>

@@ -23,7 +23,7 @@ export default function Home (){
     const fav = useSelector((state) => state.products.favs);
 
     const [order, setOrder] = useState('');
-    const [currentPg, setCurrentPg] = useState(1);
+    const [currentPg, setCurrentPg] = useState(1); //setea la pagina en 1
     const [productPerPg, setProductPerPg] = useState(12);
 
     const lastProduct = currentPg * productPerPg; 
@@ -49,7 +49,7 @@ export default function Home (){
     //ProductCard ---> (name, img, price, rating)
     return(
         <div>
-            <NavBar categories={allCategories} setCurrentPg={setCurrentPg}/>
+            <NavBar categories={allCategories} paginado={paginado}/>
             
             <div className={style.cards}>
                 {

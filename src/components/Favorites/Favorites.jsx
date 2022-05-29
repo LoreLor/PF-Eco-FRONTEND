@@ -51,7 +51,7 @@ export default function Favorites(){
                             return(
                                 <div className={style.fav_card} key={f.id}>
                                                 <div className={style.fav_img}>
-                                                    <img src={f.img} alt="" />
+                                                    <img src={f.img[0]} alt="" />
                                                 </div>
                                                 <span>{f.name}</span>
                                                 <button className={style.btnDeleteFav} onClick={e=> handleDelete(e, f.id)}>X</button>
