@@ -18,13 +18,15 @@ export default function Cart(){
     const navigate = useNavigate();
     
     let total = 0;
+    const user = useSelector((state)=> state.users)
+    const{userInfo, userObj} = user
 
-    const user = localStorage.getItem('userInfo')
-         ? JSON.parse(localStorage.getItem('userInfo'))
-         : null
+    // const user = localStorage.getItem('userInfo')
+    //      ? JSON.parse(localStorage.getItem('userInfo'))
+    //      : null
     
     useEffect(() => {
-        if(user){
+        if(userInfo || userObj){
             dispatch(getCart(user.id))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps

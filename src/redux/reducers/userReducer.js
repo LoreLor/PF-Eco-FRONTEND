@@ -18,7 +18,8 @@ export const userReducer =(state=initialState, action)=>{
         case USER_LOGOUT:
             return {
                 ...state,
-                userInfo:{}
+                userInfo:{},
+                userObj:{}
             }
         case USER_REGISTER:
             return {
@@ -48,7 +49,8 @@ export const userReducer =(state=initialState, action)=>{
         case USER_LOGIN_GOOGLE:
             return {
                 ...state,
-                userObj: action.payload
+                userObj: action.payload,
+                userInfo:action.payload
             }
 
         default:

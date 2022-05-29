@@ -66,4 +66,8 @@
     margin-left: 10px;
   }
 
-  
+.btnGoogle{
+  display:flex;
+  justify-content: center;
+    align-items: center;
+}

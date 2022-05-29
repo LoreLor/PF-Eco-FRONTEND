@@ -38,11 +38,7 @@ const Login = () => {
         && input.password !==""){
             let response = null
             try {
-<<<<<<< HEAD
-                console.log(input)
-=======
                 
->>>>>>> eceaea3c4a2725fee357e086d6f3c2dfd6329814
                 response = await fetch(`${SERVER}/user/signin`,
                 {method:"POST",
                 headers: {
@@ -61,6 +57,7 @@ const Login = () => {
                         email: "",
                         password: ""
                     })
+                 
                 }
             }
             } catch (error) {
@@ -69,9 +66,7 @@ const Login = () => {
         }
     }
 
-    const handleLoginGoogle = () =>{
-        
-    }
+  
 
     return (
         <div>
@@ -146,15 +141,14 @@ const Login = () => {
                             </div>
                              <div className="container w-100 my-5">
                                 <div className="row my-3 text-center">
-                                    <div className="col-12"> 
-                                            <LoginGoogle onclick={handleLoginGoogle}/>                            
+                                    <div className={s.btnGoogle}> 
+                                            <LoginGoogle />                            
                                     </div>                           
                                 </div>
                             </div> 
                             <div className="row my-3 text-center">
                                 <span> You don't have an account?  Go to...<strong><Link to={"/register"}>Create your account</Link></strong></span>
-                            </div>  
-            
+                            </div>       
                         </div>
                     </div>
                 </div>

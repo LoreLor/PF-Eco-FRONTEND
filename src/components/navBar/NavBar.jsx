@@ -12,8 +12,10 @@ import FilterPrice from "../filterPrice/FilterPrice";
 
 export default function NavBar({ categories, setCurrentPg }) {
     const user = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
-   // const user = useSelector((state) => state.users.userInfo)
+    const userGoogle = useSelector((state) => state.users.userObj)
+    //console.log('userGoogle :>> ', userGoogle);
     const dispatch = useDispatch();
+    
 
 
 
@@ -49,11 +51,7 @@ export default function NavBar({ categories, setCurrentPg }) {
                 </div>
             </nav>
             <div className={style.footHead}>
-<<<<<<< HEAD
-                {window.location.href.includes("http://localhost:3000/home/") || window.location.href.includes("http://localhost:3000/cart") || window.location.href.includes("http://localhost:3000/myShopping") || window.location.href.includes("http://localhost:3000/review") ? <NavLink to="/" className={style.mybtn}></NavLink> :
-=======
                 {window.location.href.includes("http://localhost:3000/profile") ||window.location.href.includes("http://localhost:3000/favs") || window.location.href.includes("http://localhost:3000/home/") || window.location.href.includes("http://localhost:3000/cart") || window.location.href.includes("http://localhost:3000/myShopping") || window.location.href.includes("http://localhost:3000/review") ? <NavLink to="/" className={style.mybtn}></NavLink> :
->>>>>>> eceaea3c4a2725fee357e086d6f3c2dfd6329814
                     <div className={style.aux}>
                         <Categories categories={categories} setCurrentPg={setCurrentPg} />
                         <OrderPrice />
@@ -65,7 +63,7 @@ export default function NavBar({ categories, setCurrentPg }) {
                 <div className={style.logCart}>
                     <div className={style.conte}>
                         {
-                            user ? (
+                            user && 
                                 <div className={style.drop}>
                                     <button className={style.perfil} type="button" data-toggle="dropdown">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#F66B0E" className="bi bi-person-circle" viewBox="0 0 16 16">
@@ -95,10 +93,41 @@ export default function NavBar({ categories, setCurrentPg }) {
                                         {/* <li><a href="/register" className={style.logout}>Register</a></li> */}
                                     </ul>
                                 </div>
-                            ) : (
+                            }
+                            
+                          
+                          { 
+                           userGoogle ? (
+                                <div className={style.drop}>
+                                <button className={style.perfil} type="button" data-toggle="dropdown">
+                                <h3 className={style.userName}>{userGoogle.name}</h3>
+                                <img className={style.picture} src={userGoogle.picture} alt=""/>
+                                </button>
+                                <ul className="dropdown-menu">
+                                        <li>
+                                            <button className={style.mybtn} onClick={handleLogout}>Log Out</button>
+                                        </li>
+                                        {!window.location.href.includes("/myShopping") ?
+                                            <li>
+                                                <NavLink to="/myShopping">
+                                                    <button className={style.mybtn} /* onClick={} */>My shopping</button>
+                                                </NavLink>
+                                            </li> : <li></li>
+                                        }
+                                        {!window.location.href.includes("/favs") ?
+                                            <li>
+                                                <NavLink to="/favs">
+                                                    <button className={style.mybtn} /* onClick={} */>Favorites</button>
+                                                </NavLink>
+                                            </li> : <li></li>
+                                        }
+                                        {/* <li><a href="/register" className={style.logout}>Register</a></li> */}
+                                    </ul>
+                                </div>
+                            ):(
                                 <NavLink to="/login" className={style.mybtn}>Log In</NavLink>
-                            )}
-                    </div>
+                            )}   
+                            </div>             
                     {user && user.rol === "admin" ? <NavLink to="/admin" className={style.mybtn}>Admin</NavLink> : <></>}
 
                     <NavLink to="/cart">
