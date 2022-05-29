@@ -26,7 +26,7 @@ export default function ProductDetail() {
     const categories = useSelector((state) => state.products.categoriesDb)
     const reviewsProduct = useSelector((state) => state.products.reviews)
    
-    const user = JSON.parse(localStorage.getItem('userInfo'))
+    const user = useSelector((state) => state.users.users[0])
 
     useEffect(() => {
         dispatch(getProductById(id))
@@ -46,7 +46,7 @@ export default function ProductDetail() {
             dispatch(addCartProduct({
                 userId: user.id,
                 productId: productId,
-                required_quantity: 1
+                bundle: 1
             }))
             toast.success("Product added to cart!", {
                 position: toast.POSITION.BOTTOM_RIGHT
