@@ -19,7 +19,7 @@ function OrderDetail() {
   }, [user]);
 
   return (
-    <div >
+    <div className={s.box}>
       <div className={s.contenedor}>
         <div class="container">
           <div class="py-5 text-center">
@@ -88,10 +88,10 @@ function OrderDetail() {
                       {user.address} <br /></div>
                      <hr/>
                     </li>
-                    <h6 class="my-0">Payment Method</h6>
+                    {/* <h6 class="my-0">Payment Method</h6>
                     <li class="list-group-item d-flex justify-content-between">
                       <strong>{user.payment_method} </strong>
-                    </li>
+                    </li> */}
                     <h6 class="my-0">Amount</h6>
                     <li class="list-group-item d-flex justify-content-center">
                       <span>

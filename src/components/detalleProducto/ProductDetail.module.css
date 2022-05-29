@@ -130,6 +130,11 @@
     display: flex;
     justify-content: center;
 }
+.box{
+    width: 100%;
+    display: flex;
+    margin: 0px 25px 0px 25px;
+}
 
 .review{
     display: flex;
@@ -140,12 +145,12 @@
     border-radius: 20px;
     padding: 15px;
     background-color: #112B3C;
+    margin-right: 20px;
 }
 .review p {
     color: #F66B0E;
     margin-top: 10px;
 }
 .review_description{
-    text-transform: uppercase;
     color: #F66B0E;
 }
