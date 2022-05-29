@@ -1,14 +1,9 @@
 import axios from 'axios';
-import { USER_LOGIN, USER_LOGOUT, USER_REGISTER, USER_REGISTER_CLEAR } from './constants';
+import { USER_LOGIN, USER_LOGOUT, USER_REGISTER, USER_REGISTER_CLEAR, GET_USERS,GET_USER, USER_UPDATE, USER_LOGIN_GOOGLE } from './constants';
+import SERVER from '../../server';
 
-
-const SERVER = "http://localhost:3001";
-
-
-export const userLogin = (email, password) => async(dispatch) =>{
+export const userLogin = (data) => async(dispatch) =>{
     try {
-    const { data } = await axios.post(`${SERVER}/user/signin`, {email,password} )
-    // console.log(data) 
     dispatch({
       type: USER_LOGIN,
       payload: data
@@ -16,33 +11,33 @@ export const userLogin = (email, password) => async(dispatch) =>{
     localStorage.setItem('userInfo', JSON.stringify(data)))
  
   }catch (error) {
-  //  console.log(error)
-     return error;
+  console.log(error)
   } 
 }
 
 export const logout = () => (dispatch) => {
-   localStorage.clear()
-    dispatch({
-        type: USER_LOGOUT,
-    })
+  dispatch({
+    type: USER_LOGOUT,
+  })
+  window.localStorage.clear();
 };
 
-export const register = ( body) => async(dispatch) => {
+export const register = (body) => async(dispatch) => {
   try{
     const {data} = await axios.post(`${SERVER}/user`, body)
     
       dispatch({
         type: USER_REGISTER,
-        payload: data.user
+        payload: data
       });
+    
       dispatch({
         type: USER_LOGIN,
         payload: data
       })
       localStorage.setItem('userInfo', JSON.stringify(data))
     }catch(error){
-      console.log(error)
+      return error;
     }
 
   }
@@ -54,10 +49,72 @@ export const registerClear = ()=>(dispatch) =>{
   })
 };
 
-export function onSignIn(googleUser) {
-  var profile = googleUser.getBasicProfile();
-  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-  console.log('Name: ' + profile.getName());
-  console.log('Image URL: ' + profile.getImageUrl());
-  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+export function getAllUsers (){
+  return async function(dispatch){
+      try {
+      const response = await fetch(`${SERVER}/user`);
+      const users = await response.json();
+      dispatch({ type: GET_USERS, payload: users });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
+
+export function getSingleUser(id){
+  return async function(dispatch){
+    try{
+      const response = await axios.get(`${SERVER}/user/${id}`)
+      const result = response.data
+      dispatch({type:GET_USER,payload:result})
+    }catch(error){
+      console.log(error)
+    }
+  }
+}
+
+export const userUpdate = ( userId, body) => async(dispatch) =>{
+  try {
+    const {data} = await axios.put(`${SERVER}/user/${userId}`,body)
+    console.log('data', data)
+    dispatch({
+      type: USER_UPDATE,
+      payload: data
+    })
+    
+  } catch (error) {
+    console.log(error)
+    
+  }
+}
+
+export const userLoginGoogle = (data) => async(dispatch) =>{
+  try {
+    const userGoogle= await axios.post(`${SERVER}/user/googlelogin`, data)
+    console.log('data', userGoogle)
+  dispatch({
+    type: USER_LOGIN_GOOGLE,
+    payload: userGoogle.data
+  },
+  localStorage.setItem('userInfo', JSON.stringify(userGoogle)))
+
+}catch (error) {
+console.log(error)
+} 
+}
+
+export const profileUpdate = (data) => async(dispatch) =>{
+  try {
+    dispatch({
+      type: USER_UPDATE,
+      payload: data
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const logoutGoogle = ()=>{
+   
+}
+

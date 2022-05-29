@@ -1,65 +1,104 @@
 import React from 'react';
-import { Link } from "react-router-dom"
+import { Link, NavLink} from "react-router-dom"
 import { useNavigate } from 'react-router-dom';
-import { onSignIn, userLogin } from "../../redux/actions/user"
-import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from "../../redux/actions/user"
+import { useDispatch} from "react-redux";
 import s from "./Login.module.css";
 import { useState } from 'react';
-import Swal from "sweetalert2";
 import imagen1 from '../../assets/celulares.jpg';
 import imagen2 from '../../assets/celulares1.jpg';
 import imagen3 from '../../assets/celulares3.jpg';
 import LoginGoogle from './LoginGoogle';
-
+import Footer from '../Footer/Footer';
+import SERVER from '../../server';
+import { toast } from 'react-toastify';
 
 
 const Login = () => {
-
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.user)
-    console.log(user)
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [data, setData] = useState({
+        email: "",
+        password: ""
+    });
 
-
-    const handleSubmitLogin = (e) => {
+    function onChange(e){
+        setData({
+            ...data,
+            [e.target.name]:e.target.value
+        })
+    }
+    async function handleSubmitLogin(e){
         e.preventDefault();
-
-        dispatch(userLogin(email, password))
-            .then(res => { 
-                if(!res){
-                    setEmail('')
-                    setPassword('')
-                    Swal.fire({
-                        title: 'login success',
-                        icon: 'success'
-                    })
-                    navigate('/')
-                } else {
-                    alert("Email or password invalid.")
-                }
+        if(Object.keys(data).length === 2
+        && data.email !== ""
+        && data.password !==""){
+            let response = null
+            try {
+                
+                response = await fetch(`${SERVER}/user/signin`,
+                {method:"POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            body: JSON.stringify(data)
             })
+                const result = await response.json()
+            if(result){
+                if(result.msg === "Login success"){
+                    dispatch(userLogin(result.data))
+                    setData({
+                        email: "",
+                        password: ""
+                    })
+                    toast.success(`${result.msg}`, {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    });
+                    navigate("/",{replace:true})
+                }else{
+                    toast.error(`${result.msg}`, {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    });
+                }
+            }
+            } catch (error) {
+                console.log(error)
+            }
+        }
     }
 
 
-    const handleGoogleLogin = async () => {
-        dispatch(LoginGoogle())
-        navigate('/')
-    
-        window.location.reload()
-    };
-
     return (
-        <div style={{ marginBottom: 40 }} >
+        <div>
+            <div class="py-5 text-center">
+            <h2 className={s.title}>
+              Sign In{" "}
+              <div>
+           
+                <NavLink to="/" className={s.titulo} type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="GO HOME">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    fill="currentColor"
+                    className="bi bi-phone"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z" />
+                    <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                  </svg>
+                  City Cell
+                </NavLink>
+              </div>
+            </h2>
+          </div>
             <form onSubmit={handleSubmitLogin} autoComplete="off">
                 <div className="container w-75 mt-5 shadow-lg p-3 mb-5 bg-white rounded">
                     <div className="row align-items-center align-items-center ">
                         <div class='col-lg-5'>
                             <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
-
                                     <div class="carousel-item active">
                                         <img class="d-block w-100" src={imagen1} alt="First slide" width="1010" height="400" />
                                     </div>
@@ -74,15 +113,15 @@ const Login = () => {
                         </div>
                         <div className="col bg-white p-5 col-lg-7 col-xl-6 rounded-end">
                             <h2 className="fw-bold text-center pt-5 mb-5">Welcome</h2>
-
                             {/* Formulario de login */}
                             <div className="mb-4">
                                 <label htmlFor="email" className="form-label"> Email </label>
                                 <input type="text"
                                     className="form-control mb-2"
                                     placeholder="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    name='email'
+                                    value={data.email}
+                                    onChange={onChange}
                                     required
                                 />
                             </div>
@@ -91,53 +130,34 @@ const Login = () => {
                                 <input type="password"
                                     className="form-control"
                                     placeholder="Password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    name='password'
+                                    value={data.password}
+                                    onChange={onChange}
                                     required
 
                                 />
                             </div>
-                            {/* <div className="mb-4 form-check">
-                                <input type="checkbox" className="form-check-input" name="connected" />
-                                <label className="form-check-label" htmlFor="connected"> Keep Connection </label>
-                            </div> */}
                             <div className="d-grid">
-                                <button type="submit" className={s.btn}> Sign In </button>
+                                <button type="submit" className={s.btn} onClick={handleSubmitLogin}> Sign In </button>
                             </div>
-
-                            <div className="container w-100 my-5">
+                             <div className="container w-100 my-5">
                                 <div className="row my-3 text-center">
-                                    <div className="col-12"> Or LogIn width </div>
+                                    <div className={s.btnGoogle}> 
+                                            <LoginGoogle />                            
+                                    </div>                           
                                 </div>
-                                {/* Login con google */}
-                                <div className="row">
-                                    <div className="col">
-                                
-                                    
-                                            
-                                            <LoginGoogle />
-                                            {/* <div className="row align-items-center">
-                                                <div className="d-none d-md-block col-12 col-lg-4 col-xl-4 col-xxl-3 text-center">
-                                                <div class="g-signin2" data-width="300" data-height="200" data-longtitle="true"></div>
-                                                <img src="https://i.postimg.cc/Y04ZG5n6/google.png" width="50px" alt='' />
-                                                </div>
-                                                <div className="col-12 col-md-9 col-lg-8 col-xl-8 col-xxl-6 text-center">
-                                                Google
-                                                </div>
-                                            </div> */}
-                                  
-                                    </div>
-                                            
-                                </div>
-                            </div>
-
+                            </div> 
                             <div className="row my-3 text-center">
-                                <span> You don't have an account?  Go to...<Link to="/register">Register</Link></span>
-                            </div>
+                                <span> You don't have an account?  Go to...<strong><Link to={"/register"}>Create your account</Link></strong></span>
+                                <strong><Link to={`${SERVER}/email/forgot-password`}><span>Forgot your password?</span></Link></strong>
+                            </div>       
                         </div>
                     </div>
                 </div>
             </form>
+        <div>
+            <Footer/>
+        </div> 
         </div>
     );
 };

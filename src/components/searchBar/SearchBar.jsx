@@ -22,6 +22,8 @@ export default function SearchBar(){
             }
         }))
         //console.log(e.target.value)
+        dispatch(getProductByName(e.target.value))
+
     }
 
     function handleSearch(e){
@@ -42,11 +44,7 @@ export default function SearchBar(){
         };
         setName('')
     };
-
-    useEffect(()=>{
-        dispatch(getAllProducts())
-    },[])
-
+    
     return(
         <div className={style.search} >
             <Hint options={Array.isArray(allProducts)?allProducts.map(p=>p.name):[]}>

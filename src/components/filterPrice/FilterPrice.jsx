@@ -1,16 +1,17 @@
 import React, { useState } from "react"
-import { filterByPrice, getAllProducts } from "../../redux/actions/products";
+import { filterByPrice, /* getAllProducts */} from "../../redux/actions/products";
 import { useDispatch } from "react-redux";
 
 import style from './FilterPrice.module.css'
+import { toast } from "react-toastify";
 
 export default function FilterPrice() {
 
     const dispatch = useDispatch();
 
     const [input, setInput] = useState({
-        min: "$Min",
-        max: "$Max",
+        min: "",
+        max: "",
     })
 
 
@@ -34,7 +35,9 @@ export default function FilterPrice() {
                 max: "$Max",
             })
         } else {
-            alert("Numbers cannot be null or negative!")
+            toast.warning('Numbers cannot be null or negative!', {
+                position: toast.POSITION.TOP_LEFT
+            })
         }
     }
 
@@ -44,11 +47,10 @@ export default function FilterPrice() {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <input className={style.input} type={"number"} name={"min"}  min={0} value={input.min} onChange={e => handleChange(e)} placeholder="$Min."></input>
-                <input className={style.input} type={"number"} name={"max"} min={1} value={input.max} onChange={e => handleChange(e)} placeholder="$Max."></input>
-                <button type="submit">GO</button>
+                <input className={style.input} type={"number"} min={1} name={"min"} value={input.min} onChange={e => handleChange(e)} placeholder="$Min."></input>
+                <input className={style.input} type={"number"} min={1} name={"max"} value={input.max} onChange={e => handleChange(e)} placeholder="$Max."></input>
+                <button type="submit" className={style.mybtn}>GO</button>
             </form>
         </div>
-
     )
 }

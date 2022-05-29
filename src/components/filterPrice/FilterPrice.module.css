@@ -1,3 +1,22 @@
 .input {
-    width: 80px;
+    width: 110px;
+    text-align: center;
+    padding-left: 14px;
+    margin: 6px;
+    border-radius: 20px;
+}
+
+.input:focus {
+    outline-color: #F66B0E;
+}
+
+.mybtn{
+    color: #EFEFEF;
+    text-decoration: none;
+    font-weight: 700;
+    background-color: #112B3C;
+    border: none;
+}
+.mybtn:hover{
+    color: #F66B0E;
 }

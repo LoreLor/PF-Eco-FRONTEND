@@ -1,6 +1,5 @@
 import { GET_ALL_CATEGORIES,GET_SINGLE_CATEGORY } from "./constants";
-
-const SERVER = "http://localhost:3001";
+import SERVER from "../../server";
 
 export function getCategories(){
     return function(dispatch){

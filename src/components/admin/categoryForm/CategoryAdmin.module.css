@@ -1,8 +1,109 @@
-p.danger {
-    color: red;
-    font-size: 12px;
+.errors {
+  color: red;
+  font-size: 12px;
+}
+
+.input{
+  outline: none;
+  padding: 10px;
+  border: 0;
+  background-color: #E1E1E1;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: box-shadow 0.15s
+}
+.input:hover{
+  box-shadow: 0 0 0 3px #F66B0E;
+}
+
+.inputError{
+  animation: shake 300ms;
+  outline: none;
+  padding: 10px;
+  border: 0;
+  background-color: #E1E1E1;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: box-shadow 0.15s
+}
+.inputError:hover{
+  box-shadow: 0 0 0 3px #F66B0E;
+}
+@keyframes shake {
+  25% {
+    transform: translateX(5px);
   }
-  
-  input.danger {
-    border: 2px solid red;
+  50% {
+    transform: translateX(-5px);
   }
+  75% {
+    transform: translateX(5px);
+  }
+}
+.container{
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.containerForm{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 500px;;
+    padding: 10px;
+  }
+
+.categoryForm{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+.categoryForm h3 {
+  font-weight: bold;
+  font-size: 25px;
+}
+.categoryForm p {
+  font-weight: bold;
+  font-size: 19px;
+}
+
+
+.mybtn{
+  align-self: center;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 0.5rem;
+  background: #6ecb63;
+  font-size: large;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.mybtn2{
+  align-self: center;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 0.5rem;
+  background: #b20600;
+  font-size: large;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  margin-left: 1rem;
+}
+.btnContainer{
+  display: flex;
+  align-items: center;
+}

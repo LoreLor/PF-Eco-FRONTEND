@@ -1,39 +1,62 @@
-import React, {useEffect, useState} from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import React, {useEffect, useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { getAllProducts } from "../../redux/actions/products"
-import { getCategories } from "../../redux/actions/categories"
+import { clearStatesProducts, getAllProducts, getCart, getFavs } from "../../redux/actions/products";
+import { getCategories } from "../../redux/actions/categories";
 
 
-import NavBar from '../navBar/NavBar'
-import ProductCard from '../Productos/ProductCard'
-import Loader from "../Loading/Loader"
+import NavBar from '../navBar/NavBar';
+import ProductCard from '../Productos/ProductCard';
+import Loader from "../Loading/Loader";
+import Pages from "../Pages/Pages";
 
-import style from './Home.module.css'
+import style from './Home.module.css';
+import Footer from "../Footer/Footer";
+
+
 
 export default function Home (){
 
     const dispatch = useDispatch();
-    const allProducts = useSelector((state) => state.products)
-    const allCategories = useSelector((state) => state.products.categoriesDb)
+    const allProducts = useSelector((state) => state.products);
+    const allCategories = useSelector((state) => state.products.categoriesDb);
+    const fav = useSelector((state) => state.products.favs);
+
+    const [order, setOrder] = useState('');
+    const [currentPg, setCurrentPg] = useState(1); //setea la pagina en 1
+    const [productPerPg, setProductPerPg] = useState(12);
+
+    const lastProduct = currentPg * productPerPg; 
+    const firstProduct = lastProduct - productPerPg;
+    const currentProduct = allProducts.showedProducts.slice(firstProduct, lastProduct);
+
+    const paginado = (pgNumber) => {
+        setCurrentPg(pgNumber)
+    }
+    const users = JSON.parse(localStorage.getItem('userInfo'));
+    
+    let isFaved = false
 
     useEffect(() => {
         dispatch(getAllProducts());
-        dispatch(getCategories())
-        //console.log(allProducts)
-        //console.log(allCategories)
+        dispatch(getCategories());
+        dispatch(clearStatesProducts());
+        if(users){
+            dispatch(getFavs(users.id))
+        }
     }, [dispatch])
 
-    //mantener un boton que lleve a la pagina de admin
     //ProductCard ---> (name, img, price, rating)
     return(
         <div>
-            <NavBar categories={allCategories}/>
+            <NavBar categories={allCategories} paginado={paginado}/>
+            
             <div className={style.cards}>
                 {
-                    allProducts.showedProducts ? 
-                        allProducts.showedProducts.map(p => {
+                    currentProduct ? 
+                        currentProduct.map(p => {
+                            if (p.stock === 0) return;
+                            isFaved = fav.some(item => item.id === p.id)
                             return(
                                     <ProductCard
                                         id={p.id}
@@ -42,12 +65,21 @@ export default function Home (){
                                         price={p.price}
                                         img={p.img}
                                         rating={p.rating}
+                                        isFaved={isFaved}
                                     />
                             )
                         }):
                         <Loader/>
                 }
             </div>
+            <Pages
+                productPerPg = {productPerPg}
+                allProducts = {allProducts.showedProducts.length}
+                paginado= {paginado}
+                currentPg = {currentPg}
+                setCurrentPg= {setCurrentPg}
+            />
+            <Footer/>
         </div>
     )
 }

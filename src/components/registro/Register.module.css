@@ -1,11 +1,17 @@
-.contenedor{
-    min-height: 100vh;
+.contenedor {
+    background-color: #fff;
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; 
-}
+    justify-content: flex-start;
+    position: relative;
+  }
+  .contenedor h2{
+    color: #112B3C;
+  }
+
 .btn{
     color: #FFFFFF; 
     background-color: #112B3C; 
@@ -29,9 +35,31 @@
       justify-items: start;
   }
   .titulo{
-      color: crimson;
-      font-size: larger;
-      font-weight: 800;
-      align-items: center;
-      flex-direction: center;
+    color: #112B3C;
+    font-size: 3rem;
+    font-weight: 800;
+    align-items: center;
+    flex-direction: center;
+    margin: 15px;
   }
+  .title{
+    color: #F66B0E;
+    font-size: 3rem;
+    font-weight: 800;
+    align-items: center;
+    flex-direction: center;
+    margin: 15px;
+  }
+  .titulo:hover{
+    color: #9b978f;
+  }
+  .subtitulo{
+    color: #F66B0E;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+ .label{
+    color: #0927ce;
+    margin-left: 10px;
+  }
+  
