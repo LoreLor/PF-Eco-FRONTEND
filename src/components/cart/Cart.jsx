@@ -9,6 +9,7 @@ import NavBar from "../navBar/NavBar";
 import style from './Cart.module.css'
 import Loader from "../Loading/Loader";
 import numberFormat from "../detalleProducto/numberFormat";
+import { getAllUsers } from "../../redux/actions/user";
 
 export default function Cart(){
     
@@ -18,15 +19,14 @@ export default function Cart(){
     const navigate = useNavigate();
     
     let total = 0;
-    const user = useSelector((state)=> state.users)
-    const{userInfo, userObj} = user
-
-    // const user = localStorage.getItem('userInfo')
-    //      ? JSON.parse(localStorage.getItem('userInfo'))
-    //      : null
+    
+    const user = localStorage.getItem('userInfo')
+          ? JSON.parse(localStorage.getItem('userInfo'))
+          : null
     
     useEffect(() => {
-        if(userInfo || userObj){
+        dispatch(getAllUsers())
+        if(user){
             dispatch(getCart(user.id))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps

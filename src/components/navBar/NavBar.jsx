@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SearchBar from "../searchBar/SearchBar";
 import Categories from "../categorias/Categories";
 import OrderPrice from "../orderPrice/OrderPrice";
-import { logout } from '../../redux/actions/user'
+import { getAllUsers, logout } from '../../redux/actions/user'
 import style from './NavBar.module.css'
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,11 @@ export default function NavBar({ categories, setCurrentPg }) {
     const userGoogle = useSelector((state) => state.users.userObj)
     //console.log('userGoogle :>> ', userGoogle);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllUsers())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
     
 
 

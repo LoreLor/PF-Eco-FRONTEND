@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import jwtDecode from 'jwt-decode'
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import SERVER from '../../server';
 import { useDispatch } from 'react-redux';
 import { userLoginGoogle } from '../../redux/actions/user';
@@ -12,9 +12,15 @@ function LoginGoogle() {
     const navigate = useNavigate();
     const dispatch = useDispatch()
    
-    const handleCallbackResponse = async(response)=>{ 
+    const handleCallbackResponse = (response)=>{ 
       const userObj = jwtDecode(response.credential);
-      dispatch(userLoginGoogle(userObj))
+      console.log('userObj :>> ', userObj);
+      axios({
+        method: "POST",
+        url: `${SERVER}/user/googlelogin`,
+        data:{idToken: response.credential}
+      })
+      //dispatch(userLoginGoogle(userObj))
       navigate('/')
     }
         
