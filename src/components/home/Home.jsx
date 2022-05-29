@@ -33,7 +33,7 @@ export default function Home (){
     const paginado = (pgNumber) => {
         setCurrentPg(pgNumber)
     }
-    const users = JSON.parse(localStorage.getItem('userInfo'));
+    const users = useSelector((state)=>state.users.userInfo)
     
     let isFaved = false
 
@@ -41,7 +41,7 @@ export default function Home (){
         dispatch(getAllProducts());
         dispatch(getCategories());
         dispatch(clearStatesProducts());
-        if(users){
+        if(users && users.id){
             dispatch(getFavs(users.id))
         }
     }, [dispatch])

@@ -63,7 +63,6 @@ export default function UserAdmin({user,setModalA,setUser}){
             try {
                 response = await axios.put(`${SERVER}/user/status/${userData.id}`,input)
                 const result = response.data
-                console.log(result)
                 setKeyword(result.msg)
                 if(!isOpen && result){
                     setIsOpen(state => !state);

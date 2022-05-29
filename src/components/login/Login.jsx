@@ -48,7 +48,7 @@ const Login = () => {
             if(result){
                 if(result.msg === "Login success"){
                     dispatch(userLogin(result.data))
-                    setInput({
+                    setData({
                         email: "",
                         password: ""
                     })
