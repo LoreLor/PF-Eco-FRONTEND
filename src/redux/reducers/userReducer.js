@@ -3,28 +3,32 @@ import { GET_USER, GET_USERS, USER_LOGIN, USER_LOGIN_GOOGLE, USER_LOGOUT, USER_R
 
 const initialState = {
     userInfo: localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')): null,
-    userObj: localStorage.getItem('userObj')?JSON.parse(localStorage.getItem('userObj')): null,
     userEdit:{},
     users: []
 }
 
 export const userReducer =(state=initialState, action)=>{
     switch(action.type){
+
         case USER_LOGIN:
             return {
                 ...state,
-                userInfo: action.payload
+                userInfo: action.payload,
+                users: action.payload
             }
+
         case USER_LOGOUT:
             return {
                 ...state,
                 userInfo:{},
-                userObj:{}
+                userObj:{},
+                users:[],
             }
         case USER_REGISTER:
             return {
                 ...state,
-                userInfo: action.payload
+                userInfo: action.payload,
+                users: action.payload
             }
         case USER_REGISTER_CLEAR:
             return {
@@ -49,8 +53,8 @@ export const userReducer =(state=initialState, action)=>{
         case USER_LOGIN_GOOGLE:
             return {
                 ...state,
-                userObj: action.payload,
-                userInfo:action.payload
+                userInfo: action.payload,
+                users:action.payload
             }
 
         default:

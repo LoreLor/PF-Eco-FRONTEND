@@ -40,8 +40,6 @@ function PaypalCheckoutButton() {
             onClick={(data, actions) => {
             //aca va lo quiero que se haga..enviar email, guarda, te direcciona al review
             
-         
-
         }}
             createOrder= {(data, actions) => {
                 return actions.order.create({
@@ -64,10 +62,8 @@ function PaypalCheckoutButton() {
             onError={(err) => {
                 setError(err);
                 console.log('err :>> ', err);
-            }}
-    
-        />
-  
+            }}  
+        />  
   )
 }
 

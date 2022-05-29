@@ -16,10 +16,10 @@ export const userLogin = (data) => async(dispatch) =>{
 }
 
 export const logout = () => (dispatch) => {
-   localStorage.removeItem()
-    dispatch({
-        type: USER_LOGOUT,
-    })
+  dispatch({
+    type: USER_LOGOUT,
+  })
+  window.localStorage.clear();
 };
 
 export const register = (body) => async(dispatch) => {
@@ -90,13 +90,13 @@ export const userUpdate = ( userId, body) => async(dispatch) =>{
 
 export const userLoginGoogle = (data) => async(dispatch) =>{
   try {
-    const {userGoogle}= await axios.post(`${SERVER}/user/googlelogin`, data)
+    const userGoogle= await axios.post(`${SERVER}/user/googlelogin`, data)
     console.log('data', userGoogle)
   dispatch({
     type: USER_LOGIN_GOOGLE,
-    payload: userGoogle
+    payload: userGoogle.data
   },
-  localStorage.setItem('userObj', JSON.stringify(userGoogle)))
+  localStorage.setItem('userInfo', JSON.stringify(userGoogle)))
 
 }catch (error) {
 console.log(error)
@@ -114,5 +114,7 @@ export const profileUpdate = (data) => async(dispatch) =>{
   }
 }
 
-
+export const logoutGoogle = ()=>{
+   
+}
 

@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode'
 import axios, { Axios } from 'axios';
 import SERVER from '../../server';
 import { useDispatch } from 'react-redux';
-import { userLoginGoogle } from '../../redux/actions/user';
+import { getAllUsers, userLoginGoogle } from '../../redux/actions/user';
 
 
 
@@ -14,13 +14,14 @@ function LoginGoogle() {
    
     const handleCallbackResponse = (response)=>{ 
       const userObj = jwtDecode(response.credential);
-      console.log('userObj :>> ', userObj);
-      axios({
-        method: "POST",
-        url: `${SERVER}/user/googlelogin`,
-        data:{idToken: response.credential}
-      })
-      //dispatch(userLoginGoogle(userObj))
+      //console.log('userObj :>> ', userObj);
+      // axios({
+      //   method: "POST",
+      //   url: `${SERVER}/user/googlelogin`,
+      //   data:{idToken: response.credential}
+      // })
+      dispatch(getAllUsers())
+      dispatch(userLoginGoogle({idToken:response.credential}))
       navigate('/')
     }
         
@@ -36,6 +37,7 @@ function LoginGoogle() {
       document.getElementById('signInDiv'),
       {theme:'outline', size:'large'}
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

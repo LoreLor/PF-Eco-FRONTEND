@@ -9,7 +9,6 @@ import NavBar from "../navBar/NavBar";
 import style from './Cart.module.css'
 import Loader from "../Loading/Loader";
 import numberFormat from "../detalleProducto/numberFormat";
-import { getAllUsers } from "../../redux/actions/user";
 
 export default function Cart(){
     
@@ -19,13 +18,13 @@ export default function Cart(){
     const navigate = useNavigate();
     
     let total = 0;
-    
-    const user = localStorage.getItem('userInfo')
-          ? JSON.parse(localStorage.getItem('userInfo'))
-          : null
+    const user = useSelector((state) => state.users.userInfo)
+    console.log('user :>> ', user.id);
+    // const user = localStorage.getItem('userInfo')
+    //       ? JSON.parse(localStorage.getItem('userInfo'))
+    //       : null
     
     useEffect(() => {
-        dispatch(getAllUsers())
         if(user){
             dispatch(getCart(user.id))
         }
