@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import s from './LoginGoogle.module.css'
-
-
-
-
 
 
 function LoginGoogle() {
@@ -34,7 +29,7 @@ function LoginGoogle() {
         <div>
             { showloginButton ?
                 <GoogleLogin
-                    clientId={process.env.REACT_APP_GOOGLE_API_KEY}
+                    clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                     buttonText="Log in with Google"
                     onSuccess={onLoginSuccess}
                     onFailure={onLoginFailure}
@@ -44,7 +39,7 @@ function LoginGoogle() {
 
             { showlogoutButton ?
                 <GoogleLogout
-                    clientId={process.env.REACT_APP_GOOGLE_API_KEY}
+                    clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                     buttonText="Sign Out"
                     onLogoutSuccess={onSignoutSuccess}
                 >
