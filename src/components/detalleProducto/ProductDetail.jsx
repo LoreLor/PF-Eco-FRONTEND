@@ -112,7 +112,7 @@ export default function ProductDetail() {
             <div className={style.review_container}>
                 {
                     Array.isArray(reviewsProduct) ? 
-                    <div>
+                    <div className={style.box}>
                     {
                         reviewsProduct.map(r => {
                             return (

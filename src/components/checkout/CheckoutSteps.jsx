@@ -65,7 +65,7 @@ function CheckoutSteps() {
     } 
 
   return (
-    <div>
+    <div className={s.box}>
     <div className={s.contenedor}>
       <div class="container">
         <div class="py-5 text-center">
@@ -249,7 +249,7 @@ function CheckoutSteps() {
               </div>
             
               <hr />
-              <div className={s.subtitulo}>
+              {/* <div className={s.subtitulo}>
                 <p>Payment</p>
               </div>
               <div class="d-block my-3">
@@ -272,7 +272,7 @@ function CheckoutSteps() {
                     PayPal
                   </label>
                 </div>
-              </div>
+              </div> */}
               <hr class="mb-4" />
               <div className="d-grid">
                 <button class={s.btn} type="submit">
