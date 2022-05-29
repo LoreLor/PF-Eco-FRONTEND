@@ -12,7 +12,7 @@ export default function Favorites(){
     const dispatch = useDispatch()
 
     const favs = useSelector((state) => state.products.favs)
-    const user = useSelector((state) => state.users.userInfo)
+    const user = useSelector((state) => state.users.users[0])
 
     useEffect(() => {
         dispatch(getFavs(user.id))
