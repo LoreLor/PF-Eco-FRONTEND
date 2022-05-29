@@ -18,10 +18,11 @@ export default function Cart(){
     const navigate = useNavigate();
     
     let total = 0;
-
-    const user = localStorage.getItem('userInfo')
-         ? JSON.parse(localStorage.getItem('userInfo'))
-         : null
+    const user = useSelector((state) => state.users.userInfo)
+    console.log('user :>> ', user.id);
+    // const user = localStorage.getItem('userInfo')
+    //       ? JSON.parse(localStorage.getItem('userInfo'))
+    //       : null
     
     useEffect(() => {
         if(user){

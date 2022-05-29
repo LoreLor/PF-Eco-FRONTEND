@@ -45,7 +45,7 @@ const Register = () => {
     && user.password !=="") {
       let response = null
       try {
-        response = await axios.post(`${SERVER}/user`,user) // El que no entiende es por que no le sabe!!!
+        response = await axios.post(`${SERVER}/user`,user)
         const result = response.data
         if(result){
         if(result.msg === "User registered"){

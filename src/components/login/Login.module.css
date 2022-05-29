@@ -66,10 +66,8 @@
     margin-left: 10px;
   }
 
-  .btnPaypal{
-    
-    justify-content: center;
+.btnGoogle{
+  display:flex;
+  justify-content: center;
     align-items: center;
-    
-   
-  }
+}

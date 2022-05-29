@@ -5,8 +5,10 @@ import OrderPrice from "../orderPrice/OrderPrice";
 import { logout } from '../../redux/actions/user'
 import style from './NavBar.module.css'
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FilterPrice from "../filterPrice/FilterPrice";
+
+
 import { cleanCart, cleanFav } from "../../redux/actions/products";
 import SERVER2 from "../../server2";
 
@@ -14,8 +16,7 @@ import SERVER2 from "../../server2";
 export default function NavBar({ categories, paginado }) {
     const user = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
     const dispatch = useDispatch();
-
-
+ 
     // function handleCart(e){
     //     e.preventDefault()
     //     alert('carrito')
@@ -23,8 +24,6 @@ export default function NavBar({ categories, paginado }) {
 
     function handleLogout() {
         dispatch(logout())
-        dispatch(cleanCart())
-        dispatch(cleanFav())
         window.location.reload();
     }
 
@@ -61,8 +60,10 @@ export default function NavBar({ categories, paginado }) {
                 }
                 <div className={style.logCart}>
                     <div className={style.conte}>
-                        {
-                            user ? (
+                    {
+                        !user ?  
+                                (<NavLink to="/login" className={style.mybtn}>Log In</NavLink>
+                            ):( 
                                 <div className={style.drop}>
                                     <button className={style.perfil} type="button" data-toggle="dropdown">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#F66B0E" className="bi bi-person-circle" viewBox="0 0 16 16">
@@ -89,20 +90,13 @@ export default function NavBar({ categories, paginado }) {
                                                 </NavLink>
                                             </li> : <li></li>
                                         }
-                                        {!window.location.href.includes("/profile") ?
-                                            <li>
-                                                <NavLink to="/profile">
-                                                    <button className={style.mybtn} /* onClick={} */>Profile</button>
-                                                </NavLink>
-                                            </li> : <li></li>
-                                        }
                                         {/* <li><a href="/register" className={style.logout}>Register</a></li> */}
                                     </ul>
                                 </div>
-                            ) : (
-                                <NavLink to="/login" className={style.mybtn}>Log In</NavLink>
-                            )}
-                    </div>
+                
+                            )
+                        }        
+                    </div>             
                     {user && user.rol === "admin" ? <NavLink to="/admin" className={style.mybtn}>Admin</NavLink> : <></>}
 
                     <NavLink to="/cart">

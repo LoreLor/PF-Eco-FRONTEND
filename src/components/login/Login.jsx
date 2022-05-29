@@ -18,22 +18,22 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
-    const [data, setData] = useState({
+    const [input, setInput] = useState({
         email: "",
         password: ""
     });
 
     function onChange(e){
-        setData({
-            ...data,
+        setInput({
+            ...input,
             [e.target.name]:e.target.value
         })
     }
     async function handleSubmitLogin(e){
         e.preventDefault();
-        if(Object.keys(data).length === 2
-        &&data.email !== ""
-        && data.password !==""){
+        if(Object.keys(input).length === 2
+        && input.email !== ""
+        && input.password !==""){
             let response = null
             try {
                 
@@ -42,7 +42,7 @@ const Login = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-            body: JSON.stringify(data)
+            body: JSON.stringify(input)
             })
                 const result = await response.json()
             if(result){
@@ -67,6 +67,7 @@ const Login = () => {
             }
         }
     }
+
 
     return (
         <div>
@@ -119,7 +120,7 @@ const Login = () => {
                                     className="form-control mb-2"
                                     placeholder="email"
                                     name='email'
-                                    value={data.email}
+                                    value={input.email}
                                     onChange={onChange}
                                     required
                                 />
@@ -130,7 +131,7 @@ const Login = () => {
                                     className="form-control"
                                     placeholder="Password"
                                     name='password'
-                                    value={data.password}
+                                    value={input.password}
                                     onChange={onChange}
                                     required
 
@@ -139,16 +140,16 @@ const Login = () => {
                             <div className="d-grid">
                                 <button type="submit" className={s.btn} onClick={handleSubmitLogin}> Sign In </button>
                             </div>
-                            {/* <div className="container w-100 my-5">
+                             <div className="container w-100 my-5">
                                 <div className="row my-3 text-center">
-                                    <div className="col-12"> 
+                                    <div className={s.btnGoogle}> 
                                             <LoginGoogle />                            
                                     </div>                           
                                 </div>
-                            </div>  */}
+                            </div> 
                             <div className="row my-3 text-center">
                                 <span> You don't have an account?  Go to...<strong><Link to={"/register"}>Create your account</Link></strong></span>
-                            </div>  
+                            </div>       
                         </div>
                     </div>
                 </div>
