@@ -12,7 +12,7 @@ import numberFormat from "../detalleProducto/numberFormat";
 export default function ProductCard({name, img, price, rating, id, isFaved}){
     
     const dispatch = useDispatch()
-    const user = JSON.parse(localStorage.getItem('userInfo'))
+    const user = useSelector((state) => state.users.users[0])
     //console.log(isFaved, name)
 
     function handleAddCart(id){
