@@ -18,22 +18,22 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
-    const [input, setInput] = useState({
+    const [data, setData] = useState({
         email: "",
         password: ""
     });
 
     function onChange(e){
-        setInput({
-            ...input,
+        setData({
+            ...data,
             [e.target.name]:e.target.value
         })
     }
     async function handleSubmitLogin(e){
         e.preventDefault();
-        if(Object.keys(input).length === 2
-        && input.email !== ""
-        && input.password !==""){
+        if(Object.keys(data).length === 2
+        && data.email !== ""
+        && data.password !==""){
             let response = null
             try {
                 
@@ -42,7 +42,7 @@ const Login = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-            body: JSON.stringify(input)
+            body: JSON.stringify(data)
             })
                 const result = await response.json()
             if(result){
@@ -120,7 +120,7 @@ const Login = () => {
                                     className="form-control mb-2"
                                     placeholder="email"
                                     name='email'
-                                    value={input.email}
+                                    value={data.email}
                                     onChange={onChange}
                                     required
                                 />
@@ -131,7 +131,7 @@ const Login = () => {
                                     className="form-control"
                                     placeholder="Password"
                                     name='password'
-                                    value={input.password}
+                                    value={data.password}
                                     onChange={onChange}
                                     required
 
@@ -149,6 +149,7 @@ const Login = () => {
                             </div> 
                             <div className="row my-3 text-center">
                                 <span> You don't have an account?  Go to...<strong><Link to={"/register"}>Create your account</Link></strong></span>
+                                <strong><Link to={`${SERVER}/email/forgot-password`}><span>Forgot your password?</span></Link></strong>
                             </div>       
                         </div>
                     </div>
