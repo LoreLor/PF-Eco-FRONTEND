@@ -36,37 +36,37 @@ export default function Shopping() {
                     {
                         shopping &&
                             shopping.length !== 0 ?
-                            shopping?.map((s, i) => {
-                                return (
-                                    <div key={s.id} className={style.shop_products}>
-                                        <div className={style.shop_date}>
-                                            <h3>Bougth {s.date.replace("T", " ").replace("Z", " ")}</h3>
-                                        </div>
-                                        <div className={style.shops}>
-                                            {
-                                                s.details?.map(d => {
-                                                    return (
-                                                        <div className={style.products} key={d.id}>
-                                                            <div className={style.shop_img}>
-                                                                <img src={d.img} alt="" className={style.imgBox} />
-                                                            </div>
-                                                            <NavLink className={style.link} to={`/home/${d.productId}`}>
+                                shopping?.map((s, i) => {
+                                    return (
+                                        <div key={s.id} className={style.shop_products}>
+                                            <div className={style.shop_date}>
+                                                <h3>Bought {s.date.replace("T", " ").replace("Z", " ")}</h3>
+                                            </div>
+                                            <div className={style.shops}>
+                                                {
+                                                    s.details?.map(d => {
+                                                        return (
+                                                            <div className={style.products} key={d.id}>
+                                                                <div className={style.shop_img}>
+                                                                    <NavLink className={style.link} to={`/home/${d.productId}`}>
+                                                                        <img src={d.img} alt="" className={style.imgBox} />
+                                                                    </NavLink>
+                                                                </div>
                                                                 <span>{d.name}</span>
-                                                            </NavLink>
-                                                            <span>Quantity: {d.bundle}</span>
-                                                            <span>    price: ${d.price}</span>
-                                                            {!d.hasReview ?
-                                                                <button onClick={e => handleClick(e, d.id)} className={style.btnReview}>ADD REVIEW</button>
-                                                                :
-                                                                <div><span>Reviewed</span></div>}
-                                                        </div>
-                                                    )
-                                                })
-                                            }
-                                        </div>
-                                        <div className={style.shop_total}>
-                                            <span>Price total: $ {numberFormat(s.price_total)}</span>
-                                        </div>
+                                                                <span>Quantity: {d.bundle}</span>
+                                                                <span>    price: ${d.price}</span>
+                                                                {!d.hasReview ?
+                                                                    <button onClick={e => handleClick(e, d.id)} className={style.btnReview}>ADD REVIEW</button>
+                                                                    :
+                                                                    <div><span>Reviewed</span></div>}
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                            <div className={style.shop_total}>
+                                                <span>Price total: $ {numberFormat(s.price_total)}</span>
+                                            </div>
                                     </div>
                                 )
                             })
