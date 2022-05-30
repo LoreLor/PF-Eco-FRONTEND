@@ -24,12 +24,8 @@
     "react-autocomplete-hint": "^2.0.0",
     "react-collapsed": "^3.3.1",
     "react-dom": "^18.1.0",
-<<<<<<< HEAD
-   
-=======
     "react-google-login": "^5.2.2",
     "react-paypal-button-v2": "^2.6.3",
->>>>>>> 9e699540b68f2750130481119f19094af9ed8ac6
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",

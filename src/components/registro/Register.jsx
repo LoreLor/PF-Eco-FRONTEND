@@ -183,13 +183,13 @@ const Register = () => {
                     {errors.email && <p class="text-danger">{errors.email}</p>}
                   </div>
 
-                  <div class="mb-3">
+                  {/* <div class="mb-3">
                     <label
                       htmlFor="validationCustom03"
                       class="form-label"
                       className={s.label}
-                    >
-                      <strong>User Name: </strong>
+                    > */}
+                      {/* <strong>User Name: </strong>
                     </label>
                     <input
                       id="user_name"
@@ -203,7 +203,7 @@ const Register = () => {
                   </div>
                   {errors.user_name && (
                     <p class="text-danger">{errors.user_name}</p>
-                  )}
+                  )} */}
 
                   <div class="mb-3">
                     <label

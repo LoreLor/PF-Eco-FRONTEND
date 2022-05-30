@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate} from "react-router-dom";
 import activeValidations from "../registro/validators/activeValidations";
-import submitValidations from "../registro/validators/submitValidations"
 import {getSingleUser, userUpdate} from '../../redux/actions/user'
 import { closeCart, getCart, paidCartTemporal } from "../../redux/actions/products";
 import s from "./CheckoutSteps.module.css";
 import Footer from "../Footer/Footer";
 import numberFormat from "../detalleProducto/numberFormat";
 
+
+
 function CheckoutSteps() {
 
   const navigate = useNavigate();
   const dispacth = useDispatch();
-  const user = useSelector((state) => state.users.users[0])
+  const user = useSelector((state) => state.users.users)
   const cart = useSelector((state) => state.products.cart)
+  console.log('user :>> ', user);
 
   const toPrice = (num) => Number(num.toFixed(2)); //ejemplo 6.123 -'5.12' - 5.12
   const amount= toPrice(cart.details.reduce((a, c) => a + c.bundle * c.price, 0));
