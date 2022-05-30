@@ -103,7 +103,7 @@ export default function Cart(){
 
     function handleSubtract(e, productId, bundle){
         e.preventDefault()
-        if(user && user.id){
+        if(user && user.id ){
             if(bundle === 1){
                 dispatch(deleteProductCart(user.id, productId))
                 .then(r => {
@@ -173,14 +173,16 @@ export default function Cart(){
                                     return(
                                             <div className={style.cart_products} key={p.id}>
                                                 <div className={style.cart_img}>
-                                                    <img className={style.imgBox}src={user && user.id ? p.img :p.img[0]} alt='...'/>
+                                                    <NavLink to={`/home/${user.id ? p.productId : p.id}`}>
+                                                        <img className={style.imgBox} src={user && user.id ? p.img : p.img[0]} alt='...'/>
+                                                    </NavLink>
                                                 </div>
                                                 <span>$ {numberFormat(p.price)}</span>
                                                 <span>{p.name}</span>
                                                 <div className={style.cart_amount}>
                                                     <span>Qty: {`(${p.stock} max)`} </span>
                                                         <div className={style.amount_input}>
-                                                        <button onClick={e=>handleAdd(e, p.productId || p.id, p.bundle, p.stock)} className={style.btnAdd}>+</button>
+                                                        <button onClick={e=>handleSubtract(e, p.productId || p.id, p.bundle)} className={style.btnSubs} disabled={p.bundle === 1    }>-</button>
                                                         <input 
                                                             type='number'
                                                             name="Qty"
@@ -189,7 +191,7 @@ export default function Cart(){
                                                             value={p.bundle}
                                                             readOnly
                                                             />
-                                                        <button onClick={e=>handleSubtract(e, p.productId || p.id, p.bundle)} className={style.btnSubs}>-</button>
+                                                        <button onClick={e=>handleAdd(e, p.productId || p.id, p.bundle, p.stock)} className={style.btnAdd}>+</button>
                                                     </div>
                                                 </div>
                                                 <button className={style.btnDelete} onClick={e => handleDelete(e, p.productId || p.id)}>
