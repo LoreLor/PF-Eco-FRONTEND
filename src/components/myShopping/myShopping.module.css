@@ -130,3 +130,10 @@
     font-weight: bold;
     color: #F66B0E;
 }
+
+.link {
+    color: black
+}
+.link:hover {
+    color: black
+}
