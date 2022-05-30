@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { USER_LOGIN, USER_LOGOUT, USER_REGISTER, USER_REGISTER_CLEAR, GET_USERS,GET_USER, USER_UPDATE, USER_LOGIN_GOOGLE } from './constants';
+import { USER_LOGIN, USER_LOGOUT, USER_REGISTER_CLEAR, GET_USERS,GET_USER, USER_UPDATE, USER_LOGIN_GOOGLE } from './constants';
 import SERVER from '../../server';
 
 export const userLogin = (data) => async(dispatch) =>{
@@ -7,8 +7,7 @@ export const userLogin = (data) => async(dispatch) =>{
     dispatch({
       type: USER_LOGIN,
       payload: data
-    },
-    localStorage.setItem('userInfo', JSON.stringify(data)))
+    })
  
   }catch (error) {
   console.log(error)
@@ -21,26 +20,6 @@ export const logout = () => (dispatch) => {
   })
   window.localStorage.clear();
 };
-
-export const register = (body) => async(dispatch) => {
-  try{
-    const {data} = await axios.post(`${SERVER}/user`, body)
-    
-      dispatch({
-        type: USER_REGISTER,
-        payload: data
-      });
-    
-      dispatch({
-        type: USER_LOGIN,
-        payload: data
-      })
-      localStorage.setItem('userInfo', JSON.stringify(data))
-    }catch(error){
-      return error;
-    }
-
-  }
 
 export const registerClear = ()=>(dispatch) =>{
   localStorage.clear()
@@ -76,7 +55,6 @@ export function getSingleUser(id){
 export const userUpdate = ( userId, body) => async(dispatch) =>{
   try {
     const {data} = await axios.put(`${SERVER}/user/${userId}`,body)
-    console.log('data', data)
     dispatch({
       type: USER_UPDATE,
       payload: data

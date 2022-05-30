@@ -12,11 +12,11 @@ import numberFormat from "../detalleProducto/numberFormat";
 export default function ProductCard({name, img, price, rating, id, isFaved}){
     
     const dispatch = useDispatch()
-    const user = useSelector((state) => state.users.users[0])
-    //console.log(isFaved, name)
+    const user = useSelector((state)=>state.users.userInfo)
 
-    function handleAddCart(id){
-        if(user){
+    function handleAddCart(e,id){
+        e.preventDefault()
+        if(user && user.id){
             const addCart = {
                 userId: user.id,
                 productId: id,
@@ -101,7 +101,7 @@ export default function ProductCard({name, img, price, rating, id, isFaved}){
                     <span className={style.card_preci}>${numberFormat(price)}</span>
                     <div className={style.card_ratBtn}>
                         <Rating name="read-only" value={rating} readOnly/>
-                        <a href="#" className={style.card_button} onClick={(e) => handleAddCart(id)}>AddCart</a>
+                        <a href="#" className={style.card_button} onClick={(e) => handleAddCart(e,id)}>AddCart</a>
                     </div>
                 </div>
             </div>

@@ -14,7 +14,7 @@ function CheckoutSteps() {
 
   const navigate = useNavigate();
   const dispacth = useDispatch();
-  const user = useSelector((state) => state.users.users)
+  const user = useSelector((state)=>state.users.userInfo)
   const cart = useSelector((state) => state.products.cart)
   console.log('user :>> ', user);
 

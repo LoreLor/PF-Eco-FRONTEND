@@ -18,39 +18,38 @@ export default function Cart(){
     const navigate = useNavigate();
     
     let total = 0;
-    const user = useSelector((state) => state.users.users[0])
-    // console.log('user :>> ', user[0].id);
+    const user = useSelector((state)=>state.users.userInfo)
     // const user = localStorage.getItem('userInfo')
     //       ? JSON.parse(localStorage.getItem('userInfo'))
     //       : null
     
     useEffect(() => {
-        if(user){
+        if(user && user.id){
             dispatch(getCart(user.id))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[dispatch])
     
     //agrega CartGuest a Cart
-    if(user && cartGuest.length !== 0){
-        cartGuest.map(p => {
-            //console.log(p.bundle)
+    if(user && user.id && cartGuest.length !== 0){
+        cartGuest.map(p => 
+        
             dispatch(addCartProduct({
                 userId: user.id,
                 productId: p.id,
                 bundle: p.bundle
             }))
-        })
+        )
         dispatch(cleanCartGuest())
-        //console.log(cartGuest)
+
     }
 
     //si hay usur logueado cargo su carrito, si no, el de invitados
-    const cart = user ? cartUser.details : cartGuest
+    const cart = user && user.id ? cartUser.details : cartGuest
 
     function handleDelete (e, productId){
         e.preventDefault()
-        if(user){
+        if(user && user.id){
             dispatch(deleteProductCart(user.id, productId))
             .then(r => {
                 dispatch(getCart(user.id))
@@ -62,8 +61,7 @@ export default function Cart(){
     
     function handleDeleteALL(e, id){
         e.preventDefault()
-        //console.log(id)
-        if(user){
+        if(user && user.id){
             dispatch(deleteAllProductCart(cartUser.id))
             .then(r => {
                 dispatch(getCart(user.id))
@@ -75,7 +73,7 @@ export default function Cart(){
 
     function handleAdd(e, productId, bundle, stock){
         e.preventDefault()
-        if(user){
+        if(user && user.id){
             if(bundle !== stock){
                 dispatch(addCartProduct({
                     userId: user.id,
@@ -105,7 +103,7 @@ export default function Cart(){
 
     function handleSubtract(e, productId, bundle){
         e.preventDefault()
-        if(user){
+        if(user && user.id){
             if(bundle === 1){
                 dispatch(deleteProductCart(user.id, productId))
                 .then(r => {
@@ -143,7 +141,7 @@ export default function Cart(){
     }
 
     function acount ()  {
-        if(user){
+        if(user && user.id){
             cart?.map(p => {
                 return (
                     total += p.price_total
@@ -175,7 +173,7 @@ export default function Cart(){
                                     return(
                                             <div className={style.cart_products} key={p.id}>
                                                 <div className={style.cart_img}>
-                                                    <img className={style.imgBox}src={user ? p.img :p.img[0]} alt='...'/>
+                                                    <img className={style.imgBox}src={user && user.id ? p.img :p.img[0]} alt='...'/>
                                                 </div>
                                                 <span>$ {numberFormat(p.price)}</span>
                                                 <span>{p.name}</span>
@@ -213,7 +211,7 @@ export default function Cart(){
                 </div>
 
                 {
-                    user ? 
+                    user && user.id ? 
                         <div className={style.cart_actions}>
                             <button className={style.btnDelete} onClick={e=>handleDeleteALL(e, cart.id)} disabled={!cart?.length}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">

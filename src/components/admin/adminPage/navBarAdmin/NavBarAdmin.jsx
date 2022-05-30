@@ -3,13 +3,12 @@ import SearchBar from "../../../searchBar/SearchBar";
 import { logout } from '../../../../redux/actions/user'
 import style from './NavBarAdmin.module.css'
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 
 export default function NavBarAdmin({categories}){
     
-    const user = localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')): null
+    const user = useSelector((state)=>state.users.userInfo)
     const dispatch = useDispatch();
-
     function handleLogout(){
         dispatch(logout())
         window.location.reload();

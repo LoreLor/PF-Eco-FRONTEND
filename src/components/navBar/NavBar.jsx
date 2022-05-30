@@ -12,7 +12,7 @@ import SERVER2 from "../../server2";
 
 
 export default function NavBar({ categories, paginado }) {
-    const user = useSelector((state) => state.users.users)
+    const user = useSelector((state)=>state.users.userInfo)
     const dispatch = useDispatch();
     // function handleCart(e){
     //     e.preventDefault()
@@ -58,7 +58,7 @@ export default function NavBar({ categories, paginado }) {
                 <div className={style.logCart}>
                     <div className={style.conte}>
                     {
-                        user?.length !== 0 ?     
+                        Object.keys(user).length > 0 ?     
                                 <div className={style.drop}>
                                     <button className={style.perfil} type="button" data-toggle="dropdown">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#F66B0E" className="bi bi-person-circle" viewBox="0 0 16 16">
@@ -82,6 +82,13 @@ export default function NavBar({ categories, paginado }) {
                                             <li>
                                                 <NavLink to="/favs">
                                                     <button className={style.mybtn} /* onClick={} */>Favorites</button>
+                                                </NavLink>
+                                            </li> : <li></li>
+                                        }
+                                        {!window.location.href.includes("/profile") ?
+                                            <li>
+                                                <NavLink to="/profile">
+                                                    <button className={style.mybtn} /* onClick={} */>Profile</button>
                                                 </NavLink>
                                             </li> : <li></li>
                                         }

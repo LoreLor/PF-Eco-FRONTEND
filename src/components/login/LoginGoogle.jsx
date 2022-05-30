@@ -12,7 +12,6 @@ function LoginGoogle() {
    
     const handleCallbackResponse = (response)=>{ 
       const userObj = jwtDecode(response.credential);
-      //console.log('userObj :>> ', userObj);
       // axios({
       //   method: "POST",
       //   url: `${SERVER}/user/googlelogin`,
