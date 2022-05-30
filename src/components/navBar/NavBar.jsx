@@ -7,8 +7,6 @@ import style from './NavBar.module.css'
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import FilterPrice from "../filterPrice/FilterPrice";
-
-
 import { cleanCart, cleanFav } from "../../redux/actions/products";
 import SERVER2 from "../../server2";
 

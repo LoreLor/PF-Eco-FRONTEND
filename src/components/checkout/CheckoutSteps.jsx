@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate} from "react-router-dom";
-import activeValidations from "../registro/validators/activeValidations";
-import submitValidations from "../registro/validators/submitValidations"
+import inputValidations from "../checkout/validations/inputValidations";
 import {getSingleUser, userUpdate} from '../../redux/actions/user'
 import { closeCart, getCart, paidCartTemporal } from "../../redux/actions/products";
 import s from "./CheckoutSteps.module.css";
 import Footer from "../Footer/Footer";
 import numberFormat from "../detalleProducto/numberFormat";
+import submitValidations from "../registro/validators/submitValidations";
+
+
 
 function CheckoutSteps() {
 
@@ -15,24 +17,23 @@ function CheckoutSteps() {
   const dispacth = useDispatch();
   const user = useSelector((state)=>state.users.userInfo)
   const cart = useSelector((state) => state.products.cart)
+  console.log('user :>> ', user);
 
   const toPrice = (num) => Number(num.toFixed(2)); //ejemplo 6.123 -'5.12' - 5.12
   const amount= toPrice(cart.details.reduce((a, c) => a + c.bundle * c.price, 0));
   const total_amount= (cart.price_total - 5)
 
 
-
   const [input, setInput] = useState({
     name: user.name,
     last_name: user.last_name,
-    phone_number: user.phone_number,
+    phone_number:"",
     email: user.email,
-    address: user.address,
+    address:"",
     payment_method: ""
   })
 
   const [errors, setErrors] = useState({});
-
 
 
   useEffect(()=>{
@@ -43,7 +44,7 @@ function CheckoutSteps() {
   const handleChange = (e) =>{
     e.preventDefault();
     setErrors(
-      activeValidations({
+      inputValidations({
         ...input,
         [e.target.name]: e.target.value,
       })
@@ -57,6 +58,13 @@ function CheckoutSteps() {
  
   const handleSubmit =(e) => {
       e.preventDefault();
+      setErrors(submitValidations(input))
+      if (Object.keys(errors).length === 0 
+      && input.name !== ""
+      && input.last_name !== ""
+      && input.address !== ""
+      && input.phone_number !== "")
+      setInput(input)
       dispacth(userUpdate(user.id, input))
       dispacth(getCart(user.id))
 
@@ -101,7 +109,7 @@ function CheckoutSteps() {
             <ul class="list-group mb-3">
                   {cart ? cart.details.map((p) => {
                     return(
-              <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <li key={p.id} class="list-group-item d-flex justify-content-between lh-condensed">
                     <>
                     <div key={p.id}>
                       <h6 class="my-0">Product name: {p.name}</h6>
@@ -128,7 +136,7 @@ function CheckoutSteps() {
                   <strong>{numberFormat(total_amount)}</strong>
                 </li>
               </ul>
-            <form class="card p-2">
+            <form class="card p-2" >
               <div class="input-group">
                 <input
                   type="text"
@@ -148,7 +156,7 @@ function CheckoutSteps() {
               <p>Billing Address</p>
             </div>
             {user ? (
-            <form class="needs-validation" noValidate onSubmit={handleSubmit}>
+            <form class="needs-validation" validate onSubmit={handleSubmit}>
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <label htmlFor="name" className={s.label}>
@@ -166,8 +174,8 @@ function CheckoutSteps() {
                   <div className="invalid-feedback">
                     Valid first name is required.
                   </div>
-                </div>
                   {errors.name && <p class="text-danger">{errors.name}</p>}
+                </div>
 
                 <div class="col-md-6 mb-3">
                   <label htmlFor="last_name" className={s.label}>
@@ -187,8 +195,8 @@ function CheckoutSteps() {
                     Valid last name is required.
                   </div>
                 </div>
-              </div>
               {errors.last_name && <p class="text-danger">{errors.last_name}</p>}
+              </div>
 
               <div class="mb-3">
                 <label htmlFor="email" className={s.label}>
@@ -211,6 +219,7 @@ function CheckoutSteps() {
                     Please enter a valid email address for shipping updates.
                   </div>
                 </div>
+              {errors.email && <p class="text-danger">{errors.email}</p>}
               </div>
 
 
@@ -230,8 +239,8 @@ function CheckoutSteps() {
                 <div class="invalid-feedback">
                   Please enter your shipping address.
                 </div>
-              </div>
               {errors.address && <p class="text-danger">{errors.address}</p>}
+              </div>
 
               <div class="mb-3">
                 <label htmlFor="phone_number" className={s.label}>
@@ -246,6 +255,7 @@ function CheckoutSteps() {
                   onChange={handleChange}
                   required
                 />
+              {errors.phone_number && <p class="text-danger">{errors.phone_number}</p>}
               </div>
             
               <hr />
@@ -279,8 +289,9 @@ function CheckoutSteps() {
                   Proceed to Payment
                 </button>
               </div>
-              {errors.payment_method && <p class="text-danger">{errors.payment_method}</p>}
-            </form>):null}
+            </form>
+            ) : null
+            }
           </div>
         </div>
       </div>
