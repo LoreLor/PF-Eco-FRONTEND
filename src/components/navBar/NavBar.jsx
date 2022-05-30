@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBar from "../searchBar/SearchBar";
 import Categories from "../categorias/Categories";
-import OrderPrice from "../orderPrice/OrderPrice";
+import OrderPrice from "../order/Order";
 import { logout } from '../../redux/actions/user'
 import style from './NavBar.module.css'
 import { NavLink } from "react-router-dom";

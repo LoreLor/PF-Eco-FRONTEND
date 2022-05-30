@@ -36,7 +36,9 @@ import {
     CLEAN_FAV,
     CLEAN_CART,
     CLEAN_CART_GUEST,
-    CLEAN_PRODUCTS
+    CLEAN_PRODUCTS,
+    ORDER_BY_RATING,
+    ORDER_BY_ALPHABET
 } from "./constants";
 
 import axios from 'axios';
@@ -97,6 +99,19 @@ export function filterByCategory(payload) {
 export function orderByPrice(payload) {
     return {
         type: ORDER_BY_PRICE,
+        payload
+    }
+}
+
+export function orderByRating(payload) {
+    return {
+        type: ORDER_BY_RATING,
+        payload
+    }
+}
+export function orderByAlphabet(payload) {
+    return {
+        type: ORDER_BY_ALPHABET,
         payload
     }
 }
