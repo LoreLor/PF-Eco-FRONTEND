@@ -132,7 +132,7 @@ function CheckoutSteps() {
                   <span class="text-success">-$5</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
-                  <span>Total (AR)</span>
+                  <span>Total (Usd)</span>
                   <strong>{numberFormat(total_amount)}</strong>
                 </li>
               </ul>
@@ -244,7 +244,7 @@ function CheckoutSteps() {
 
               <div class="mb-3">
                 <label htmlFor="phone_number" className={s.label}>
-                  Phone Number <span class="text-muted">(Optional)</span>
+                  Phone Number <span class="text-muted"></span>
                 </label>
                 <input
                   type="text"

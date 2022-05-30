@@ -5,9 +5,9 @@ import { userLogin } from "../../redux/actions/user"
 import { useDispatch} from "react-redux";
 import s from "./Login.module.css";
 import { useState } from 'react';
-import imagen1 from '../../assets/celulares.jpg';
+import imagen3 from '../../assets/celulares.jpg';
 import imagen2 from '../../assets/celulares1.jpg';
-import imagen3 from '../../assets/celulares3.jpg';
+import imagen1 from '../../assets/celulares3.jpg';
 import LoginGoogle from './LoginGoogle';
 import Footer from '../Footer/Footer';
 import SERVER from '../../server';
@@ -76,7 +76,7 @@ const Login = () => {
               Sign In{" "}
               <div>
            
-                <NavLink to="/" className={s.titulo} type="text"  data-bs-toggle="tooltip" data-bs-placement="top" title="GO HOME">
+                <NavLink to="/" className={s.titulo} type="text" data-bs-toggle="tooltip" data-bs-placement="top" title="GO HOME">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="40"
