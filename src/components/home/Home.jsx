@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { clearStatesProducts, getAllProducts, getCart, getFavs } from "../../redux/actions/products";
@@ -15,7 +15,7 @@ import Footer from "../Footer/Footer";
 
 
 
-export default function Home (){
+export default function Home() {
 
     const dispatch = useDispatch();
     const allProducts = useSelector((state) => state.products);
@@ -26,38 +26,38 @@ export default function Home (){
     const [currentPg, setCurrentPg] = useState(1); //setea la pagina en 1
     const [productPerPg, setProductPerPg] = useState(12);
 
-    const lastProduct = currentPg * productPerPg; 
+    const lastProduct = currentPg * productPerPg;
     const firstProduct = lastProduct - productPerPg;
     const currentProduct = allProducts.showedProducts.slice(firstProduct, lastProduct);
 
     const paginado = (pgNumber) => {
         setCurrentPg(pgNumber)
     }
-    const users = useSelector((state)=>state.users.userInfo)
-    
+    const users = useSelector((state) => state.users.userInfo)
+
     let isFaved = false
 
     useEffect(() => {
         dispatch(getAllProducts());
         dispatch(getCategories());
         dispatch(clearStatesProducts());
-        if(users && users.id){
+        if (users && users.id) {
             dispatch(getFavs(users.id))
         }
     }, [dispatch])
 
     //ProductCard ---> (name, img, price, rating)
-    return(
+    return (
         <div>
-            <NavBar categories={allCategories} paginado={paginado}/>
-            
+            <NavBar categories={allCategories} paginado={paginado} />
+
             <div className={style.cards}>
                 {
-                    currentProduct ? 
+                    currentProduct ?
                         currentProduct.map(p => {
-                            if (p.stock === 0) return;
-                            isFaved = fav.some(item => item.id === p.id)
-                            return(
+                            if (p.stock && p.isActive) {
+                                isFaved = fav.some(item => item.id === p.id)
+                                return (
                                     <ProductCard
                                         id={p.id}
                                         key={p.id}
@@ -67,19 +67,20 @@ export default function Home (){
                                         rating={p.rating}
                                         isFaved={isFaved}
                                     />
-                            )
-                        }):
-                        <Loader/>
+                                )
+                            }
+                        }) :
+                        <Loader />
                 }
             </div>
             <Pages
-                productPerPg = {productPerPg}
-                allProducts = {allProducts.showedProducts.length}
-                paginado= {paginado}
-                currentPg = {currentPg}
-                setCurrentPg= {setCurrentPg}
+                productPerPg={productPerPg}
+                allProducts={allProducts.showedProducts.length}
+                paginado={paginado}
+                currentPg={currentPg}
+                setCurrentPg={setCurrentPg}
             />
-            <Footer/>
+            <Footer />
         </div>
     )
 }
