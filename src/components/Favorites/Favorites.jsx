@@ -51,11 +51,11 @@ export default function Favorites() {
                                             return (
                                                 <div className={style.fav_card} key={f.id}>
                                                         <div className={style.fav_img}>
-                                                            <img src={f.img[0]} alt="" />
+                                                            <NavLink to={`/home/${f.id}`}>
+                                                                <img src={f.img[0]} alt="" />
+                                                            </NavLink>
                                                         </div>
-                                                    <NavLink to={`/home/${f.id}`}>
                                                         <span>{f.name}</span>
-                                                    </NavLink>
                                                         <button className={style.btnDeleteFav} onClick={e => handleDelete(e, f.id)}>X</button>
                                                 </div>
                                             )
