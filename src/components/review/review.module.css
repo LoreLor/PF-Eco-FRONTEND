@@ -81,3 +81,8 @@
   .inputReviewPoints:hover{
     box-shadow: 0 0 0 3px #F66B0E;
   }
+
+  .err {
+    color: red;
+    font-size: 10px;
+}
