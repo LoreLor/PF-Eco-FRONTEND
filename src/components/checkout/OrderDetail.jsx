@@ -13,6 +13,8 @@ function OrderDetail() {
   //const amount = cart.details.reduce((a, c) => a + c.bundle * c.price, 0);
   const total_amount = cart.price_total - 5;
 
+
+
   useEffect(() => {
     getSingleUser(user.id);
     getCart(user.id);
@@ -21,8 +23,8 @@ function OrderDetail() {
   return (
     <div className={s.box}>
       <div className={s.contenedor}>
-        <div class="container">
-          <div class="py-5 text-center">
+        <div className="container">
+          <div className="text-center">
             <h2 className={s.title}>
               Your Order{" "}
               <div>
@@ -45,46 +47,48 @@ function OrderDetail() {
             </h2>
           </div>
 
-          <div class="row justify-content-around">
-            <div class="col-md-6 order-md-2 mb-4">
-              <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <div className="row justify-content-around">
+            <div className="col-md-6 order-md-2 mb-4">
+              <h4 className="d-flex justify-content-between align-items-center mb-3">
                 <div className={s.subtitulo}></div>
-                <span class="badge badge-secondary badge-pill"></span>
+                <span className="badge badge-secondary badge-pill"></span>
               </h4>
               <hr />
 
-              <ul class="list-group mb-3 ">
+              <ul className="list-group mb-3 ">
                 {cart
                   ? cart.details.map((p) => {
                       return (
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <li  key={p.id} className="list-group-item d-flex justify-content-between lh-condensed">
                           <>
-                            <div key={p.id}>
-                              <h6 class="my-0">Your Products</h6>
-                              <h6 class="my-0">Product name: {p.name}</h6>
+                            <div>
+                              <h6 className={s.head}>Your Products</h6>
+                              <h6><stron>{p.name}</stron> </h6>
                               <img src={p.img} className={s.small} alt=""></img>
-                              <small class="text-muted">
+                              <small className="text-muted">
                                 Brief description: {p.description}
                               </small>
                               <hr />
                             </div>
-                            <span class="text-muted">Qty:{p.bundle}</span>
-                            <span class="text-muted">
+                            <article className={s.qty}>
+                            <span classname="text-muted">Qty:{p.bundle}</span>
+                            <span className="text-muted">
                               Price:{p.price_total}
                             </span>
+                            </article>
                           </>
                         </li>
                       );
                     })
                   : null}
-                <li class="list-group-item d-flex justify-content-between bg-light">
-                  <div class="text-success">
-                    <h6 class="my-0">Shipping Address</h6>
+                <li className="list-group-item d-flex justify-content-between bg-light">
+                  <div className="text-success">
+                    <h6>Shipping Address</h6>
                     <li class="list-group-item d-flex justify-content-between">
-                      <div><strong>FullName: </strong>
+                      <div className={s.shipping}><strong>FullName: </strong>
                       {user.name} {user.last_name}  <br /></div>
                     <hr/>
-                      <div><strong>Address: </strong>
+                      <div className={s.shipping}><strong>Address: </strong>
                       {user.address} <br /></div>
                      <hr/>
                     </li>
