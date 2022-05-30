@@ -14,6 +14,8 @@ import {
     GET_PRODUCT_BY_NAME_SUCCESS,
     FILTER_BY_CATEGORY,
     ORDER_BY_PRICE,
+    ORDER_BY_RATING,
+    ORDER_BY_ALPHABET,
     FILTER_BY_PRICE,
     CLEAN_DETAIL,
     EDIT_PRODUCT,
@@ -151,9 +153,6 @@ export const productsReducer = (state = initialState, action) => {
                 showedProducts: filter
             }
         case ORDER_BY_PRICE:
-            if (action.payload === "default") return {
-                ...state,
-            }
             let sortedByPrice = [...state.showedProducts];
             sortedByPrice = action.payload === "asc" ?
                 state.showedProducts.sort(function (a, b) {
@@ -169,6 +168,40 @@ export const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 showedProducts: sortedByPrice,
+            }
+        case ORDER_BY_RATING:
+            let sortedByRating = [...state.showedProducts];
+            sortedByRating = action.payload === "asc2" ?
+                state.showedProducts.sort(function (a, b) {
+                    if (a.rating > b.rating) return 1;
+                    if (a.rating < b.rating) return -1;
+                    return 0
+                }) :
+                state.showedProducts.sort(function (a, b) {
+                    if (a.rating < b.rating) return 1;
+                    if (a.rating > b.rating) return -1;
+                    return 0;
+                });
+            return {
+                ...state,
+                showedProducts: sortedByRating,
+            }
+        case ORDER_BY_ALPHABET:
+            let sortedByAlphabet = [...state.showedProducts];
+            sortedByAlphabet = action.payload === "atoz" ?
+                state.showedProducts.sort(function (a, b) {
+                    if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+                    if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+                    return 0
+                }) :
+                state.showedProducts.sort(function (a, b) {
+                    if (a.name.toLowerCase() < b.name.toLowerCase()) return 1;
+                    if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
+                    return 0;
+                });
+            return {
+                ...state,
+                showedProducts: sortedByAlphabet,
             }
         case FILTER_BY_PRICE:
             const all2 = state.products;
