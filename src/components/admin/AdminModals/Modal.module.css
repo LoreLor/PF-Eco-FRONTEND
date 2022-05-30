@@ -67,7 +67,7 @@
 
   #alert{
     min-height: 12rem;
-    width: 55%;
+    /* width: 55%; */
   }
   #beta{
     min-height: 13rem;
