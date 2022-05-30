@@ -40,7 +40,7 @@ export default function Shopping() {
                                     return (
                                         <div key={s.id} className={style.shop_products}>
                                             <div className={style.shop_date}>
-                                                <h3>{i + 1} Buy on  {s.date.replace("T", " ").replace("Z", " ")}</h3>
+                                                <h3>Bought {s.date.replace("T", " ").replace("Z", " ")}</h3>
                                             </div>
                                             <div className={style.shops}>
                                                 {

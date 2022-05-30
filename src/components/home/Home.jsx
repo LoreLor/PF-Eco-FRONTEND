@@ -38,7 +38,9 @@ export default function Home() {
     let isFaved = false
 
     useEffect(() => {
-        dispatch(getAllProducts());
+        if(!allProducts.showedProducts.length) {
+            dispatch(getAllProducts());
+        }
         dispatch(getCategories());
         dispatch(clearStatesProducts());
         if (users && users.id) {
