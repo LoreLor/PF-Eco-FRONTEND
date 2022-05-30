@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import FilterPrice from "../filterPrice/FilterPrice";
 import SERVER2 from "../../server2";
+import { getAllProducts } from "../../redux/actions/products";
 
 
 export default function NavBar({ categories, paginado }) {
@@ -22,10 +23,13 @@ export default function NavBar({ categories, paginado }) {
         dispatch(logout())
         window.location.reload();
     }
-
+    
     function handleClick(e) {
         e.preventDefault();
-        window.location.reload();
+        dispatch(getAllProducts())
+        .then(r => {
+            window.location.reload();
+        })
     }
 
     return (
