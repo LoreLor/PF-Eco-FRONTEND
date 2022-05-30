@@ -7,7 +7,6 @@ import style from './NavBar.module.css'
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import FilterPrice from "../filterPrice/FilterPrice";
-import { cleanCart, cleanFav } from "../../redux/actions/products";
 import SERVER2 from "../../server2";
 
 
@@ -31,8 +30,8 @@ export default function NavBar({ categories, paginado }) {
 
     return (
         <header>
-            <nav className="navbar navbar-expand-sm">
-                <div className={style.container}>
+            <nav className="navbar navbar-expand-lg">
+                <div class="container-fluid">
                     <NavLink to="/" className={style.title}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" className="bi bi-phone" viewBox="0 0 16 16">
                             <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z" />
@@ -40,20 +39,35 @@ export default function NavBar({ categories, paginado }) {
                         </svg>
                         City Cell
                     </NavLink>
-                    <div className={style.box}>
-                        <SearchBar />
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBar" aria-controls="navBar" aria-expanded="false" aria-label="Toggle navigation">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#F66B0E" class="bi bi-three-dots" viewBox="0 0 16 16">
+                            <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                        </svg>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navBar">
+                        <form class="d-flex" role="search" style={{width:'100%', justifyContent:'center', marginRight:'200px'}}>
+                            <SearchBar />
+                        </form>
                     </div>
                 </div>
             </nav>
             <div className={style.footHead}>
-                {window.location.href.includes(`${SERVER2}/profile`) ||window.location.href.includes(`${SERVER2}/favs`) || window.location.href.includes(`${SERVER2}/home`) || window.location.href.includes(`${SERVER2}/cart`) || window.location.href.includes(`${SERVER2}/myShopping`) || window.location.href.includes(`${SERVER2}/review`) ? <NavLink to="/" className={style.mybtn}></NavLink> :
-                    <div className={style.aux}>
-                        <Categories categories={categories} paginado= {paginado}/>
-                        <OrderPrice />
-                        <FilterPrice />
-                        <button onClick={e => handleClick(e)} className={style.mybtn}>Clear filters</button>
-                        {/* <NavLink to="/" className={style.mybtn}>Help</NavLink> */}
-                    </div>
+                {
+                    window.location.href.includes(`${SERVER2}/profile`) ||
+                    window.location.href.includes(`${SERVER2}/favs`) || 
+                    window.location.href.includes(`${SERVER2}/home`) || 
+                    window.location.href.includes(`${SERVER2}/cart`) || 
+                    window.location.href.includes(`${SERVER2}/myShopping`) || 
+                    window.location.href.includes(`${SERVER2}/review`) 
+                        ? 
+                        <NavLink to="/" className={style.mybtn}></NavLink> 
+                        :
+                        <div className={style.aux}>
+                            <Categories categories={categories} paginado= {paginado}/>
+                            <OrderPrice />
+                            <FilterPrice />
+                            <button onClick={e => handleClick(e)} className={style.mybtn}>Clear filters</button>
+                        </div>
                 }
                 <div className={style.logCart}>
                     <div className={style.conte}>
