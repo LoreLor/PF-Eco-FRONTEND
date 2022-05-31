@@ -30,19 +30,12 @@ export default function FilterPrice() {
         e.preventDefault();
         if(input.min > 0 && input.max > 0) {
             dispatch(filterByPrice(input));
-            setInput({
-                min: "$Min",
-                max: "$Max",
-            })
         } else {
             toast.warning('Numbers cannot be null or negative!', {
                 position: toast.POSITION.TOP_LEFT
             })
         }
     }
-
-    
-
 
     return (
         <div>

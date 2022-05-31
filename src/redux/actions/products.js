@@ -286,9 +286,6 @@ export const paidCartTemporal = (cartId) => async (dispatch) => {
 }
 
 export const getShopping = (userId) => async (dispatch) => {
-    dispatch({
-        type: GET_SHOPPING
-    })
     try {
         const product = await axios.get(`${SERVER}/cart?userId=${userId}`)
         dispatch({
