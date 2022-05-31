@@ -55,7 +55,10 @@ const initialState = {
     stateFilter: {
         min: "",
         max: "",
-        category: ""
+        category: "",
+        orderByPrice: "",
+        orderByRating: "",
+        orderByAlphabet: "",
     },
     reviews: [],
     review: [],
@@ -231,8 +234,14 @@ export const productsReducer = (state = initialState, action) => {
                 }
             }
         case ORDER_BY_PRICE:
+            state.stateFilter = {
+                ...state.stateFilter,
+                orderByAlphabet: "",
+                orderByRating: "",
+                orderByPrice: action.payload
+            }
             let sortedByPrice = [...state.showedProducts];
-            sortedByPrice = action.payload === "asc" ?
+            sortedByPrice = action.payload === "Min to Max price" ?
                 state.showedProducts.sort(function (a, b) {
                     if (a.price > b.price) return 1;
                     if (a.price < b.price) return -1;
@@ -248,8 +257,14 @@ export const productsReducer = (state = initialState, action) => {
                 showedProducts: sortedByPrice,
             }
         case ORDER_BY_RATING:
+            state.stateFilter = {
+                ...state.stateFilter,
+                orderByAlphabet: "",
+                orderByRating: action.payload,
+                orderByPrice: "",
+            }
             let sortedByRating = [...state.showedProducts];
-            sortedByRating = action.payload === "asc2" ?
+            sortedByRating = action.payload === "Min to Max rating" ?
                 state.showedProducts.sort(function (a, b) {
                     if (a.rating > b.rating) return 1;
                     if (a.rating < b.rating) return -1;
@@ -265,8 +280,14 @@ export const productsReducer = (state = initialState, action) => {
                 showedProducts: sortedByRating,
             }
         case ORDER_BY_ALPHABET:
+            state.stateFilter = {
+                ...state.stateFilter,
+                orderByAlphabet: action.payload,
+                orderByRating: "",
+                orderByPrice: "",
+            }
             let sortedByAlphabet = [...state.showedProducts];
-            sortedByAlphabet = action.payload === "atoz" ?
+            sortedByAlphabet = action.payload === "A to Z" ?
                 state.showedProducts.sort(function (a, b) {
                     if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
                     if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
