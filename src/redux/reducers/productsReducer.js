@@ -181,9 +181,21 @@ export const productsReducer = (state = initialState, action) => {
                         }
                     } 
                 }
-                return {
-                    ...state,
-                    showedProducts: filter
+                if(state.stateFilter.min > 1 || state.stateFilter.max > 1) {
+                    all = state.products;
+                    filter = action.payload === 'all' ? all : all.filter(p => p.categories.find(d => d.name === action.payload))
+                    filter = filter.filter(p => p.price >= parseInt(state.stateFilter.min) && p.price <= parseInt(state.stateFilter.max))
+                    return {
+                        ...state,
+                        showedProducts: filter,
+                    }
+                } else {
+                    all = state.products;
+                    filter = action.payload === 'all' ? all : all.filter(p => p.categories.find(d => d.name === action.payload))
+                    return {
+                        ...state,
+                        showedProducts: filter,
+                    }
                 }
             } else {
                 all = state.products;
