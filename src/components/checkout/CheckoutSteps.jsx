@@ -27,9 +27,9 @@ function CheckoutSteps() {
   const [input, setInput] = useState({
     name: user.name,
     last_name: user.last_name,
-    phone_number:"",
+    phone_number:user.phone_number,
     email: user.email,
-    address:"",
+    address:user.address,
     payment_method: ""
   })
 
