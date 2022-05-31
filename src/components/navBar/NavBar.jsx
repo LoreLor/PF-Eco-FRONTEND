@@ -14,11 +14,15 @@ import { getAllProducts } from "../../redux/actions/products";
 
 export default function NavBar({ categories, paginado }) {
     const user = useSelector((state)=>state.users.userInfo)
-
+    
     const cartUser = useSelector((state) => state.products.cart)
     const cartGuest = useSelector((state) => state.products.cartGuest)
-    const cart = user && user.id ? cartUser.details : cartGuest
-    let qty = cart && [].concat(cart).reduce((a, c) => a + c.bundle, 0)
+    
+    const cart = user && user.id? cartUser.details : cartGuest
+    cart.map(p=>p.bundle)
+    const qty = (cart && [].concat(cart)).reduce((a, c) => a + c.bundle, 0)
+
+console.log('cartbun :>> ', cart);
 
 
     const dispatch = useDispatch();

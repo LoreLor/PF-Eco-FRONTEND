@@ -69,7 +69,7 @@ export const userUpdate = ( userId, body) => async(dispatch) =>{
 export const userLoginGoogle = (data) => async(dispatch) =>{
   try {
     const userGoogle= await axios.post(`${SERVER}/user/googlelogin`, data)
-    console.log('data', userGoogle)
+    console.log('userGoogle', userGoogle)
   dispatch({
     type: USER_LOGIN_GOOGLE,
     payload: userGoogle.data
