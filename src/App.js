@@ -21,6 +21,7 @@ import  UserProfile  from './components/userProfile/UserProfile';
 import UsersPage from './components/admin/manageUsers/MainPage';
 import CategoriesPage from './components/admin/manageCategories/MainPage'
 import ProductsPage from './components/admin/manageProducts/MainPage'
+import ForgotPass from './components/ForgotPassword/ForgotPass';
 
 function App() {
   
@@ -44,6 +45,7 @@ function App() {
         <Route path={'*'} element={<Error404/>}/>
         <Route path="/check" element={<CheckoutSteps/>}/>
         <Route path="/order" element={<OrderDetail/>}/>
+        <Route path='/forgotPass' element={<ForgotPass/>}/>
       </Routes>
     </Fragment>
   );
