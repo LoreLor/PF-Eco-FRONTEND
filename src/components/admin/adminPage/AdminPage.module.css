@@ -1,39 +1,90 @@
 .admin_container{
     width: 100%;
-    height: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
-.adminPage{
-    display: grid;
+/* .adminPage{
+     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 90px;
     width: 70%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5rem;
-    margin-bottom: 5rem;
+    margin-bottom: 5rem; 
+    display: flex;
+    flex-direction: column;
+    border: solid 1px black;
+    width: 70%;
+} */
+.adminBox{
+    width: 70%;
+}
+.amdin_title{
+    display: flex;
+    justify-content: center;
+    color: #F66B0E;
+}
+.amdin_title h1{
+    font-weight: bold;
+    font-size: 800;
+}
+.admin_actions{
+    padding: 30px;
 }
 
 .box{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     text-align: center;
     align-items: center;
     justify-content: space-evenly;
-    width: 300px;
-    height: 23.5rem;
+    width: 100%;
+    height: 270px;
     border-radius: 20px;
-    background-color: rgb(207, 207, 215);
+    background-color: #112B3C;
     box-shadow: 0.2rem 0.2rem 0.5rem rgb(0 0 0 / 20%);
     padding: 15px;
+    margin-top: 20px;
 }
+
 h2{
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    color: #F66B0E;
+    margin-left: 5px;
 }
 
+i{
+    color: #fff;
+    font-size: large;
+    font-weight: 400;
+}
+.subBox{
+    display: flex;
+    justify-content: space-evenly;
+    width: 200px;
+    flex-wrap: wrap;
+    transition: .05s;
+    cursor: pointer;
+}
+.subBox:hover{
+    transform: scale(1.2);
+}
+.info{
+    width: 500px;
+}
 .btnAdmin{
-    align-self: center;
+    width: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-transform: uppercase;
     border: none;
     border-radius: 0.5rem;
@@ -42,7 +93,6 @@ h2{
     font-weight: 700;
     color: #fff;
     display: flex;
-    align-items: center;
     gap: 1rem;
     padding: 0.5rem;
     margin: 0px 0px 0px 5px;
