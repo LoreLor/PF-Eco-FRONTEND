@@ -51,6 +51,11 @@ import {
 const initialState = {
     products: [],
     showedProducts: [],
+    filters: [],
+    stateFilter: {
+        min: "",
+        max: "",
+    },
     reviews: [],
     review: [],
     detail: {},
@@ -79,6 +84,8 @@ export const productsReducer = (state = initialState, action) => {
                 loading: false,
                 products: action.payload,
                 showedProducts: action.payload,
+                filters: [],
+                stateFilter: {}
             }
 
         case GET_ALL_PRODUCTS_FAIL:
@@ -95,11 +102,22 @@ export const productsReducer = (state = initialState, action) => {
             }
 
         case GET_PRODUCT_BY_NAME_SUCCESS:
+            if(state.stateFilter.min > 1 && state.stateFilter.max > 1) {
+                var filterByNameRange = action.payload.filter(p => p.price >= parseInt(state.stateFilter.min) && p.price <= parseInt(state.stateFilter.max))
+                return {
+                    ...state,
+                    loading: false,
+                    products: filterByNameRange,
+                    showedProducts: filterByNameRange,
+                    filters: filterByNameRange
+                }
+            }
             return {
                 ...state,
                 loading: false,
                 products: action.payload,
                 showedProducts: action.payload,
+                filters: action.payload
             }
 
         case GET_PRODUCT_BY_NAME_FAIL:
@@ -146,11 +164,47 @@ export const productsReducer = (state = initialState, action) => {
                 editProduct: action.payload
             }
         case FILTER_BY_CATEGORY:
-            const all = state.products;
-            const filter = action.payload === 'all' ? all : all.filter(p => p.categories.find(d => d.name === action.payload))
-            return {
-                ...state,
-                showedProducts: filter
+            var all = []
+            var filter = []     
+        if(state.filters.length) {
+                all = state.filters;
+                filter = action.payload === 'all' ? all : all.filter(p => p.categories.find(d => d.name === action.payload))
+                if(!filter.length) {
+                    all = state.products;
+                    filter = action.payload === 'all' ? all : all.filter(p => p.categories.find(d => d.name === action.payload))
+                    filter = filter.filter(p => p.price >= parseInt(state.stateFilter.min) && p.price <= parseInt(state.stateFilter.max))
+                    if(filter.length) {
+                        return {
+                            ...state,
+                            showedProducts: filter,
+                            filters: filter
+                        }
+                    } 
+                }
+                if(state.stateFilter.min > 1 || state.stateFilter.max > 1) {
+                    all = state.products;
+                    filter = action.payload === 'all' ? all : all.filter(p => p.categories.find(d => d.name === action.payload))
+                    filter = filter.filter(p => p.price >= parseInt(state.stateFilter.min) && p.price <= parseInt(state.stateFilter.max))
+                    return {
+                        ...state,
+                        showedProducts: filter,
+                    }
+                } else {
+                    all = state.products;
+                    filter = action.payload === 'all' ? all : all.filter(p => p.categories.find(d => d.name === action.payload))
+                    return {
+                        ...state,
+                        showedProducts: filter,
+                    }
+                }
+            } else {
+                all = state.products;
+                filter = action.payload === 'all' ? all : all.filter(p => p.categories.find(d => d.name === action.payload))
+                return {
+                    ...state,
+                    showedProducts: filter,
+                    filters: filter,
+                }
             }
         case ORDER_BY_PRICE:
             let sortedByPrice = [...state.showedProducts];
@@ -204,20 +258,47 @@ export const productsReducer = (state = initialState, action) => {
                 showedProducts: sortedByAlphabet,
             }
         case FILTER_BY_PRICE:
-            const all2 = state.products;
-            const filter2 = all2.filter(p => p.price >= action.payload.min && p.price <= action.payload.max)
-            if (filter2.length === 0) {
-                Swal.fire({
-                    title:"No products were found in that range, all products were displayed again.",
-                    icon: "error"
-                })
+            var all2 = []
+            var filter2 = []
+            state.stateFilter = {
+                min: parseInt(action.payload.min),
+                max: parseInt(action.payload.max)
+            }
+            // console.log(state.stateFilter)
+        if(state.filters.length) {
+                all2 = state.filters;
+                filter2 = all2.filter(p => p.price >= action.payload.min && p.price <= action.payload.max)
+                if (filter2.length === 0) {
+                    Swal.fire({
+                        title:"No products were found in that range, all products were displayed again.",
+                        icon: "error"
+                    })
+                    return {
+                        ...state,
+                    }
+                } else {
+                    return {
+                        ...state,
+                        showedProducts: filter2
+                    }
+                }
+            } else {
+                all2 = state.products;
+                filter2 = all2.filter(p => p.price >= action.payload.min && p.price <= action.payload.max)
+                if (filter2.length === 0) {
+                    Swal.fire({
+                        title:"No products were found in that range, all products were displayed again.",
+                        icon: "error"
+                    })
+                    return {
+                        ...state,
+                    }
+                }
                 return {
                     ...state,
+                    showedProducts: filter2,
+                    filters: filter2,
                 }
-            }
-            return {
-                ...state,
-                showedProducts: filter2
             }
         case CLEAN_DETAIL:
             return {
@@ -261,10 +342,10 @@ export const productsReducer = (state = initialState, action) => {
                 // cart: action.payload
             }
         case GET_SHOPPING:
-            if(action.payload   ) {
+            if(action.payload) {
                 action.payload.sort(function (a, b) {
-                    if (a.date > b.date) return 1;
-                    if (a.date < b.date) return -1;
+                    if (a.date < b.date) return 1;
+                    if (a.date > b.date) return -1;
                     return 0
                 })
             }
@@ -399,7 +480,8 @@ export const productsReducer = (state = initialState, action) => {
                 return{
                     ...state,
                     products: [],
-                    showedProducts: []
+                    showedProducts: [],
+                    filters: [],
                 } 
         default:
             return state

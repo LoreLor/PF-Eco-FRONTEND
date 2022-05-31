@@ -32,7 +32,6 @@ export default function ProductDetail() {
         dispatch(getProductById(id))
         dispatch(getCategories())
         dispatch(getReviewsProduct(id))
-        dispatch(cleanProducts())
         return () => {
             dispatch(limpiarDetail()) 
             dispatch(cleanReview()) 

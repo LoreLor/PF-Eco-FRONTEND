@@ -70,9 +70,8 @@
 }
 
 .imgBox{
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    max-height: 160px;
+    object-fit: cover;
 }
 
 .reviewCard{
@@ -129,4 +128,11 @@
     font-size: x-large;
     font-weight: bold;
     color: #F66B0E;
+}
+
+.link {
+    color: black
+}
+.link:hover {
+    color: black
 }

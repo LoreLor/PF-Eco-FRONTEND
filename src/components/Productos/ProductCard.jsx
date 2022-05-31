@@ -33,7 +33,7 @@ export default function ProductCard({name, img, price, rating, id, isFaved}){
     
     function handleFavourites(e, productId){
         e.preventDefault()
-        if(user){
+        if(Object.keys(user).length > 0){
             if(isFaved){
                 dispatch(deleteFav(user.id, productId))
                 .then(r => {

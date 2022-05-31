@@ -22,7 +22,7 @@ export default function Cart(){
     // const user = localStorage.getItem('userInfo')
     //       ? JSON.parse(localStorage.getItem('userInfo'))
     //       : null
-    
+    console.log('user', user)
     useEffect(() => {
         if(user && user.id){
             dispatch(getCart(user.id))
