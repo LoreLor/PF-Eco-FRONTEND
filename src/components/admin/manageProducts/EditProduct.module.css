@@ -283,3 +283,9 @@
 #special{
   font-size:x-large;
 }
+
+#prodTitle{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}

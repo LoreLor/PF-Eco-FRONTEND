@@ -162,6 +162,10 @@ export default function ProductForm ({product,products,categories,setProductEdit
             }
         }
   }
+  function productname(name){
+    if(name.length >= 24)return name.slice(0,21) + '...' 
+    return name
+}
 
 useEffect(()=>{
     if(!product){
@@ -205,7 +209,7 @@ useEffect(()=>{
         <div className={style.imageBox}>
             <img id={style.imageDiv}src={product.img[0]} alt="..."/>
         </div>
-        <h2>{product.name}</h2>
+        <h2>{productname(product.name)}</h2>
         <h4>$ {numberFormat(product.price)}</h4>
         <p>Stock: {product.stock}</p>
         <p>Status: {product.isActive === true ? "Active": "Inactive"}</p>
@@ -222,7 +226,7 @@ useEffect(()=>{
         <div className={style.imageBox}>
         <img id={style.imageDiv2}src="https://res.cloudinary.com/drcvcbmwq/image/upload/v1654007162/1606471631_175714_1606474989_noticia_normal_recorte1_bsgelj.jpg" alt="..."/>
         </div>
-        <h2>Products admin page</h2>
+        <h2 >Products admin page</h2>
         <div className={style.dataBox}>
         <h2 id={style.special}><i>- Create a product</i></h2>
         <h2 id={style.special}><i>- Search a product</i></h2>
