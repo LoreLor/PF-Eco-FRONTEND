@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SearchBar from "../searchBar/SearchBar";
 import Categories from "../categorias/Categories";
 import OrderPrice from "../order/Order";
@@ -9,20 +9,25 @@ import { useDispatch, useSelector } from "react-redux";
 import FilterPrice from "../filterPrice/FilterPrice";
 import SERVER2 from "../../server2";
 import Badge from '@mui/material/Badge';
-import { getAllProducts } from "../../redux/actions/products";
+import { getAllProducts, getCart, getCartGuest } from "../../redux/actions/products";
 
 
 export default function NavBar({ categories, paginado }) {
     const user = useSelector((state)=>state.users.userInfo)
     
     const cartUser = useSelector((state) => state.products.cart)
+    console.log('cartUser :>> ', cartUser);
     const cartGuest = useSelector((state) => state.products.cartGuest)
     
-    const cart = user && user.id? cartUser.details : cartGuest
-    cart.map(p=>p.bundle)
-    const qty = (cart && [].concat(cart)).reduce((a, c) => a + c.bundle, 0)
+     const cart = user && user.id? cartUser : cartGuest
+     cart.map(p=>p.bundle)
+     const qty = cart.reduce((a, c) => a + c.bundle, 0)
 
-console.log('cartbun :>> ', cart);
+// console.log('cartbun :>> ', cart);
+    useEffect(() => {
+        dispatch(getCart())
+        dispatch(getCartGuest())
+    }, [])
 
 
     const dispatch = useDispatch();
