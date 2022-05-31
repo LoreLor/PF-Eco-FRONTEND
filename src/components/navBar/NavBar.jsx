@@ -110,14 +110,19 @@ export default function NavBar({ categories, paginado }) {
                                                 </NavLink>
                                             </li> : <li></li>
                                         }
-                                        {/* <li><a href="/register" className={style.logout}>Register</a></li> */}
+                                        {user && user.rol === "admin" && !window.location.href.includes("/admin") ?
+                                            <li>
+                                                <NavLink to="/admin">
+                                                    <button className={style.mybtn} /* onClick={} */>Admin</button>
+                                                </NavLink>
+                                            </li> : <li></li>}
                                     </ul>
                                 </div>
                         : 
                             <NavLink to="/login" className={style.mybtn}>Log In</NavLink>
                     }        
                     </div>             
-                    {user && user.rol === "admin" ? <NavLink to="/admin" className={style.mybtn}>Admin</NavLink> : <></>}
+                    {/* {user && user.rol === "admin" ? <NavLink to="/admin" className={style.mybtn}>Admin</NavLink> : <></>} */}
 
                     <NavLink to="/cart">
 
