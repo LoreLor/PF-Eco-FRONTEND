@@ -19,9 +19,6 @@ export default function Cart(){
     
     let total = 0;
     const user = useSelector((state)=>state.users.userInfo)
-    // const user = localStorage.getItem('userInfo')
-    //       ? JSON.parse(localStorage.getItem('userInfo'))
-    //       : null
     
     useEffect(() => {
         if(user && user.id){
