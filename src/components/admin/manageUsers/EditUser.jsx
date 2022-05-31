@@ -1,14 +1,14 @@
 import React,{useEffect,useState} from "react"
 import {useDispatch} from "react-redux"
 import axios from "axios"
-import submitValidators from "./validators/submitValidations"
+import submitValidations from "./validators/submitValidations"
 import { getAllUsers } from "../../../redux/actions/user"
 import capitalize from '../adminPage/Capitalize'
 import style from './EditUser.module.css'
 import SERVER from "../../../server"
 import { toast } from "react-toastify"
 
-export default function UserAdmin({user,setUserEdit}){
+export default function EditUser({user,setUserEdit}){
     const dispatch = useDispatch()
  
     const [errors,setErrors]= useState("")
@@ -44,7 +44,7 @@ export default function UserAdmin({user,setUserEdit}){
     
     async function onSubmit(event){
         event.preventDefault()
-        setErrors(submitValidators(input))
+        setErrors(submitValidations(input))
         if(Object.keys(errors).length === 0
         && input.isActive !== ""
         && input.rol !== ""){
@@ -117,13 +117,13 @@ export default function UserAdmin({user,setUserEdit}){
            : 
            <>
                       <div className={style.imageBox}>
-                <img id={style.imageDiv}src="https://res.cloudinary.com/drcvcbmwq/image/upload/v1653953130/labor-icon-vector-male-user-person-profile-avatar-gear-cogwheel-settings-configuration-flat-color-glyph-pictogram-150134511_gw8wef.jpg" alt="..."/>
+                <img id={style.imageDiv}src="https://res.cloudinary.com/drcvcbmwq/image/upload/v1654009200/v2_hvt2md.jpg" alt="..."/>
             </div>
-            <h4>User administration page:</h4>
+            <h2>User admin page</h2>
             <div className={style.dataBox}>
-            <h2><i>- Search an user</i></h2>
-            <h2><i>- Authorize an user</i></h2>
-            <h2><i>- Deactivate an account</i></h2>
+            <h2 id={style.special}><i>- Search an user</i></h2>
+            <h2 id={style.special}><i>- Authorize an user</i></h2>
+            <h2 id={style.special}><i>- Deactivate an account</i></h2>
             </div>
            </>} 
             

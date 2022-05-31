@@ -8,7 +8,7 @@ import { getAllUsers } from '../../../redux/actions/user'
 import { toast } from 'react-toastify';
 
 
-export default function ManageUsers({array,setUserEdit, myUser}){
+export default function UsersTable({array,setUserEdit, myUser}){
     const dispatch = useDispatch()
 
     const [isOpen,setIsOpen]= useState(false)
@@ -62,7 +62,7 @@ export default function ManageUsers({array,setUserEdit, myUser}){
 
     return (
         <div className={style.container}>
-            {array.length > 0 ? array.map((user)=>{
+            {array && array.length > 0 ? array.map((user)=>{
                 return(
                     <div key={user.id} className={base.includes(user.id)?style.box2:style.box}>
                         <h3 className={style.title}>{user.user_name}</h3>
@@ -73,10 +73,10 @@ export default function ManageUsers({array,setUserEdit, myUser}){
                 )
             }):
             <div>
-            <p>There is no coincidences</p>
+            <h1 className={style.coincidences}>There is no coincidences</h1>
             </div>}
             <div className={style.admBox}>
-            {base.length > 0  ? (<>
+            {base && base.length > 0  ? (<>
             <span>Deactivate <strong>{base.length}</strong> accounts</span>
             <button name="confirm" onClick={onConfirm}className={style.deleteBtn}>Confirm</button>
             </>): <></> }    

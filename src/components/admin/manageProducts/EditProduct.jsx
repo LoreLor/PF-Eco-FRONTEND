@@ -3,25 +3,20 @@ import React,{useEffect,useRef,useState} from "react"
 import {useDispatch, useSelector} from 'react-redux'
 import { getAllProducts} from "../../../redux/actions/products"
 import { getCategories } from "../../../redux/actions/categories"
-import style from './ProductAdmin.module.css'
-import FlashModal from '../AdminModals/FlashModal'
+import style from './EditProduct.module.css'
+import FormModal from '../AdminModals/FormModal'
 import activeValidators from './validators/activeValidations'
 import submitValidators from './validators/submitValidations'
 import fileValidators from './validators/fileValidations'
 import SERVER from "../../../server"
 import ProductPictures from "./ProductPictures"
+import { toast } from "react-toastify"
+import numberFormat from "../../detalleProducto/numberFormat";
 
-export default function ProductForm ({product,setModalC,setProduct}){
+export default function ProductForm ({product,products,categories,setProductEdit}){
     const dispatch = useDispatch()
     const ref = useRef()
 
-    const categoriesDb = useSelector((state)=>state.products.categoriesDb)
-    const productsDb = useSelector((state)=>state.products.products)
-
-
-    const [keyword,setKeyword] = useState("")
-    const [isOpen,setIsOpen] =useState(false)
-    
     const [errors,setErrors]=useState({})
     const [fileErrors,setFileErrors] = useState({})
     const [input,setInput] = useState({
@@ -35,8 +30,10 @@ export default function ProductForm ({product,setModalC,setProduct}){
     })
     const [file,setFile] = useState([])
 
+    const [isOpen,setIsOpen] = useState(false)
+
     function onValueChange (e){
-        setErrors(activeValidators(product,{...input,[e.target.name]:e.target.value},productsDb))
+        setErrors(activeValidators(product,{...input,[e.target.name]:e.target.value},products))
         setInput({...input,[e.target.name]:e.target.value}) 
     }
 
@@ -56,13 +53,6 @@ export default function ProductForm ({product,setModalC,setProduct}){
             ...input,
             [e.target.name]: input[e.target.name].filter(item => item !== e.target.value)
         }))
-    }
-
-    function onClose(e){
-        e.preventDefault()
-        setIsOpen(false)
-        setModalC(false)
-        setProduct("")
     }
 
     function onStatus(e){
@@ -93,11 +83,15 @@ export default function ProductForm ({product,setModalC,setProduct}){
         ref.current.value=""
         setFileErrors({})
     }
+    function handleOpen(e){
+        e.preventDefault()
+        setIsOpen(true)
+    }
     
     async function onSubmit (event){
         event.preventDefault()
         var filelength = file.length? file.length : 0
-        setErrors(submitValidators(product,input,productsDb,file))
+        setErrors(submitValidators(product,input,products,file))
         setFileErrors(fileValidators(input,file))
         if(Object.keys(errors).length === 0
         && Object.keys(fileErrors).length === 0
@@ -121,10 +115,8 @@ export default function ProductForm ({product,setModalC,setProduct}){
                 product? (response = await axios.put(`${SERVER}/products/${product.id}`,data))
                 :(response = await axios.post(`${SERVER}/products`,data))
                 const result = response.data
-                setKeyword(result.msg)
                 
-                if(!isOpen && result){
-                    setIsOpen(true);
+                if(result){
                 if(result.msg === "Product created"){
                     dispatch(getAllProducts())
                     dispatch(getCategories())
@@ -138,6 +130,9 @@ export default function ProductForm ({product,setModalC,setProduct}){
                 isActive: ""
                     })
                     setFile([])
+                    toast.success(`${result.msg}`, {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    });
                 }else if(result.msg === "Product edited"){
                     dispatch(getAllProducts())
                     dispatch(getCategories())
@@ -151,6 +146,15 @@ export default function ProductForm ({product,setModalC,setProduct}){
                 isActive:""
                     })
                     setFile([])
+                    setProductEdit([])
+                    setIsOpen(false)
+                    toast.success(`${result.msg}`, {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    });
+                }else{
+                    toast.error(`${result.msg}`, {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    });
                 }
                 }
             } catch (error) {
@@ -171,6 +175,8 @@ useEffect(()=>{
         isActive: ""
         })
         setFile([])
+        setErrors({})
+        setFileErrors({})
         resetFile()
     }
     if(product){
@@ -184,19 +190,58 @@ useEffect(()=>{
         isActive: product.isActive
         })
         setFile([])
+        setErrors({})
+        setFileErrors({})
         resetFile()
     }
 },[product])
-
+    console.log(product)
     return(
+        <>
+        <div className={style.container}>
+        {product && product.id ? 
+        <>
+        <button onClick={(e)=> setProductEdit([])} className={style.closeBtn}>X</button>
+        <div className={style.imageBox}>
+            <img id={style.imageDiv}src={product.img[0]} alt="..."/>
+        </div>
+        <h2>{product.name}</h2>
+        <h4>$ {numberFormat(product.price)}</h4>
+        <p>Stock: {product.stock}</p>
+        <p>Status: {product.isActive === true ? "Active": "Inactive"}</p>
+        <p>Categories:</p>
+        <div className={style.categoriesBox}>
+        {product && product.categories.length > 0? product.categories.map((category)=>{return(
+            <p key={category.name} >{category.name}</p>
+        )}):<p>No categories added</p>}
+        </div>
+        <button className={style.btnX} onClick={handleOpen}>Edit</button>
+        </>
+        :
+        <>
+        <div className={style.imageBox}>
+        <img id={style.imageDiv2}src="https://res.cloudinary.com/drcvcbmwq/image/upload/v1654007162/1606471631_175714_1606474989_noticia_normal_recorte1_bsgelj.jpg" alt="..."/>
+        </div>
+        <h2>Products admin page</h2>
+        <div className={style.dataBox}>
+        <h2 id={style.special}><i>- Create a product</i></h2>
+        <h2 id={style.special}><i>- Search a product</i></h2>
+        <h2 id={style.special}><i>- Edit a product</i></h2>
+        </div>
+        <button className={style.btnX} id={style.btnXX} onClick={handleOpen}>Create</button>
+        </>}
+        </div>
+
+
+
+
+        <FormModal isOpen={isOpen} setIsOpen={setIsOpen}>
         <div className={product? style.containerProd2:style.containerProd}>
                 <div>
-                <form>
-                    
-                </form>
+
                 <form onSubmit={onSubmit} className={style.formProduct}>
                     
-                        <h3>Add or edit</h3>
+                        <h3>{product && product.id ? "Edit": "Add"}</h3>
                 
                     
                         <p>Product name:</p>
@@ -230,9 +275,9 @@ useEffect(()=>{
                     <div>
                         <p>Categories:</p>
                         {
-                            categoriesDb.length ?
+                            categories.length ?
                                 <select className={style.select} name ='categories' onChange={onArrayChange} multiple={true} >
-                        {categoriesDb && categoriesDb.map((category)=>{return(
+                        {categories && categories.map((category)=>{return(
                         <option key={category.id} value={category.name} className={style.categories}>{category.name}</option>
                         )})}
                         </select>:<span> No categories yet</span>}
@@ -245,12 +290,13 @@ useEffect(()=>{
                             )
                         })}
                     </div>
+                        <div className={style.statusDiv}>
                         {product?<>
                         <span>This product is: {input.isActive === true ? "Active": "Inactive"} </span>
                         <button name ="isActive" value={input.isActive} onClick={onStatus} className={style.btn}>Change</button>
                         {errors?.isActive && <p className={style.errors}>{errors?.isActive}</p>}
                         </>:<></>}
-                    
+                        </div>
                     <div>
                         <p>Images:</p>
                         <div className={style.imgBox}>
@@ -270,27 +316,8 @@ useEffect(()=>{
 
                 </form>
                 </div>
-        <FlashModal isOpen={isOpen} setIsOpen={setIsOpen}>
-                {keyword.length ? (
-                    <>
-                    <h2>{keyword}</h2>
-                    {keyword === "Product created" || keyword === "Product edited" ? (
-                        <>
-                            <button onClick={onClose} className={style.mybtn}> 
-                                Close All
-                            </button>
-                        </>
-                        ): (
-                            <>
-                            
-                            <button className={style.mybtn} onClick={()=> setIsOpen(state=>!state)}>Try Again</button>
-                            </>
-                        )}
-                        </>
-                    ):(
-                        <h2>Invalid Data</h2>
-                    )}
-                </FlashModal>
         </div>
+        </FormModal>
+        </>
     )
 }

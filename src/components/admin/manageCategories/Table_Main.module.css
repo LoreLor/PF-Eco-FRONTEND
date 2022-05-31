@@ -1,7 +1,8 @@
 .container{
     margin-top: 1rem;
-    width: 100%;
+    width: 75%;
 }
+
 .box{
     display: flex;
     justify-content: space-evenly;
@@ -13,6 +14,7 @@
     border-radius: 5px;
     background-color: #112B3C;
 }
+
 .box2{
     display: flex;
     justify-content: space-evenly;
@@ -22,16 +24,17 @@
     padding-right: 0.5rem;
     border: #b20600 1px solid;
     border-radius: 5px;
-    background-color: #b20600;
+    background-color: #b20600;;
 }
 
 .title{
-    width: 60%;
+    width: 80%;
     margin-top: 0.5rem;
     margin-left: 0.5rem;
     font-size: larger;
     color: antiquewhite;
 }
+
 .btn{
     width: 20%;
     border-radius: 5px;
@@ -39,57 +42,31 @@
     margin-left: 0.5rem;
 }
 
-.deleteBtn{
-    display: flex;
-    
-    background-color: #b20600;
-    color: aliceblue;
-    border: #b20600 1px solid;
-    border-radius: 5px;
-    margin-left: 2rem;
-}
-.admBox{
-    display: flex;
-    padding-left: 1rem;
-}
-
-.btnAdmin{
-    align-self: center;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 0.5rem;
-    background: #6ecb63;
-    font-size: medium;
-    font-weight: 700;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.5rem;
-    margin: 0px 0px 0px 5px;
-}
-
 .content{
     display: flex;
     
 }
+
 .searchBar{
     width: 30%;
     margin-top: 1rem;
     margin-left: 1rem;
 }
-.usersList{
+
+.categoriesList{
     width: 70%;
-    height: 34rem;
+    margin-top: 0.5rem;
+    height: 26rem;
     overflow-x: overlay;
 }
-.usersList::-webkit-scrollbar {
-    display: none;
-    }
 
 #footer{
     margin-top: 2rem;
 }
+
+.categoriesList::-webkit-scrollbar {
+    display: none;
+    }
 
 .coincidences{
     display: flex;
@@ -97,4 +74,3 @@
     color: #112B3C;
     font-weight: 700;
 }
-

@@ -19,6 +19,8 @@ import Favorites from './components/Favorites/Favorites';
 import { ToastContainer } from 'react-toastify';
 import  UserProfile  from './components/userProfile/UserProfile';
 import UsersPage from './components/admin/manageUsers/MainPage';
+import CategoriesPage from './components/admin/manageCategories/MainPage'
+import ProductsPage from './components/admin/manageProducts/MainPage'
 
 function App() {
   
@@ -29,6 +31,8 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/admin' element={<PrivateAdmin><AdminPage/></PrivateAdmin>}/>
         <Route path='/admin/users' element={<PrivateAdmin><UsersPage/></PrivateAdmin>}/>
+        <Route path='/admin/categories' element={<PrivateAdmin><CategoriesPage/></PrivateAdmin>}/>
+        <Route path='/admin/products' element={<PrivateAdmin><ProductsPage/></PrivateAdmin>}/>
         <Route path='/profile' element={<PrivateProfile><UserProfile/></PrivateProfile>}/>
         <Route path ='/login' element={<Login />} />
         <Route path = '/home/:id' element={<ProductDetail/>}/>
@@ -40,7 +44,6 @@ function App() {
         <Route path={'*'} element={<Error404/>}/>
         <Route path="/check" element={<CheckoutSteps/>}/>
         <Route path="/order" element={<OrderDetail/>}/>
-        
       </Routes>
     </Fragment>
   );

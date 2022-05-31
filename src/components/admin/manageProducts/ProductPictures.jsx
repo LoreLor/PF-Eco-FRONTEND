@@ -1,5 +1,5 @@
 import { useState } from "react"
-import style from './ProductAdmin.module.css'
+import style from './EditProduct.module.css'
 
 export default function ProductPictures({input,setInput}){
     

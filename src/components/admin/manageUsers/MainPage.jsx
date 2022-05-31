@@ -1,15 +1,15 @@
 import NavBarAdmin from "../adminPage/navBarAdmin/NavBarAdmin";
-import ManageUsers from "./UsersTable";
+import UsersTable from "./UsersTable";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import UserSB from "./UsersSearchBar";
+import SearchBar from "../adminPage/searchBar/SearchBar";
 import style from './Table_Main.module.css'
-import UserAdmin from "./EditUser";
+import EditUser from "./EditUser";
 import { getAllUsers } from "../../../redux/actions/user";
 import Footer from "../../Footer/Footer";
 
 
-export default function UsersPage (){
+export default function MainPage(){
     const users = useSelector((state)=>state.users.users)
     const user = useSelector((state)=>state.users.userInfo)
 
@@ -33,11 +33,11 @@ export default function UsersPage (){
 
         <div className={style.content}>
             <div className={style.searchBar}>
-            <UserSB result={result} setResult={setResult}/>
-            <UserAdmin user={userEdit[0]} setUserEdit={setUserEdit}/>
+            <SearchBar result={result} setResult={setResult}/>
+            <EditUser user={userEdit[0]} setUserEdit={setUserEdit}/>
             </div>
             <div className={style.usersList}>
-            <ManageUsers array={array} setUserEdit={setUserEdit} myUser={user}/>
+            <UsersTable array={array} setUserEdit={setUserEdit} myUser={user}/>
             </div>
 
         </div>

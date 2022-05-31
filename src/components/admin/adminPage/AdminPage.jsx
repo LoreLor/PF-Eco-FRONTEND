@@ -3,54 +3,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getCategories } from '../../../redux/actions/categories'
 import { getAllProducts } from '../../../redux/actions/products'
 import { getAllUsers } from '../../../redux/actions/user'
-import CategoriesSB from './searchBars/categoriesSB'
-import ProductsSB from './searchBars/productsSB'
+
+import ProductsSB from './searchBar/productsSB'
 import style from './AdminPage.module.css'
 import BetaModal from '../AdminModals/BetaModal'
 import FormModal from '../AdminModals/FormModal'
-import CategoryAdmin from "../categoryForm/CategoryAdmin"
-import ProductAdmin from "../productForm/ProductAdmin"
+import CategoryAdmin from "../manageCategories/EditCategory"
+import ProductAdmin from "../manageProducts/MainPage"
 import NavBarAdmin from './navBarAdmin/NavBarAdmin'
 import Footer from '../../Footer/Footer'
 import { Link } from 'react-router-dom'
 
 export default function AdminPage (){
-    const categories = useSelector((state)=> state.products.categoriesDb)
-    const products = useSelector((state)=> state.products.products)
-    const users = useSelector((state)=>state.users.users)
-    const dispatch = useDispatch()
-
-    const [userName,setUserName]= useState("")
-    const [user,setUser] = useState("")
-    const [categoryName,setCategoryName] = useState("")
-    const [category,setCategory] = useState("")
-    const [productName,setProductName]= useState("")
-    const [product,setProduct]= useState("")
-    const [base,setBase]=useState([])
-    
-    const [modalA,setModalA] = useState(false)
-    const [modalB,setModalB] = useState(false)
-    const [modalC,setModalC] = useState(false)
-    const [modalD,setModalD] = useState(false)
-   
-    function handleModalB(e){
-        e.preventDefault()
-        setCategory("")
-        setModalB(true)
-    }
-
-    function handleModalC(e){
-        e.preventDefault()
-        setProduct("")
-        setModalC(true)
-    }
-
-    useEffect(()=>{
-        dispatch(getCategories())
-        dispatch(getAllProducts())
-        dispatch(getAllUsers())
-    },[dispatch])
-
 
     return(
         <div className={style.admin_container}>
@@ -63,31 +27,24 @@ export default function AdminPage (){
                     <Link to="/admin/users">
                     <button className={style.btnAdmin}>Manage users</button>
                     </Link>
-
                 </div>
-
 
                 <div className={style.box}>
                     <h2>Categories</h2>
-                    <button className={style.btnAdmin} onClick={handleModalB}>Create category</button>
-                    <CategoriesSB categories={categories} categoryName={categoryName} category={category} 
-                    setCategoryName={setCategoryName} setCategory={setCategory} setModalB={setModalB}/>
+                    <p><i>Search for a category, edit it or delete it</i></p> 
+                    <Link to="/admin/categories">
+                    <button className={style.btnAdmin}>Manage categories</button>
+                    </Link>
                 </div>
-
-                <BetaModal setIsOpen={setModalB} isOpen={modalB} resetData={setCategory}>
-                    <CategoryAdmin category={category} setModalB={setModalB} setCategory={setCategory}/>
-                </BetaModal>
 
                 <div className={style.box}>
                     <h2>Products</h2>
-                    <button className={style.btnAdmin} onClick={handleModalC}>Create product</button>
-                    <ProductsSB products={products} productName={productName} 
-                    product={product} setProductName={setProductName} setProduct={setProduct} setModalC={setModalC}/>
+                    <p><i>Search for a product, edit it or delete it</i></p> 
+                    <Link to="/admin/products">
+                    <button className={style.btnAdmin}>Manage products</button>
+                    </Link>
                 </div>
 
-                <FormModal setIsOpen={setModalC} isOpen={modalC} resetData={setProduct}>
-                    <ProductAdmin product={product} setModalC={setModalC} setProduct={setProduct}/>
-                </FormModal>
             </div>
             <Footer/>
         </div>
