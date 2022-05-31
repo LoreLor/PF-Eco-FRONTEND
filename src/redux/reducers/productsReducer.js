@@ -374,7 +374,7 @@ export const productsReducer = (state = initialState, action) => {
                 cart: action.payload
             }
         case GET_CART:
-            action.payload.details.sort(function (a, b) {
+            action.payload.details?.sort(function (a, b) {
                 if (a.id > b.id) return 1;
                 if (a.id < b.id) return -1;
                 return 0
