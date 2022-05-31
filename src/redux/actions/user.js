@@ -97,7 +97,7 @@ export const logoutGoogle = ()=>{
 }
 
 export const forgotPassword = (email) => async(dispatch) => {
-    const {data} = axios.post(`${SERVER}/email/forgot-password`, email)
+    const {data} = axios.post(`${SERVER}/email/forgot-password`, {email: email})
   try {
     dispatch({
       type: SEND_EMAIL_RP,
