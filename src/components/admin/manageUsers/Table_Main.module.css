@@ -1,4 +1,5 @@
 .container{
+    margin-top: 1rem;
     width: 75%;
 }
 .box{
@@ -32,8 +33,9 @@
     color: antiquewhite;
 }
 .btn{
-    width: 40%;
+    width: 20%;
     border-radius: 5px;
+    margin-right: 0.5rem;
 }
 
 .deleteBtn{
@@ -66,17 +68,20 @@
     margin: 0px 0px 0px 5px;
 }
 
-.mybtn{
-    align-self: center;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 0.5rem;
-    background: #6ecb63;
-    font-size: large;
-    font-weight: 700;
-    color: #fff;
+.content{
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.5rem;
+    
 }
+.searchBar{
+    width: 25rem;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+.usersList{
+    width: 60rem;
+}
+
+#footer{
+    margin-top: 2rem;
+}
+

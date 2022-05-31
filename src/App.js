@@ -2,7 +2,7 @@ import React,{Fragment} from 'react';
 import './App.css';
 import Home from './components/home/Home'
 import AdminPage from './components/admin/adminPage/AdminPage'
-import {Routes,Route, Router} from 'react-router-dom'
+import {Routes,Route} from 'react-router-dom'
 import Login from './components/login/Login';
 import ProductDetail from './components/detalleProducto/ProductDetail';
 import Error404 from './components/Error404/Error404';
@@ -18,6 +18,7 @@ import Review from './components/review/Review';
 import Favorites from './components/Favorites/Favorites';
 import { ToastContainer } from 'react-toastify';
 import  UserProfile  from './components/userProfile/UserProfile';
+import UsersPage from './components/admin/manageUsers/MainPage';
 
 function App() {
   
@@ -27,6 +28,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/admin' element={<PrivateAdmin><AdminPage/></PrivateAdmin>}/>
+        <Route path='/admin/users' element={<PrivateAdmin><UsersPage/></PrivateAdmin>}/>
         <Route path='/profile' element={<PrivateProfile><UserProfile/></PrivateProfile>}/>
         <Route path ='/login' element={<Login />} />
         <Route path = '/home/:id' element={<ProductDetail/>}/>

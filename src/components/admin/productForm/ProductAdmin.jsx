@@ -108,6 +108,7 @@ export default function ProductForm ({product,setModalC,setProduct}){
         && input.stock !== ""
         && input.categories.length >0
         && input.img.length + filelength <=5
+        && input.img.length + filelength >0
         ){
             let response = null
             try {

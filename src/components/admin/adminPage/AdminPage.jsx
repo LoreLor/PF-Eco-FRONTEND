@@ -5,16 +5,14 @@ import { getAllProducts } from '../../../redux/actions/products'
 import { getAllUsers } from '../../../redux/actions/user'
 import CategoriesSB from './searchBars/categoriesSB'
 import ProductsSB from './searchBars/productsSB'
-import UserSB from './searchBars/userSB'
 import style from './AdminPage.module.css'
 import BetaModal from '../AdminModals/BetaModal'
 import FormModal from '../AdminModals/FormModal'
-import UserAdmin from '../userAdmin/UserAdmin'
 import CategoryAdmin from "../categoryForm/CategoryAdmin"
 import ProductAdmin from "../productForm/ProductAdmin"
 import NavBarAdmin from './navBarAdmin/NavBarAdmin'
 import Footer from '../../Footer/Footer'
-import ManageUsers from '../manageUsers/ManageUsers'
+import { Link } from 'react-router-dom'
 
 export default function AdminPage (){
     const categories = useSelector((state)=> state.products.categoriesDb)
@@ -47,11 +45,6 @@ export default function AdminPage (){
         setModalC(true)
     }
 
-    function handleModalD(e){
-        e.preventDefault()
-        setModalD(true)
-    }
-
     useEffect(()=>{
         dispatch(getCategories())
         dispatch(getAllProducts())
@@ -65,18 +58,14 @@ export default function AdminPage (){
             <div className={style.adminPage}>
 
                 <div className={style.box}>
-                    <h2>Users</h2> 
-                    <button className={style.btnAdmin} onClick={handleModalD}>Manage users</button>
-                    <UserSB users={users} userName={userName} user={user} setUserName={setUserName} 
-                    setUser={setUser} setModalA={setModalA}/>
-                </div>
-                <BetaModal setIsOpen={setModalD} isOpen={modalD} resetData={setBase}>
-                    <ManageUsers setBase={setBase} base={base} setModalD={setModalD}/>
-                </BetaModal>
+                    <h2>Users</h2>
+                    <p><i>Search for a user, change permissions or deactivate an account</i></p> 
+                    <Link to="/admin/users">
+                    <button className={style.btnAdmin}>Manage users</button>
+                    </Link>
 
-                <BetaModal setIsOpen={setModalA} isOpen={modalA} resetData={setUser}>
-                    <UserAdmin user={user[0]} setModalA= {setModalA} setUser={setUser}/>
-                </BetaModal>
+                </div>
+
 
                 <div className={style.box}>
                     <h2>Categories</h2>
