@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { filterByPrice, /* getAllProducts */} from "../../redux/actions/products";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import style from './FilterPrice.module.css'
 import { toast } from "react-toastify";
@@ -8,10 +8,11 @@ import { toast } from "react-toastify";
 export default function FilterPrice() {
 
     const dispatch = useDispatch();
+    const stateFilter = useSelector(s => s.products.stateFilter)
 
     const [input, setInput] = useState({
-        min: "",
-        max: "",
+        min: stateFilter.min,
+        max: stateFilter.max,
     })
 
 
