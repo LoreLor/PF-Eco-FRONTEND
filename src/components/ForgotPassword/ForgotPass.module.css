@@ -1,0 +1,65 @@
+.box{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    background-color: #112B3C;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0px;
+    padding: 20px 0px;
+    border-radius: 20px ;
+  }
+  h1{
+    color: #F66B0E;
+  }
+  form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  .input_email{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
+    height: 25px;
+    background: #EFEFEF;
+    border-radius: 40px;
+    border: solid #F66B0E;
+    padding: 0px 15px;
+    margin-right: 9px;
+    outline: none;
+  }
+  .input_email:hover{
+    box-shadow: 0 0 0 3px #F66B0E;
+  }
+  label{
+    color: #F66B0E;
+    font-size: large;
+  }
+  .mybtn{
+    align-self: center;
+    border: none;
+    border-radius: 0.5rem;
+    background: #F66B0E;
+    font-size: large;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    transition: 0.5s;
+  }
+  .mybtn:hover{
+      box-shadow: 0.2rem 0.2rem 0.5rem #F66B0E;
+  }

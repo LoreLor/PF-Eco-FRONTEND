@@ -85,6 +85,9 @@
     top: 5px;
     right: 5px;
 }
+.ul_favs ul{
+    list-style: none;
+}
 .sale{
     position: absolute;
     top: 35px;
