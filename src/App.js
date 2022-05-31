@@ -23,6 +23,7 @@ import CategoriesPage from './components/admin/manageCategories/MainPage'
 import ProductsPage from './components/admin/manageProducts/MainPage'
 import ForgotPass from './components/ForgotPassword/ForgotPass';
 
+
 function App() {
   
   return (
@@ -42,10 +43,10 @@ function App() {
         <Route path = '/myShopping'element={<Shopping/>}/>
         <Route path = '/review'element={<Review/>}/>
         <Route path = '/register' element={<Register />} />
-        <Route path={'*'} element={<Error404/>}/>
         <Route path="/check" element={<CheckoutSteps/>}/>
         <Route path="/order" element={<OrderDetail/>}/>
         <Route path='/forgotPass' element={<ForgotPass/>}/>
+        <Route path={'*'} element={<Error404/>}/>
       </Routes>
     </Fragment>
   );
