@@ -55,6 +55,7 @@ const initialState = {
     stateFilter: {
         min: "",
         max: "",
+        category: ""
     },
     reviews: [],
     review: [],
@@ -102,12 +103,31 @@ export const productsReducer = (state = initialState, action) => {
             }
 
         case GET_PRODUCT_BY_NAME_SUCCESS:
-            if(state.stateFilter.min > 1 && state.stateFilter.max > 1) {
+            if(state.stateFilter.min > 1 && state.stateFilter.max > 1 && !state.stateFilter.category) {
                 var filterByNameRange = action.payload.filter(p => p.price >= parseInt(state.stateFilter.min) && p.price <= parseInt(state.stateFilter.max))
                 return {
                     ...state,
                     loading: false,
-                    products: filterByNameRange,
+                    products: action.payload,
+                    showedProducts: filterByNameRange,
+                    filters: filterByNameRange
+                }
+            } else if(state.stateFilter.min > 1 && state.stateFilter.max > 1 && state.stateFilter.category) {
+                var filterByNameRange = action.payload.filter(p => p.price >= parseInt(state.stateFilter.min) && p.price <= parseInt(state.stateFilter.max))
+                filterByNameRange = filterByNameRange.filter(p => p.categories.find(d => d.name === state.stateFilter.category))
+                return {
+                    ...state,
+                    loading: false,
+                    products: action.payload,
+                    showedProducts: filterByNameRange,
+                    filters: filterByNameRange
+                }
+            } else if(state.stateFilter.category) {
+                var filterByNameRange = action.payload.filter(p => p.categories.find(d => d.name === state.stateFilter.category))
+                return {
+                    ...state,
+                    loading: false,
+                    products: action.payload,
                     showedProducts: filterByNameRange,
                     filters: filterByNameRange
                 }
@@ -166,6 +186,10 @@ export const productsReducer = (state = initialState, action) => {
         case FILTER_BY_CATEGORY:
             var all = []
             var filter = []     
+            state.stateFilter = {
+                ...state.stateFilter,
+                category: action.payload
+            }
         if(state.filters.length) {
                 all = state.filters;
                 filter = action.payload === 'all' ? all : all.filter(p => p.categories.find(d => d.name === action.payload))
@@ -181,7 +205,7 @@ export const productsReducer = (state = initialState, action) => {
                         }
                     } 
                 }
-                if(state.stateFilter.min > 1 || state.stateFilter.max > 1) {
+                if(state.stateFilter.min > 1 && state.stateFilter.max > 1) {
                     all = state.products;
                     filter = action.payload === 'all' ? all : all.filter(p => p.categories.find(d => d.name === action.payload))
                     filter = filter.filter(p => p.price >= parseInt(state.stateFilter.min) && p.price <= parseInt(state.stateFilter.max))
@@ -261,13 +285,14 @@ export const productsReducer = (state = initialState, action) => {
             var all2 = []
             var filter2 = []
             state.stateFilter = {
+                ...state.stateFilter,
                 min: parseInt(action.payload.min),
-                max: parseInt(action.payload.max)
+                max: parseInt(action.payload.max),
             }
-            // console.log(state.stateFilter)
         if(state.filters.length) {
                 all2 = state.filters;
                 filter2 = all2.filter(p => p.price >= action.payload.min && p.price <= action.payload.max)
+                
                 if (filter2.length === 0) {
                     Swal.fire({
                         title:"No products were found in that range, all products were displayed again.",
@@ -276,7 +301,17 @@ export const productsReducer = (state = initialState, action) => {
                     return {
                         ...state,
                     }
+                    
                 } else {
+                    all2 = state.products;
+                    filter2 = all2.filter(p => p.price >= action.payload.min && p.price <= action.payload.max)
+                    if(state.stateFilter.category) {
+                        filter2 = filter2.filter(p => p.categories.find(d => d.name === state.stateFilter.category))
+                        return {
+                            ...state,
+                            showedProducts: filter2
+                        }
+                    }
                     return {
                         ...state,
                         showedProducts: filter2
@@ -285,6 +320,7 @@ export const productsReducer = (state = initialState, action) => {
             } else {
                 all2 = state.products;
                 filter2 = all2.filter(p => p.price >= action.payload.min && p.price <= action.payload.max)
+
                 if (filter2.length === 0) {
                     Swal.fire({
                         title:"No products were found in that range, all products were displayed again.",
@@ -294,6 +330,7 @@ export const productsReducer = (state = initialState, action) => {
                         ...state,
                     }
                 }
+
                 return {
                     ...state,
                     showedProducts: filter2,

@@ -1,0 +1,76 @@
+.container{
+    margin-top: 1rem;
+    width: 75%;
+}
+
+.box{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border: #112B3C 1px solid;
+    border-radius: 5px;
+    background-color: #112B3C;
+}
+
+.box2{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border: #b20600 1px solid;
+    border-radius: 5px;
+    background-color: #b20600;;
+}
+
+.title{
+    width: 80%;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    font-size: larger;
+    color: antiquewhite;
+}
+
+.btn{
+    width: 20%;
+    border-radius: 5px;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.content{
+    display: flex;
+    
+}
+
+.searchBar{
+    width: 30%;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+.categoriesList{
+    width: 70%;
+    margin-top: 0.5rem;
+    height: 26rem;
+    overflow-x: overlay;
+}
+
+#footer{
+    margin-top: 2rem;
+}
+
+.categoriesList::-webkit-scrollbar {
+    display: none;
+    }
+
+.coincidences{
+    display: flex;
+    justify-content: center;
+    color: #112B3C;
+    font-weight: 700;
+}

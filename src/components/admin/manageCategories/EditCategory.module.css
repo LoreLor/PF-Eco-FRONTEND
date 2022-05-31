@@ -42,36 +42,27 @@
     transform: translateX(5px);
   }
 }
-.container{
-  display: flex;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 
 .containerForm{
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    width: 500px;;
-    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 
 .categoryForm{
-  display: flex;
-  flex-direction: row;
-  text-align: center;
+  margin-top: 2rem;
 }
 .categoryForm h3 {
   font-weight: bold;
   font-size: 25px;
+  color: aliceblue
 }
-.categoryForm p {
+/* .categoryForm p {
   font-weight: bold;
   font-size: 19px;
-}
-
+} */
 
 .mybtn{
   align-self: center;
@@ -106,4 +97,31 @@
 .btnContainer{
   display: flex;
   align-items: center;
+  margin-top: 1rem;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  margin-top: 2rem;
+  background-color: #112B3C;
+  color: aliceblue;
+  height: 21rem;
+  position: relative;
+}
+
+.closeBtn{
+  position: absolute;
+  background-color: #b20600;
+  border: none;
+  font-weight: bold;
+  color: #fff;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
 }

@@ -1,11 +1,10 @@
 import React from "react";
-import SearchBar from "../../../searchBar/SearchBar";
 import { logout } from '../../../../redux/actions/user'
 import style from './NavBarAdmin.module.css'
 import { NavLink } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 
-export default function NavBarAdmin({categories}){
+export default function NavBarAdmin(){
     
     const user = useSelector((state)=>state.users.userInfo)
     const dispatch = useDispatch();

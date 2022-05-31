@@ -1,5 +1,6 @@
 .container{
-    width: 75%;
+    margin-top: 1rem;
+    width: 100%;
 }
 .box{
     display: flex;
@@ -26,14 +27,16 @@
 
 .title{
     width: 60%;
-    margin-right: 5rem;
     margin-top: 0.5rem;
+    margin-left: 0.5rem;
     font-size: larger;
     color: antiquewhite;
 }
 .btn{
-    width: 40%;
+    width: 20%;
     border-radius: 5px;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 .deleteBtn{
@@ -66,17 +69,32 @@
     margin: 0px 0px 0px 5px;
 }
 
-.mybtn{
-    align-self: center;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 0.5rem;
-    background: #6ecb63;
-    font-size: large;
-    font-weight: 700;
-    color: #fff;
+.content{
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.5rem;
+    
 }
+.searchBar{
+    width: 30%;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+.usersList{
+    width: 70%;
+    height: 34rem;
+    overflow-x: overlay;
+}
+.usersList::-webkit-scrollbar {
+    display: none;
+    }
+
+#footer{
+    margin-top: 2rem;
+}
+
+.coincidences{
+    display: flex;
+    justify-content: center;
+    color: #112B3C;
+    font-weight: 700;
+}
+
