@@ -1,7 +1,7 @@
 import { useState } from "react"
 import AlertModal from '../../AdminModals/AlertModal'
 import axios from "axios"
-import style from './searchBars.module.css'
+import style from './searchBar.module.css'
 import SERVER from "../../../../server"
 
 export default function ProductsSB({products,productName,product,setProductName,setProduct,setModalC}){

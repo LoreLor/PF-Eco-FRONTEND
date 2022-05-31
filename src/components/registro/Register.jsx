@@ -227,25 +227,6 @@ const Register = () => {
                     <p class="text-danger">{errors.password}</p>
                   )}
 
-                  <div class="mb-3">
-                    <label
-                      htmlFor="validationCustom03"
-                      class="form-label"
-                      className={s.label}
-                    >
-                      <strong>Profile Image: </strong>
-                    </label>
-                    <input
-                      id="img"
-                      name="img"
-                      class="form-control"
-                      type="file"
-                      placeholder="Add your avatar"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  {errors.img && <p class="text-danger">{errors.img}</p>}
-
                   <div className="d-grid">
                   {Object.keys(errors).length === 0 && Object.keys(user).length > 0 && 
                     <button type="submit" class={s.btn}>

@@ -1,20 +1,15 @@
 import React,{useEffect, useState} from "react"
 import activeValidations from "./validators/activeValidations"
 import submitValidations from "./validators/submitValidations"
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {getCategories} from "../../../redux/actions/categories"
-import style from './CategoryAdmin.module.css'
-import FlashModal from '../AdminModals/FlashModal'
+import style from './EditCategory.module.css'
 import axios from "axios"
 import SERVER from "../../../server"
+import { toast } from "react-toastify"
 
-export default function CategoryForm({category,setModalB,setCategory}){
+export default function CategoryForm({category,categories,setCategoryEdit}){
     const dispatch = useDispatch()
-    
-    const categoriesDb = useSelector((state)=>state.products.categoriesDb)
-    
-    const [keyword,setKeyword] = useState("")
-    const [isOpen,setIsOpen] =useState(false)
     
     const [errors,setErrors]=useState({})
     const [input,setInput] = useState({
@@ -22,23 +17,16 @@ export default function CategoryForm({category,setModalB,setCategory}){
     })
     
     function handleInputChange(i){  
-        setErrors(activeValidations(category,{...input,[i.target.name]:i.target.value},categoriesDb))
+        setErrors(activeValidations(category,{...input,[i.target.name]:i.target.value},categories))
         setInput({...input,[i.target.name]:i.target.value})            
     }
     
-    function handleClose(e){
-        e.preventDefault()
-        setIsOpen(false)
-        setModalB(false)
-        setCategory("")
-    }
-
     async function handleSubmit(event){
         event.preventDefault()
         const data = {
         name: input.name || "",
         }
-        setErrors(submitValidations(category,data,categoriesDb))
+        setErrors(submitValidations(category,data,categories))
         if(Object.keys(errors).length === 0
         && input.name !== ""
         ){
@@ -61,20 +49,29 @@ export default function CategoryForm({category,setModalB,setCategory}){
                 }))
         const result = await response.json()
 
-        setKeyword(result.msg)
-        
-        if(!isOpen && result){
-            setIsOpen(true)
+        if(result){
         if(result.msg === "Category created"){
+            toast.success(`${result.msg}`, {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
             dispatch(getCategories())
             setInput({
                 name:""
             })
+            setCategoryEdit([])
             }else if(result.msg === "Category updated"){
+                toast.success(`${result.msg}`, {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
             dispatch(getCategories())
             setInput({
                 name:""
-            })               
+            }) 
+            setCategoryEdit([])              
+            }else{
+                toast.error(`${result.msg}`, {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
             }
         } 
             } catch (error) {
@@ -90,15 +87,22 @@ export default function CategoryForm({category,setModalB,setCategory}){
         response = await axios.delete(`http://localhost:3001/categories/${category.id}`)
         const result = response.data
        
-        setKeyword(result.msg)
-        
-        if(!isOpen && result){
-            setIsOpen(state => !state);
+        if(result){
         if(result.msg === "Category deleted"){
+            toast.success(`${result.msg}`, {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
             dispatch(getCategories())
             setInput({
                 name:""
-            })}}
+            })
+            setCategoryEdit([])
+        }else{
+            toast.error(`${result.msg}`, {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
+        }
+        } 
         } catch (error) {
             console.log(error)
         }
@@ -109,22 +113,33 @@ export default function CategoryForm({category,setModalB,setCategory}){
             setInput({
                 name: ""
             })
+            setErrors({})
         }
-        if(category){
+        if(category && category.id){
             setInput({
                 name: category.name
             })
+            setErrors({})
         }
     },[category])
 
     return (
         <div className={style.container}>
+
+{category && category.id ? 
+           <button onClick={(e)=> setCategoryEdit([])} className={style.closeBtn}>X</button>:<></>}
+
                 <form onSubmit={handleSubmit} className={style.containerForm}>
                     <div className={style.categoryForm}>
                         <div>
-                            <h3>Add or Edit</h3>
+                            <h2>{category && category.id? "Edit":"Add"}</h2>
+                            {category? 
+                            <>
+                            <p>Previus name: {category.name}</p>
+                            <p>Linked products: {category.products ? category.products.length : 0}</p>
+                            </>:<></>}
+                            
                             <p>Name:</p>
-                            {category? <p>Previus name: {category.name}</p>:<></>}
                             <input className={errors?.name ? style.inputError:style.input} type='text' placeholder="Add a name..." name='name' value={input.name} onChange={handleInputChange}/>
                         </div>
                         {
@@ -139,31 +154,10 @@ export default function CategoryForm({category,setModalB,setCategory}){
                             }   
                         </div>
                     <div>
-                        {category ? <button onClick={handleDelete} className={style.mybtn2}>Delete</button> :<></>}
+                        {Object.keys(errors).length === 0 && Object.keys(input).length > 0 && category ? <button onClick={handleDelete} className={style.mybtn2}>Delete</button> :<></>}
                     </div>
                     </div>
                 </form>
-                <FlashModal isOpen={isOpen} setIsOpen={setIsOpen} closePrev={setModalB} resetData={setCategory}>
-                    { keyword.length ? (
-                        <>
-                        <h2>{keyword}</h2>
-                        {keyword === "Category created" || keyword === "Category updated" || keyword === "Category deleted" ? 
-                            <>
-                            <button onClick={handleClose} className={style.mybtn}> 
-                                Close All
-                            </button>
-                            </>
-                        : 
-                            <>
-                            <button className={style.mybtn}onClick={()=> setIsOpen(false)}>Ok</button>
-                            </>
-                        
-                    }
-                        </>
-                    ):(
-                        <h2>Invalid Data</h2>
-                    )}
-                </FlashModal>
             </div>
     )
 }

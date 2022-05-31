@@ -19,11 +19,12 @@
 .containerProd{
   display: flex;
   position: absolute;
-  top: 48%;
+/*   top: 48%;
   left: 50%;
-  transform: translate(-50%, -35%);
+  transform: translate(-40%, -35%); */
   padding: 15px;
-  width: 90%;
+  width: 75%;
+  margin-top: 15rem;
 }
 .containerProd h3{
   font-weight: bold;
@@ -33,12 +34,12 @@
 .containerProd2{
   display: flex;
   position: absolute;
-  top: 48%;
+/*   top: 48%;
   left: 50%;
-  transform: translate(-50%, -35%);
+  transform: translate(-50%, -35%); */
   padding: 15px;
-  width: 90%;
-  margin-top: 17%;
+  width: 75%;
+  margin-top: 40rem;
 }
 .containerProd2 h3{
   font-weight: bold;
@@ -152,6 +153,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-top: 0.5rem;
 }
 .imgZone{
   display: flex;
@@ -197,4 +199,87 @@
   background-color: #112B3C;
   color: #E1E1E1;
   border: none;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  margin-top: 2rem;
+  background-color: #112B3C;
+  color: aliceblue;
+  height: 32rem;
+  position: relative;
+}
+
+.imageBox{
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+#imageDiv{
+  max-width: 100%;
+  max-height: 100%;
+}
+#imageDiv2{
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10%;
+}
+
+.categoriesBox{
+  width: 75%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.btnX{
+  width: 10rem;
+  align-self: center;
+  border: none;
+  border-radius: 0.5rem;
+  background: #6ecb63;
+  font-size: medium;
+  font-weight: 500;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.1rem;
+}
+
+#btnXX{
+  margin-top: 2.6rem;
+}
+
+.closeBtn{
+  position: absolute;
+  background-color: #b20600;
+  border: none;
+  font-weight: bold;
+  color: #fff;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.statusDiv{
+  margin-top: 0.5rem;
+}
+
+.dataBox{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#special{
+  font-size:x-large;
 }
