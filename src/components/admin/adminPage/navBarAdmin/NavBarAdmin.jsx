@@ -69,6 +69,13 @@ export default function NavBarAdmin(){
                                                 </NavLink>
                                             </li> : <li></li>
                                             }
+                                            {!window.location.href.includes("/admin/orders") ?
+                                            <li>
+                                                <NavLink to="/admin/orders">
+                                                    <button className={style.mybtn} /* onClick={} */>Orders</button>
+                                                </NavLink>
+                                            </li> : <li></li>
+                                            }
                                         </ul>
                                     </div>    
                                 ) : (

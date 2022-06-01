@@ -119,7 +119,9 @@ export default function EditUser({user,setUserEdit}){
             <div className={style.imageBox}>
                 <img id={style.imageDiv}src="https://res.cloudinary.com/drcvcbmwq/image/upload/v1654009200/v2_hvt2md.jpg" alt="..."/>
             </div>
+            <div className={style.titleF}>
             <h2>User admin page</h2>
+            </div>
             <div className={style.dataBox}>
             <h2 id={style.special}><i>- Search an user</i></h2>
             <h2 id={style.special}><i>- Authorize an user</i></h2>

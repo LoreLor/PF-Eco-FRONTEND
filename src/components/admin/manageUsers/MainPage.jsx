@@ -31,7 +31,7 @@ export default function MainPage(){
             <div className={style.caja}>
                 <div className={style.content}>
                     <div className={style.searchBar}>
-                    <SearchBar result={result} setResult={setResult}/>
+                    <SearchBar result={result} setResult={setResult} placeholder={"Search by name..."}/>
                     <EditUser user={userEdit[0]} setUserEdit={setUserEdit}/>
                     </div>
                     <div className={style.usersList}>
@@ -39,6 +39,7 @@ export default function MainPage(){
                     </div>
                 </div>
             </div>
+            <br></br>
             <Footer/>
         </div>
     )
