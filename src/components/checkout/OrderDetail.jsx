@@ -72,15 +72,12 @@ function OrderDetail() {
                               <h6 className={s.head}>Your Products</h6>
                               <h6><stron>{p.name}</stron> </h6>
                               <img src={p.img} className={s.small} alt=""></img>
-                              <small className="text-muted">
-                                Brief description: {p.description}
-                              </small>
                               <hr />
                             </div>
                             <article className={s.qty}>
-                            <span classname="text-muted">Qty:{p.bundle}</span>
+                            <span classname="text-muted">Qty: {p.bundle}</span>
                             <span className="text-muted">
-                              Price:{p.price_total}
+                              Price: {p.price_total}
                             </span>
                             </article>
                           </>
@@ -111,7 +108,7 @@ function OrderDetail() {
                     <h6 class="my-0">Amount</h6>
                     <li class="list-group-item d-flex justify-content-center">
                       <span>
-                        <strong>Amount:</strong> $ {total_amount}
+                        <strong>Amount:</strong> ${total_amount}
                       </span>
                     </li>
                   </div>

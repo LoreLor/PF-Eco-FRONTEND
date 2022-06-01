@@ -39,16 +39,13 @@ import {
     CLEAN_PRODUCTS,
     ORDER_BY_RATING,
     ORDER_BY_ALPHABET,
-    DISCOUNT_PRICE
+    APPLY_DISCOUNT
 } from "./constants";
 
 import axios from 'axios';
 import SERVER from "../../server";
 
 export const getAllProducts = () => async (dispatch) => {
-    dispatch({
-        type: GET_ALL_PRODUCTS_REQUEST
-    })
     try {
         const { data } = await axios.get(`${SERVER}/products`)
         dispatch({
@@ -64,9 +61,6 @@ export const getAllProducts = () => async (dispatch) => {
 };
 
 export const getProductByName = (name) => async (dispatch) => {
-    dispatch({
-        type: GET_PRODUCT_BY_NAME_REQUEST
-    })
     try {
         const product = await axios.get(`${SERVER}/products?name=${name}`)
         dispatch({
@@ -278,8 +272,8 @@ export function cleanReview(){
 }
 
 
-export const paidCartTemporal = (cartId) => async (dispatch) => {
-    const json = await axios.put(`${SERVER}/cart/?cartId=${cartId}`)
+export const paidCartTemporal = (userId,cartId) => async (dispatch) => {
+    const json = await axios.put(`${SERVER}/cart/?cartId=${cartId}&&userId=${userId}`)
     return dispatch({
         type: PAID_CART_TEMPORAL,
         payload: json.data
@@ -374,8 +368,12 @@ export const cleanProducts = () => dispatch => {
     })
 }
 
-export const discountpPrice = ()=> (dispatch) => {
+export const applyDiscount = (cartId,newPriceTotal) => async (dispatch) => {
+    const json = await axios.put(`${SERVER}/cart/discount/?cartId=${cartId}&&newPriceTotal=${newPriceTotal}`)
     return dispatch({
-        type: DISCOUNT_PRICE,
+        type: APPLY_DISCOUNT,
+        payload: json.data
     })
 }
+
+
