@@ -375,7 +375,7 @@ export const cleanProducts = () => dispatch => {
 }
 
 export const discountpPrice = ()=> (dispatch) => {
-    dispatch({
+    return dispatch({
         type: DISCOUNT_PRICE,
     })
 }
