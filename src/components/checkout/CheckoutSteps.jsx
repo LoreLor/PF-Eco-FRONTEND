@@ -190,7 +190,7 @@ function CheckoutSteps() {
               <p>Billing Address</p>
             </div>
             {user ? (
-            <form class="needs-validation" validate onSubmit={handleSubmit}>
+            <form class="needs-validation align-item-strecht" validate onSubmit={handleSubmit}>
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <label htmlFor="name" className={s.label}>
