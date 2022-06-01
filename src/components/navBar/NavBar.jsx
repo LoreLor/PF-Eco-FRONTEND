@@ -25,7 +25,6 @@ export default function NavBar({ categories, paginado }) {
         dispatch(getCart(cartUser.id))
     },[])
 
-
     function handleLogout() {
         dispatch(logout())
         window.location.reload();
@@ -34,9 +33,6 @@ export default function NavBar({ categories, paginado }) {
     function handleClick(e) {
         e.preventDefault();
         dispatch(getAllProducts())
-        .then(r => {
-            window.location.reload();
-        })
     }
 
     return (

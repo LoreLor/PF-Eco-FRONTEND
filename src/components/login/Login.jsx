@@ -149,7 +149,7 @@ const Login = () => {
                             </div> 
                             <div className="row my-3 text-center">
                                 <span> You don't have an account?  Go to...<strong><Link to={"/register"}>Create your account</Link></strong></span>
-                                <strong><Link to={`${SERVER}/email/forgot-password`}><span>Forgot your password?</span></Link></strong>
+                                <strong><Link to={`/forgotPass`}><span>Forgot your password?</span></Link></strong>
                             </div>       
                         </div>
                     </div>
