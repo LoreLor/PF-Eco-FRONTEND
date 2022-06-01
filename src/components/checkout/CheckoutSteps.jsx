@@ -16,11 +16,10 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 function CheckoutSteps() {
 
   const navigate = useNavigate();
-  const dispacth = useDispatch();
+  const dispatch = useDispatch();
   const user = useSelector((state)=>state.users.userInfo)
   const cart = useSelector((state) => state.products.cart)
-  const orden = []
-
+ 
   const [errors, setErrors] = useState({});
 
   //---- Cupon de Descuento
@@ -31,10 +30,10 @@ function CheckoutSteps() {
   //---- Total y Deescuentos
   const toPrice = (num) => Number(num.toFixed(2)); //ejemplo 6.123 -'5.12' - 5.12
   // const amount= toPrice(cart.details.reduce((a, c) => a + c.bundle * c.price, 0));
-  const discount = (cart.price_total*0.25).toFixed(2)
-  const total_amount= (cart.price_total).toFixed(2) 
-  const total_amountDiscount= (total_amount - discount).toFixed(2)
-  const dispatch = useDispatch();
+  const discount = promoCode?(cart.price_total*0.25):""
+  const total_amount= (cart.price_total)
+  const total_amountDiscount= (total_amount - discount)
+  
 
 
   const [input, setInput] = useState({
@@ -44,7 +43,7 @@ function CheckoutSteps() {
     email: user.email,
     address:user.address,
     payment_method: "",
-    discount:false
+  
   })
 
 
@@ -77,21 +76,22 @@ function CheckoutSteps() {
       && input.address !== ""
       && input.phone_number !== "")
       setInput(input)
-      dispacth(userUpdate(user.id, input))
-      dispacth(getCart(user.id))
+      dispatch(userUpdate(user.id, input))
+      dispatch(getCart(user.id))
+      dispatch(applyDiscount(cart.id, total_amountDiscount))
       navigate('/order')  
     } 
     
     const checkDiscount = (e) => {
       e.preventDefault();
       if(promoCode === "HENRYCELL"){
-        input.discount=true
+       
         setPromoCode('HENRYCELL')
         setHasDiscount(true);
         setErrorCode(false)
-        if(!hasDiscount) {
-          dispatch(applyDiscount(cart.id,total_amountDiscount))
-        }
+        // if(!hasDiscount) {
+        //   dispatch(applyDiscount(cart.id,total_amountDiscount))
+        // }
       }else{
         setHasDiscount(false)
         setErrorCode(true)
@@ -151,7 +151,7 @@ function CheckoutSteps() {
                       <hr />
                     </div>
                     <span class="text-muted"></span>
-                    <span class="text-muted">Price: ${''}{numberFormat(p.price)}</span>
+                    <span class="text-muted">Price: ${''}{numberFormat(p.price_total)}</span>
                     </>
                 </li> )
                 }): null
