@@ -195,7 +195,7 @@ useEffect(()=>{
         resetFile()
     }
 },[product])
-    console.log(product)
+    //console.log(product)
     return(
         <>
         <div className={style.container}>
@@ -273,7 +273,7 @@ useEffect(()=>{
                         }              
                     </div>
                     <div>
-                        <p>Categories:</p>
+                        <p>Brand:</p>
                         {
                             categories.length ?
                                 <select className={style.select} name ='categories' onChange={onArrayChange} multiple={true} >
@@ -310,7 +310,7 @@ useEffect(()=>{
                     </div>
                     <div>
                         {Object.keys(errors).length === 0 && Object.keys(fileErrors).length === 0 && Object.keys(input).length > 0 && 
-                        <input type='submit' value= {product? "Edit": "Add"} onClick={onSubmit} className={style.mybtn}/>   
+                        <input type='submit' value= {product? "Save": "Add"} onClick={onSubmit} className={style.mybtn}/>   
                         }
                     </div>
 

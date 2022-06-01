@@ -48,13 +48,39 @@ export default function NavBarAdmin(){
                                                     <button className={style.mybtn} /* onClick={} */>Profile</button>
                                                 </NavLink>
                                             </li>
-                                            {/* <li><a href="/register" className={style.logout}>Register</a></li> */}
+                                            {!window.location.href.includes("/admin/users") ?
+                                            <li>
+                                                <NavLink to="/admin/users">
+                                                    <button className={style.mybtn} /* onClick={} */>Users</button>
+                                                </NavLink>
+                                            </li> : <li></li>
+                                            }
+                                            {!window.location.href.includes("/admin/categories") ?
+                                            <li>
+                                                <NavLink to="/admin/categories">
+                                                    <button className={style.mybtn} /* onClick={} */>Brand</button>
+                                                </NavLink>
+                                            </li> : <li></li>
+                                            }
+                                            {!window.location.href.includes("/admin/products") ?
+                                            <li>
+                                                <NavLink to="/admin/products">
+                                                    <button className={style.mybtn} /* onClick={} */>Products</button>
+                                                </NavLink>
+                                            </li> : <li></li>
+                                            }
                                         </ul>
                                     </div>    
                                 ) : (
                                     <NavLink to="/login" className={style.mybtn}>Log In</NavLink>
                                 )}
-                            <NavLink to="/" className={style.mybtn}>Home</NavLink>                            
+                            <NavLink to="/" className={style.mybtn}>Home</NavLink>
+                            {window.location.href.includes('/admin/') ?
+                                <NavLink to="/admin">
+                                <button className={style.mybtn} /* onClick={} */>DashBoard</button>
+                            </NavLink> 
+                                : null                          
+                            }
                         </div>
                     </div>
                 </div>

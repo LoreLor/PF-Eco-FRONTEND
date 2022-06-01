@@ -2,6 +2,13 @@
     margin-top: 1rem;
     width: 75%;
 }
+.caja{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    margin-top: 50px;
+}
 
 .box{
     display: flex;
@@ -35,16 +42,24 @@
     color: antiquewhite;
 }
 
-.btn{
-    width: 20%;
-    border-radius: 5px;
-    margin-right: 0.5rem;
-    margin-left: 0.5rem;
+.btnAdmin{
+    align-self: center;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0.5rem;
+    background: #F66B0E;
+    font-size: medium;
+    font-weight: 500;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0px 0px 0px 5px;
 }
 
 .content{
     display: flex;
-    
+    width: 80%;
 }
 
 .searchBar{
