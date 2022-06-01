@@ -2,11 +2,11 @@ import React from 'react'
 import style from './Table_Main.module.css'
 
 
-export default function CategoriesTable({array,setEdit}){
+export default function MainTable({array,setEdit}){
 
     function onEdit(e){
         e.preventDefault()
-        setEdit(array.filter(user=> user.id === e.target.value ))
+        setEdit(array.filter(element=> element.id === e.target.value ))
     }
 
     return (

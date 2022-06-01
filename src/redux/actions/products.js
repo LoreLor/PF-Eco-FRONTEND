@@ -39,6 +39,7 @@ import {
     CLEAN_PRODUCTS,
     ORDER_BY_RATING,
     ORDER_BY_ALPHABET,
+    GET_PAID_ORDERS,
     APPLY_DISCOUNT
 } from "./constants";
 
@@ -368,6 +369,18 @@ export const cleanProducts = () => dispatch => {
     })
 }
 
+export const getPaidOrders = () => async (dispatch) => {
+    try {
+        const response = await axios.get(`${SERVER}/cart/paid/all`)
+        const result = response.data
+        dispatch({
+            type: GET_PAID_ORDERS,
+            payload:result
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
 export const applyDiscount = (cartId,newPriceTotal) => async (dispatch) => {
     const json = await axios.put(`${SERVER}/cart/discount/?cartId=${cartId}&&newPriceTotal=${newPriceTotal}`)
     return dispatch({

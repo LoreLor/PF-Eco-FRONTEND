@@ -39,29 +39,10 @@
     font-size: larger;
     color: antiquewhite;
 }
+
+
 .btn{
-    width: 20%;
-    border-radius: 5px;
-    margin-right: 0.5rem;
-    margin-left: 0.5rem;
-}
-
-.deleteBtn{
-    display: flex;
-    
-    background-color: #b20600;
-    color: aliceblue;
-    border: #b20600 1px solid;
-    border-radius: 5px;
-    margin-left: 2rem;
-}
-.admBox{
-    display: flex;
-    padding-left: 1rem;
-}
-
-.btnAdmin{
-    align-self: center;
+    justify-content: center;
     text-transform: uppercase;
     border: none;
     border-radius: 0.5rem;
@@ -71,8 +52,27 @@
     color: #fff;
     display: flex;
     align-items: center;
+    width: max-content;
     gap: 1rem;
     margin: 0px 0px 0px 5px;
+}
+
+.btnsAdm{
+    width: 40%;
+    display: flex;
+}
+
+.deleteBtn{
+    display: flex;
+    background-color: #b20600;
+    color: aliceblue;
+    border: #b20600 1px solid;
+    border-radius: 5px;
+    margin-left: 2rem;
+}
+.admBox{
+    display: flex;
+    padding-left: 1rem;
 }
 
 .content{

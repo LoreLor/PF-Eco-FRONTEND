@@ -18,7 +18,7 @@ export default function MainPage(){
     const [result,setResult] = useState("")
     const [productEdit,setProductEdit] = useState([])
 
-    const searchResult = result ? products.filter((category)=> category.name.includes(result)) : ""
+    const searchResult = result ? products.filter((product)=> product.name.toLowerCase().includes(result.toLowerCase())) : ""
     const array = !result ? products : searchResult
 
     useEffect(()=>{
@@ -32,7 +32,7 @@ export default function MainPage(){
             <div className={style.caja}>
                 <div className={style.content}>
                     <div className={style.searchBar}>  
-                        <SearchBar result={result} setResult={setResult}/>
+                        <SearchBar result={result} setResult={setResult} placeholder={"Search by name..."}/>
                         <EditProduct product={productEdit[0]} products={products} categories={categories} setProductEdit={setProductEdit}/>
                     </div>
                     <div className={style.productsList}>
@@ -40,6 +40,7 @@ export default function MainPage(){
                     </div>
                 </div>
             </div>
+            <br></br>
             <Footer/>
         </div>
     )

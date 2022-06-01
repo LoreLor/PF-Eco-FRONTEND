@@ -53,7 +53,15 @@
     margin-top: 20px;
 }
 
-h2{
+/* h2{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    color: #F66B0E;
+    margin-left: 5px;
+} */
+
+.test{
     display: flex;
     justify-content: center;
     align-items: flex-start;

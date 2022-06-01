@@ -48,6 +48,12 @@
   cursor: pointer;
 }
 
+.titleF{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: antiquewhite;
+}
 
 .dataBox{
   display: flex;
@@ -119,5 +125,5 @@
 }
 
 #special{
-  font-size:x-large;
+  padding-top: 30px;
 }

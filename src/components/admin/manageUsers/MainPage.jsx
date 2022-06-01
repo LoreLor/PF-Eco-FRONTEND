@@ -18,7 +18,7 @@ export default function MainPage(){
     const [result,setResult] = useState("")
     const [userEdit,setUserEdit] = useState([])
 
-    const searchResult = result ? users.filter((user)=> user.user_name.includes(result)) : ""
+    const searchResult = result ? users.filter((user)=> user.user_name.toLowerCase().includes(result.toLowerCase())) : ""
     const array = !result ? users : searchResult
 
 
@@ -31,7 +31,7 @@ export default function MainPage(){
             <div className={style.caja}>
                 <div className={style.content}>
                     <div className={style.searchBar}>
-                    <SearchBar result={result} setResult={setResult}/>
+                    <SearchBar result={result} setResult={setResult} placeholder={"Search by name..."}/>
                     <EditUser user={userEdit[0]} setUserEdit={setUserEdit}/>
                     </div>
                     <div className={style.usersList}>
@@ -39,6 +39,7 @@ export default function MainPage(){
                     </div>
                 </div>
             </div>
+            <br></br>
             <Footer/>
         </div>
     )
