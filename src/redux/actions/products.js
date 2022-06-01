@@ -297,7 +297,7 @@ export const getShopping = (userId) => async (dispatch) => {
 export const getFavs = (userId) => async (dispatch) => {
     try{
         const {data} = await axios.get(`${SERVER}/favorites?userId=${userId}`)
-        dispatch({
+        return dispatch({
             type: GET_FAVS,
             payload: data
         })
