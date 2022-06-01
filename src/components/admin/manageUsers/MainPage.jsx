@@ -26,25 +26,21 @@ export default function MainPage(){
         dispatch(getAllUsers())
     },[dispatch])
     return (
-        <>
         <div>
             <NavBarAdmin/>
+            <div className={style.caja}>
+                <div className={style.content}>
+                    <div className={style.searchBar}>
+                    <SearchBar result={result} setResult={setResult}/>
+                    <EditUser user={userEdit[0]} setUserEdit={setUserEdit}/>
+                    </div>
+                    <div className={style.usersList}>
+                    <UsersTable array={array} setUserEdit={setUserEdit} myUser={user}/>
+                    </div>
+                </div>
+            </div>
+            <Footer/>
         </div>
-
-        <div className={style.content}>
-            <div className={style.searchBar}>
-            <SearchBar result={result} setResult={setResult}/>
-            <EditUser user={userEdit[0]} setUserEdit={setUserEdit}/>
-            </div>
-            <div className={style.usersList}>
-            <UsersTable array={array} setUserEdit={setUserEdit} myUser={user}/>
-            </div>
-
-        </div>
-        <div id={style.footer}>
-                <Footer/>
-            </div>
-        </>
     )
 
 }

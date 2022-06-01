@@ -1,6 +1,7 @@
 .errors {
-  color: red;
-  font-size: 12px;
+  color: rgb(239, 53, 53);
+  font-size: large;
+  padding-top: 20px;
 }
 
 .input{
