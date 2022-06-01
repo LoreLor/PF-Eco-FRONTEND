@@ -31,7 +31,7 @@ export default function MainPage (){
 
         <div className={style.content}>
             <div className={style.searchBar}>
-            <SearchBar result={result} setResult={setResult}/>
+            <SearchBar result={result} setResult={setResult} placeholder={"Search by name..."}/>
             <EditCategory category={categoryEdit[0]} categories ={categories} setCategoryEdit={setCategoryEdit}/>
             </div>
 

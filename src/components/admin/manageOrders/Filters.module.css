@@ -1,0 +1,21 @@
+.select{
+    width: 100%;
+    margin-top: 0.5rem;
+    outline: none;
+    padding: 10px;
+    border: 0;
+    background-color: #E1E1E1;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: box-shadow 0.15s;
+    color: #112B3C
+}
+
+.select:hover{
+    box-shadow: 0 0 0 3px #F66B0E;
+}
+
+#span{
+    font-weight: bold;
+    margin-top: 0.5rem;
+}

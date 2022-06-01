@@ -15,6 +15,30 @@
     background-color: #112B3C;
 }
 
+.shipping{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border: #F66B0E 1px solid;
+    border-radius: 5px;
+    background-color: #F66B0E;
+}
+
+.delivered{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border: #6ecb63 1px solid;
+    border-radius: 5px;
+    background-color: #6ecb63;
+}
+
 .box2{
     display: flex;
     justify-content: space-evenly;
@@ -33,6 +57,21 @@
     margin-left: 0.5rem;
     font-size: larger;
     color: antiquewhite;
+}
+
+.title2{
+    width: 60%;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    font-size: x-large;
+    color: antiquewhite;
+}
+
+.idNum{
+    width: 20%;
+    color: antiquewhite;
+    font-style: italic;
+    font-size: small;
 }
 
 .btn{

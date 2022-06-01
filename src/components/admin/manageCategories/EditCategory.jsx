@@ -84,7 +84,7 @@ export default function CategoryForm({category,categories,setCategoryEdit}){
         event.preventDefault()
         try {
         let response = null
-        response = await axios.delete(`http://localhost:3001/categories/${category.id}`)
+        response = await axios.delete(`${SERVER}/categories/${category.id}`)
         const result = response.data
        
         if(result){

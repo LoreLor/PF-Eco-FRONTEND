@@ -1,7 +1,7 @@
 import React from "react"
 import style from './searchBar.module.css'
 
-export default function SearchBar ({result,setResult}){
+export default function SearchBar ({result,setResult,placeholder}){
 
     function handleSearch (e){
         e.preventDefault()
@@ -9,7 +9,7 @@ export default function SearchBar ({result,setResult}){
     }
     return(
         <div className={style.subBox}>
-            <input type="search" value={result} onChange={handleSearch} placeholder="Search by name..." className={style.inputAdmin}/>
+            <input type="search" value={result} onChange={handleSearch} placeholder={placeholder} className={style.inputAdmin}/>
         </div>
     )
 }
