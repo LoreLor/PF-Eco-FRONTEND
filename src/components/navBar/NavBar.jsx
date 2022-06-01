@@ -16,20 +16,11 @@ export default function NavBar({ categories, paginado }) {
     const user = useSelector((state)=>state.users.userInfo)
 
     const cartUser = useSelector((state) => state.products.cart)
-    // console.log('cartUser :>> ', cartUser);
     const cartGuest = useSelector((state) => state.products.cartGuest) 
     const cart = user && user.id? cartUser.details : cartGuest
     const qty = cart && [].concat(cart).reduce((a, c) => a + c.bundle, 0)
 
-// console.log('cartbun :>> ', cart);
     const dispatch = useDispatch();
-
-    useEffect(()=>{
-        dispatch(getCart(cartUser.id))
-
-    },[])
-
-    // 
 
     function handleLogout() {
         dispatch(logout())
@@ -39,9 +30,6 @@ export default function NavBar({ categories, paginado }) {
     function handleClick(e) {
         e.preventDefault();
         dispatch(getAllProducts())
-        .then(r => {
-            window.location.reload();
-        })
     }
 
     return (
