@@ -38,7 +38,8 @@ import {
     CLEAN_CART_GUEST,
     CLEAN_PRODUCTS,
     ORDER_BY_RATING,
-    ORDER_BY_ALPHABET
+    ORDER_BY_ALPHABET,
+    DISCOUNT_PRICE
 } from "./constants";
 
 import axios from 'axios';
@@ -370,5 +371,11 @@ export const cleanCartGuest = () => dispatch => {
 export const cleanProducts = () => dispatch => {
     dispatch({
         type: CLEAN_PRODUCTS
+    })
+}
+
+export const discountpPrice = ()=> (dispatch) => {
+    dispatch({
+        type: DISCOUNT_PRICE,
     })
 }
