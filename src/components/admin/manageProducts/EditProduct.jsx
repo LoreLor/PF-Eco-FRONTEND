@@ -199,6 +199,7 @@ useEffect(()=>{
         resetFile()
     }
 },[product])
+
     return(
         <>
         <div className={style.container}>
@@ -276,7 +277,7 @@ useEffect(()=>{
                         }              
                     </div>
                     <div>
-                        <p>Categories:</p>
+                        <p>Brand:</p>
                         {
                             categories.length ?
                                 <select className={style.select} name ='categories' onChange={onArrayChange} multiple={true} >

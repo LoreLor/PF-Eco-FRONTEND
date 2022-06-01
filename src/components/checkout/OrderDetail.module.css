@@ -67,6 +67,21 @@
   }
 
   .shipping{
-    font-size: small;
+    font-size: 16px;
+    margin: 2px;
+  }
 
+  .btn{
+    color: #FFFFFF; 
+    background-color: #F66B0E; 
+    border-color: #393f44; 
+    border-radius: 8px;
+    height: 40px;
+    display: block;
+    margin-bottom: 50px;
+  }
+  .btn:hover{
+      color: #FFFFFF; 
+      background-color: #393f44; 
+      border-color: #393f44; 
   }

@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate} from "react-router-dom";
 import inputValidations from "../checkout/validations/inputValidations";
 import {getSingleUser, userUpdate} from '../../redux/actions/user'
-import { closeCart, getCart, paidCartTemporal } from "../../redux/actions/products";
+import { closeCart, getCart, paidCartTemporal, applyDiscount } from "../../redux/actions/products";
 import s from "./CheckoutSteps.module.css";
 import Footer from "../Footer/Footer";
 import numberFormat from "../detalleProducto/numberFormat";
 import submitValidations from "../registro/validators/submitValidations";
+import Swal from 'sweetalert2';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 
 
@@ -17,11 +19,22 @@ function CheckoutSteps() {
   const dispacth = useDispatch();
   const user = useSelector((state)=>state.users.userInfo)
   const cart = useSelector((state) => state.products.cart)
-  console.log('user :>> ', user);
+  const orden = []
 
+  const [errors, setErrors] = useState({});
+
+  //---- Cupon de Descuento
+  const [hasDiscount, setHasDiscount] = useState(false);
+  const [promoCode, setPromoCode] = useState('');
+  const [errorCode, setErrorCode] = useState(false)
+
+  //---- Total y Deescuentos
   const toPrice = (num) => Number(num.toFixed(2)); //ejemplo 6.123 -'5.12' - 5.12
-  const amount= toPrice(cart.details.reduce((a, c) => a + c.bundle * c.price, 0));
-  const total_amount= (cart.price_total - 5)
+  // const amount= toPrice(cart.details.reduce((a, c) => a + c.bundle * c.price, 0));
+  const discount = (cart.price_total*0.25).toFixed(2)
+  const total_amount= (cart.price_total).toFixed(2) 
+  const total_amountDiscount= (total_amount - discount).toFixed(2)
+  const dispatch = useDispatch();
 
 
   const [input, setInput] = useState({
@@ -30,10 +43,9 @@ function CheckoutSteps() {
     phone_number:user.phone_number,
     email: user.email,
     address:user.address,
-    payment_method: ""
+    payment_method: "",
+    discount:false
   })
-
-  const [errors, setErrors] = useState({});
 
 
   useEffect(()=>{
@@ -67,10 +79,31 @@ function CheckoutSteps() {
       setInput(input)
       dispacth(userUpdate(user.id, input))
       dispacth(getCart(user.id))
-
       navigate('/order')  
-
     } 
+    
+    const checkDiscount = (e) => {
+      e.preventDefault();
+      if(promoCode === "HENRYCELL"){
+        input.discount=true
+        setPromoCode('HENRYCELL')
+        setHasDiscount(true);
+        setErrorCode(false)
+        if(!hasDiscount) {
+          dispatch(applyDiscount(cart.id,total_amountDiscount))
+        }
+      }else{
+        setHasDiscount(false)
+        setErrorCode(true)
+        Swal.fire({
+          title: 'Verify your Promo Code',
+          text:'Verify your Promo Code',
+          icon:'error'
+        })
+      }
+    }
+
+
 
   return (
     <div className={s.box}>
@@ -114,11 +147,11 @@ function CheckoutSteps() {
                     <div key={p.id}>
                       <h6 class="my-0">Product name: {p.name}</h6>
                       <img src={p.img} className={s.small} alt=""></img>
-                      <small class="text-muted">Brief description: {p.description}</small>
+                      <small class="text-muted">Qty: {p.bundle}</small>
                       <hr />
                     </div>
-                    <span class="text-muted">Qty:{p.bundle}</span>
-                    <span class="text-muted">Price:{numberFormat(p.price)}</span>
+                    <span class="text-muted"></span>
+                    <span class="text-muted">Price: ${''}{numberFormat(p.price)}</span>
                     </>
                 </li> )
                 }): null
@@ -127,25 +160,30 @@ function CheckoutSteps() {
                 <li class="list-group-item d-flex justify-content-between bg-light">
                   <div class="text-success">
                     <h6 class="my-0">Promo code</h6>
-                    <small>EXAMPLECODE</small>
+                    <small>{promoCode}</small>
                   </div>
-                  <span class="text-success">-$5</span>
+                  <span class="text-success">${' '}{discount}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
-                  <span>Total (AR)</span>
-                  <strong>{numberFormat(total_amount)}</strong>
+                  <span>Total Amount </span>
+                  <strong>${' '}{hasDiscount===false? total_amount:total_amountDiscount}</strong>
                 </li>
               </ul>
             <form class="card p-2" >
               <div class="input-group">
                 <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Promo code"
+                    type="text"
+                    class="form-control"
+                    placeholder="Promo code"
+                    onChange={(e) =>{setPromoCode(e.target.value)}}
                 />
                 <div class="input-group-append">
-                  <button type="submit" class="btn btn-secondary">
-                    Redeem
+                  <button 
+                    type="submit" 
+                    class="btn btn-secondary"
+                    onClick={checkDiscount}
+                  >
+                    Apply Promo
                   </button>
                 </div>
               </div>
@@ -244,7 +282,7 @@ function CheckoutSteps() {
 
               <div class="mb-3">
                 <label htmlFor="phone_number" className={s.label}>
-                  Phone Number <span class="text-muted">(Optional)</span>
+                  Phone Number <span class="text-muted"></span>
                 </label>
                 <input
                   type="text"
@@ -291,9 +329,10 @@ function CheckoutSteps() {
               </div>
             </form>
             ) : null
-            }
+          }
           </div>
         </div>
+          <button className={s.btn} onClick={()=>navigate('/cart')}><ArrowLeftIcon > </ArrowLeftIcon>GO BACK</button>
       </div>
       </div>
       <Footer />  

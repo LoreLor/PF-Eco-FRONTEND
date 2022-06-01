@@ -15,7 +15,7 @@ export default function MainTable({array,setEdit}){
                 return(
                     <div key={element.id} className={element && element.isActive === false ? style.box2:style.box}>
                         <h3 className={style.title}>{element && element.isActive === false ? `${element.name} (Inactive)`: element.name}</h3>
-                        <button value={element.id} className={style.btn} onClick={onEdit}>Edit</button>
+                        <button value={element.id} className={style.btnAdmin} onClick={onEdit}>Edit</button>
                     </div>
                 )
             }):

@@ -45,7 +45,8 @@ import {
     CLEAN_FAV,
     CLEAN_CART_GUEST,
     CLEAN_PRODUCTS,
-    GET_PAID_ORDERS
+    GET_PAID_ORDERS,
+    APPLY_DISCOUNT
 } from "../actions/constants";
 
 
@@ -548,6 +549,11 @@ export const productsReducer = (state = initialState, action) => {
                 ...state,
                 paidOrders: action.payload
             } 
+        case APPLY_DISCOUNT:
+            return{
+                ...state,
+                cart: action.payload
+            }
         default:
             return state
     }

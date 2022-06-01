@@ -2,6 +2,13 @@
     margin-top: 1rem;
     width: 100%;
 }
+.caja{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    margin-top: 50px;
+}
 .box{
     display: flex;
     justify-content: space-evenly;
@@ -58,20 +65,19 @@
     text-transform: uppercase;
     border: none;
     border-radius: 0.5rem;
-    background: #6ecb63;
+    background: #F66B0E;
     font-size: medium;
     font-weight: 700;
     color: #fff;
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 0.5rem;
     margin: 0px 0px 0px 5px;
 }
 
 .content{
     display: flex;
-    
+    width: 50%;
 }
 .searchBar{
     width: 30%;
@@ -86,10 +92,6 @@
 .usersList::-webkit-scrollbar {
     display: none;
     }
-
-#footer{
-    margin-top: 2rem;
-}
 
 .coincidences{
     display: flex;
