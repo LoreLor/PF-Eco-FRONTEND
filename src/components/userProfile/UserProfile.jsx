@@ -6,11 +6,11 @@ import Accordion from "./Accordion";
 import style from "./userProfile.module.css"
 import activeValidations from "../registro/validators/activeValidations"
 import PasswordValidations from "./validators/PasswordValidation"
-import { submitA,submitB} from "./validators/SubmitValidators";
+import { submitA,submitB,submitD} from "./validators/SubmitValidators";
 import { toast } from "react-toastify";
 import axios from "axios";
 import SERVER from "../../server";
-import { profileUpdate, logout } from "../../redux/actions/user";
+import { profileUpdate, logout, userUpdate } from "../../redux/actions/user";
 import { cleanCart, cleanFav } from "../../redux/actions/products";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
@@ -39,10 +39,16 @@ export default function UserProfile (){
         phone_number: "",
     })
 
+    const [google, setGoogle] =useState({
+        password: "",
+       
+    })
+
     const [errorsA, setErrorsA] =useState({})
     const [errorsB, setErrorsB] =useState({})
     const [errorsC, setErrorsC] =useState({})
-
+    const [errorsD, setErrorsD] =useState({})
+    
     function handleChangeA(e){
         setErrorsA(activeValidations({...profile,[e.target.name]:e.target.value}))
         setProfile({
@@ -66,6 +72,16 @@ export default function UserProfile (){
             [e.target.name]: e.target.value
         })
     }
+
+    function handleChangeD(e){
+        setErrorsD(activeValidations({...google,[e.target.name]:e.target.value}))
+        setGoogle({
+            ...google,
+            [e.target.name]: e.target.value
+        })
+    }
+
+
 
     async function handleSubmitA(e){
         e.preventDefault()
@@ -174,6 +190,19 @@ export default function UserProfile (){
         }
     }
 
+    async function handleSubmitD(e){
+        e.preventDefault()
+        setErrorsD(google)
+        dispatch(userUpdate(user.id, google))           
+        dispatch(logout())
+        dispatch(cleanCart())
+        dispatch(cleanFav())
+        toast.success(`Password Created`, {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
+        navigate("/login",{replace:true})                 
+    }
+
     function partDate(e){
         return e.split("T")[0]
     }
@@ -256,6 +285,14 @@ useEffect(()=>{
                     <input className={errorsB?.conf_password? style.inputError : style.input} name="conf_password" type="password" onChange={handleChangeB}/>
                     {errorsB.conf_password && (<p className={style.errors}>{errorsB.conf_password}</p>)}
                     <input className={style.button} type="submit" value="Edit" onClick={handleSubmitB}/>
+                </form>
+            </Accordion>
+            <Accordion title={"Manage password Google"} content={"Change your password every time you need it"}>
+                <form onSubmit={handleSubmitD}>
+                    <p>Password:</p>
+                    <input className={errorsD?.password? style.inputError : style.input} name="password" type="password" onChange={handleChangeD}/>
+                    {errorsD.password && (<p className={style.errors}>{errorsD.password}</p>)}
+                    <input className={style.button} type="submit" value="Submit" onClick={handleSubmitD}/>
                 </form>
             </Accordion>
             <Accordion title={"Shipping information"} content={"Edit your address and other contact info."}>
