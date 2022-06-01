@@ -21,7 +21,7 @@ function PaypalCheckoutButton() {
     };
 
     if(paidFor){
-        dispatch(paidCartTemporal(cart.id))
+        dispatch(paidCartTemporal(user.id,cart.id))
         Swal.fire({
             icon: 'success',
             title: 'Succefully Purchase',

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate} from "react-router-dom";
 import inputValidations from "../checkout/validations/inputValidations";
 import {getSingleUser, userUpdate} from '../../redux/actions/user'
-import { closeCart, getCart, paidCartTemporal } from "../../redux/actions/products";
+import { closeCart, getCart, paidCartTemporal, applyDiscount } from "../../redux/actions/products";
 import s from "./CheckoutSteps.module.css";
 import Footer from "../Footer/Footer";
 import numberFormat from "../detalleProducto/numberFormat";
@@ -30,10 +30,11 @@ function CheckoutSteps() {
 
   //---- Total y Deescuentos
   const toPrice = (num) => Number(num.toFixed(2)); //ejemplo 6.123 -'5.12' - 5.12
-  const amount= toPrice(cart.details.reduce((a, c) => a + c.bundle * c.price, 0));
+  // const amount= toPrice(cart.details.reduce((a, c) => a + c.bundle * c.price, 0));
   const discount = (cart.price_total*0.25).toFixed(2)
   const total_amount= (cart.price_total).toFixed(2) 
   const total_amountDiscount= (total_amount - discount).toFixed(2)
+  const dispatch = useDispatch();
 
 
   const [input, setInput] = useState({
@@ -88,6 +89,9 @@ function CheckoutSteps() {
         setPromoCode('HENRYCELL')
         setHasDiscount(true);
         setErrorCode(false)
+        if(!hasDiscount) {
+          dispatch(applyDiscount(cart.id,total_amountDiscount))
+        }
       }else{
         setHasDiscount(false)
         setErrorCode(true)
@@ -143,11 +147,11 @@ function CheckoutSteps() {
                     <div key={p.id}>
                       <h6 class="my-0">Product name: {p.name}</h6>
                       <img src={p.img} className={s.small} alt=""></img>
-                      <small class="text-muted">Qty:{p.bundle}</small>
+                      <small class="text-muted">Qty: {p.bundle}</small>
                       <hr />
                     </div>
                     <span class="text-muted"></span>
-                    <span class="text-muted">Price:${' '}{numberFormat(p.price)}</span>
+                    <span class="text-muted">Price: ${''}{numberFormat(p.price)}</span>
                     </>
                 </li> )
                 }): null
@@ -278,7 +282,7 @@ function CheckoutSteps() {
 
               <div class="mb-3">
                 <label htmlFor="phone_number" className={s.label}>
-                  Phone Number <span class="text-muted">(Optional)</span>
+                  Phone Number <span class="text-muted"></span>
                 </label>
                 <input
                   type="text"
