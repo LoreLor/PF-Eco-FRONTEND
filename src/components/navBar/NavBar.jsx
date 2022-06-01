@@ -21,8 +21,6 @@ export default function NavBar({ categories, paginado }) {
     const cart = user && user.id? cartUser.details : cartGuest
     const qty = cart && [].concat(cart).reduce((a, c) => a + c.bundle, 0)
 
-   
-
     function handleLogout() {
         dispatch(logout())
         window.location.reload();
