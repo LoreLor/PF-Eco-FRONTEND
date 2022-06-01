@@ -110,7 +110,7 @@ export default function EditUser({user,setUserEdit}){
             <button name="isActive" value={input.isActive} onClick={onChange} className={style.btnX}>Change</button>
             </div>
             <br/>
-            <input type="submit" value="Edit" onClick={onSubmit} className={style.btnX}/>
+            <input type="submit" value="Save" onClick={onSubmit} className={style.btnX}/>
             </div>
         </form>
            </>

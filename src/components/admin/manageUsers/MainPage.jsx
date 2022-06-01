@@ -18,7 +18,7 @@ export default function MainPage(){
     const [result,setResult] = useState("")
     const [userEdit,setUserEdit] = useState([])
 
-    const searchResult = result ? users.filter((user)=> user.user_name.includes(result)) : ""
+    const searchResult = result ? users.filter((user)=> user.user_name.toLowerCase().includes(result.toLowerCase())) : ""
     const array = !result ? users : searchResult
 
 

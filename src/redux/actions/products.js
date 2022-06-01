@@ -38,7 +38,8 @@ import {
     CLEAN_CART_GUEST,
     CLEAN_PRODUCTS,
     ORDER_BY_RATING,
-    ORDER_BY_ALPHABET
+    ORDER_BY_ALPHABET,
+    GET_PAID_ORDERS
 } from "./constants";
 
 import axios from 'axios';
@@ -371,4 +372,17 @@ export const cleanProducts = () => dispatch => {
     dispatch({
         type: CLEAN_PRODUCTS
     })
+}
+
+export const getPaidOrders = () => async (dispatch) => {
+    try {
+        const response = await axios.get(`${SERVER}/cart/paid/all`)
+        const result = response.data
+        dispatch({
+            type: GET_PAID_ORDERS,
+            payload:result
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }

@@ -44,7 +44,8 @@ import {
     CLEAN_CART,
     CLEAN_FAV,
     CLEAN_CART_GUEST,
-    CLEAN_PRODUCTS
+    CLEAN_PRODUCTS,
+    GET_PAID_ORDERS
 } from "../actions/constants";
 
 
@@ -71,7 +72,8 @@ const initialState = {
     cart: [],
     shopping: [],
     cartGuest: [],
-    favs: []
+    favs: [],
+    paidOrders:[]
 }
 
 export const productsReducer = (state = initialState, action) => {
@@ -107,7 +109,7 @@ export const productsReducer = (state = initialState, action) => {
 
         case GET_PRODUCT_BY_NAME_SUCCESS:
             if(state.stateFilter.min > 1 && state.stateFilter.max > 1 && !state.stateFilter.category) {
-                var filterByNameRange = action.payload.filter(p => p.price >= parseInt(state.stateFilter.min) && p.price <= parseInt(state.stateFilter.max))
+                let filterByNameRange = action.payload.filter(p => p.price >= parseInt(state.stateFilter.min) && p.price <= parseInt(state.stateFilter.max))
                 return {
                     ...state,
                     loading: false,
@@ -116,7 +118,7 @@ export const productsReducer = (state = initialState, action) => {
                     filters: filterByNameRange
                 }
             } else if(state.stateFilter.min > 1 && state.stateFilter.max > 1 && state.stateFilter.category) {
-                var filterByNameRange = action.payload.filter(p => p.price >= parseInt(state.stateFilter.min) && p.price <= parseInt(state.stateFilter.max))
+                let filterByNameRange = action.payload.filter(p => p.price >= parseInt(state.stateFilter.min) && p.price <= parseInt(state.stateFilter.max))
                 filterByNameRange = filterByNameRange.filter(p => p.categories.find(d => d.name === state.stateFilter.category))
                 return {
                     ...state,
@@ -126,7 +128,7 @@ export const productsReducer = (state = initialState, action) => {
                     filters: filterByNameRange
                 }
             } else if(state.stateFilter.category) {
-                var filterByNameRange = action.payload.filter(p => p.categories.find(d => d.name === state.stateFilter.category))
+                let filterByNameRange = action.payload.filter(p => p.categories.find(d => d.name === state.stateFilter.category))
                 return {
                     ...state,
                     loading: false,
@@ -374,7 +376,7 @@ export const productsReducer = (state = initialState, action) => {
                 cart: action.payload
             }
         case GET_CART:
-            action.payload.details.sort(function (a, b) {
+            action.payload.details?.sort(function (a, b) {
                 if (a.id > b.id) return 1;
                 if (a.id < b.id) return -1;
                 return 0
@@ -540,7 +542,12 @@ export const productsReducer = (state = initialState, action) => {
                     products: [],
                     showedProducts: [],
                     filters: [],
-                } 
+                }
+        case GET_PAID_ORDERS:
+            return{
+                ...state,
+                paidOrders: action.payload
+            } 
         default:
             return state
     }

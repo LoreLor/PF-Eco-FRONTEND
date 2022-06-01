@@ -1,0 +1,25 @@
+.content{
+    display: flex;
+    
+}
+
+.searchBar{
+    width: 30%;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+.ordersList{
+    width: 70%;
+    margin-top: 0.5rem;
+    height: 38rem;
+    overflow-x: overlay;
+}
+
+#footer{
+    margin-top: 2rem;
+}
+
+.ordersList::-webkit-scrollbar {
+    display: none;
+    }

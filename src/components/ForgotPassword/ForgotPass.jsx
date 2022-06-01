@@ -24,7 +24,7 @@ export default function ForgotPass(){
         <div className={style.box}>
             <div className={style.container}>
             <h1>Forgot password</h1>
-            <form onSubmit={e => handleSubmit(e)}>
+            <form  id={style.formDiv}onSubmit={e => handleSubmit(e)}>
                 <label for='email'>Email:</label>
                 <input className={style.input_email} type='email' name='email' id='email' onChange={e => handleSetEmail(e)}/>
                 <br/>

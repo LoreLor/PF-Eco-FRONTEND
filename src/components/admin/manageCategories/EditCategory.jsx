@@ -150,7 +150,7 @@ export default function CategoryForm({category,categories,setCategoryEdit}){
                         <div>
                             {
                                 Object.keys(errors).length === 0 && Object.keys(input).length > 0 && 
-                                <input type='submit' value= {category? "Edit" : "Add"} onClick={handleSubmit} className={style.mybtn}/>   
+                                <input type='submit' value= {category? "Save" : "Add"} onClick={handleSubmit} className={style.mybtn}/>   
                             }   
                         </div>
                     <div>

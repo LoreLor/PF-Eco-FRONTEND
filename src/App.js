@@ -21,6 +21,7 @@ import  UserProfile  from './components/userProfile/UserProfile';
 import UsersPage from './components/admin/manageUsers/MainPage';
 import CategoriesPage from './components/admin/manageCategories/MainPage'
 import ProductsPage from './components/admin/manageProducts/MainPage'
+import OrdersPage from './components/admin/manageOrders/MainPage'
 import ForgotPass from './components/ForgotPassword/ForgotPass';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path='/admin/users' element={<PrivateAdmin><UsersPage/></PrivateAdmin>}/>
         <Route path='/admin/categories' element={<PrivateAdmin><CategoriesPage/></PrivateAdmin>}/>
         <Route path='/admin/products' element={<PrivateAdmin><ProductsPage/></PrivateAdmin>}/>
+        <Route path='/admin/orders' element={<PrivateAdmin><OrdersPage/></PrivateAdmin>}/>
         <Route path='/profile' element={<PrivateProfile><UserProfile/></PrivateProfile>}/>
         <Route path ='/login' element={<Login />} />
         <Route path = '/home/:id' element={<ProductDetail/>}/>

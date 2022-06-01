@@ -25,9 +25,10 @@ export default function NavBar({ categories, paginado }) {
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        dispatch(getCart(cartUser.id))
+        if(user & user.id){dispatch(getCart(user.id))}
+        
 
-    },[])
+    },[dispatch, user])
 
     // 
 

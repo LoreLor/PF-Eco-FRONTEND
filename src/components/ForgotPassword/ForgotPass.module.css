@@ -19,7 +19,7 @@
   h1{
     color: #F66B0E;
   }
-  form{
+  .formDiv{
     display: flex;
     justify-content: center;
     flex-direction: column;

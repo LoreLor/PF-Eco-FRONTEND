@@ -19,9 +19,6 @@
 .containerProd{
   display: flex;
   position: absolute;
-/*   top: 48%;
-  left: 50%;
-  transform: translate(-40%, -35%); */
   padding: 15px;
   width: 75%;
   margin-top: 15rem;
@@ -34,9 +31,6 @@
 .containerProd2{
   display: flex;
   position: absolute;
-/*   top: 48%;
-  left: 50%;
-  transform: translate(-50%, -35%); */
   padding: 15px;
   width: 75%;
   margin-top: 40rem;
@@ -145,8 +139,6 @@
 .categories{
   display: flex;
   justify-content: center;
-/*   color: aliceblue;
-  background-color: #112B3C; */
 }
 
 .imgbtn{
@@ -281,7 +273,7 @@
 }
 
 #special{
-  font-size:x-large;
+  padding-top: 22.1px;
 }
 
 #prodTitle{

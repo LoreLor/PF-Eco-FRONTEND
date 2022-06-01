@@ -199,7 +199,6 @@ useEffect(()=>{
         resetFile()
     }
 },[product])
-    console.log(product)
     return(
         <>
         <div className={style.container}>
@@ -314,7 +313,7 @@ useEffect(()=>{
                     </div>
                     <div>
                         {Object.keys(errors).length === 0 && Object.keys(fileErrors).length === 0 && Object.keys(input).length > 0 && 
-                        <input type='submit' value= {product? "Edit": "Add"} onClick={onSubmit} className={style.mybtn}/>   
+                        <input type='submit' value= {product? "Save": "Add"} onClick={onSubmit} className={style.mybtn}/>   
                         }
                     </div>
 

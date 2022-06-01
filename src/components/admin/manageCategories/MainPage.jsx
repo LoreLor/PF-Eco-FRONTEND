@@ -16,7 +16,7 @@ export default function MainPage (){
     const [result,setResult] = useState("")
     const [categoryEdit,setCategoryEdit] = useState([])
 
-    const searchResult = result ? categories.filter((category)=> category.name.includes(result)) : ""
+    const searchResult = result ? categories.filter((category)=> category.name.toLowerCase().includes(result.toLowerCase())) : ""
     const array = !result ? categories : searchResult
 
     useEffect(()=>{
