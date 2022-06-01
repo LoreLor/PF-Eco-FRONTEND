@@ -182,6 +182,7 @@ function CheckoutSteps() {
                     type="submit" 
                     class="btn btn-secondary"
                     onClick={checkDiscount}
+                    disabled={hasDiscount}
                   >
                     Apply Promo
                   </button>
