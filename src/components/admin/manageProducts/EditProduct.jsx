@@ -1,6 +1,6 @@
 import axios from "axios"
 import React,{useEffect,useRef,useState} from "react"
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import { getAllProducts} from "../../../redux/actions/products"
 import { getCategories } from "../../../redux/actions/categories"
 import style from './EditProduct.module.css'
@@ -199,7 +199,7 @@ useEffect(()=>{
         resetFile()
     }
 },[product])
-
+    console.log(errors)
     return(
         <>
         <div className={style.container}>
@@ -236,10 +236,7 @@ useEffect(()=>{
         </>}
         </div>
 
-
-
-
-        <FormModal isOpen={isOpen} setIsOpen={setIsOpen}>
+        <FormModal isOpen={isOpen} setIsOpen={setIsOpen} resetData={setErrors} resetFile={resetFileBtn}>
         <div className={product? style.containerProd2:style.containerProd}>
                 <div>
 
@@ -285,7 +282,7 @@ useEffect(()=>{
                         <option key={category.id} value={category.name} className={style.categories}>{category.name}</option>
                         )})}
                         </select>:<span> No categories yet</span>}
-                        {errors?.categories && <p className={style.errors}>{errors?.categories}</p>}
+                        {errors.categories && <p className={style.errors}>{errors.categories}</p>}
                     </div>
                     <div>
                         {input.categories && input.categories.map((category)=>{

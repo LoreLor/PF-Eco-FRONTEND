@@ -21,7 +21,7 @@ export default function Home() {
     const allProducts = useSelector((state) => state.products);
     const allCategories = useSelector((state) => state.products.categoriesDb);
     const fav = useSelector((state) => state.products.favs);
-    console.log(allProducts)
+    
     const [order, setOrder] = useState('');
     const [currentPg, setCurrentPg] = useState(1); //setea la pagina en 1
     const [productPerPg, setProductPerPg] = useState(12);
