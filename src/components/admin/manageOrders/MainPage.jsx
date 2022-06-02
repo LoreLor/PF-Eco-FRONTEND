@@ -20,12 +20,12 @@ export default function MainPage(){
         filter:"All",
         order:"date"
     })
-    console.log(orders)
+   
     const searchResult = result ? orders.filter((order)=> order.user.email.toLowerCase().includes(result.toLowerCase())) : ""
     const Data = !result ? orders : searchResult
     const array = Data ? SortAndFilter(Data,filter) : null
 
-    console.log(filter)
+   
     useEffect(()=>{
         dispatch(getPaidOrders())
     },[dispatch])
