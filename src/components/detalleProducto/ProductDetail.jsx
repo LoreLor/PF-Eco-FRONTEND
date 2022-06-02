@@ -8,7 +8,7 @@ import numberFormat from "./numberFormat";
 
 import { getCategories } from "../../redux/actions/categories";
 
-import { addCartProduct, addCartProductGuest, cleanProducts, cleanReview, getProductById, getReviewsProduct, limpiarDetail } from "../../redux/actions/products";
+import { addCartProduct, addCartProductGuest, cleanProducts, cleanReview, getCart, getProductById, getReviewsProduct, limpiarDetail } from "../../redux/actions/products";
 
 import style from './ProductDetail.module.css'
 
@@ -30,8 +30,12 @@ export default function ProductDetail() {
 
     useEffect(() => {
         dispatch(getProductById(id))
-        dispatch(getCategories())
-        dispatch(getReviewsProduct(id))
+        .then( () => {
+            dispatch(getCategories())
+        })
+        .then(() => {
+            dispatch(getReviewsProduct(id))
+        })
         return () => {
             dispatch(limpiarDetail()) 
             dispatch(cleanReview()) 
@@ -51,6 +55,7 @@ export default function ProductDetail() {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
             navigate('/cart')
+            dispatch(getCart(user.id))
         }else{
             dispatch(addCartProductGuest(productId))
             toast.success("Product added to cart!", {

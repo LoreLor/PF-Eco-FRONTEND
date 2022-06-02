@@ -22,7 +22,9 @@ export default function Shopping() {
     function handleClick(e, id) {
         e.preventDefault()
         dispatch(getReviewsProductDetail(id))
-        navigate("/review")
+        .then( () => {
+            navigate("/review")
+        })
     }
 
     return (

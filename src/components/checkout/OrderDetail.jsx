@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { getCart } from "../../redux/actions/products";
 import { getSingleUser } from "../../redux/actions/user";
@@ -16,14 +16,6 @@ function OrderDetail() {
   const cart = useSelector((state) => state.products.cart);
   //const amount = cart.details.reduce((a, c) => a + c.bundle * c.price, 0);
   const total_amount = cart.price_total ;
-  
-
-
-
-  useEffect(() => {
-    getSingleUser(user.id);
-    getCart(user.id);
-  }, [user]);
 
   return (
     <div className={s.box}>
