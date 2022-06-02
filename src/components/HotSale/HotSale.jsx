@@ -1,5 +1,4 @@
 import React from "react";
-import svg from './25%off.svg'
 import style from './HotSale.module.css'
 import Swal from "sweetalert2";
 

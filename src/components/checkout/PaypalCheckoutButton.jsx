@@ -8,7 +8,6 @@ import { paidCartTemporal } from '../../redux/actions/products';
 function PaypalCheckoutButton() {
     const user = useSelector((state) => state.users.userInfo);
     const cart = useSelector((state) => state.products.cart);
-    console.log('cart', cart.price_total)
     const total_amount= (cart.price_total)
     const [ paidFor, setPaidFor ] = useState(false);
     const [ error, setError ] = useState(null);
