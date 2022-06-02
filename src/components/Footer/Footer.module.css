@@ -30,3 +30,11 @@
     width: 100%;
     justify-content: space-evenly;
 }
+
+.li_redes{
+    transition: 0.5s;
+}
+.li_redes:hover{
+    color: #F66B0E;
+    cursor: pointer;
+}
