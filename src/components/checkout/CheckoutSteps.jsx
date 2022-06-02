@@ -48,8 +48,10 @@ function CheckoutSteps() {
 
 
   useEffect(()=>{
-    getSingleUser(user.id)
-    getCart(user.id)
+    dispatch(getSingleUser(user.id))
+    .then( () => {
+      dispatch(getCart(user.id))
+    })
   }, [user])
 
   const handleChange = (e) =>{
