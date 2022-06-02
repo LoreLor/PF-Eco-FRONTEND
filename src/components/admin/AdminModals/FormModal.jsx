@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Modal.module.css"
 
-export default function Modal({children, isOpen,setIsOpen,resetError,resetFile,resetInput,product}){
+export default function Modal({children, isOpen,setIsOpen,resetError,resetFile,resetInput,product,order}){
 
     function handleClick(e){
         e.stopPropagation()
@@ -13,7 +13,11 @@ export default function Modal({children, isOpen,setIsOpen,resetError,resetFile,r
             setIsOpen(false)
             resetError({})
             resetFile(e) 
-        }else{
+        }
+        if(order){
+            setIsOpen(false)
+        }
+        else{
             setIsOpen(false)
             resetError({})
             resetFile(e) 

@@ -1,31 +1,66 @@
 .content{
     display: flex;
     width: max-content;
-    margin-top: 1rem;
 }
+
+.center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navBar{
+    width: 100%;
+}
+
 .caja{
     display: flex;
-    width: 100%;
     justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    width: 80%;
 }
 
 .searchBar{
-    width: 500px;
-    margin-top: 1rem;
-    margin-left: 1rem;
+    flex: 1;
+    margin: 0rem 1rem 2rem 1rem;
 }
 
 .ordersList{
-    width: 70%;
-    margin-top: 0.5rem;
-    height: 35rem;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 33rem;
     overflow-x: overlay;
-}
-
-#footer{
     margin-top: 2rem;
 }
 
-.ordersList::-webkit-scrollbar {
-    display: none;
+#Footer{
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+@media(max-width: 750px){
+    .caja{
+    display: flex;
+}
+    .content{
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+       
     }
+    .searchBar{
+        display: flex;
+        flex-direction: column;
+        width: 90%;    
+    }
+    .ordersList{
+        display: flex;
+        justify-content: center;
+        overflow-x: overlay;
+        margin-bottom: 2.5rem;
+    }
+}

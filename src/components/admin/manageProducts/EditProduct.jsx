@@ -164,7 +164,7 @@ export default function ProductForm ({product,products,categories,setProductEdit
         }
   }
   function productname(name){
-    if(name.length >= 24)return name.slice(0,21) + '...' 
+    if(name.length >= 21)return name.slice(0,18) + '...' 
     return name
 }
 
@@ -200,7 +200,7 @@ useEffect(()=>{
         resetFile()
     }
 },[product])
-    console.log(errors)
+    
     return(
         <>
         <div className={style.container}>

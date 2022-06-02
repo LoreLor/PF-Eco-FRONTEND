@@ -116,7 +116,7 @@ export default function OrderEdit({order,setOrderEdit}){
             </>
             }
 
-            <FormModal isOpen={isOpen} setIsOpen={setIsOpen}>
+            <FormModal isOpen={isOpen} setIsOpen={setIsOpen} order={order}>
             <div className={style.containerProd}>
             {order ? 
             <div className={style.clientInfo}>

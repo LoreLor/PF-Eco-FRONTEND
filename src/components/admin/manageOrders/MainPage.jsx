@@ -31,9 +31,11 @@ export default function MainPage(){
     },[dispatch])
 
     return(
-        <div>
+        <div className={style.center}>
+            <div className={style.navBar}>
             <NavBarAdmin/>
-            <div className={style.caja  }>
+            </div>
+            <div className={style.caja}>
                 <div className={style.content}>
                     <div className={style.searchBar}>
                         <SearchBar result={result} setResult={setResult} placeholder={"Search by email..."}/>
@@ -45,7 +47,9 @@ export default function MainPage(){
                     </div>
                 </div>
             </div>
+            <div id={style.Footer}>
             <Footer/>
+            </div>
         </div>
     )
 }

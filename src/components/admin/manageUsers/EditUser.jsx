@@ -93,9 +93,9 @@ export default function EditUser({user,setUserEdit}){
            <div className={style.imageBox}>
                 <img id={style.imageDiv}src="https://res.cloudinary.com/drcvcbmwq/image/upload/v1653589673/aps_504x498_medium_transparent-pad_600x600_f8f8f8_r3fwnu.jpg" alt="..."/>
             </div>
-            <div>
+            <div className={style.userInfo}>
                 <h2>{user.user_name}</h2>
-                <h4>{user.email}</h4>
+                <h4 className={style.email}>{user.email}</h4>
 
             </div>
 

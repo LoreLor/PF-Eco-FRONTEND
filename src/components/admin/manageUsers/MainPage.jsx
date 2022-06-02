@@ -10,9 +10,9 @@ import Footer from "../../Footer/Footer";
 
 
 export default function MainPage(){
-    const users = useSelector((state)=>state.users.users)
+    const usersDb = useSelector((state)=>state.users.users)
     const user = useSelector((state)=>state.users.userInfo)
-
+    const users = usersDb.filter((userDb) => userDb.id !== user.id)
     const dispatch = useDispatch()
 
     const [result,setResult] = useState("")
@@ -26,8 +26,10 @@ export default function MainPage(){
         dispatch(getAllUsers())
     },[dispatch])
     return (
-        <div>
+        <div className={style.center}>
+            <div className={style.navBar}>
             <NavBarAdmin/>
+            </div>
             <div className={style.caja}>
                 <div className={style.content}>
                     <div className={style.searchBar}>
@@ -39,8 +41,9 @@ export default function MainPage(){
                     </div>
                 </div>
             </div>
-            <br></br>
+            <div id={style.Footer}>
             <Footer/>
+            </div>
         </div>
     )
 

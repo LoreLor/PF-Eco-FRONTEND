@@ -27,21 +27,24 @@ export default function MainPage(){
     },[dispatch])
 
     return (
-        <div>
+        <div className={style.center}>
+            <div className={style.navBar}>
             <NavBarAdmin/>
+            </div>
             <div className={style.caja}>
                 <div className={style.content}>
                     <div className={style.searchBar}>  
-                        <SearchBar result={result} setResult={setResult} placeholder={"Search by name..."}/>
-                        <EditProduct product={productEdit[0]} products={products} categories={categories} setProductEdit={setProductEdit}/>
+                    <SearchBar result={result} setResult={setResult} placeholder={"Search by name..."}/>
+                    <EditProduct product={productEdit[0]} products={products} categories={categories} setProductEdit={setProductEdit}/>
                     </div>
                     <div className={style.productsList}>
-                        <MainTable array={array} setEdit={setProductEdit} />
+                    <MainTable array={array} setEdit={setProductEdit} />
                     </div>
                 </div>
             </div>
-            <br></br>
+            <div id={style.Footer}>
             <Footer/>
+            </div>
         </div>
     )
 }

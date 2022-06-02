@@ -14,12 +14,14 @@ export default function MainTable({array,setEdit}){
     }
 
     return (
-        <div>
+        <div className={style.container}>
             {array && array.length > 0 ? array.map((element)=>{
                 return(
                     <div key={element.id} className={element.sendStatus === "shipped" ? style.shipping : element.sendStatus === "delivered" ? style.delivered : element.sendStatus === "returned" ? style.box2 : style.box}>
+                        <div className={style.orderInf}>
                         <h3 className={style.title2}>{element.user.email}</h3>
                         <span className={style.idNum}>{partDate(element.date)}</span>
+                        </div>
                         <button value={element.id} className={style.btnAdmin} onClick={onEdit}>Details</button>
                     </div>
                 )

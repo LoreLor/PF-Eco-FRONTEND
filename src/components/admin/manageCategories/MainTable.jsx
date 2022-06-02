@@ -10,12 +10,14 @@ export default function MainTable({array,setEdit}){
     }
 
     return (
-        <div>
+        <div className={style.container}>
             {array && array.length > 0 ? array.map((element)=>{
                 return(
                     <div key={element.id} className={element && element.isActive === false ? style.box2:style.box}>
                         <h3 className={style.title}>{element && element.isActive === false ? `${element.name} (Inactive)`: element.name}</h3>
+                        <div className={style.btnsAdm}>
                         <button value={element.id} className={style.btnAdmin} onClick={onEdit}>Edit</button>
+                        </div>
                     </div>
                 )
             }):
