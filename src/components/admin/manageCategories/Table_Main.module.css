@@ -1,6 +1,6 @@
 .container{
     margin-top: 1rem;
-    width: 75%;
+    width: max-content;
 }
 .caja{
     display: flex;
@@ -20,6 +20,7 @@
     border: #112B3C 1px solid;
     border-radius: 5px;
     background-color: #112B3C;
+    width: 700px;
 }
 
 .shipping{
@@ -101,10 +102,13 @@
     gap: 1rem;
     margin: 0px 0px 0px 5px;
 }
+.btnAdmin:hover{
+    box-shadow: 0.2rem 0.2rem 0.5rem #F66B0E;
+}
 
 .content{
     display: flex;
-    width: 80%;
+    width: max-content;
 }
 
 .searchBar{
@@ -114,7 +118,7 @@
 }
 
 .categoriesList{
-    width: 70%;
+    width: 100%;
     margin-top: 0.5rem;
     height: 26rem;
     overflow-x: overlay;
@@ -133,4 +137,5 @@
     justify-content: center;
     color: #112B3C;
     font-weight: 700;
+    margin-left: 50px;
 }

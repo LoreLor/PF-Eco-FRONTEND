@@ -31,26 +31,21 @@ export default function MainPage(){
     },[dispatch])
 
     return(
-        <>
         <div>
             <NavBarAdmin/>
+            <div className={style.caja  }>
+                <div className={style.content}>
+                    <div className={style.searchBar}>
+                        <SearchBar result={result} setResult={setResult} placeholder={"Search by email..."}/>
+                        <Filters filter={filter} setFilter={setFilter}/>
+                        <EditOrder order={orderEdit[0]} setOrderEdit={setOrderEdit}/>
+                    </div>
+                    <div className={style.ordersList}>
+                        <OrderTable array={array} setEdit={setOrderEdit} />
+                    </div>
+                </div>
+            </div>
+            <Footer/>
         </div>
-
-        <div className={style.content}>
-        <div className={style.searchBar}>
-            <SearchBar result={result} setResult={setResult} placeholder={"Search by email..."}/>
-            <Filters filter={filter} setFilter={setFilter}/>
-            <EditOrder order={orderEdit[0]} setOrderEdit={setOrderEdit}/>
-            </div>
-
-            <div className={style.ordersList}>
-                <OrderTable array={array} setEdit={setOrderEdit} />
-            </div>
-        </div>
-
-        <div id={style.footer}>
-                <Footer/>
-            </div>
-        </>
     )
 }

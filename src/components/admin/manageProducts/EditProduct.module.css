@@ -200,10 +200,13 @@
   align-items: center;
   border-radius: 10px;
   margin-top: 2rem;
+  margin-bottom: 2rem;
   background-color: #112B3C;
   color: aliceblue;
   height: 32rem;
   position: relative;
+  width: 405px;
+  padding-bottom: 20px;
 }
 
 .imageBox{

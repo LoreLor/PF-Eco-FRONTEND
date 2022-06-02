@@ -41,6 +41,7 @@ export default function Shopping() {
                                         <div key={s.id} className={style.shop_products}>
                                             <div className={style.shop_date}>
                                                 <h3>Bought {s.date.replace("T", " ").replace("Z", " ")}</h3>
+                                                <h2>Shipping: <span>{s.sendStatus}</span></h2>
                                             </div>
                                             <div className={style.shops}>
                                                 {

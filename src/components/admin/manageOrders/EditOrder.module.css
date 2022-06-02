@@ -6,8 +6,8 @@
     margin-top: 2rem;
     background-color: #112B3C;
     color: aliceblue;
-    height: 23.5rem;
     position: relative;
+    padding-bottom: 20px;
   }
 
   .closeBtn{
@@ -76,6 +76,10 @@
   border: #F66B0E solid;
   border-radius: 0.75rem;
   color: antiquewhite;
+  transition: 0.2s;
+}
+#A:hover{
+  box-shadow: 0.2rem 0.2rem 0.5rem #F66B0E;
 }
 
 #B{
@@ -83,6 +87,10 @@
   border: #6ecb63 solid;
   border-radius: 0.75rem;
   color: antiquewhite;
+  transition: 0.2s;
+}
+#B:hover{
+  box-shadow: 0.2rem 0.2rem 0.5rem #6ecb63;
 }
 
 #C{
@@ -90,6 +98,10 @@
   border: #b20600 solid;
   border-radius: 0.75rem;
   color: antiquewhite;
+  transition: 0.2s;
+}
+#C:hover{
+  box-shadow: 0.2rem 0.2rem 0.5rem #b20600;
 }
 
 .saveBtn{
@@ -101,7 +113,11 @@
   padding: 5px;
   font-size: large;
   color:antiquewhite;
-  width: 10rem
+  width: 10rem;
+  transition: 0.2s;
+}
+.saveBtn:hover{
+  box-shadow: 0.2rem 0.2rem 0.5rem #6ecb63;
 }
 
 .prodDetail{
