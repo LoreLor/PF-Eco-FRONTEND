@@ -147,6 +147,7 @@
     align-items: center;
     height: 26rem;
     overflow-x: overlay;
+    width: 1000px;
 }
 
 .coincidences{
