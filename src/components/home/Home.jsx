@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearStatesProducts, getAllProducts, getCart, getFavs } from "../../redux/actions/products";
 import { getCategories } from "../../redux/actions/categories";
 
-
+import HotSale from "../HotSale/HotSale";
 import NavBar from '../navBar/NavBar';
 import ProductCard from '../Productos/ProductCard';
 import Loader from "../Loading/Loader";
@@ -52,36 +52,38 @@ export default function Home() {
     return (
         <div>
             <NavBar categories={allCategories} paginado={paginado} />
-
-            <div className={style.cards}>
-                {
-                    currentProduct ?
-                        currentProduct.map(p => {
-                            if (p.stock && p.isActive) {
-                                isFaved = fav.some(item => item.id === p.id)
-                                return (
-                                    <ProductCard
-                                        id={p.id}
-                                        key={p.id}
-                                        name={p.name}
-                                        price={p.price}
-                                        img={p.img}
-                                        rating={p.rating}
-                                        isFaved={isFaved}
-                                    />
-                                )
-                            }
-                        }) :
-                        <Loader />
-                }
-            </div>
-            <Pages
-                productPerPg={productPerPg}
-                allProducts={allProducts.showedProducts.length}
-                paginado={paginado}
-                currentPg={currentPg}
-                setCurrentPg={setCurrentPg}
-            />
+            <div className={style.homeFlex}>
+                <HotSale/>
+                <div className={style.cards}>
+                    {
+                        currentProduct ?
+                            currentProduct.map(p => {
+                                if (p.stock && p.isActive) {
+                                    isFaved = fav.some(item => item.id === p.id)
+                                    return (
+                                        <ProductCard
+                                            id={p.id}
+                                            key={p.id}
+                                            name={p.name}
+                                            price={p.price}
+                                            img={p.img}
+                                            rating={p.rating}
+                                            isFaved={isFaved}
+                                        />
+                                    )
+                                }
+                            }) :
+                            <Loader />
+                    }
+                </div>
+                </div>
+                <Pages
+                    productPerPg={productPerPg}
+                    allProducts={allProducts.showedProducts.length}
+                    paginado={paginado}
+                    currentPg={currentPg}
+                    setCurrentPg={setCurrentPg}
+                />
             <Footer />
         </div>
     )

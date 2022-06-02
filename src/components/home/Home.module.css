@@ -1,10 +1,14 @@
+.homeFlex{
+    display: flex;
+}
 .cards{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap: 40px;
-    width: 80%;
-    margin-left: auto;
+    width: 70%;
+    margin-left: 50px;
     margin-right: auto;
     margin-bottom: 40px;
     margin-top: 20px;
+    justify-items: center;
 }
