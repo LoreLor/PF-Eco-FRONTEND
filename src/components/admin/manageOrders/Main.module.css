@@ -33,7 +33,7 @@
     align-items: center;
     height: 33rem;
     overflow-x: overlay;
-    margin-top: 2rem;
+    width: 500px;
 }
 
 #Footer{
