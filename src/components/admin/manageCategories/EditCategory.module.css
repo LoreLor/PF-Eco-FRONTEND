@@ -111,6 +111,7 @@
   color: aliceblue;
   height: 21rem;
   position: relative;
+  width: 300px;
 }
 
 .closeBtn{

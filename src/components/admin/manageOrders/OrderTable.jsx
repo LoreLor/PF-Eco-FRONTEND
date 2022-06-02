@@ -20,7 +20,7 @@ export default function MainTable({array,setEdit}){
                     <div key={element.id} className={element.sendStatus === "shipped" ? style.shipping : element.sendStatus === "delivered" ? style.delivered : element.sendStatus === "returned" ? style.box2 : style.box}>
                         <h3 className={style.title2}>{element.user.email}</h3>
                         <span className={style.idNum}>{partDate(element.date)}</span>
-                        <button value={element.id} className={style.btn} onClick={onEdit}>Details</button>
+                        <button value={element.id} className={style.btnAdmin} onClick={onEdit}>Details</button>
                     </div>
                 )
             }):

@@ -100,7 +100,7 @@ export default function OrderEdit({order,setOrderEdit}){
                 <button className={style.btnZ} id={style.B} value="delivered" name="sendStatus" onClick={onClick}>Delivered</button>
                 <button className={style.btnZ} id={style.C} value="returned" name="sendStatus" onClick={onClick}>Returned</button>
             </div>
-            <button className={style.saveBtn} onClick={onSave}>Edit</button>
+            <button className={style.saveBtn} onClick={onSave}>Save</button>
             </>
             :
             <>

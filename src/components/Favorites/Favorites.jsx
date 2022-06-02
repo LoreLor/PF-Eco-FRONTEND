@@ -75,9 +75,9 @@ export default function Favorites() {
                                                             </NavLink>
                                                         </div>
                                                         <span>{f.name}</span>
-                                                        <div className={style.sale}>
+                                                        {/* <div className={style.sale}>
                                                             <h3 className={style.desc}>25% off</h3>
-                                                        </div>
+                                                        </div> */}
                                                         <div className={style.ul_favs}>
                                                             <ul>
                                                                 <li>

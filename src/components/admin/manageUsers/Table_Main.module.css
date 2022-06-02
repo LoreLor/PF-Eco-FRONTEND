@@ -19,6 +19,7 @@
     border: #112B3C 1px solid;
     border-radius: 5px;
     background-color: #112B3C;
+    width: 700px;
 }
 .box2{
     display: flex;
@@ -77,15 +78,16 @@
 
 .content{
     display: flex;
-    width: 50%;
+    width: max-content;
+    
 }
 .searchBar{
-    width: 30%;
+    width: 500px;
     margin-top: 1rem;
     margin-left: 1rem;
 }
 .usersList{
-    width: 70%;
+    width: 100%;
     height: 34rem;
     overflow-x: overlay;
 }
