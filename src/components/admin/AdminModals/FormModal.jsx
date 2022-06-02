@@ -1,16 +1,18 @@
 import React from "react";
 import styles from "./Modal.module.css"
-export default function Modal({children, isOpen,setIsOpen, closePrev,resetData}){
+
+export default function Modal({children, isOpen,setIsOpen,resetData,resetFile}){
+
     function handleClick(e){
         e.stopPropagation()
     }
 
     function handleClose(e){
         e.preventDefault()
-        if(closePrev && resetData){
+        if(resetData){
             setIsOpen(false)
-            closePrev(false)
-            resetData("")  
+            resetData({})
+            resetFile(e) 
         }
         setIsOpen(false)
     }
