@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAllFavs, deleteFav, getFavs, addCartProduct } from "../../redux/actions/products";
+import { deleteAllFavs, deleteFav, getFavs, addCartProduct, getCart } from "../../redux/actions/products";
 import { NavLink } from "react-router-dom";
 import { toast } from 'react-toastify';
 import Loader from "../Loading/Loader";
@@ -44,6 +44,9 @@ export default function Favorites() {
                 bundle: 1
             }
             dispatch(addCartProduct(addCart))
+            .then(r=>{
+                dispatch(getCart(user.id))
+            })
             toast.success("Product added to cart!", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });

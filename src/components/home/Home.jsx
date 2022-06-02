@@ -38,11 +38,11 @@ export default function Home() {
     let isFaved = false
 
     useEffect(() => {
-        /* if(!allProducts.showedProducts.length) { */
+        if(!allProducts.showedProducts.length) { 
             dispatch(getAllProducts());
-        /* } */ 
+         } 
         dispatch(getCategories());
-        dispatch(clearStatesProducts());
+        // dispatch(clearStatesProducts());
         if (users && users.id) {
             dispatch(getFavs(users.id))
         }
