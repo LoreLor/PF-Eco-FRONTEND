@@ -74,6 +74,7 @@ export default function ProductForm ({product,products,categories,setProductEdit
     }
     function onFileChange(e){
         setFile(e)
+        setFileErrors({})
     }
     function resetFile(){
         ref.current.value=""
@@ -236,7 +237,7 @@ useEffect(()=>{
         </>}
         </div>
 
-        <FormModal isOpen={isOpen} setIsOpen={setIsOpen} resetData={setErrors} resetFile={resetFileBtn}>
+        <FormModal isOpen={isOpen} setIsOpen={setIsOpen} resetError={setErrors} resetFile={resetFileBtn} resetInput={setInput} product={product}>
         <div className={product? style.containerProd2:style.containerProd}>
                 <div>
 
