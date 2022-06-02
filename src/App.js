@@ -41,12 +41,12 @@ function App() {
         <Route path ='/login' element={<Login />} />
         <Route path = '/home/:id' element={<ProductDetail/>}/>
         <Route path = '/cart'element={<Cart/>}/>
-        <Route path='/favs' element = {<Favorites/>}/>
-        <Route path = '/myShopping'element={<Shopping/>}/>
-        <Route path = '/review'element={<Review/>}/>
+        <Route path='/favs' element = {<PrivateProfile><Favorites/></PrivateProfile>}/>
+        <Route path = '/myShopping'element={<PrivateProfile><Shopping/></PrivateProfile>}/>
+        <Route path = '/review'element={<PrivateProfile><Review/></PrivateProfile>}/>
         <Route path = '/register' element={<Register />} />
-        <Route path="/check" element={<CheckoutSteps/>}/>
-        <Route path="/order" element={<OrderDetail/>}/>
+        <Route path="/check" element={<PrivateProfile><CheckoutSteps/></PrivateProfile>}/>
+        <Route path="/order" element={<PrivateProfile><OrderDetail/></PrivateProfile>}/>
         <Route path='/forgotPass' element={<ForgotPass/>}/>
         <Route path={'*'} element={<Error404/>}/>
       </Routes>

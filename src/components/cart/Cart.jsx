@@ -25,7 +25,7 @@ export default function Cart(){
             dispatch(getCart(user.id))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[dispatch])
+    })
     
     //agrega CartGuest a Cart
     if(user && user.id && cartGuest.length !== 0){
