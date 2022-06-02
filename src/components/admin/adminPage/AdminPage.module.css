@@ -1,29 +1,20 @@
 .admin_container{
-    width: 100%;
+/*     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 30px;
-    margin-bottom: 30px;
-}
-/* .adminPage{
-     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 90px;
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5rem;
-    margin-bottom: 5rem; 
+    margin-bottom: 30px; */
     display: flex;
-    flex-direction: column;
-    border: solid 1px black;
-    width: 70%;
-} */
+    justify-content: center;
+    margin: 20px 0px 20px 0px
+
+}
+
 .adminBox{
-    width: 70%;
+    min-width: 750px;
 }
 .amdin_title{
     display: flex;
@@ -44,7 +35,6 @@
     text-align: center;
     align-items: center;
     justify-content: space-evenly;
-    width: 100%;
     height: 270px;
     border-radius: 20px;
     background-color: #112B3C;
@@ -53,13 +43,53 @@
     margin-top: 20px;
 }
 
-/* h2{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    color: #F66B0E;
-    margin-left: 5px;
-} */
+@media(max-width: 700px){
+    .box{
+        display: flex;
+        flex-direction: column;
+    }
+    .info{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 300px;
+    }
+    .adminBox{
+        min-width: 500px;
+    }
+    .test{
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media(max-width: 500px){
+    .adminBox{
+        min-width: 250px;
+    }
+    .Footer{
+        margin-top: 5rem;
+    }
+}
+
+@media(max-width: 350px){
+    .info{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 200px;
+    }
+}
+
+@media(max-width: 880px){
+    .subBox{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
 
 .test{
     display: flex;

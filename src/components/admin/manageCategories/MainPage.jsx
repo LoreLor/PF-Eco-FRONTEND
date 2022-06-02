@@ -24,8 +24,10 @@ export default function MainPage (){
     },[dispatch])
 
     return(
-        <div>
+        <div className={style.center}>
+            <div className={style.navBar}>
             <NavBarAdmin/>
+            </div>
         <div className={style.caja}>
             <div className={style.content}>
                 <div className={style.searchBar}>
@@ -37,8 +39,9 @@ export default function MainPage (){
                 </div>
             </div>
         </div>
-        <br></br>
+        <div id={style.Footer}>
             <Footer/>
+            </div>
         </div>
     )
 }
