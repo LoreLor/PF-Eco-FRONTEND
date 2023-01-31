@@ -16,6 +16,8 @@ import Loader from "../Loading/Loader";
 import NavBar from "../navBar/NavBar";
 import Carrousel from "../Carrousel/Carrousel"
 import Footer from "../Footer/Footer";
+
+
 export default function ProductDetail() {
 
     let { id } = useParams()

@@ -46,7 +46,7 @@ export default function Home() {
         if (users && users.id) {
             dispatch(getFavs(users.id))
         }
-    }, [dispatch])
+    }, [])
 
     //ProductCard ---> (name, img, price, rating)
     return (
@@ -56,6 +56,7 @@ export default function Home() {
             <div className={style.cards}>
                 {
                     currentProduct ?
+                        // eslint-disable-next-line array-callback-return
                         currentProduct.map(p => {
                             if (p.stock && p.isActive) {
                                 isFaved = fav.some(item => item.id === p.id)

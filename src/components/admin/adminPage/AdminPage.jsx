@@ -1,15 +1,6 @@
-import { useEffect, useState} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getCategories } from '../../../redux/actions/categories'
-import { getAllProducts } from '../../../redux/actions/products'
-import { getAllUsers } from '../../../redux/actions/user'
 
-import ProductsSB from './searchBar/productsSB'
 import style from './AdminPage.module.css'
-import BetaModal from '../AdminModals/BetaModal'
-import FormModal from '../AdminModals/FormModal'
-import CategoryAdmin from "../manageCategories/EditCategory"
-import ProductAdmin from "../manageProducts/MainPage"
+
 import NavBarAdmin from './navBarAdmin/NavBarAdmin'
 import Footer from '../../Footer/Footer'
 import { Link } from 'react-router-dom'
