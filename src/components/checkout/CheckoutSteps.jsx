@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate} from "react-router-dom";
 import inputValidations from "../checkout/validations/inputValidations";
 import {getSingleUser, userUpdate} from '../../redux/actions/user'
-import { closeCart, getCart, paidCartTemporal, applyDiscount } from "../../redux/actions/products";
+import {  getCart,  applyDiscount } from "../../redux/actions/products";
 import s from "./CheckoutSteps.module.css";
 import Footer from "../Footer/Footer";
 import numberFormat from "../detalleProducto/numberFormat";

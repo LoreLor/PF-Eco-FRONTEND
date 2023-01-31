@@ -2,12 +2,11 @@ import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, /* paidCartTemporal, */ deleteProductCartGuest, addCartProductGuest, deleteCartGuest, getCartGuest, substractOneProduct, cleanCartGuest  } from "../../redux/actions/products";
-// import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, closeCart, deleteProductCartGuest, addCartProductGuest} from "../../redux/actions/products";
+import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, deleteProductCartGuest, addCartProductGuest, deleteCartGuest, getCartGuest, substractOneProduct, cleanCartGuest  } from "../../redux/actions/products";
 import Footer from "../Footer/Footer";
 import NavBar from "../navBar/NavBar";
 import style from './Cart.module.css'
-import Loader from "../Loading/Loader";
+
 import numberFormat from "../detalleProducto/numberFormat";
 
 export default function Cart(){
@@ -25,7 +24,7 @@ export default function Cart(){
             dispatch(getCart(user.id))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    })
+    },[])
     
     //agrega CartGuest a Cart
     if(user && user.id && cartGuest.length !== 0){

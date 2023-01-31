@@ -104,7 +104,7 @@ export default function ProductCard({name, img, price, rating, id, isFaved}){
                     <span className={style.card_preci}>${numberFormat(price)}</span>
                     <div className={style.card_ratBtn}>
                         <Rating name="read-only" value={rating} readOnly/>
-                        <Link href="#" className={style.card_button} onClick={(e) => handleAddCart(e,id)}>AddCart</Link>
+                        <a href="#" className={style.card_button} onClick={(e) => handleAddCart(e,id)}>AddCart</a>
                     </div>
                 </div>
             </div>

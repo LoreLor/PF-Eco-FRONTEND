@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-
 import style from './AdminPage.module.css'
-
-=======
-import style from './AdminPage.module.css'
->>>>>>> DevelopFront
 import NavBarAdmin from './navBarAdmin/NavBarAdmin'
 import Footer from '../../Footer/Footer'
 import { Link } from 'react-router-dom'
