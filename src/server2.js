@@ -1,3 +1,4 @@
-const SERVER = "http://localhost:3000";
+const SERVER2 = `https://pf-eco-frontend.vercel.app`
+//"http://localhost:3000";
 
-export default SERVER
+export default SERVER2

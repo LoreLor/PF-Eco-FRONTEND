@@ -40,10 +40,10 @@ function App() {
         <Route path='/profile' element={<PrivateProfile><UserProfile/></PrivateProfile>}/>
         <Route path ='/login' element={<Login />} />
         <Route path = '/home/:id' element={<ProductDetail/>}/>
-        <Route path = '/cart'element={<Cart/>}/>
+        <Route path = '/cart' element={<Cart/>}/>
         <Route path='/favs' element = {<PrivateProfile><Favorites/></PrivateProfile>}/>
-        <Route path = '/myShopping'element={<PrivateProfile><Shopping/></PrivateProfile>}/>
-        <Route path = '/review'element={<PrivateProfile><Review/></PrivateProfile>}/>
+        <Route path = '/myShopping' element={<PrivateProfile><Shopping/></PrivateProfile>}/>
+        <Route path = '/review' element={<PrivateProfile><Review/></PrivateProfile>}/>
         <Route path = '/register' element={<Register />} />
         <Route path="/check" element={<PrivateProfile><CheckoutSteps/></PrivateProfile>}/>
         <Route path="/order" element={<PrivateProfile><OrderDetail/></PrivateProfile>}/>

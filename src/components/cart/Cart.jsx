@@ -2,12 +2,11 @@ import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, /* paidCartTemporal, */ deleteProductCartGuest, addCartProductGuest, deleteCartGuest, getCartGuest, substractOneProduct, cleanCartGuest  } from "../../redux/actions/products";
-// import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, closeCart, deleteProductCartGuest, addCartProductGuest} from "../../redux/actions/products";
+import { addCartProduct, deleteProductCart, getCart, deleteOneProduct, deleteAllProductCart, deleteProductCartGuest, addCartProductGuest, deleteCartGuest, getCartGuest, substractOneProduct, cleanCartGuest  } from "../../redux/actions/products";
 import Footer from "../Footer/Footer";
 import NavBar from "../navBar/NavBar";
 import style from './Cart.module.css'
-import Loader from "../Loading/Loader";
+
 import numberFormat from "../detalleProducto/numberFormat";
 
 export default function Cart(){
@@ -25,7 +24,7 @@ export default function Cart(){
             dispatch(getCart(user.id))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    })
+    },[])
     
     //agrega CartGuest a Cart
     if(user && user.id && cartGuest.length !== 0){
@@ -100,7 +99,7 @@ export default function Cart(){
 
     function handleSubtract(e, productId, bundle){
         e.preventDefault()
-        if(user && user.id ){
+        if(user && user.id){
             if(bundle === 1){
                 dispatch(deleteProductCart(user.id, productId))
                 .then(r => {
@@ -170,16 +169,14 @@ export default function Cart(){
                                     return(
                                             <div className={style.cart_products} key={p.id}>
                                                 <div className={style.cart_img}>
-                                                    <NavLink to={`/home/${user.id ? p.productId : p.id}`}>
-                                                        <img className={style.imgBox} src={user && user.id ? p.img : p.img[0]} alt='...'/>
-                                                    </NavLink>
+                                                    <img className={style.imgBox}src={user && user.id ? p.img :p.img[0]} alt='...'/>
                                                 </div>
                                                 <span>$ {numberFormat(p.price)}</span>
                                                 <span>{p.name}</span>
                                                 <div className={style.cart_amount}>
                                                     <span>Qty: {`(${p.stock} max)`} </span>
                                                         <div className={style.amount_input}>
-                                                        <button onClick={e=>handleSubtract(e, p.productId || p.id, p.bundle)} className={style.btnSubs} disabled={p.bundle === 1    }>-</button>
+                                                        <button onClick={e=>handleAdd(e, p.productId || p.id, p.bundle, p.stock)} className={style.btnAdd}>+</button>
                                                         <input 
                                                             type='number'
                                                             name="Qty"
@@ -188,7 +185,7 @@ export default function Cart(){
                                                             value={p.bundle}
                                                             readOnly
                                                             />
-                                                        <button onClick={e=>handleAdd(e, p.productId || p.id, p.bundle, p.stock)} className={style.btnAdd}>+</button>
+                                                        <button onClick={e=>handleSubtract(e, p.productId || p.id, p.bundle)} className={style.btnSubs}>-</button>
                                                     </div>
                                                 </div>
                                                 <button className={style.btnDelete} onClick={e => handleDelete(e, p.productId || p.id)}>
