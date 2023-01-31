@@ -46,7 +46,7 @@ export default function Home() {
         if (users && users.id) {
             dispatch(getFavs(users.id))
         }
-    }, [dispatch])
+    }, [])
 
     //ProductCard ---> (name, img, price, rating)
     return (

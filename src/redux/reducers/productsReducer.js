@@ -190,8 +190,8 @@ export const productsReducer = (state = initialState, action) => {
                 editProduct: action.payload
             }
         case FILTER_BY_CATEGORY:
-            var all = []
-            var filter = []     
+            let all = []
+            let filter = []     
             state.stateFilter = {
                 ...state.stateFilter,
                 category: action.payload
@@ -306,8 +306,8 @@ export const productsReducer = (state = initialState, action) => {
                 showedProducts: sortedByAlphabet,
             }
         case FILTER_BY_PRICE:
-            var all2 = []
-            var filter2 = []
+            let all2 = []
+            let filter2 = []
             state.stateFilter = {
                 ...state.stateFilter,
                 min: parseInt(action.payload.min),
