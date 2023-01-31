@@ -1,0 +1,43 @@
+.container{
+    width: 350px;
+    height: 100%;
+    z-index: 100;
+    position: relative;
+    top: 280px;
+  
+}
+.container:hover{
+    animation-name: wobble-hor-top;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: none;
+    cursor: pointer;
+}
+@keyframes wobble-hor-top {
+    0%{
+      transform: translateX(0%);
+      transform-origin: 50% 50%;
+    }
+    15%{
+      transform: translateX(-30px) rotate(6deg);
+    }
+    30%{
+      transform: translateX(15px) rotate(-6deg);
+    }
+    45%{
+      transform: translateX(-15px) rotate(3.6deg);
+    }
+    60%{
+      transform: translateX(9px) rotate(-2.4deg);
+    }
+    75%{
+      transform: translateX(-6px) rotate(1.2deg);
+    }
+    100%{
+      transform: translateX(0%);
+      transform-origin: 50% 50%;
+    }
+  }

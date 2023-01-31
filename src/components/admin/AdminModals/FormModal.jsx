@@ -1,16 +1,35 @@
 import React from "react";
 import styles from "./Modal.module.css"
-export default function Modal({children, isOpen,setIsOpen, closePrev,resetData}){
+
+export default function Modal({children, isOpen,setIsOpen,resetError,resetFile,resetInput,product,order}){
+
     function handleClick(e){
         e.stopPropagation()
     }
 
     function handleClose(e){
         e.preventDefault()
-        if(closePrev && resetData){
+        if(product){
             setIsOpen(false)
-            closePrev(false)
-            resetData("")  
+            resetError({})
+            resetFile(e) 
+        }
+        if(order){
+            setIsOpen(false)
+        }
+        else{
+            setIsOpen(false)
+            resetError({})
+            resetFile(e) 
+            resetInput({
+                name: "",
+                price: "",
+                description:"",
+                stock:"",
+                categories: [],
+                img: [],
+                isActive: ""
+            })
         }
         setIsOpen(false)
     }

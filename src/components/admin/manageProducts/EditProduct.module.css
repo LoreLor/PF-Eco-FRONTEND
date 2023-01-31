@@ -1,7 +1,7 @@
 .errors {
   padding-top: 3px;
-  color: red;
-  font-size: 12px;
+  color: rgb(239, 53, 53);
+  font-size: 18px;
 }
 
 
@@ -19,9 +19,6 @@
 .containerProd{
   display: flex;
   position: absolute;
-/*   top: 48%;
-  left: 50%;
-  transform: translate(-40%, -35%); */
   padding: 15px;
   width: 75%;
   margin-top: 15rem;
@@ -34,9 +31,6 @@
 .containerProd2{
   display: flex;
   position: absolute;
-/*   top: 48%;
-  left: 50%;
-  transform: translate(-50%, -35%); */
   padding: 15px;
   width: 75%;
   margin-top: 40rem;
@@ -47,6 +41,7 @@
 }
 .formProduct{
   padding: 20px;
+  margin-top: 150px;
 }
 
 .input{
@@ -57,7 +52,7 @@
   border-radius: 5px;
   width: 100%;
   box-sizing: border-box;
-  transition: box-shadow 0.15s
+  transition: box-shadow 0.15s;
 }
 .input:hover{
   box-shadow: 0 0 0 3px #F66B0E;
@@ -114,7 +109,7 @@
   background-color: #E1E1E1;
   border: none;
   border-radius:5px;
-  width: 100%;
+  width: 250px;
   cursor: pointer;
 }
 .sectionA{
@@ -145,8 +140,6 @@
 .categories{
   display: flex;
   justify-content: center;
-/*   color: aliceblue;
-  background-color: #112B3C; */
 }
 
 .imgbtn{
@@ -240,7 +233,22 @@
 .btnX{
   width: 10rem;
   align-self: center;
-  border: none;
+  border: #6ecb63 solid;
+  border-radius: 0.5rem;
+  background: #6ecb63;
+  font-size: medium;
+  font-weight: 500;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.1rem;
+}
+
+.btnX:hover{
+  width: 10rem;
+  align-self: center;
+  border: #F66B0E solid;
   border-radius: 0.5rem;
   background: #6ecb63;
   font-size: medium;
@@ -253,7 +261,7 @@
 }
 
 #btnXX{
-  margin-top: 2.6rem;
+  margin-top: 2.7rem;
 }
 
 .closeBtn{
@@ -276,10 +284,17 @@
 
 .dataBox{
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 #special{
-  font-size:x-large;
+  padding-top: 5px;
+}
+
+#prodTitle{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }

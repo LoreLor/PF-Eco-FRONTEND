@@ -1,5 +1,9 @@
 import axios from 'axios';
+<<<<<<< HEAD
 import { USER_LOGIN, USER_LOGOUT, USER_REGISTER_CLEAR, GET_USERS, GET_USER, USER_UPDATE, USER_LOGIN_GOOGLE } from './constants';
+=======
+import { USER_LOGIN, USER_LOGOUT, USER_REGISTER_CLEAR, GET_USERS,GET_USER, USER_UPDATE, USER_LOGIN_GOOGLE, SEND_EMAIL_RP } from './constants';
+>>>>>>> DevelopFront
 import SERVER from '../../server';
 
 export const userLogin = (data) => async (dispatch) => {
@@ -100,5 +104,18 @@ export const profileUpdate = (data) => async (dispatch) => {
 
 export const logoutGoogle = () => {
 
+}
+
+export const forgotPassword = (email) => async(dispatch) => {
+    const {data} = axios.post(`${SERVER}/email/forgot-password`, {email: email})
+  try {
+    dispatch({
+      type: SEND_EMAIL_RP,
+      payload: data
+    })
+    console.log(email)
+  } catch (error) {
+    console.log(error)
+  }
 }
 

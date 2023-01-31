@@ -8,7 +8,7 @@ import { paidCartTemporal } from '../../redux/actions/products';
 function PaypalCheckoutButton() {
     const user = useSelector((state) => state.users.userInfo);
     const cart = useSelector((state) => state.products.cart);
-    const total_amount= (cart.price_total - 5)
+    const total_amount= (cart.price_total)
     const [ paidFor, setPaidFor ] = useState(false);
     const [ error, setError ] = useState(null);
     const navigate = useNavigate()
@@ -21,11 +21,12 @@ function PaypalCheckoutButton() {
     };
 
     if(paidFor){
-        dispatch(paidCartTemporal(cart.id))
+        dispatch(paidCartTemporal(user.id,cart.id))
         Swal.fire({
             icon: 'success',
             title: 'Succefully Purchase',
             text: ' Post reviews at your Products ',
+            
             footer: navigate('/')
           })
         //redirigir a pagina con mensaje Gracias por su compra..recibira a la brevedad el detalle de su compra

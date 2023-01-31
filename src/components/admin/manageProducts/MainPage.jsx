@@ -18,7 +18,7 @@ export default function MainPage(){
     const [result,setResult] = useState("")
     const [productEdit,setProductEdit] = useState([])
 
-    const searchResult = result ? products.filter((category)=> category.name.includes(result)) : ""
+    const searchResult = result ? products.filter((product)=> product.name.toLowerCase().includes(result.toLowerCase())) : ""
     const array = !result ? products : searchResult
 
     useEffect(()=>{
@@ -27,28 +27,24 @@ export default function MainPage(){
     },[dispatch])
 
     return (
-        <>
-        <div>
+        <div className={style.center}>
+            <div className={style.navBar}>
             <NavBarAdmin/>
+            </div>
+            <div className={style.caja}>
+                <div className={style.content}>
+                    <div className={style.searchBar}>  
+                    <SearchBar result={result} setResult={setResult} placeholder={"Search by name..."}/>
+                    <EditProduct product={productEdit[0]} products={products} categories={categories} setProductEdit={setProductEdit}/>
+                    </div>
+                    <div className={style.productsList}>
+                    <MainTable array={array} setEdit={setProductEdit} />
+                    </div>
+                </div>
+            </div>
+            <div id={style.Footer}>
+            <Footer/>
+            </div>
         </div>
-
-        <div className={style.content}>
-        <div className={style.searchBar}>
-            <SearchBar result={result} setResult={setResult}/>
-            <EditProduct product={productEdit[0]} products={products} categories={categories} setProductEdit={setProductEdit}/>
-
-            </div>
-
-            <div className={style.productsList}>
-                <MainTable array={array} setEdit={setProductEdit} />
-            </div>
-
-
-        </div>
-
-        <div id={style.footer}>
-                <Footer/>
-            </div>
-        </>
     )
 }

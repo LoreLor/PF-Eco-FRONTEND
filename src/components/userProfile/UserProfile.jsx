@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Footer from "../Footer/Footer";
 import NavBar from "../navBar/NavBar";
 import Accordion from "./Accordion";
-import style from "./userProfile.module.css";
-import activeValidations from "../registro/validators/activeValidations";
-import PasswordValidations from "./validators/PasswordValidation";
-import { submitA, submitB } from "./validators/SubmitValidators";
+import style from "./userProfile.module.css"
+import activeValidations from "../registro/validators/activeValidations"
+import PasswordValidations from "./validators/PasswordValidation"
+import { submitA,submitB,submitD} from "./validators/SubmitValidators";
 import { toast } from "react-toastify";
 import axios from "axios";
 import SERVER from "../../server";
-import { profileUpdate, logout } from "../../redux/actions/user";
+import { profileUpdate, logout, userUpdate } from "../../redux/actions/user";
 import { cleanCart, cleanFav } from "../../redux/actions/products";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
@@ -39,14 +39,18 @@ export default function UserProfile() {
         phone_number: "",
     });
 
-    const [errorsA, setErrorsA] = useState({});
-    const [errorsB, setErrorsB] = useState({});
-    const [errorsC, setErrorsC] = useState({});
+    const [google, setGoogle] =useState({
+        password: "",
+       
+    })
 
-    function handleChangeA(e) {
-        setErrorsA(
-            activeValidations({ ...profile, [e.target.name]: e.target.value })
-        );
+    const [errorsA, setErrorsA] =useState({})
+    const [errorsB, setErrorsB] =useState({})
+    const [errorsC, setErrorsC] =useState({})
+    const [errorsD, setErrorsD] =useState({})
+    
+    function handleChangeA(e){
+        setErrorsA(activeValidations({...profile,[e.target.name]:e.target.value}))
         setProfile({
             ...profile,
             [e.target.name]: e.target.value,
@@ -73,18 +77,26 @@ export default function UserProfile() {
         });
     }
 
-    async function handleSubmitA(e) {
-        e.preventDefault();
-        setErrorsA(submitA(profile));
-        if (
-            Object.keys(errorsA).length === 0 &&
-            profile.name !== "" &&
-            profile.last_name !== "" &&
-            profile.user_name !== "" &&
-            profile.email !== "" &&
-            profile.birthday !== ""
-        ) {
-            let response = null;
+    function handleChangeD(e){
+        setErrorsD(activeValidations({...google,[e.target.name]:e.target.value}))
+        setGoogle({
+            ...google,
+            [e.target.name]: e.target.value
+        })
+    }
+
+
+
+    async function handleSubmitA(e){
+        e.preventDefault()
+        setErrorsA(submitA(profile))
+        if (Object.keys(errorsA).length === 0
+        && profile.name !== ""
+        && profile.last_name !== ""
+        && profile.user_name !== ""
+        && profile.email !== ""
+        && profile.birthday !== ""){
+            let response = null
             try {
                 response = await axios.put(`${SERVER}/user/update/${user.id}`, profile);
                 const result = response.data;
@@ -189,8 +201,21 @@ export default function UserProfile() {
         }
     }
 
-    function partDate(e) {
-        return e.split("T")[0];
+    async function handleSubmitD(e){
+        e.preventDefault()
+        setErrorsD(google)
+        dispatch(userUpdate(user.id, google))           
+        dispatch(logout())
+        dispatch(cleanCart())
+        dispatch(cleanFav())
+        toast.success(`Password Created`, {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
+        navigate("/login",{replace:true})                 
+    }
+
+    function partDate(e){
+        return e.split("T")[0]
     }
 
     useEffect(() => {
@@ -407,8 +432,62 @@ export default function UserProfile() {
                     </Accordion>
                 </div>
             </div>
-            <div id={style.footer}>
-                <Footer />
+            <div className={style.forms}>
+            <Accordion title={"Profile info"} content={"Edit your name, username, birthday and email"}>
+                <form onSubmit={handleSubmitA}>
+                    <p>First name:</p>
+                    <input className={errorsA?.name? style.inputError : style.input} name="name" value={profile.name}type="text" placeholder="Add your First name..." onChange={handleChangeA}/>
+                    {errorsA.name && (<p className={style.errors}>{errorsA.name}</p>)}
+                    <p>Last name:</p>
+                    <input className={errorsA?.last_name? style.inputError : style.input} name="last_name" value={profile.last_name}type="text" placeholder="Add your Last name..." onChange={handleChangeA}/>
+                    {errorsA.last_name && (<p className={style.errors}>{errorsA.last_name}</p>)}
+                    <p>Username:</p>
+                    <input className={errorsA?.user_name? style.inputError : style.input} name="user_name" value={profile.user_name}type="text" placeholder="Add your Username..." onChange={handleChangeA}/>
+                    {errorsA.user_name && (<p className={style.errors}>{errorsA.user_name}</p>)}
+                    <p>Email:</p>
+                    <input className={errorsA?.email? style.inputError : style.input} name="email" value={profile.email}type="email" placeholder="Add your email..." onChange={handleChangeA}/>
+                    {errorsA.email && (<p className={style.errors}>{errorsA.email}</p>)}
+                    <p>Birthday:</p>
+                    <input className={style.birthday}name="birthday" type="date" value={profile.birthday}onChange={handleChangeA}/>
+                    {errorsA.birthday && (<p className={style.errors}>{errorsA.birthday}</p>)}
+                    <br></br>
+                    <input className={style.button} type="submit" value="Edit" onClick={handleSubmitA}/>
+                </form>
+            </Accordion>
+            <Accordion title={"Manage password"} content={"Change your password every time you need it"}
+                warning={"Changing the password automatically logs out"}>
+                <form onSubmit={handleSubmitB}>
+                    <p>Actual password:</p>
+                    <input className={errorsB?.prev_password? style.inputError : style.input} name="prev_password" type="password" onChange={handleChangeB}/>
+                    {errorsB.prev_password && (<p className={style.errors}>{errorsB.prev_password}</p>)}
+                    <p>New password:</p>
+                    <input className={errorsB?.new_password? style.inputError : style.input} name="new_password" type="password" onChange={handleChangeB}/>
+                    {errorsB.new_password && (<p className={style.errors}>{errorsB.new_password}</p>)}
+                    <p>Confirm password:</p>
+                    <input className={errorsB?.conf_password? style.inputError : style.input} name="conf_password" type="password" onChange={handleChangeB}/>
+                    {errorsB.conf_password && (<p className={style.errors}>{errorsB.conf_password}</p>)}
+                    <input className={style.button} type="submit" value="Edit" onClick={handleSubmitB}/>
+                </form>
+            </Accordion>
+            <Accordion title={"Manage password Google"} content={"Change your password every time you need it"}>
+                <form onSubmit={handleSubmitD}>
+                    <p>Password:</p>
+                    <input className={errorsD?.password? style.inputError : style.input} name="password" type="password" onChange={handleChangeD}/>
+                    {errorsD.password && (<p className={style.errors}>{errorsD.password}</p>)}
+                    <input className={style.button} type="submit" value="Submit" onClick={handleSubmitD}/>
+                </form>
+            </Accordion>
+            <Accordion title={"Shipping information"} content={"Edit your address and other contact info."}>
+                <form onSubmit={handleSubmitC}>
+                    <p>Address:</p>
+                    <input className={errorsC?.address? style.inputError : style.input} name="address" value={shipping.address}type="text" placeholder="Add your address..." onChange={handleChangeC}/>
+                    {errorsC.address && (<p className={style.errors}>{errorsC.address}</p>)}
+                    <p>Phone number:</p>
+                    <input className={errorsC?.phone_number? style.inputError : style.input} name="phone_number" value={shipping.phone_number}type="text" placeholder="Add your phone number..." onChange={handleChangeC}/>
+                    {errorsC.phone_number && (<p className={style.errors}>{errorsC.phone_number}</p>)}
+                    <input className={style.button} type="submit" value="Edit" onClick={handleSubmitC}/>
+                </form>
+            </Accordion>
             </div>
         </div>
     );

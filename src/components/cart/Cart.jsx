@@ -19,16 +19,13 @@ export default function Cart(){
     
     let total = 0;
     const user = useSelector((state)=>state.users.userInfo)
-    // const user = localStorage.getItem('userInfo')
-    //       ? JSON.parse(localStorage.getItem('userInfo'))
-    //       : null
-    console.log('user', user)
+    
     useEffect(() => {
         if(user && user.id){
             dispatch(getCart(user.id))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[dispatch])
+    })
     
     //agrega CartGuest a Cart
     if(user && user.id && cartGuest.length !== 0){

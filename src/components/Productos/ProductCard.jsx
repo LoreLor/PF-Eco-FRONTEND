@@ -23,6 +23,9 @@ export default function ProductCard({name, img, price, rating, id, isFaved}){
                 bundle: 1
             }
             dispatch(addCartProduct(addCart))
+            .then(r=>{
+                dispatch(getCart(user.id))
+            })
         }else{
             dispatch(addCartProductGuest(id))
         }

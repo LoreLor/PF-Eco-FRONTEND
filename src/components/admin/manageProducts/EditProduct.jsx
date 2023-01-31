@@ -1,7 +1,13 @@
 import axios from "axios"
+<<<<<<< HEAD
 import React, { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProducts } from "../../../redux/actions/products"
+=======
+import React,{useEffect,useRef,useState} from "react"
+import {useDispatch} from 'react-redux'
+import { getAllProducts} from "../../../redux/actions/products"
+>>>>>>> DevelopFront
 import { getCategories } from "../../../redux/actions/categories"
 import style from './EditProduct.module.css'
 import FormModal from '../AdminModals/FormModal'
@@ -75,6 +81,7 @@ export default function ProductForm({ product, products, categories, setProductE
     }
     function onFileChange(e) {
         setFile(e)
+        setFileErrors({})
     }
     function resetFile() {
         ref.current.value = ""
@@ -162,6 +169,7 @@ export default function ProductForm({ product, products, categories, setProductE
                 console.log(error)
             }
         }
+<<<<<<< HEAD
     }
 
     useEffect(() => {
@@ -217,6 +225,144 @@ export default function ProductForm({ product, products, categories, setProductE
                                     <p key={category.name} >{category.name}</p>
                                 )
                             }) : <p>No categories added</p>}
+=======
+  }
+  function productname(name){
+    if(name.length >= 21)return name.slice(0,18) + '...' 
+    return name
+}
+
+useEffect(()=>{
+    if(!product){
+        setInput({
+        name: "",
+        price: "",
+        description:"",
+        stock:"",
+        categories: [],
+        img: [],
+        isActive: ""
+        })
+        setFile([])
+        setErrors({})
+        setFileErrors({})
+        resetFile()
+    }
+    if(product){
+        setInput({
+        name: product.name,
+        price: product.price.toString(),
+        description: product.description,
+        stock: product.stock.toString(),
+        img: product.img,
+        categories: product.categories.map(c=>c.name),
+        isActive: product.isActive
+        })
+        setFile([])
+        setErrors({})
+        setFileErrors({})
+        resetFile()
+    }
+},[product])
+    
+    return(
+        <>
+        <div className={style.container}>
+        {product && product.id ? 
+        <>
+        <button onClick={(e)=> setProductEdit([])} className={style.closeBtn}>X</button>
+        <div className={style.imageBox}>
+            <img id={style.imageDiv}src={product.img[0]} alt="..."/>
+        </div>
+        <h2>{productname(product.name)}</h2>
+        <h4>$ {numberFormat(product.price)}</h4>
+        <p>Stock: {product.stock}</p>
+        <p>Status: {product.isActive === true ? "Active": "Inactive"}</p>
+        <p>Categories:</p>
+        <div className={style.categoriesBox}>
+        {product && product.categories.length > 0? product.categories.map((category)=>{return(
+            <p key={category.name} >{category.name}</p>
+        )}):<p>No categories added</p>}
+        </div>
+        <button className={style.btnX} onClick={handleOpen}>Edit</button>
+        </>
+        :
+        <>
+        <div className={style.imageBox}>
+        <img id={style.imageDiv2}src="https://res.cloudinary.com/drcvcbmwq/image/upload/v1654007162/1606471631_175714_1606474989_noticia_normal_recorte1_bsgelj.jpg" alt="..."/>
+        </div>
+        <h2 >Products admin page</h2>
+        <div className={style.dataBox}>
+        <h2 id={style.special}><i>- Create a product</i></h2>
+        <h2 id={style.special}><i>- Search a product</i></h2>
+        <h2 id={style.special}><i>- Edit a product</i></h2>
+        </div>
+        <button className={style.btnX} id={style.btnXX} onClick={handleOpen}>Create</button>
+        </>}
+        </div>
+
+        <FormModal isOpen={isOpen} setIsOpen={setIsOpen} resetError={setErrors} resetFile={resetFileBtn} resetInput={setInput} product={product}>
+        <div className={product? style.containerProd2:style.containerProd}>
+                <div>
+
+                <form onSubmit={onSubmit} className={style.formProduct}>
+                    
+                        <h3>{product && product.id ? "Edit": "Add"}</h3>
+                
+                    
+                        <p>Product name:</p>
+                        <input className={errors?.name? style.inputError : style.input} type='text' placeholder="Product name..." name='name' value={input.name} onChange={onValueChange}/>
+                        {
+                            errors.name && (<p className={style.errors}>{errors.name}</p>)
+                        }
+                
+                    
+                        <p>Price:</p>
+                        <input className={errors?.price? style.inputError : style.input} type='text' placeholder="Product price..." name='price' value={input.price} onChange={onValueChange}/>
+                        {
+                            errors.price && (<p className={style.errors}>{errors.price}</p>)
+                        }               
+                    
+               
+                    <div>
+                        <p>Description:</p>
+                        <textarea rows={5} cols={70} className={errors?.description? style.inputError : style.input} type='text' placeholder="Add more info..." name='description' value={input.description} onChange={onValueChange}/>
+                        {
+                            errors.description && (<p className={style.errors}>{errors.description}</p>)
+                        }              
+                    </div>
+                    <div>
+                        <p>Stock:</p>
+                        <input className={errors?.stock? style.inputError : style.input} type='text' placeholder="Add a stock..." name='stock' value={input.stock} onChange={onValueChange}/>
+                        {
+                            errors.stock && (<p className={style.errors}>{errors.stock}</p>)
+                        }              
+                    </div>
+                    <div>
+                        <p>Brand:</p>
+                        {
+                            categories.length ?
+                                <select className={style.select} name ='categories' onChange={onArrayChange} multiple={true} >
+                        {categories && categories.map((category)=>{return(
+                        <option key={category.id} value={category.name} className={style.categories}>{category.name}</option>
+                        )})}
+                        </select>:<span> No categories yet</span>}
+                        {errors.categories && <p className={style.errors}>{errors.categories}</p>}
+                    </div>
+                    <div>
+                        {input.categories && input.categories.map((category)=>{
+                            return(
+                                <button key={category} name="categories" value={category} onClick={onRemove} className={style.btn}>{category}</button>
+                            )
+                        })}
+                    </div>
+                        <div className={style.statusDiv}>
+                        {product?<>
+                        <span>This product is: {input.isActive === true ? "Active": "Inactive"} </span>
+                        <button name ="isActive" value={input.isActive} onClick={onStatus} className={style.btn}>Change</button>
+                        {errors?.isActive && <p className={style.errors}>{errors?.isActive}</p>}
+                        </>:<></>}
+>>>>>>> DevelopFront
                         </div>
                         <button className={style.btnX} onClick={handleOpen}>Edit</button>
                     </>
@@ -225,6 +371,7 @@ export default function ProductForm({ product, products, categories, setProductE
                         <div className={style.imageBox}>
                             <img id={style.imageDiv2} src="https://res.cloudinary.com/drcvcbmwq/image/upload/v1654007162/1606471631_175714_1606474989_noticia_normal_recorte1_bsgelj.jpg" alt="..." />
                         </div>
+<<<<<<< HEAD
                         <h2>Products admin page</h2>
                         <div className={style.dataBox}>
                             <h2 id={style.special}><i>- Create a product</i></h2>
@@ -234,6 +381,18 @@ export default function ProductForm({ product, products, categories, setProductE
                         <button className={style.btnX} id={style.btnXX} onClick={handleOpen}>Create</button>
                     </>}
             </div>
+=======
+                        <input className={style.btn}accept="image/png,image/jpg,image/jpeg" multiple={true} type='file' name="file" ref={ref} onChange={(e)=>onFileChange(e.target.files)}/>
+                        <br></br>
+                        <button className={style.btn} id={style.btnB}onClick={resetFileBtn}>Unselect images</button>
+                        {fileErrors?.img && <p className={style.errors}>{fileErrors?.img}</p>}
+                    </div>
+                    <div>
+                        {Object.keys(errors).length === 0 && Object.keys(fileErrors).length === 0 && Object.keys(input).length > 0 && 
+                        <input type='submit' value= {product? "Save": "Add"} onClick={onSubmit} className={style.mybtn}/>   
+                        }
+                    </div>
+>>>>>>> DevelopFront
 
 
 

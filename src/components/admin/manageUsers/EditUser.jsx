@@ -93,9 +93,9 @@ export default function EditUser({user,setUserEdit}){
            <div className={style.imageBox}>
                 <img id={style.imageDiv}src="https://res.cloudinary.com/drcvcbmwq/image/upload/v1653589673/aps_504x498_medium_transparent-pad_600x600_f8f8f8_r3fwnu.jpg" alt="..."/>
             </div>
-            <div>
+            <div className={style.userInfo}>
                 <h2>{user.user_name}</h2>
-                <h4>{user.email}</h4>
+                <h4 className={style.email}>{user.email}</h4>
 
             </div>
 
@@ -110,16 +110,18 @@ export default function EditUser({user,setUserEdit}){
             <button name="isActive" value={input.isActive} onClick={onChange} className={style.btnX}>Change</button>
             </div>
             <br/>
-            <input type="submit" value="Edit" onClick={onSubmit} className={style.btnX}/>
+            <input type="submit" value="Save" onClick={onSubmit} className={style.btnX}/>
             </div>
         </form>
            </>
            : 
            <>
-                      <div className={style.imageBox}>
+            <div className={style.imageBox}>
                 <img id={style.imageDiv}src="https://res.cloudinary.com/drcvcbmwq/image/upload/v1654009200/v2_hvt2md.jpg" alt="..."/>
             </div>
+            <div className={style.titleF}>
             <h2>User admin page</h2>
+            </div>
             <div className={style.dataBox}>
             <h2 id={style.special}><i>- Search an user</i></h2>
             <h2 id={style.special}><i>- Authorize an user</i></h2>

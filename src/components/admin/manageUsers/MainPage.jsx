@@ -10,15 +10,15 @@ import Footer from "../../Footer/Footer";
 
 
 export default function MainPage(){
-    const users = useSelector((state)=>state.users.users)
+    const usersDb = useSelector((state)=>state.users.users)
     const user = useSelector((state)=>state.users.userInfo)
-
+    const users = usersDb.filter((userDb) => userDb.id !== user.id)
     const dispatch = useDispatch()
 
     const [result,setResult] = useState("")
     const [userEdit,setUserEdit] = useState([])
 
-    const searchResult = result ? users.filter((user)=> user.user_name.includes(result)) : ""
+    const searchResult = result ? users.filter((user)=> user.user_name.toLowerCase().includes(result.toLowerCase())) : ""
     const array = !result ? users : searchResult
 
 
@@ -26,25 +26,25 @@ export default function MainPage(){
         dispatch(getAllUsers())
     },[dispatch])
     return (
-        <>
-        <div>
+        <div className={style.center}>
+            <div className={style.navBar}>
             <NavBarAdmin/>
+            </div>
+            <div className={style.caja}>
+                <div className={style.content}>
+                    <div className={style.searchBar}>
+                    <SearchBar result={result} setResult={setResult} placeholder={"Search by name..."}/>
+                    <EditUser user={userEdit[0]} setUserEdit={setUserEdit}/>
+                    </div>
+                    <div className={style.usersList}>
+                    <UsersTable array={array} setUserEdit={setUserEdit} myUser={user}/>
+                    </div>
+                </div>
+            </div>
+            <div id={style.Footer}>
+            <Footer/>
+            </div>
         </div>
-
-        <div className={style.content}>
-            <div className={style.searchBar}>
-            <SearchBar result={result} setResult={setResult}/>
-            <EditUser user={userEdit[0]} setUserEdit={setUserEdit}/>
-            </div>
-            <div className={style.usersList}>
-            <UsersTable array={array} setUserEdit={setUserEdit} myUser={user}/>
-            </div>
-
-        </div>
-        <div id={style.footer}>
-                <Footer/>
-            </div>
-        </>
     )
 
 }

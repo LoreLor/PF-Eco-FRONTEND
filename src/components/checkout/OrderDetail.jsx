@@ -1,24 +1,21 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
 import { getCart } from "../../redux/actions/products";
 import { getSingleUser } from "../../redux/actions/user";
 import Footer from "../Footer/Footer";
 import s from "./OrderDetail.module.css";
 import PaypalCheckoutButton from "./PaypalCheckoutButton";
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+
+
 
 function OrderDetail() {
+  const navigate = useNavigate()
   const user = useSelector((state) => state.users.userInfo);
   const cart = useSelector((state) => state.products.cart);
   //const amount = cart.details.reduce((a, c) => a + c.bundle * c.price, 0);
-  const total_amount = cart.price_total - 5;
-
-
-
-  useEffect(() => {
-    getSingleUser(user.id);
-    getCart(user.id);
-  }, [user]);
+  const total_amount = cart.price_total ;
 
   return (
     <div className={s.box}>
@@ -86,7 +83,12 @@ function OrderDetail() {
                     <h6>Shipping Address</h6>
                     <li class="list-group-item d-flex justify-content-between">
                       <div className={s.shipping}><strong>FullName: </strong>
-                      {user.name} {user.last_name}  <br /></div>
+                      {user.name}{' '} 
+                     <div> {user.last_name}  <br />
+
+                     </div>
+                     
+                      </div>
                     <hr/>
                       <div className={s.shipping}><strong>Address: </strong>
                       {user.address} <br /></div>
@@ -99,13 +101,14 @@ function OrderDetail() {
                     <h6 class="my-0">Amount</h6>
                     <li class="list-group-item d-flex justify-content-center">
                       <span>
-                        <strong>Amount:</strong> USD {total_amount}
+                        <strong>Amount:</strong> $ {total_amount}
                       </span>
                     </li>
                   </div>
                 </li>
                 <PaypalCheckoutButton className={s.btnPaypal} />
               </ul>
+                <button className={s.btn} onClick={()=>(navigate('/check'),window.location.reload())}><ArrowLeftIcon> </ArrowLeftIcon>GO BACK</button>
             </div>
           </div>
         </div>

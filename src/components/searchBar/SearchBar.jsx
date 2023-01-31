@@ -3,13 +3,14 @@ import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { Hint } from 'react-autocomplete-hint'
 import { getAllProducts, getProductByName } from "../../redux/actions/products";
-import Swal from 'sweetalert2';
-
 import style from './SearchBar.module.css'
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchBar(){
     const allProducts = useSelector((state) => state.products.products)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [name, setName] = useState('')
     const [auto, setAuto] = useState([])
     
@@ -33,14 +34,12 @@ export default function SearchBar(){
                 ...oldState,
                 search: name
             }))
+            navigate('/')
             dispatch(getProductByName(name))
         }else{
-            Swal.fire({
-                title: 'Search Error',
-                text:'Enter a name to search',
-                icon:'error',
-                confirmButtonText:'Cool'
-            })
+            toast.warning("'Enter a name to search!", {
+                position: toast.POSITION.TOP_RIGHT
+            });
         };
         setName('')
     };

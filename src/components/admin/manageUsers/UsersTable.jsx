@@ -66,9 +66,11 @@ export default function UsersTable({array,setUserEdit, myUser}){
                 return(
                     <div key={user.id} className={base.includes(user.id)?style.box2:style.box}>
                         <h3 className={style.title}>{user.user_name}</h3>
+                        <div className={style.btnsAdm}>
+                        
                         {user && user.isActive && user.id !== myUser.id ? <button className={style.btn} value = {user.id} onClick={onDeactivate}>{base.includes(user.id)?"Cancel": "Deactivate"}</button>: <div className={style.btn}></div> }
                         <button value={user.id} className={style.btn} onClick={onEdit}>Edit</button>
-                        
+                        </div>
                     </div>
                 )
             }):

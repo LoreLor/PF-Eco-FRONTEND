@@ -8,6 +8,7 @@
     color: aliceblue;
     height: 28rem;
     position: relative;
+    width: 500px;
   }
   
   .section{
@@ -24,7 +25,7 @@
     border: none;
     border-radius: 0.5rem;
     background: #6ecb63;
-    font-size: medium;
+    font-size: large  ;
     font-weight: 500;
     color: #fff;
     display: flex;
@@ -48,6 +49,12 @@
   cursor: pointer;
 }
 
+.titleF{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: antiquewhite;
+}
 
 .dataBox{
   display: flex;
@@ -58,7 +65,7 @@
   .containerForm{
       display: flex;
       flex-direction: column;
-      width: 100%;
+      width: max-content;
     }
     .containerForm span{
       font-weight: bold;
@@ -119,5 +126,16 @@
 }
 
 #special{
-  font-size:x-large;
+  padding-top: 5px;
+}
+
+.userInfo{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+}
+
+.email{
+  font-size: large;
 }

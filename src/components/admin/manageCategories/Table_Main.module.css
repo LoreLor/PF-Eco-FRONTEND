@@ -1,11 +1,25 @@
-.container{
-    margin-top: 1rem;
-    width: 75%;
+
+.caja{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    width: 80%;
+}
+
+.center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navBar{
+    width: 100%;
 }
 
 .box{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     margin: 0.5rem;
     padding-left: 0.5rem;
@@ -13,26 +27,83 @@
     border: #112B3C 1px solid;
     border-radius: 5px;
     background-color: #112B3C;
+    width: 90%;
+}
+
+.shipping{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border: #F66B0E 1px solid;
+    border-radius: 5px;
+    background-color: #F66B0E;
+    width: 90%;
+}
+
+.delivered{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border: #6ecb63 1px solid;
+    border-radius: 5px;
+    background-color: #6ecb63;
+    width: 90%;
 }
 
 .box2{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     margin: 0.5rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     border: #b20600 1px solid;
     border-radius: 5px;
-    background-color: #b20600;;
+    background-color: #b20600;
+    width: 90%;
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .title{
-    width: 80%;
+    width: 60%;
+    justify-content: flex-start;
     margin-top: 0.5rem;
     margin-left: 0.5rem;
     font-size: larger;
     color: antiquewhite;
+}
+
+.btnsAdm{
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.title2{
+    justify-content: flex-start;
+    margin-top: 0.5rem;
+    font-size: larger;
+    color: antiquewhite;
+}
+
+.idNum{
+    display: flex;
+    flex-wrap: wrap;
+    color: antiquewhite;
+    font-style: italic;
+    font-size: small;
+    margin-bottom: 0.5rem;  
 }
 
 .btn{
@@ -41,36 +112,101 @@
     margin-right: 0.5rem;
     margin-left: 0.5rem;
 }
+.btnAdmin{
+    justify-content: center;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0.5rem;
+    background: #F66B0E;
+    font-size: medium;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    width: max-content;
+    gap: 1rem;
+    margin: 0px 0px 0px 5px;
+}
+.btnAdmin:hover{
+    box-shadow: 0.2rem 0.2rem 0.5rem #F66B0E;
+}
 
 .content{
     display: flex;
-    
+    width: max-content;
 }
 
 .searchBar{
-    width: 30%;
-    margin-top: 1rem;
-    margin-left: 1rem;
+    flex: 1;
+    margin: 0rem 1rem 2rem 1rem;
 }
-
 .categoriesList{
-    width: 70%;
-    margin-top: 0.5rem;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: 26rem;
     overflow-x: overlay;
+    width: 1000px;
 }
-
-#footer{
-    margin-top: 2rem;
-}
-
-.categoriesList::-webkit-scrollbar {
-    display: none;
-    }
 
 .coincidences{
     display: flex;
     justify-content: center;
     color: #112B3C;
     font-weight: 700;
+    margin-left: 50px;
+}
+
+@media(max-width: 750px){
+    .caja{
+    display: flex;
+}
+    .content{
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+       
+    }
+    .searchBar{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;    
+    }
+    .categoriesList{
+        display: flex;
+        justify-content: center;
+        overflow-x: overlay;
+    }
+    .container{
+        height: 20rem;
+        margin-bottom: 1.5rem;
+        justify-content: center;
+    }
+
+}
+
+@media(max-width: 850px){
+    .orderInf{
+        display: flex;
+        width: 80%;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+}
+
+
+#Footer{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.orderInf{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    flex-direction: column;
+    justify-content: center;
 }

@@ -10,6 +10,22 @@
     padding: 10px;
 }
 
+@media(max-width: 500px){
+    .footer{
+        display: flex;
+        width: 100%;
+        
+        flex-wrap: wrap;
+        margin-top: 2rem;
+    }
+    .footer_container{
+        height: 13rem !important;
+    }
+    #svg{
+        display: none;
+    }
+}
+
 .footer{
     display: flex;
     width: 100%;
@@ -29,4 +45,12 @@
     list-style: none;
     width: 100%;
     justify-content: space-evenly;
+}
+
+.li_redes{
+    transition: 0.5s;
+}
+.li_redes:hover{
+    color: #F66B0E;
+    cursor: pointer;
 }

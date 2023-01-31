@@ -44,7 +44,9 @@ import {
     CLEAN_CART,
     CLEAN_FAV,
     CLEAN_CART_GUEST,
-    CLEAN_PRODUCTS
+    CLEAN_PRODUCTS,
+    GET_PAID_ORDERS,
+    APPLY_DISCOUNT
 } from "../actions/constants";
 
 
@@ -71,7 +73,8 @@ const initialState = {
     cart: [],
     shopping: [],
     cartGuest: [],
-    favs: []
+    favs: [],
+    paidOrders:[]
 }
 
 export const productsReducer = (state = initialState, action) => {
@@ -374,7 +377,7 @@ export const productsReducer = (state = initialState, action) => {
                 cart: action.payload
             }
         case GET_CART:
-            action.payload.details.sort(function (a, b) {
+            action.payload.details?.sort(function (a, b) {
                 if (a.id > b.id) return 1;
                 if (a.id < b.id) return -1;
                 return 0
@@ -540,7 +543,17 @@ export const productsReducer = (state = initialState, action) => {
                     products: [],
                     showedProducts: [],
                     filters: [],
-                } 
+                }
+        case GET_PAID_ORDERS:
+            return{
+                ...state,
+                paidOrders: action.payload
+            } 
+        case APPLY_DISCOUNT:
+            return{
+                ...state,
+                cart: action.payload
+            }
         default:
             return state
     }

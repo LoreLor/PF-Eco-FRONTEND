@@ -21,7 +21,7 @@ export default function submitValidations(id,input,products,file){
     if(!input.stock){
         errors.stock = "Must have a stock"
     }
-    if(!input.categories){
+    if(input.categories.length === 0){
         errors.categories = "Must have at least one category"
     }
 

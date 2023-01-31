@@ -99,17 +99,17 @@ const Login = () => {
             <form onSubmit={handleSubmitLogin} autoComplete="off">
                 <div className="container w-75 mt-5 shadow-lg p-3 mb-5 bg-white rounded">
                     <div className="row align-items-center align-items-center ">
-                        <div class='col-lg-5'>
+                        <div className='col-lg-5'>
                             <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img class="d-block w-100" src={imagen1} alt="First slide" width="1010" height="400" />
+                                <div className="carousel-inner">
+                                    <div className="carousel-item active">
+                                        <img className="d-block w-100" src={imagen1} alt="First slide" width="1010" height="400" />
                                     </div>
-                                    <div class="carousel-item">
-                                        <img class="d-block w-100" src={imagen2} alt="Second slide" width="1010" height="400" />
+                                    <div className="carousel-item">
+                                        <img className="d-block w-100" src={imagen2} alt="Second slide" width="1010" height="400" />
                                     </div>
-                                    <div class="carousel-item">
-                                        <img class="d-block w-100" src={imagen3} alt="Third slide" width="1010" height="400" />
+                                    <div className="carousel-item">
+                                        <img className="d-block w-100" src={imagen3} alt="Third slide" width="1010" height="400" />
                                     </div>
                                 </div>
                             </div>
@@ -152,8 +152,8 @@ const Login = () => {
                             </div>
                             <div className="row my-3 text-center">
                                 <span> You don't have an account?  Go to...<strong><Link to={"/register"}>Create your account</Link></strong></span>
-                                <strong><Link to={`${SERVER}/email/forgot-password`}><span>Forgot your password?</span></Link></strong>
-                            </div>
+                                <strong><Link to={`/forgotPass`}><span>Forgot your password?</span></Link></strong>
+                            </div>       
                         </div>
                     </div>
                 </div>

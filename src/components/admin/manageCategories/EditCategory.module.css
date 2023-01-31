@@ -1,6 +1,7 @@
 .errors {
-  color: red;
-  font-size: 12px;
+  color: rgb(239, 53, 53);
+  font-size: medium;
+  padding-top: 20px;
 }
 
 .input{
@@ -9,7 +10,7 @@
   border: 0;
   background-color: #E1E1E1;
   border-radius: 5px;
-  width: 100%;
+  width: 220px;
   box-sizing: border-box;
   transition: box-shadow 0.15s
 }
@@ -24,7 +25,7 @@
   border: 0;
   background-color: #E1E1E1;
   border-radius: 5px;
-  width: 100%;
+  width: 220px;
   box-sizing: border-box;
   transition: box-shadow 0.15s
 }
@@ -59,10 +60,6 @@
   font-size: 25px;
   color: aliceblue
 }
-/* .categoryForm p {
-  font-weight: bold;
-  font-size: 19px;
-} */
 
 .mybtn{
   align-self: center;
@@ -110,6 +107,7 @@
   color: aliceblue;
   height: 21rem;
   position: relative;
+  width: 300px;
 }
 
 .closeBtn{

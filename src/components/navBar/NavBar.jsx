@@ -8,33 +8,22 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import FilterPrice from "../filterPrice/FilterPrice";
 import SERVER2 from "../../server2";
+import { getAllProducts } from "../../redux/actions/products";
 import Badge from '@mui/material/Badge';
-import { getAllProducts, getCart, getCartGuest } from "../../redux/actions/products";
+
+
 
 
 export default function NavBar({ categories, paginado }) {
     const user = useSelector((state)=>state.users.userInfo)
     
-    const cartUser = useSelector((state) => state.products.cart)
-    console.log('cartUser :>> ', cartUser);
-    const cartGuest = useSelector((state) => state.products.cartGuest)
-    
-     const cart = user && user.id? cartUser : cartGuest
-     cart.map(p=>p.bundle)
-     const qty = cart.reduce((a, c) => a + c.bundle, 0)
-
-// console.log('cartbun :>> ', cart);
-    useEffect(() => {
-        dispatch(getCart())
-        dispatch(getCartGuest())
-    }, [])
-
-
     const dispatch = useDispatch();
-    // function handleCart(e){
-    //     e.preventDefault()
-    //     alert('carrito')
-    // }
+
+    const cartUser = useSelector((state) => state.products.cart)
+    const cartGuest = useSelector((state) => state.products.cartGuest) 
+    const cart = user && user.id? cartUser.details : cartGuest
+    const qty = cart && [].concat(cart).reduce((a, c) => a + c.bundle, 0)
+
 
     function handleLogout() {
         dispatch(logout())
@@ -44,7 +33,7 @@ export default function NavBar({ categories, paginado }) {
     function handleClick(e) {
         e.preventDefault();
         dispatch(getAllProducts())
-        .then(r => {
+        .then( () => {
             window.location.reload();
         })
     }
@@ -52,7 +41,7 @@ export default function NavBar({ categories, paginado }) {
     return (
         <header>
             <nav className="navbar navbar-expand-lg">
-                <div class="container-fluid">
+                <div className="container-fluid">
                     <NavLink to="/" className={style.title}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" className="bi bi-phone" viewBox="0 0 16 16">
                             <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z" />
@@ -60,13 +49,13 @@ export default function NavBar({ categories, paginado }) {
                         </svg>
                         City Cell
                     </NavLink>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBar" aria-controls="navBar" aria-expanded="false" aria-label="Toggle navigation">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#F66B0E" class="bi bi-three-dots" viewBox="0 0 16 16">
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBar" aria-controls="navBar" aria-expanded="false" aria-label="Toggle navigation">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#F66B0E" className="bi bi-three-dots" viewBox="0 0 16 16">
                             <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
                         </svg>
                     </button>
-                    <div class="collapse navbar-collapse" id="navBar">
-                        <form class="d-flex" role="search" style={{width:'100%', justifyContent:'center', marginRight:'200px'}}>
+                    <div className="collapse navbar-collapse" id="navBar">
+                        <form className="d-flex" role="search" style={{width:'100%', justifyContent:'center', marginRight:'200px'}}>
                             <SearchBar />
                         </form>
                     </div>
@@ -127,23 +116,30 @@ export default function NavBar({ categories, paginado }) {
                                                 </NavLink>
                                             </li> : <li></li>
                                         }
-                                        {/* <li><a href="/register" className={style.logout}>Register</a></li> */}
+                                        {user && user.rol === "admin" && !window.location.href.includes("/admin") ?
+                                            <li>
+                                                <NavLink to="/admin">
+                                                    <button className={style.mybtn} /* onClick={} */>Admin</button>
+                                                </NavLink>
+                                            </li> : <li></li>}
                                     </ul>
                                 </div>
                         : 
                             <NavLink to="/login" className={style.mybtn}>Log In</NavLink>
                     }        
                     </div>             
-                    {user && user.rol === "admin" ? <NavLink to="/admin" className={style.mybtn}>Admin</NavLink> : <></>}
+                    {/* {user && user.rol === "admin" ? <NavLink to="/admin" className={style.mybtn}>Admin</NavLink> : <></>} */}
 
                     <NavLink to="/cart">
 
                         <button className="btn btn-secundary" type="button" style={{ marginRight: '10px' }}>
+                            <Badge badgeContent={qty}  color="secondary">
                         <Badge badgeContent={qty} color="secondary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#F66B0E" className="bi bi-cart-check" viewBox="0 0 16 16">
                                 <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
                                 <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                             </svg>
+                            </Badge>
                             </Badge>
                         </button>
                     </NavLink>
