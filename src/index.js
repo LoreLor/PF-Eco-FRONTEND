@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';  //v17
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import {BrowserRouter} from 'react-router-dom'
@@ -8,12 +8,12 @@ import { Provider } from 'react-redux';
 import store, {Persistor} from './redux/store/index';
 import { PersistGate } from 'redux-persist/integration/react';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
-
-const root = document.getElementById('root'); // <- This is the //correct method call for React version 17
-render(
-
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <React.StrictMode>
+    
       <PayPalScriptProvider options={{ "client-id": "AaQI-1adqVEH1wWgNAa9IlvPvWf4rOLo5-zttK1nrlMMxkU1WBUo0zSmPfWpKVWaBTL3TpwiQl1dEaDQ"}}>
         <Provider store={store}>
           <BrowserRouter>
@@ -23,8 +23,7 @@ render(
           </BrowserRouter>   
         </Provider>
       </PayPalScriptProvider>
+   
   </React.StrictMode>
- ,root
 );
-
 
