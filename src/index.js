@@ -8,12 +8,10 @@ import { Provider } from 'react-redux';
 import store, {Persistor} from './redux/store/index';
 import { PersistGate } from 'redux-persist/integration/react';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
-import { GoogleOAuthProvider } from '@react-oauth/google';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+
+ReactDOM.render(
   <React.StrictMode>
-    
       <PayPalScriptProvider options={{ "client-id": "AaQI-1adqVEH1wWgNAa9IlvPvWf4rOLo5-zttK1nrlMMxkU1WBUo0zSmPfWpKVWaBTL3TpwiQl1dEaDQ"}}>
         <Provider store={store}>
           <BrowserRouter>
@@ -23,7 +21,8 @@ root.render(
           </BrowserRouter>   
         </Provider>
       </PayPalScriptProvider>
-   
   </React.StrictMode>
+ ,document.getElementById('root')
 );
+
 
