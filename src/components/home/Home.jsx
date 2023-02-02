@@ -46,6 +46,7 @@ export default function Home() {
         if (users && users.id) {
             dispatch(getFavs(users.id))
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     //ProductCard ---> (name, img, price, rating)
