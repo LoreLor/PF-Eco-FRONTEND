@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getAllProducts, getCategories, getFavs } from "../../redux/actions/products";
+import { getAllProducts, getFavs } from "../../redux/actions/products";
 
 
 import HotSale from "../HotSale/HotSale";
@@ -12,6 +12,7 @@ import Pages from "../Pages/Pages";
 
 import style from './Home.module.css';
 import Footer from "../Footer/Footer";
+import { getCategories } from "../../redux/actions/categories";
 
 
 
