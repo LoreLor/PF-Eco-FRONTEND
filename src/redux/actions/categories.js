@@ -2,14 +2,14 @@ import { GET_ALL_CATEGORIES,GET_SINGLE_CATEGORY } from "./constants";
 import SERVER from "../../server";
 
 export function getCategories(){
-    return function(dispatch){
-        return fetch(`${SERVER}/categories`)
-        .then(response=>response.json())
-        .then((categories)=>{dispatch({type:GET_ALL_CATEGORIES,payload:categories})
-    })
-    .catch(error=>{
-        console.log(error)
-    })
+    return async function(dispatch){
+        try {
+            const response = await fetch(`${SERVER}/categories`);
+            const categories = await response.json();
+            dispatch({ type: GET_ALL_CATEGORIES, payload: categories });
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 
