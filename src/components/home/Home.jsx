@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { clearStatesProducts, getAllProducts, getCart, getFavs } from "../../redux/actions/products";
-import { getCategories } from "../../redux/actions/categories";
+import { getAllProducts, getCategories, getFavs } from "../../redux/actions/products";
+
 
 import HotSale from "../HotSale/HotSale";
 import NavBar from '../navBar/NavBar';
