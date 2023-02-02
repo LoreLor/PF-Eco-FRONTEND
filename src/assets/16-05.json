@@ -1,1 +1,8 @@
-{"web":{"client_id":"640314454001-3v76vc8c874abhtehrrc1evrs66u2ro1.apps.googleusercontent.com","project_id":"ecommerce-pf-350113","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"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","javascript_origins":["https://pf-eco-frontend-lorelor.vercel.app","https://pf-eco-backend.onrender.com"]}}
+{"web":{
+    "client_id":"640314454001-3v76vc8c874abhtehrrc1evrs66u2ro1.apps.googleusercontent.com",
+    "project_id":"ecommerce-pf-350113",
+    "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+    "token_uri":"https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret":"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",
+    "javascript_origins":["https://pf-eco-frontend-lorelor.vercel.app","https://pf-eco-backend.onrender.com"]}}
